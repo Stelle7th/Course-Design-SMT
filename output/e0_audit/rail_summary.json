@@ -1,0 +1,140 @@
+{
+  "address_node_total": 2858,
+  "rail_edge_total": 3424,
+  "rail_edges_missing_from_node": 0,
+  "rail_edges_missing_to_node": 0,
+  "rail_edges_missing_coordinates": 0,
+  "curve_edge_total": 951,
+  "weak_component_count": 1,
+  "largest_weak_component": 2858,
+  "edge_length_min": 882.0103870303509,
+  "edge_length_max": 14166.666693239007,
+  "edge_length_mean": 3274.4952994961536,
+  "sample_reachability": [
+    {
+      "source": "rn_A10_1",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_10",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_11",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_12",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_13",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_14",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_15",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_16",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_17",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_18",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_19",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_2",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_20",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_21",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_22",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_23",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_24",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_25",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_26",
+      "reachable_node_count": 2858
+    },
+    {
+      "source": "rn_A10_27",
+      "reachable_node_count": 2858
+    }
+  ],
+  "rail_edges_by_bay": {
+    "A1": 37,
+    "A10": 40,
+    "A11": 40,
+    "A12": 40,
+    "A13": 40,
+    "A14": 40,
+    "A15": 40,
+    "A16": 40,
+    "A17": 40,
+    "A18": 40,
+    "A19": 40,
+    "A2": 40,
+    "A20": 37,
+    "A3": 40,
+    "A4": 40,
+    "A5": 40,
+    "A6": 40,
+    "A7": 40,
+    "A8": 40,
+    "A9": 40,
+    "B1": 37,
+    "B10": 40,
+    "B11": 40,
+    "B12": 40,
+    "B13": 40,
+    "B14": 40,
+    "B15": 40,
+    "B16": 40,
+    "B17": 40,
+    "B18": 40,
+    "B19": 40,
+    "B2": 40,
+    "B20": 37,
+    "B3": 40,
+    "B4": 40,
+    "B5": 40,
+    "B6": 40,
+    "B7": 40,
+    "B8": 40,
+    "B9": 40,
+    "InterBay1": 546,
+    "InterBay2": 744,
+    "InterBay3": 546
+  }
+}
