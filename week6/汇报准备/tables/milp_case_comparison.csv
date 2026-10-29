@@ -1,0 +1,2 @@
+﻿bays,equipment_count,group_count,regional_operation_count,binary_variables,total_variables,constraints,reference_affected_cost,objective,improvement_local,mip_gap,dual_bound,solver_seconds,changed_group_slots,positive_internal_reference_transitions
+"['A2', 'A3']",48,4,59,173,8296,5660,304663194.1668111,302889755.9603954,0.005820979495950285,0.0,302889755.96039546,0.06538879999425262,6,0

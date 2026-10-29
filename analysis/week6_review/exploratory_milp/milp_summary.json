@@ -1,0 +1,68 @@
+{
+  "experiment": "restricted local fixed-flow equipment-slot MILP",
+  "scope": "8 devices in equal-footprint Dry_Etch slots; all other 1060 production devices fixed; reference operation/transport flows frozen during MILP",
+  "selection": "Greedily select four disjoint improving swap pairs from the 127-device same-process equal-footprint pool, then optimize all 8 selected slots jointly.",
+  "selection_pairs": [
+    {
+      "a": "ECH0127",
+      "b": "ECH0459",
+      "pair_swap_delta": -23725217.773467936
+    },
+    {
+      "a": "ECH0249",
+      "b": "ECH0458",
+      "pair_swap_delta": -7419250.588075697
+    },
+    {
+      "a": "ECH0262",
+      "b": "ECH0452",
+      "pair_swap_delta": -6794737.138302887
+    },
+    {
+      "a": "ECH0163",
+      "b": "ECH0265",
+      "pair_swap_delta": -5267510.364674771
+    }
+  ],
+  "candidate_pool_count": 127,
+  "selected_device_count": 8,
+  "internal_positive_flow_pairs": 0,
+  "binary_count": 64,
+  "total_variable_count": 64,
+  "constraint_count": 16,
+  "solver_status": 0,
+  "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "mip_gap": 0.0,
+  "milp_solve_seconds": 0.08378889999585226,
+  "milp_node_count": 1,
+  "reference_cost": 5803123608.491466,
+  "frozen_flow_milp_cost": 5759916892.626945,
+  "frozen_flow_improvement": 0.007445424012905488,
+  "restricted_problem_dual_bound": 5759916892.62695,
+  "moved_device_count": 8,
+  "assumptions": [
+    "Equal source/target footprint preserves reference slot occupancy under the same anchor convention.",
+    "Dry_Etch process family is used as a provisional relocation zone rule; utility/cleanroom compatibility is unverified.",
+    "A moved equipment uses the target slot port; tracks and ports remain fixed.",
+    "The optimality certificate applies only to this selected frozen-flow subproblem."
+  ],
+  "lp_evaluation": {
+    "success": true,
+    "status": 0,
+    "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "solve_seconds": 78.84359160000167,
+    "model": {
+      "variable_count": 2033918,
+      "equality_count": 170305,
+      "inequality_count": 1068,
+      "transport_arc_count": 1950637,
+      "capacity_row_count": 1068
+    },
+    "objective": 5741047204.598918,
+    "improvement_vs_reference": 0.010697067317627651,
+    "max_all_equality_residual": 5.329070518200751e-15,
+    "max_capacity_excess_min": 1.8189894035458565e-12,
+    "nonzero_transport_arcs": 4043
+  },
+  "total_preparation_milp_lp_seconds": 88.16740079999727
+}

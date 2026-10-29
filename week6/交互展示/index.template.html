@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A2 / A3 布局优化解释器</title>
+<style>
+:root{color-scheme:light;--ink:#26232e;--muted:#736d7b;--purple:#783c91;--teal:#168e93;--line:#e6e0e9;--paper:#fff;--bg:#f6f4f8;--red:#b94846;--amber:#d88f31}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}button,select,input{font:inherit}button,select{cursor:pointer}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:8px 14px}button:hover{background:#f5f0f8}button[aria-pressed=true],button[aria-selected=true]{background:var(--purple);color:#fff;border-color:var(--purple)}button:focus-visible,select:focus-visible,input:focus-visible,[role=button]:focus-visible{outline:3px solid #a876be;outline-offset:3px}select{max-width:100%;border:1px solid #d6cedd;border-radius:8px;padding:8px 32px 8px 10px;background:#fff;color:var(--ink)}input[type=checkbox]{accent-color:var(--purple);width:17px;height:17px;vertical-align:middle}a{color:var(--purple)}h1{font-size:clamp(26px,3vw,38px);line-height:1.3;margin:6px 0 12px;letter-spacing:-.7px}h2{font-size:22px;margin:0 0 12px;line-height:1.4}h3{font-size:17px;margin:0 0 10px}p{margin:8px 0 14px}.wrap{max-width:1440px;margin:auto;padding:30px 36px 50px}.eyebrow{color:var(--purple);font-size:13px;font-weight:700;letter-spacing:1.2px}.sub{color:var(--muted);max-width:1040px}.topline{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}.offline{white-space:nowrap;color:var(--muted);font-size:13px;padding-top:10px}.numbers{display:flex;flex-wrap:wrap;gap:18px 50px;margin:24px 0 22px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.number{font-size:32px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}.number.accent{color:var(--teal)}.number small{font-size:16px;font-weight:400;color:var(--muted)}.stat-label{font-size:13px;color:var(--muted);margin-top:5px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 18px}.tabs button{padding:10px 22px;border:0;border-radius:7px;background:transparent}.tabs button[aria-selected=true]{background:var(--ink);color:#fff}.panel{background:var(--paper);border:1px solid var(--line);padding:24px;border-radius:12px}.intro{font-size:16px;max-width:1060px}.hint{font-size:13px;color:var(--muted)}.toolbar{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin:18px 0}.toolbar label{display:flex;align-items:center;gap:8px}.segmented{display:inline-flex;gap:3px}.segmented button{padding:7px 12px;border-radius:6px}.legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-height:39px;margin:8px 0 16px}.legend button{display:flex;align-items:center;gap:8px;padding:6px 10px;font-size:13px}.swatch{width:13px;height:13px;display:inline-block;border-radius:2px;flex-shrink:0}.legend button[aria-pressed=true]{background:#f1e8f6;color:var(--purple)}.layout-grid{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:24px}.maps{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}.mapbox{min-width:0}.map-head{display:flex;justify-content:space-between;align-items:center;padding:3px 6px}.map-head h3{margin:0;font-size:18px}.map-head span{font-size:12px;color:var(--muted)}.map-svg{width:100%;display:block;max-height:560px;background:#fcfbfd;border-radius:8px}.map-svg text{font-family:inherit}.slot-mark{cursor:pointer;transition:opacity .15s}.slot-mark:hover rect{stroke:#25232e;stroke-width:2px}.detail{padding-left:22px;border-left:1px solid var(--line);min-width:0}.detail h3{font-size:21px;line-height:1.4}.kicker{font-size:12px;color:var(--purple);font-weight:700}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-block:1px solid var(--line);padding:13px 0;margin:14px 0}.detail-grid b{display:block;font-size:17px;margin:6px 0}.dim{color:var(--muted);font-size:13px}.small{font-size:13px}.detail dl{display:grid;grid-template-columns:112px 1fr;gap:5px 10px;font-size:13px;margin:13px 0}.detail dt{color:var(--muted)}.detail dd{margin:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.notice{padding:12px 15px;background:#f5f1f8;border-left:3px solid var(--purple);margin:15px 0;font-size:14px}.changed-list{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.changed-list button{font-size:12px;padding:5px 8px}.op-links{display:flex;flex-wrap:wrap;gap:6px}.op-links button{font-size:12px;padding:5px 8px}.section-footer{display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:18px}.explain{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin:25px 0 4px;padding-top:21px;border-top:1px solid var(--line)}.explain b{font-size:15px}.explain p{font-size:13px;color:var(--muted);margin-top:6px}.table-wrap{overflow:auto;margin-top:16px}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}th{color:var(--muted);font-size:12px;font-weight:500;white-space:nowrap;background:#faf8fc}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}td small{color:var(--muted)}td button{font-size:12px;padding:5px 9px;white-space:nowrap}.saving{color:var(--teal)}.loss{color:var(--red)}.pill{font-size:12px;color:var(--muted);display:inline-block}.summaryline{color:var(--muted);font-size:14px;margin:10px 0}.bar-col{width:150px;min-width:120px}.bar-axis{height:12px;background:#f0ecf3;position:relative;border-radius:2px;overflow:hidden}.bar-axis:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#bdb4c5}.bar-axis i{display:block;position:absolute;top:2px;height:8px;background:var(--teal)}.bar-axis i.neg{background:var(--red)}.path-grid{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:24px}.network-svg{width:100%;display:block;background:#fcfbfd;border-radius:8px}.route-key{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:12px 0}.route-key label{display:flex;gap:7px;align-items:center}.route-line{display:inline-block;width:28px;border-top:3px solid var(--purple)}.route-line.after{border-color:var(--teal)}.route-line.out{border-color:var(--muted);border-top-style:dashed}.path-detail{font-size:14px;padding-left:22px;border-left:1px solid var(--line)}.path-detail table{font-size:13px}.path-detail td,.path-detail th{padding:9px 6px}.allocation{font-size:13px;color:var(--muted);margin:12px 0;overflow-wrap:anywhere}.method{margin-top:26px;color:var(--muted);font-size:13px}.method summary{cursor:pointer;font-size:14px;color:var(--ink);font-weight:600;padding:8px 0}.method ul{padding-left:21px}.download{margin-left:auto}.empty{text-align:center;color:var(--muted);padding:40px 0}.sign-note{font-size:12px;color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:1100px){.layout-grid,.path-grid{grid-template-columns:1fr}.detail,.path-detail{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.detail-grid{grid-template-columns:1fr 1fr}.map-svg{max-height:580px}.detail dl{grid-template-columns:150px 1fr}.explain{gap:18px}}
+@media(max-width:650px){.wrap{padding:20px 14px 36px}.panel{padding:16px}.topline{display:block}.offline{padding-top:0}.numbers{gap:18px 26px}.number{font-size:27px}.maps{grid-template-columns:1fr}.map-svg{max-height:580px}.explain{grid-template-columns:1fr;gap:10px}.toolbar{gap:12px}.tabs button{padding:9px 13px}.download{margin-left:0}.bar-col{display:none}th,td{padding:9px 8px}.detail h3{font-size:20px}.route-key{gap:10px}}
+@media print{button,select,.tabs,.toolbar,.method{display:none}body{background:white}.wrap{max-width:none;padding:0}.panel{border:0}.layout-grid{grid-template-columns:1fr 300px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topline"><div><div class="eyebrow">WEEK 6 · MILP</div><h1>A2 / A3 布局优化解释器</h1></div><div class="offline">离线展示 · 全部数据已内嵌</div></div>
+    <p class="sub">颜色表示设备组。优化同时决定设备组放在哪些槽位、工序分给哪些设备，以及物料怎样进出这两个 Bay。</p>
+    <div class="numbers">
+      <div><div class="number accent" id="gain">0.582%</div><div class="stat-label">局部加权运输距离降低</div></div>
+      <div><div class="number">6 <small>/ 48 个槽位</small></div><div class="stat-label">设备组占用发生变化</div></div>
+      <div><div class="number">0 <small>最优性 gap</small></div><div class="stat-label">给定局部边界与槽位下</div></div>
+      <div><div class="number" id="cost-transition"></div><div class="stat-label">百万原始距离单位·lot，优化前后</div></div>
+    </div>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="展示内容">
+    <button role="tab" id="tab-layout" aria-controls="panel-layout" aria-selected="true" data-tab="layout">布局怎么变了</button>
+    <button role="tab" id="tab-operations" aria-controls="panel-operations" aria-selected="false" data-tab="operations">哪些工序受益</button>
+    <button role="tab" id="tab-path" aria-controls="panel-path" aria-selected="false" data-tab="path">实际路径为什么变短</button>
+  </nav>
+
+  <section class="panel" id="panel-layout" role="tabpanel" aria-labelledby="tab-layout">
+    <h2>同色分散，表示同类设备换了位置</h2>
+    <p class="intro">四种颜色均属于 <b>后段干法刻蚀</b>，对应不同的细分设备组。当前目标只计入物流距离，没有“同组必须聚在一起”的约束。设备数量、尺寸类别和 FE/BE 阶段仍保持。</p>
+    <div class="toolbar">
+      <div class="segmented" role="group" aria-label="对照方式"><button id="mode-slot" aria-pressed="true">按固定槽位看</button><button id="mode-equipment" aria-pressed="false">跟随具体设备看</button></div>
+      <label><span id="pick-label">选择槽位</span><select id="pick" aria-label="选择要查看的槽位或设备"></select></label>
+      <label>着色<select id="color-mode"><option value="group">设备组</option><option value="load">机时利用率</option></select></label>
+      <label><input type="checkbox" id="changes-only">强调六个变化槽位</label>
+    </div>
+    <div id="legend" class="legend" aria-label="设备组图例"></div>
+    <div class="layout-grid">
+      <div class="maps">
+        <div class="mapbox"><div class="map-head"><h3>优化前</h3><span>参考布局与原加工分配</span></div><svg id="map-before" class="map-svg" viewBox="0 0 330 530" role="img" aria-label="优化前的A2和A3布局"></svg></div>
+        <div class="mapbox"><div class="map-head"><h3>优化后</h3><span>联合 MILP 与 LP 重评</span></div><svg id="map-after" class="map-svg" viewBox="0 0 330 530" role="img" aria-label="优化后的A2和A3布局"></svg></div>
+      </div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+    <p class="hint">点击图中任意设备查看详情。黑框标出六个变化槽位，亮色描边标出当前选择；槽位坐标保持固定。坐标轴按原始单位 / 1000 展示。</p>
+    <div class="explain">
+      <div><b>原来同色靠在一起</b><p>这是参考布局中的同组集中放置。同组设备工艺兼容性相同，但不同工序的上下游设备可能位于不同方向。</p></div>
+      <div><b>优化后局部混排</b><p>模型允许在同尺寸、同工艺功能及同阶段的槽位间重新配置。少数设备靠近更有利的物流位置，其他位置相应腾挪。</p></div>
+      <div><b>图中没有画出的另一半</b><p>加工任务也重新分配了。仅看颜色无法判断收益，还要看工序使用哪台设备、进站和出站距离如何共同变化。</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-operations" role="tabpanel" aria-labelledby="tab-operations" hidden>
+    <h2>逐工序核对 0.582% 的来源</h2>
+    <p class="intro">对每道区域工序，把进站和出站的 <b>流量 × 有向轨道距离</b> 相加。这里展示实际求解前后的差额，正的节省表示改善。</p>
+    <div class="notice" id="benefit-explanation"></div>
+    <div class="summaryline" id="operation-summary"></div>
+    <div class="toolbar"><label>产品<select id="product-filter"><option value="all">全部产品</option></select></label><label>变化<select id="sign-filter"><option value="all">全部工序</option><option value="positive">距离降低</option><option value="negative">距离增加</option><option value="zero">基本不变</option></select></label><label>排序<select id="sort-ops"><option value="saving">节省最多在前</option><option value="loss">增加最多在前</option><option value="route">产品与工序顺序</option></select></label><button id="open-example">查看 part_5 第 169 步的实际路径</button><button id="download-csv" class="download">导出对照 CSV</button></div>
+    <div class="sign-note">表中距离成本单位：千原始距离单位·lot。所有工序的节省相加，等于局部总目标的改善。</div>
+    <div class="table-wrap"><table><thead><tr><th>产品 / 工序</th><th>设备组</th><th class="num">优化前</th><th class="num">优化后</th><th class="num">节省</th><th class="bar-col">改善 / 增加</th><th>核对路径</th></tr></thead><tbody id="ops-body"></tbody></table></div>
+    <p class="hint">工序总量和外部源、目标的供需在两种布局中一致。收益来自局部位置和流量分配的联合调整，不能把各台设备的贡献简单相加。</p>
+  </section>
+
+  <section class="panel" id="panel-path" role="tabpanel" aria-labelledby="tab-path" hidden>
+    <h2>比较完整的进站与出站路径</h2>
+    <p class="intro">这里按实际参考解和优化解绘制路径。设备搬迁与工序改派是两项决策：一道工序原先使用的设备，可能与新布局中使用的设备不同。</p>
+    <div class="toolbar"><label>选择工序<select id="path-operation" aria-label="选择要比较的产品工序"></select></label><button id="reset-example">回到讲解示例</button></div>
+    <div class="route-key"><label><input id="show-before" type="checkbox" checked><span class="route-line"></span>优化前</label><label><input id="show-after" type="checkbox" checked><span class="route-line after"></span>优化后</label><span>实线：进站</span><span><i class="route-line out"></i> 虚线：出站</span></div>
+    <div class="path-grid"><div><svg id="network" class="network-svg" viewBox="0 0 900 500" role="img" aria-label="选定工序在全厂轨道上的实际前后最短路径"></svg><p class="hint">距离沿有向轨道计算。图形按节点连线展示，曲线以端点连线示意；数值沿用原 E1 的曼哈顿长度近似。该图是静态聚合物流路径。</p></div><aside id="path-detail" class="path-detail" aria-live="polite"></aside></div>
+  </section>
+
+  <details class="method"><summary>结果口径、约束与数据来源</summary><ul>
+    <li>优化区域为 A2、A3，共 48 台设备、4 个细分设备组、59 个区域产品工序。设备组数量与占地尺寸类别保持不变，轨道、端口和槽位固定。</li>
+    <li>优化器直接决定设备组到槽位的配置；这里的具体设备编号移动是一种满足配置的可行实现，同类同尺寸设备之间可能存在其他编号对应方式。</li>
+    <li>区域加工量、各外部源的供给量和各外部目标的接收量固定为完整弧参考解的区域份额。区域外到区域外物流保持不变，不计入本页面的局部目标。</li>
+    <li>规划周期为 10080 分钟，需求缩放系数 0.25，有效机时系数 0.85。本例无正的区域内部直接转移量。</li>
+    <li>未计入搬迁施工费用、停产损失、设备组聚集偏好、完整维护/洁净/公用工程规范。未验证动态排队、车辆冲突、生产周期或产量提升。</li>
+    <li>gap 为 0 仅针对当前数学模型。物理搬迁是否值得实施，需要继续加入工程条件与搬迁成本评价。</li>
+    <li>数据来自现有 MILP_A2_A3 结果和 e1_reference_lp_full 参考解。页面没有重新运行优化，全部展示数据已内嵌，无外部依赖。</li>
+  </ul><div id="source-check"></div></details>
+  <footer class="section-footer"><span>A2 组 · Week 6 · 局部 MILP 验证</span><span>固定边界下的加权运输距离改善，不代表全厂或动态仿真收益</span></footer>
+</div>
+<script id="milp-data" type="application/json">__MILP_DATA__</script>
+<script>
+"use strict";
+const DATA=JSON.parse(document.getElementById('milp-data').textContent);
+const COLORS={'DE_BE_13':'#783c91','DE_BE_48':'#168e93','DE_BE_50':'#d88f31','DE_BE_65':'#5685be'};
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+const state={tab:'layout',mode:'slot',slot:'S0146',equipment:'ECH0155',group:null,color:'group',changes:false,operation:DATA.default_operation};
+const slots=new Map(DATA.slots.map(s=>[s.id,s])),eqSlots=new Map(DATA.slots.map(s=>[s.slot_name,s])),ops=new Map(DATA.operations.map(o=>[o.key,o]));
+const fmt=(n,d=3)=>Number(n).toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const gshort=g=>g.split('_').at(-1),slotid=name=>'S'+name.replace('ECH','');
+function el(tag,attrs={},text){const n=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n;}
+function svgText(svg,x,y,text,attrs={}){svg.append(el('text',{x,y,fill:'#736d7b','font-size':13,...attrs},text));}
+function openTab(tab){state.tab=tab;for(const t of ['layout','operations','path']){$('panel-'+t).hidden=t!==tab;$('tab-'+t).setAttribute('aria-selected',String(t===tab));}if(tab==='path')renderPath();}
+for(const btn of document.querySelectorAll('[data-tab]'))btn.addEventListener('click',()=>openTab(btn.dataset.tab));
+$('gain').textContent=fmt(DATA.summary.improvement_local*100,3)+'%';$('cost-transition').innerHTML=fmt(DATA.summary.reference_affected_cost/1e6,3)+' <small>→</small> '+fmt(DATA.summary.objective/1e6,3);
+const benefited=DATA.operations.filter(o=>o.saving>1e-4),benefitedOld=benefited.reduce((s,o)=>s+o.old_cost,0),benefitedSaving=benefited.reduce((s,o)=>s+o.saving,0),benefitShare=benefitedOld/DATA.summary.reference_affected_cost;
+$('benefit-explanation').innerHTML='<b>为什么整体降低 '+fmt(DATA.summary.improvement_local*100,3)+'%，受益部分却降低 '+fmt(benefitedSaving/benefitedOld*100,2)+'%？</b><br>收益集中在 DE_BE_50 的 '+benefited.length+' 道工序，其加权运输距离合计降低 '+fmt(benefitedSaving/benefitedOld*100,2)+'%；其余 '+DATA.counts.same+' 道基本不变。受益工序占优化前局部运输成本的 '+fmt(benefitShare*100,1)+'%，因此 '+fmt(benefitShare*100,1)+'% × '+fmt(benefitedSaving/benefitedOld*100,2)+'% ≈ '+fmt(DATA.summary.improvement_local*100,3)+'%。这是成本加权结果，不能用受益工序数量占比代替成本权重。<br>比较基准已在固定布局下优化过加工与物流分配；当前结果是开放局部设备位置调整后的新增收益。';
+$('source-check').textContent='独立核对：前后成本和均与保存结果一致；展示路径的最大距离复算误差为 '+DATA.verification.max_distance_reconstruction_error.toExponential(2)+' 原始单位。';
+function selectedPair(){if(state.mode==='slot'){const s=slots.get(state.slot);return[s,s];}const move=DATA.moves.find(m=>m.equipment_name===state.equipment);return[slots.get(move.source_slot),slots.get(move.target_slot)];}
+function setMode(mode){state.mode=mode;$('mode-slot').setAttribute('aria-pressed',String(mode==='slot'));$('mode-equipment').setAttribute('aria-pressed',String(mode==='equipment'));renderPick();renderLayout();}
+function renderPick(){const select=$('pick');select.innerHTML='';$('pick-label').textContent=state.mode==='slot'?'选择槽位':'选择设备';const list=state.mode==='slot'?DATA.slots.map(s=>[s.id,s.id+' / '+s.bay+(s.changed_group?' · 已变化':'')]):DATA.moves.map(m=>[m.equipment_name,m.equipment_name+' / '+m.source_bay+' → '+m.target_bay]);for(const [v,label]of list){const o=document.createElement('option');o.value=v;o.textContent=label;select.append(o);}select.value=state.mode==='slot'?state.slot:state.equipment;}
+$('pick').addEventListener('change',e=>{if(state.mode==='slot')state.slot=e.target.value;else state.equipment=e.target.value;renderLayout();});
+$('mode-slot').addEventListener('click',()=>setMode('slot'));$('mode-equipment').addEventListener('click',()=>setMode('equipment'));
+$('color-mode').addEventListener('change',e=>{state.color=e.target.value;renderLegend();renderLayout();});$('changes-only').addEventListener('change',e=>{state.changes=e.target.checked;renderLayout();});
+function renderLegend(){const legend=$('legend');legend.innerHTML='';if(state.color==='load'){legend.innerHTML='<span class="hint">颜色表示机时 / 有效机时：浅灰为 0，深绿接近 100%。零分配不代表设备故障。</span>';return;}for(const g of DATA.groups){const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',String(state.group===g.group));b.innerHTML='<span class="swatch" style="background:'+COLORS[g.group]+'"></span>'+g.group+' · '+g.count+' 台';b.addEventListener('click',()=>{state.group=state.group===g.group?null:g.group;renderLegend();renderLayout();});legend.append(b);}if(state.group){const b=document.createElement('button');b.textContent='显示全部';b.addEventListener('click',()=>{state.group=null;renderLegend();renderLayout();});legend.append(b);}}
+function loadColor(v){const t=Math.min(1,Math.max(0,v)),a=[238,237,240],b=[10,118,120];return'rgb('+a.map((x,i)=>Math.round(x+(b[i]-x)*Math.sqrt(t))).join(',')+')';}
+function drawLayout(which){const svg=$('map-'+which);svg.replaceChildren();const after=which==='after',pair=selectedPair(),chosen=after?pair[1]:pair[0],sc=6.25,x=v=>59+(v-13)*sc,y=v=>493-(v-70)*sc;
+  for(const tick of [75,85,95,105,115,125,135]){svg.append(el('line',{x1:52,x2:278,y1:y(tick),y2:y(tick),stroke:'#eee9f1','stroke-width':1}));svgText(svg,45,y(tick)+4,String(tick),{'text-anchor':'end','font-size':11});}
+  for(const tick of [20,30,40])svgText(svg,x(tick),512,String(tick),{'text-anchor':'middle','font-size':11});
+  svgText(svg,x(21.6),28,'A2',{'text-anchor':'middle','font-size':19,'font-weight':700,fill:'#26232e'});svgText(svg,x(36.7),28,'A3',{'text-anchor':'middle','font-size':19,'font-weight':700,fill:'#26232e'});
+  for(const s of DATA.slots){const group=after?s.optimized_group:s.original_group,util=after?s.new_util:s.old_util;let opacity=1;if(state.changes&&!s.changed_group)opacity=.18;if(state.group&&group!==state.group)opacity=Math.min(opacity,.16);if(s.id===chosen.id)opacity=1;
+    const gx=x(s.position_x/1000),gy=y(s.position_y/1000),w=s.width/1000*sc,h=s.height/1000*sc;
+    const mark=el('g',{class:'slot-mark',opacity,role:'button',tabindex:0,'aria-label':`${which==='before'?'优化前':'优化后'} ${s.id} ${s.bay} ${group}，机时利用率${fmt(util*100,1)}%`});
+    if(s.changed_group)mark.append(el('rect',{x:gx-w/2-2,y:gy-h/2-2,width:w+4,height:h+4,fill:'none',stroke:'#292431','stroke-width':1.2}));
+    mark.append(el('rect',{x:gx-w/2,y:gy-h/2,width:w,height:h,rx:.6,fill:state.color==='load'?loadColor(util):COLORS[group],stroke:'#fff','stroke-width':.7}));
+    if(s.id===chosen.id){mark.append(el('rect',{x:gx-w/2-5,y:gy-h/2-5,width:w+10,height:h+10,fill:'none',stroke:'#6c2b87','stroke-width':2.4}));svgText(svg,gx+19,gy-5,s.id,{'font-size':13,fill:'#54246d','font-weight':700});}
+    mark.append(el('title',{},s.id+' · '+group+'\n设备 '+(after?s.new_equipment:s.old_equipment)+'\n机时利用率 '+fmt(util*100,2)+'%'));
+    const select=()=>{state.mode='slot';state.slot=s.id;setMode('slot');};mark.addEventListener('click',select);mark.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});svg.append(mark);
+  }
+}
+function renderLayout(){drawLayout('before');drawLayout('after');const [a,b]=selectedPair(),device=state.mode==='equipment'?state.equipment:b.new_equipment;
+  const oldMachine=state.mode==='equipment'?device:a.old_equipment,newMachine=state.mode==='equipment'?device:b.new_equipment;
+  const related=DATA.operations.filter(o=>o.after.some(f=>f.slot===b.slot_name));
+  let h='<div class="kicker">'+(state.mode==='slot'?'固定位置对照':'具体设备移动')+'</div><h3>'+(state.mode==='slot'?a.id+' · '+a.bay:device)+'</h3>';
+  h+='<div class="detail-grid"><div class="dim">优化前<b style="color:'+COLORS[a.original_group]+'">'+a.original_group+'</b>'+a.id+' / '+a.bay+'<br>'+oldMachine+'</div><div class="dim">优化后<b style="color:'+COLORS[b.optimized_group]+'">'+b.optimized_group+'</b>'+b.id+' / '+b.bay+'<br>'+newMachine+'</div></div>';
+  h+='<div class="notice">'+(state.mode==='slot'?(a.changed_group?'这个位置没有移动，换入了另一台设备。设备类型没有转换。':'此槽位的设备组保持不变，加工任务仍可能重新分配。'):'设备组 '+a.original_group+' 保持不变，从 '+a.id+' 移至 '+b.id+'，使用目标槽位的固定端口。')+'</div>';
+  h+='<dl><dt>原位置坐标 / 1000</dt><dd>'+fmt(a.position_x/1000)+', '+fmt(a.position_y/1000)+'</dd><dt>新位置坐标 / 1000</dt><dd>'+fmt(b.position_x/1000)+', '+fmt(b.position_y/1000)+'</dd><dt>占地尺寸 / 1000</dt><dd>'+fmt(b.width/1000)+' × '+fmt(b.height/1000)+'</dd><dt>机时利用率</dt><dd>'+fmt(a.old_util*100,2)+'% → '+fmt(b.new_util*100,2)+'%</dd><dt>加工机时 / 分钟</dt><dd>'+fmt(a.old_load,1)+' → '+fmt(b.new_load,1)+'</dd><dt>优化后接入端口</dt><dd>'+esc(b.port_name)+'</dd></dl>';
+  h+='<h3 class="small">'+(state.mode==='slot'?'六个变化槽位':'六台设备的一种移动实现')+'</h3><div class="changed-list">';
+  for(const m of DATA.moves){const value=state.mode==='slot'?m.source_slot:m.equipment_name;const active=state.mode==='slot'?value===state.slot:value===state.equipment;h+='<button data-focus="'+value+'" aria-pressed="'+active+'">'+(state.mode==='slot'?m.source_slot:m.equipment_name)+'</button>';}
+  h+='</div><h3 class="small">新布局在此加工的工序</h3>';
+  h+=related.length?'<div class="op-links">'+related.map(o=>'<button data-operation="'+o.key+'">'+o.part+' · '+o.step+'</button>').join('')+'</div>':'<p class="dim">本模型在此分配的加工量为 0。位置最优与加工任务分配需结合解读。</p>';
+  h+='<p class="hint">具体设备编号是同类同尺寸机台的一种可行对应；原优化器决定的是设备组到槽位的配置。</p>';
+  $('detail').innerHTML=h;
+  for(const b of $('detail').querySelectorAll('[data-focus]'))b.addEventListener('click',()=>{if(state.mode==='slot')state.slot=b.dataset.focus;else state.equipment=b.dataset.focus;renderPick();renderLayout();});
+  for(const b of $('detail').querySelectorAll('[data-operation]'))b.addEventListener('click',()=>chooseOp(b.dataset.operation));
+}
+function chooseOp(key){state.operation=key;$('path-operation').value=key;openTab('path');}
+const products=[...new Set(DATA.operations.map(o=>o.part))].sort((a,b)=>Number(a.split('_')[1])-Number(b.split('_')[1]));
+for(const p of products){const o=document.createElement('option');o.value=p;o.textContent=p;$('product-filter').append(o);}
+const totalGain=DATA.summary.reference_affected_cost-DATA.summary.objective;
+$('operation-summary').innerHTML='<b class="saving">'+DATA.counts.improved+' 道工序距离降低</b>，<b class="loss">'+DATA.counts.worsened+' 道增加</b>，'+DATA.counts.same+' 道基本不变。净节省 <b>'+fmt(totalGain/1e6)+' 百万原始距离单位·lot</b>。';
+function renderOps(){let list=DATA.operations.filter(o=>($('product-filter').value==='all'||o.part===$('product-filter').value));const sign=$('sign-filter').value;if(sign==='positive')list=list.filter(o=>o.saving>1e-4);if(sign==='negative')list=list.filter(o=>o.saving<-1e-4);if(sign==='zero')list=list.filter(o=>Math.abs(o.saving)<=1e-4);
+  const sort=$('sort-ops').value;list=list.slice().sort(sort==='saving'?(a,b)=>b.saving-a.saving:sort==='loss'?(a,b)=>a.saving-b.saving:(a,b)=>Number(a.part.split('_')[1])-Number(b.part.split('_')[1])||a.step-b.step);
+  const max=Math.max(...DATA.operations.map(o=>Math.abs(o.saving)),1);
+  $('ops-body').innerHTML=list.length?list.map(o=>{const good=o.saving>1e-4,bad=o.saving<-1e-4,len=Math.abs(o.saving)/max*48;return'<tr><td><b>'+o.part+'</b><br><small>第 '+o.step+' 步</small></td><td>'+o.group+'</td><td class="num">'+fmt(o.old_cost/1000)+'</td><td class="num">'+fmt(o.new_cost/1000)+'</td><td class="num '+(good?'saving':bad?'loss':'')+'">'+(good?'+':'')+fmt(o.saving/1000)+'</td><td class="bar-col"><div class="bar-axis"><i class="'+(bad?'neg':'')+'" style="left:'+(bad?50-len:50)+'%;width:'+len+'%"></i></div></td><td><button data-show="'+o.key+'">查看路径</button></td></tr>';}).join(''):'<tr><td colspan="7" class="empty">当前筛选下没有工序</td></tr>';
+  for(const b of $('ops-body').querySelectorAll('[data-show]'))b.addEventListener('click',()=>chooseOp(b.dataset.show));}
+for(const id of ['product-filter','sign-filter','sort-ops'])$(id).addEventListener('change',renderOps);
+$('open-example').addEventListener('click',()=>chooseOp(DATA.default_operation));$('reset-example').addEventListener('click',()=>chooseOp(DATA.default_operation));
+for(const o of DATA.operations.slice().sort((a,b)=>Number(a.part.split('_')[1])-Number(b.part.split('_')[1])||a.step-b.step)){const opt=document.createElement('option');opt.value=o.key;opt.textContent=o.part+' · 第 '+o.step+' 步 · '+o.group;$('path-operation').append(opt);}
+$('path-operation').value=state.operation;$('path-operation').addEventListener('change',e=>{state.operation=e.target.value;renderPath();});for(const id of ['show-before','show-after'])$(id).addEventListener('change',renderPath);
+function renderPath(){const op=ops.get(state.operation),svg=$('network');svg.replaceChildren();
+  const nodes=DATA.network.nodes;const minX=Math.min(...nodes.map(n=>n[0])),maxX=Math.max(...nodes.map(n=>n[0])),minY=Math.min(...nodes.map(n=>n[1])),maxY=Math.max(...nodes.map(n=>n[1]));const scale=Math.min(820/(maxX-minX),410/(maxY-minY));const X=v=>40+(v-minX)*scale,Y=v=>450-(v-minY)*scale;
+  let base='';for(const [a,b]of DATA.network.rails)base+='M'+X(nodes[a][0]).toFixed(2)+','+Y(nodes[a][1]).toFixed(2)+'L'+X(nodes[b][0]).toFixed(2)+','+Y(nodes[b][1]).toFixed(2);
+  svg.append(el('path',{d:base,fill:'none',stroke:'#e4dfe8','stroke-width':.9}));
+  for(const bay of ['A2','A3']){const ss=DATA.slots.filter(s=>s.bay===bay),x0=Math.min(...ss.map(s=>(s.position_x-s.width/2)/1000))-1,x1=Math.max(...ss.map(s=>(s.position_x+s.width/2)/1000))+1,y0=Math.min(...ss.map(s=>(s.position_y-s.height/2)/1000))-1,y1=Math.max(...ss.map(s=>(s.position_y+s.height/2)/1000))+1;svg.append(el('rect',{x:X(x0),y:Y(y1),width:(x1-x0)*scale,height:(y1-y0)*scale,fill:'none',stroke:'#b6a3c1','stroke-width':1,'stroke-dasharray':'4 3'}));svgText(svg,(X(x0)+X(x1))/2,Y(y1)-8,bay,{'font-size':13,'text-anchor':'middle',fill:'#783c91'});}
+  const marks=[];
+  for(const [phase,checked,color]of [['before',$('show-before').checked,'#783c91'],['after',$('show-after').checked,'#168e93']]){if(!checked)continue;for(const f of op[phase]){const p=DATA.network.paths[f.path],points=[p.start,...p.nodes.map(i=>nodes[i]),p.end];const line=points.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(2)+','+Y(p[1]).toFixed(2)).join('');svg.append(el('path',{d:line,fill:'none',stroke:color,'stroke-width':2.2+1.5*f.flow_lots/op.demand,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':f.direction==='out'?'7 5':'none',opacity:.82}));const localPoint=f.direction==='in'?p.end:p.start;marks.push({point:localPoint,label:(phase==='before'?'原 ':'新 ')+slotid(f.slot),color});}}
+  const seen=new Set();let labelIndex=0;for(const mark of marks){const key=mark.label;if(seen.has(key))continue;seen.add(key);const px=X(mark.point[0]),py=Y(mark.point[1]);svg.append(el('circle',{cx:px,cy:py,r:5.3,fill:mark.color,stroke:'#fff','stroke-width':1.5}));svgText(svg,px+9,py+(labelIndex++%2?-12:18),mark.label,{'font-size':12,fill:mark.color,'font-weight':700});}
+  const externalSeen=new Set();for(const f of op.before){const key=f.direction+f.external_equipment;if(externalSeen.has(key))continue;externalSeen.add(key);const path=DATA.network.paths[f.path],pt=f.direction==='in'?path.start:path.end;svg.append(el('circle',{cx:X(pt[0]),cy:Y(pt[1]),r:4,fill:'#736d7b',stroke:'#fff','stroke-width':1}));svgText(svg,X(pt[0])+7,Y(pt[1])-8,(f.direction==='in'?'源 ':'目标 ')+f.external_equipment,{'font-size':11,fill:'#524b5b'});}
+  svgText(svg,42,28,op.part+' · 第 '+op.step+' 步，'+op.group,{'font-size':17,'font-weight':700,fill:'#26232e'});
+  svgText(svg,42,482,'区域以虚线框标注；路径可经过区域外固定轨道。',{'font-size':12});
+  const mean=(phase,dir)=>op[phase].filter(f=>f.direction===dir).reduce((s,f)=>s+f.weighted_distance,0)/op.demand/1000;
+  const bi=mean('before','in'),ai=mean('after','in'),bo=mean('before','out'),ao=mean('after','out');
+  const allocation=phase=>[...new Set(op[phase].map(f=>slotid(f.slot)))].join('、');
+  let detail='<div class="kicker">实际工序前后对照</div><h3>'+op.part+' · 第 '+op.step+' 步</h3><p class="dim">'+op.group+'，区域加工量 '+fmt(op.demand,4)+' lot</p>';
+  const externalIds=dir=>[...new Set(op.before.filter(f=>f.direction===dir).map(f=>f.external_equipment))].join('、');
+  detail+='<div class="allocation">固定外部源：'+externalIds('in')+'<br>固定外部目标：'+externalIds('out')+'<br>原加工槽位：'+allocation('before')+'<br>新加工槽位：'+allocation('after')+'</div>';
+  detail+='<table><thead><tr><th>每 lot 加权均距</th><th class="num">优化前</th><th class="num">优化后</th></tr></thead><tbody><tr><td>进站</td><td class="num">'+fmt(bi)+'</td><td class="num '+(ai<=bi?'saving':'loss')+'">'+fmt(ai)+'</td></tr><tr><td>出站</td><td class="num">'+fmt(bo)+'</td><td class="num '+(ao<=bo?'saving':'loss')+'">'+fmt(ao)+'</td></tr><tr><td><b>进站 + 出站</b></td><td class="num"><b>'+fmt(bi+bo)+'</b></td><td class="num"><b>'+fmt(ai+ao)+'</b></td></tr></tbody></table><p class="hint">距离单位：千原始距离单位。多来源/目标按流量加权。</p>';
+  const mixed=ai>bi+1e-6&&ao<bo-1e-6?'进站距离增加，但出站节省更多，合计仍可缩短。':ai<bi-1e-6&&ao>bo+1e-6?'出站距离增加，但进站可能节省更多，需要看合计。':'收益由进站和出站共同决定，不能只看某一段。';
+  detail+='<div class="notice">'+mixed+'</div><p><b class="'+(op.saving>=0?'saving':'loss')+'">该工序加权距离'+(op.saving>=0?'降低 ':'增加 ')+fmt(Math.abs(op.saving_pct),3)+'%</b><br>净节省 '+fmt(op.saving/1000)+' 千原始距离单位·lot</p>';
+  if(op.key===DATA.default_operation)detail+='<p class="small">原工序使用 <b>ECH0163</b>。新布局使用 S0146，由移入的 <b>ECH0155</b> 承担。设备搬迁与工序改派在这里同时发生。</p>';
+  detail+='<p class="hint">这是一道工序的变化。全体 59 道工序的净结果才是页面顶部的 0.582%。</p>';
+  $('path-detail').innerHTML=detail;
+}
+$('download-csv').addEventListener('click',()=>{const rows=[['product','step','group','demand_lots','before_weighted_distance','after_weighted_distance','saving','saving_percent'],...DATA.operations.map(o=>[o.part,o.step,o.group,o.demand,o.old_cost,o.new_cost,o.saving,o.saving_pct])];const csv='\uFEFF'+rows.map(r=>r.join(',')).join('\r\n'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='MILP-operation-comparison.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+renderPick();renderLegend();renderLayout();renderOps();
+</script>
+</body></html>

@@ -1,0 +1,90 @@
+
+SMAT 2022
+Pinokio Documentation
+Release 0.1 – 11/2022
+
+Introduction
+The purpose of this document is to describe the data of the Semiconductor Manufacturing with AMHS Testbed 2022 (SMAT2022). SMAT2022 contains 16 different types of tables: 7 tables from SMT2020 and new nine tables describing AMHS in modern FABs. A summary of the purpose of tables is as follows:
+Table	Description
+Address	Information on all nodes of OHT rail network, and their characteristics.
+ZCU	Information on
+Rail	Information on all links of OHT rail network.
+Bay	Information on bays (Intrabay and Interbay)
+Equipment	Information on
+PortType	Information on
+Port	Information on 
+VehicleType	Information on 
+Vehicle	Information on
+
+Terminology
+dd
+
+Description of the tables
+Each table will be described briefly in this section. A description of each column will be provided.
+Address
+Column	Description
+NAME	
+POSITION_X	
+POSITION_Y	
+ZCU_NAME	
+ZCU_TYPE	
+
+ZCU
+Column	Description
+NAME	
+TYPE	
+RAILLINE_NAME	
+DISTANCE	
+
+Rail
+Column	Description
+NAME	
+BAY_NAME	
+FROM_NODE	
+TO_NODE	
+MAX_SPEED	
+CURVE	
+
+Bay
+Column	Description
+NAME	
+TYPE	
+RETICLE	
+NEIGHBOR_BAY	
+
+Equipment
+Column	Description
+NAME	
+TYPE	
+RETICLE	
+NEIGHBOR_BAY	
+
+PortType
+Column	Description
+NAME	
+SIZE	
+INOUT_TYPE	
+
+Port
+Column	Description
+NAME	
+PORT_TYPE	
+EQP_NAME	
+RAILLINE_NAME	
+DISTANCE	
+
+VehicleType
+Column	Description
+NAME	
+SIZE	
+MAX_SPEED	
+ACCELERATION	
+DECELERATION	
+MIN_DISTANCE	
+
+Vehicle
+Column	Description
+NAME	
+TYPE	
+RAILLINE_NAME	
+DISTANCE	

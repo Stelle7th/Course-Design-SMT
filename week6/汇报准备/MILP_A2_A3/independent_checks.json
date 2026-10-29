@@ -1,0 +1,12 @@
+{
+  "equipment_counts_by_group_and_footprint": true,
+  "processing_compatible": true,
+  "max_regional_demand_residual": 0.0,
+  "max_inflow_residual": 0.0,
+  "max_outflow_residual": 0.0,
+  "max_external_boundary_residual": 0.0,
+  "max_capacity_excess_min": 0.0,
+  "objective_relative_difference": 0.0,
+  "checked_from": "saved CSV files and original reference operation allocations; separate from solver matrices",
+  "passed": true
+}

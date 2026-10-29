@@ -1,0 +1,702 @@
+{
+  "workbook_sheets": [
+    "Address",
+    "ZCU",
+    "Rail",
+    "Bay",
+    "Equipment",
+    "PortType",
+    "Port",
+    "VehicleType",
+    "Vehicle"
+  ],
+  "workbook_sheet_count": 9,
+  "sheet_record_counts": {
+    "Address": 2858,
+    "ZCU": 734,
+    "Rail": 3424,
+    "Bay": 43,
+    "Equipment": 1116,
+    "PortType": 6,
+    "Port": 22120,
+    "VehicleType": 1,
+    "Vehicle": 500
+  },
+  "equipment_tool_group_count": 108,
+  "extra_groups_vs_A2_physical": {
+    "COMMIT": 4,
+    "COMPLETE": 4,
+    "STOCKER": 40
+  },
+  "explicit_SMAT_to_A2_name_aliases": {
+    "DefMet_FE_118": "DefMEt_FE_118"
+  },
+  "A2_physical_groups_missing_in_SMAT": [],
+  "matched_physical_group_count": 105,
+  "matched_physical_equipment_qty": 1068,
+  "groups_with_identical_qty": 47,
+  "groups_with_different_qty": 58,
+  "quantity_differences_nonzero": [
+    {
+      "group": "DE_BE_11",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 9,
+      "SMAT_equipment_qty": 12,
+      "difference": 3,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_12",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 7,
+      "SMAT_equipment_qty": 9,
+      "difference": 2,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_13",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 13,
+      "SMAT_equipment_qty": 16,
+      "difference": 3,
+      "SMAT_bays": "A1|A2",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_48",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A2|A3",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_50",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 10,
+      "SMAT_equipment_qty": 12,
+      "difference": 2,
+      "SMAT_bays": "A3",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_65",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 13,
+      "difference": 2,
+      "SMAT_bays": "A3|A4",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_66",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 17,
+      "SMAT_equipment_qty": 21,
+      "difference": 4,
+      "SMAT_bays": "A4|A5",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_67",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A5",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_1",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 7,
+      "difference": 2,
+      "SMAT_bays": "A5|A6",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_51",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 20,
+      "SMAT_equipment_qty": 25,
+      "difference": 5,
+      "SMAT_bays": "A6|A7",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_53",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 6,
+      "difference": 1,
+      "SMAT_bays": "A7",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_54",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "A7",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_56",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 2,
+      "SMAT_equipment_qty": 3,
+      "difference": 1,
+      "SMAT_bays": "A7",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_58",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 2,
+      "SMAT_equipment_qty": 3,
+      "difference": 1,
+      "SMAT_bays": "A7",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_59",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 8,
+      "SMAT_equipment_qty": 10,
+      "difference": 2,
+      "SMAT_bays": "A7|A8",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_62",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 17,
+      "SMAT_equipment_qty": 21,
+      "difference": 4,
+      "SMAT_bays": "A8|A9",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_70",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A9",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_FE_71",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 18,
+      "SMAT_equipment_qty": 23,
+      "difference": 5,
+      "SMAT_bays": "A10|A9",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_72",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A10|A11",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_FE_86",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 118,
+      "SMAT_equipment_qty": 149,
+      "difference": 31,
+      "SMAT_bays": "A11|A12|A13|A14|A15|A16",
+      "bay_count": 6
+    },
+    {
+      "group": "DefMet_FE_10",
+      "area": "Def_Met",
+      "A2_LVHM_qty": 2,
+      "SMAT_equipment_qty": 3,
+      "difference": 1,
+      "SMAT_bays": "A16",
+      "bay_count": 1
+    },
+    {
+      "group": "DefMet_FE_43",
+      "area": "Def_Met",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 6,
+      "difference": 1,
+      "SMAT_bays": "A16",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_BE_20",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 6,
+      "difference": 1,
+      "SMAT_bays": "A16|A17",
+      "bay_count": 2
+    },
+    {
+      "group": "Dielectric_BE_21",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 6,
+      "SMAT_equipment_qty": 8,
+      "difference": 2,
+      "SMAT_bays": "A17",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_BE_27",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 12,
+      "SMAT_equipment_qty": 15,
+      "difference": 3,
+      "SMAT_bays": "A17",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_BE_28",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "A17|A18",
+      "bay_count": 2
+    },
+    {
+      "group": "Dielectric_BE_60",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 6,
+      "SMAT_equipment_qty": 7,
+      "difference": 1,
+      "SMAT_bays": "A18",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_FE_112",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 9,
+      "SMAT_equipment_qty": 11,
+      "difference": 2,
+      "SMAT_bays": "A18",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_FE_130",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 4,
+      "SMAT_equipment_qty": 5,
+      "difference": 1,
+      "SMAT_bays": "A18",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_FE_29",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "A18",
+      "bay_count": 1
+    },
+    {
+      "group": "Dielectric_FE_31",
+      "area": "Dielectric",
+      "A2_LVHM_qty": 4,
+      "SMAT_equipment_qty": 5,
+      "difference": 1,
+      "SMAT_bays": "A19",
+      "bay_count": 1
+    },
+    {
+      "group": "Diffusion_FE_100",
+      "area": "Diffusion",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "A19",
+      "bay_count": 1
+    },
+    {
+      "group": "Diffusion_FE_94",
+      "area": "Diffusion",
+      "A2_LVHM_qty": 13,
+      "SMAT_equipment_qty": 14,
+      "difference": 1,
+      "SMAT_bays": "A20|B19",
+      "bay_count": 2
+    },
+    {
+      "group": "LithoMet_BE_18",
+      "area": "Litho_Met",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "B5",
+      "bay_count": 1
+    },
+    {
+      "group": "LithoMet_FE_19",
+      "area": "Litho_Met",
+      "A2_LVHM_qty": 14,
+      "SMAT_equipment_qty": 18,
+      "difference": 4,
+      "SMAT_bays": "B5",
+      "bay_count": 1
+    },
+    {
+      "group": "LithoTrack_FE_115",
+      "area": "Litho",
+      "A2_LVHM_qty": 41,
+      "SMAT_equipment_qty": 46,
+      "difference": 5,
+      "SMAT_bays": "B6|B7",
+      "bay_count": 2
+    },
+    {
+      "group": "LithoTrack_FE_95",
+      "area": "Litho",
+      "A2_LVHM_qty": 40,
+      "SMAT_equipment_qty": 47,
+      "difference": 7,
+      "SMAT_bays": "B7|B8|B9",
+      "bay_count": 3
+    },
+    {
+      "group": "Litho_BE_110",
+      "area": "Litho",
+      "A2_LVHM_qty": 23,
+      "SMAT_equipment_qty": 25,
+      "difference": 2,
+      "SMAT_bays": "B1|B2",
+      "bay_count": 2
+    },
+    {
+      "group": "Litho_FE_111",
+      "area": "Litho",
+      "A2_LVHM_qty": 20,
+      "SMAT_equipment_qty": 22,
+      "difference": 2,
+      "SMAT_bays": "B2|B3",
+      "bay_count": 2
+    },
+    {
+      "group": "Litho_FE_92",
+      "area": "Litho",
+      "A2_LVHM_qty": 26,
+      "SMAT_equipment_qty": 28,
+      "difference": 2,
+      "SMAT_bays": "B3|B4",
+      "bay_count": 2
+    },
+    {
+      "group": "Litho_REG_BE_63",
+      "area": "Litho_Met",
+      "A2_LVHM_qty": 8,
+      "SMAT_equipment_qty": 10,
+      "difference": 2,
+      "SMAT_bays": "B4|B5",
+      "bay_count": 2
+    },
+    {
+      "group": "Litho_REG_FE_64",
+      "area": "Litho_Met",
+      "A2_LVHM_qty": 12,
+      "SMAT_equipment_qty": 15,
+      "difference": 3,
+      "SMAT_bays": "B4",
+      "bay_count": 1
+    },
+    {
+      "group": "Planar_BE_75",
+      "area": "Planar",
+      "A2_LVHM_qty": 14,
+      "SMAT_equipment_qty": 19,
+      "difference": 5,
+      "SMAT_bays": "B10|B11",
+      "bay_count": 2
+    },
+    {
+      "group": "Planar_FE_76",
+      "area": "Planar",
+      "A2_LVHM_qty": 2,
+      "SMAT_equipment_qty": 3,
+      "difference": 1,
+      "SMAT_bays": "B9",
+      "bay_count": 1
+    },
+    {
+      "group": "Planar_FE_79",
+      "area": "Planar",
+      "A2_LVHM_qty": 4,
+      "SMAT_equipment_qty": 5,
+      "difference": 1,
+      "SMAT_bays": "B9",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_BE_23",
+      "area": "TF",
+      "A2_LVHM_qty": 14,
+      "SMAT_equipment_qty": 17,
+      "difference": 3,
+      "SMAT_bays": "B11|B12",
+      "bay_count": 2
+    },
+    {
+      "group": "TF_BE_26",
+      "area": "TF",
+      "A2_LVHM_qty": 13,
+      "SMAT_equipment_qty": 15,
+      "difference": 2,
+      "SMAT_bays": "B12",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_BE_40",
+      "area": "TF",
+      "A2_LVHM_qty": 17,
+      "SMAT_equipment_qty": 21,
+      "difference": 4,
+      "SMAT_bays": "B12|B13",
+      "bay_count": 2
+    },
+    {
+      "group": "TF_FE_103",
+      "area": "TF",
+      "A2_LVHM_qty": 7,
+      "SMAT_equipment_qty": 8,
+      "difference": 1,
+      "SMAT_bays": "B13",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_FE_104",
+      "area": "TF",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 6,
+      "difference": 1,
+      "SMAT_bays": "B13|B14",
+      "bay_count": 2
+    },
+    {
+      "group": "TF_FE_113",
+      "area": "TF",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "B14",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_FE_131",
+      "area": "TF",
+      "A2_LVHM_qty": 6,
+      "SMAT_equipment_qty": 7,
+      "difference": 1,
+      "SMAT_bays": "B14",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_FE_3",
+      "area": "TF",
+      "A2_LVHM_qty": 3,
+      "SMAT_equipment_qty": 4,
+      "difference": 1,
+      "SMAT_bays": "B14",
+      "bay_count": 1
+    },
+    {
+      "group": "TF_Met_FE_61",
+      "area": "TF_Met",
+      "A2_LVHM_qty": 2,
+      "SMAT_equipment_qty": 3,
+      "difference": 1,
+      "SMAT_bays": "B15",
+      "bay_count": 1
+    },
+    {
+      "group": "WE_BE_82",
+      "area": "Wet_Etch",
+      "A2_LVHM_qty": 9,
+      "SMAT_equipment_qty": 10,
+      "difference": 1,
+      "SMAT_bays": "B16",
+      "bay_count": 1
+    },
+    {
+      "group": "WE_FE_108",
+      "area": "Wet_Etch",
+      "A2_LVHM_qty": 29,
+      "SMAT_equipment_qty": 31,
+      "difference": 2,
+      "SMAT_bays": "B16|B17",
+      "bay_count": 2
+    },
+    {
+      "group": "WE_FE_41",
+      "area": "Wet_Etch",
+      "A2_LVHM_qty": 5,
+      "SMAT_equipment_qty": 6,
+      "difference": 1,
+      "SMAT_bays": "B17|B18",
+      "bay_count": 2
+    },
+    {
+      "group": "WE_FE_84",
+      "area": "Wet_Etch",
+      "A2_LVHM_qty": 17,
+      "SMAT_equipment_qty": 18,
+      "difference": 1,
+      "SMAT_bays": "B18|B19",
+      "bay_count": 2
+    }
+  ],
+  "physical_groups_in_multiple_bays": 32,
+  "physical_group_max_bay_count": 6,
+  "bay_types": {
+    "INTRABAY": 40,
+    "INTERBAY": 3
+  },
+  "bay_reticle": {
+    "0": 34,
+    "1": 9
+  },
+  "port_types": {
+    "LSTB": 5920,
+    "RSTB": 5920,
+    "UTB": 5920,
+    "COMMIT": 4,
+    "COMPLETE": 4,
+    "EQPPort": 4352
+  },
+  "port_type_specs": [
+    {
+      "NAME": "COMMIT",
+      "SIZE": "314",
+      "INOUT_TYPE": "OUT"
+    },
+    {
+      "NAME": "COMPLETE",
+      "SIZE": "314",
+      "INOUT_TYPE": "IN"
+    },
+    {
+      "NAME": "EQPPort",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "LSTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "RSTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "UTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    }
+  ],
+  "vehicle_type_specs": [
+    {
+      "NAME": "OHTV0",
+      "SIZE": "784",
+      "MAX_SPEED": "1500",
+      "ACCELERATION": "2000",
+      "DECELERATION": "3000",
+      "MIN_DISTANCE": "125"
+    }
+  ],
+  "rail_speed_values": {
+    "1": 3424
+  },
+  "rail_curve_values": {
+    "0": 2473,
+    "1": 951
+  },
+  "bad_rail_endpoint_count": 0,
+  "bad_port_rail_count": 0,
+  "bad_port_equipment_reference_count": 0,
+  "equipment_without_ports": [],
+  "port_equipment_refs_histogram": {
+    "1": 8,
+    "4": 1068,
+    "2": 40
+  },
+  "bad_vehicle_rail_count": 0,
+  "directed_graph_scc_sizes": [
+    2858
+  ],
+  "node_xy_range_raw": {
+    "POSITION_X": [
+      0.0,
+      300327.952795275
+    ],
+    "POSITION_Y": [
+      -5580.35714285714,
+      147247.023836096
+    ]
+  },
+  "straight_rail_port_distance_overruns_gt1_raw_unit_count": 0,
+  "straight_rail_port_distance_overrun_examples": [],
+  "example_group_mapping": [
+    {
+      "group": "DE_BE_11",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 9,
+      "SMAT_equipment_qty": 12,
+      "difference": 3,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_12",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 7,
+      "SMAT_equipment_qty": 9,
+      "difference": 2,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_13",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 13,
+      "SMAT_equipment_qty": 16,
+      "difference": 3,
+      "SMAT_bays": "A1|A2",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_48",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A2|A3",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_50",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 10,
+      "SMAT_equipment_qty": 12,
+      "difference": 2,
+      "SMAT_bays": "A3",
+      "bay_count": 1
+    }
+  ]
+}

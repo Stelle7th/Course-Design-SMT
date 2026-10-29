@@ -1,0 +1,1976 @@
+[
+  {
+    "check": "sheet names",
+    "actual": [
+      "Address",
+      "Bay",
+      "Equipment",
+      "Port",
+      "PortType",
+      "Rail",
+      "Vehicle",
+      "VehicleType",
+      "ZCU"
+    ],
+    "expected": [
+      "Address",
+      "Bay",
+      "Equipment",
+      "Port",
+      "PortType",
+      "Rail",
+      "Vehicle",
+      "VehicleType",
+      "ZCU"
+    ],
+    "passed": true
+  },
+  {
+    "check": "Address rows",
+    "actual": 2858,
+    "expected": 2858,
+    "passed": true
+  },
+  {
+    "check": "Address duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "ZCU rows",
+    "actual": 734,
+    "expected": 734,
+    "passed": true
+  },
+  {
+    "check": "ZCU duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Rail rows",
+    "actual": 3424,
+    "expected": 3424,
+    "passed": true
+  },
+  {
+    "check": "Rail duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Bay rows",
+    "actual": 43,
+    "expected": 43,
+    "passed": true
+  },
+  {
+    "check": "Bay duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Equipment rows",
+    "actual": 1116,
+    "expected": 1116,
+    "passed": true
+  },
+  {
+    "check": "Equipment duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "PortType rows",
+    "actual": 6,
+    "expected": 6,
+    "passed": true
+  },
+  {
+    "check": "PortType duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Port rows",
+    "actual": 22120,
+    "expected": 22120,
+    "passed": true
+  },
+  {
+    "check": "Port duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "VehicleType rows",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "check": "VehicleType duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Vehicle rows",
+    "actual": 500,
+    "expected": 500,
+    "passed": true
+  },
+  {
+    "check": "Vehicle duplicate NAME",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "source hash README.md",
+    "actual": "60bd612deb86d19fb1431d860cbc14719e4243b81311bf412a0e5c883f0c1641",
+    "expected": "60bd612deb86d19fb1431d860cbc14719e4243b81311bf412a0e5c883f0c1641",
+    "passed": true
+  },
+  {
+    "check": "source hash SMAT_2022_generic.docx",
+    "actual": "2156dc360d32e71b2f1e14e5e860cbce5ea6d6cb4e971a338c89bced0bbc5a4f",
+    "expected": "2156dc360d32e71b2f1e14e5e860cbce5ea6d6cb4e971a338c89bced0bbc5a4f",
+    "passed": true
+  },
+  {
+    "check": "source hash SMAT_2022_PINOKIO_documentation.docx",
+    "actual": "533839fe9add980878912f9c5e59dcf41088177a0e1be7b86b7689abb81217ea",
+    "expected": "533839fe9add980878912f9c5e59dcf41088177a0e1be7b86b7689abb81217ea",
+    "passed": true
+  },
+  {
+    "check": "source hash SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "actual": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "expected": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "passed": true
+  },
+  {
+    "check": "copy equality SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "actual": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "expected": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "passed": true
+  },
+  {
+    "check": "copy equality A2_SMAT_group_mapping.csv",
+    "actual": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "expected": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "passed": true
+  },
+  {
+    "check": "copy equality 核查结论与实施方案.md",
+    "actual": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "expected": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "passed": true
+  },
+  {
+    "check": "copy equality SMT2020_LVHM_group_inventory.csv",
+    "actual": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "expected": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "passed": true
+  },
+  {
+    "check": "copy equality SMAT_2022_generic.txt",
+    "actual": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "expected": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "passed": true
+  },
+  {
+    "check": "copy equality SMAT_2022_PINOKIO_documentation.txt",
+    "actual": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "expected": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "passed": true
+  },
+  {
+    "check": "mapping unique groups",
+    "actual": 105,
+    "expected": 105,
+    "passed": true
+  },
+  {
+    "check": "mapping duplicate groups",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "mapping process classes",
+    "actual": 11,
+    "expected": 11,
+    "passed": true
+  },
+  {
+    "check": "equipment PRODUCTION",
+    "actual": 1068,
+    "expected": 1068,
+    "passed": true
+  },
+  {
+    "check": "equipment STOCKER",
+    "actual": 40,
+    "expected": 40,
+    "passed": true
+  },
+  {
+    "check": "equipment COMMIT",
+    "actual": 4,
+    "expected": 4,
+    "passed": true
+  },
+  {
+    "check": "equipment COMPLETE",
+    "actual": 4,
+    "expected": 4,
+    "passed": true
+  },
+  {
+    "check": "unmapped production",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "equipment Bay FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "positive dimensions",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "finite equipment geometry",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "finite Address geometry",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "Bay type counts",
+    "actual": {
+      "INTRABAY": 40,
+      "INTERBAY": 3
+    },
+    "expected": {
+      "INTRABAY": 40,
+      "INTERBAY": 3
+    },
+    "passed": true
+  },
+  {
+    "check": "Rail Bay FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Rail FROM_NODE FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Rail TO_NODE FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "zero length straight rails",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "binary CURVE",
+    "actual": [
+      0,
+      1
+    ],
+    "expected": [
+      0,
+      1
+    ],
+    "passed": true
+  },
+  {
+    "check": "Port Rail FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Port negative DISTANCE",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Port straight overrun >1",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Vehicle Rail FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Vehicle negative DISTANCE",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Vehicle straight overrun >1",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Port equipment FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Port type FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Vehicle type FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "Address ZCU FK",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "PRODUCTION port count",
+    "actual": [
+      4
+    ],
+    "expected": [
+      4
+    ],
+    "passed": true
+  },
+  {
+    "check": "STOCKER port count",
+    "actual": [
+      2
+    ],
+    "expected": [
+      2
+    ],
+    "passed": true
+  },
+  {
+    "check": "COMMIT port count",
+    "actual": [
+      1
+    ],
+    "expected": [
+      1
+    ],
+    "passed": true
+  },
+  {
+    "check": "COMPLETE port count",
+    "actual": [
+      1
+    ],
+    "expected": [
+      1
+    ],
+    "passed": true
+  },
+  {
+    "check": "matrix total",
+    "actual": 1068,
+    "expected": 1068,
+    "passed": true
+  },
+  {
+    "check": "workcenter Bay pairs",
+    "actual": 142,
+    "expected": 142,
+    "passed": true
+  },
+  {
+    "check": "multi Bay groups",
+    "actual": 32,
+    "expected": 32,
+    "passed": true
+  },
+  {
+    "check": "maximum Bay count",
+    "actual": 6,
+    "expected": 6,
+    "passed": true
+  },
+  {
+    "check": "mapping equipment quantities",
+    "actual": [
+      12,
+      9,
+      16,
+      14,
+      12,
+      13,
+      21,
+      14,
+      3,
+      7,
+      25,
+      6,
+      4,
+      3,
+      3,
+      10,
+      21,
+      14,
+      23,
+      14,
+      149,
+      2,
+      2,
+      1,
+      3,
+      1,
+      2,
+      6,
+      6,
+      8,
+      15,
+      4,
+      7,
+      11,
+      5,
+      4,
+      2,
+      5,
+      9,
+      4,
+      10,
+      8,
+      6,
+      5,
+      4,
+      8,
+      7,
+      14,
+      2,
+      1,
+      2,
+      11,
+      7,
+      2,
+      2,
+      2,
+      7,
+      14,
+      18,
+      5,
+      46,
+      47,
+      2,
+      25,
+      4,
+      3,
+      22,
+      2,
+      28,
+      4,
+      10,
+      15,
+      19,
+      3,
+      2,
+      2,
+      5,
+      2,
+      4,
+      17,
+      4,
+      15,
+      21,
+      8,
+      6,
+      4,
+      7,
+      4,
+      3,
+      2,
+      3,
+      5,
+      8,
+      2,
+      1,
+      3,
+      10,
+      5,
+      31,
+      6,
+      5,
+      2,
+      6,
+      18,
+      2
+    ],
+    "expected": [
+      12,
+      9,
+      16,
+      14,
+      12,
+      13,
+      21,
+      14,
+      3,
+      7,
+      25,
+      6,
+      4,
+      3,
+      3,
+      10,
+      21,
+      14,
+      23,
+      14,
+      149,
+      2,
+      2,
+      1,
+      3,
+      1,
+      2,
+      6,
+      6,
+      8,
+      15,
+      4,
+      7,
+      11,
+      5,
+      4,
+      2,
+      5,
+      9,
+      4,
+      10,
+      8,
+      6,
+      5,
+      4,
+      8,
+      7,
+      14,
+      2,
+      1,
+      2,
+      11,
+      7,
+      2,
+      2,
+      2,
+      7,
+      14,
+      18,
+      5,
+      46,
+      47,
+      2,
+      25,
+      4,
+      3,
+      22,
+      2,
+      28,
+      4,
+      10,
+      15,
+      19,
+      3,
+      2,
+      2,
+      5,
+      2,
+      4,
+      17,
+      4,
+      15,
+      21,
+      8,
+      6,
+      4,
+      7,
+      4,
+      3,
+      2,
+      3,
+      5,
+      8,
+      2,
+      1,
+      3,
+      10,
+      5,
+      31,
+      6,
+      5,
+      2,
+      6,
+      18,
+      2
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_11",
+    "actual": [
+      "A1"
+    ],
+    "expected": [
+      "A1"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_12",
+    "actual": [
+      "A1"
+    ],
+    "expected": [
+      "A1"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_13",
+    "actual": [
+      "A1",
+      "A2"
+    ],
+    "expected": [
+      "A1",
+      "A2"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_48",
+    "actual": [
+      "A2",
+      "A3"
+    ],
+    "expected": [
+      "A2",
+      "A3"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_50",
+    "actual": [
+      "A3"
+    ],
+    "expected": [
+      "A3"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_65",
+    "actual": [
+      "A3",
+      "A4"
+    ],
+    "expected": [
+      "A3",
+      "A4"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_66",
+    "actual": [
+      "A4",
+      "A5"
+    ],
+    "expected": [
+      "A4",
+      "A5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_67",
+    "actual": [
+      "A5"
+    ],
+    "expected": [
+      "A5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_BE_69",
+    "actual": [
+      "A5"
+    ],
+    "expected": [
+      "A5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_1",
+    "actual": [
+      "A5",
+      "A6"
+    ],
+    "expected": [
+      "A5",
+      "A6"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_51",
+    "actual": [
+      "A6",
+      "A7"
+    ],
+    "expected": [
+      "A6",
+      "A7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_53",
+    "actual": [
+      "A7"
+    ],
+    "expected": [
+      "A7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_54",
+    "actual": [
+      "A7"
+    ],
+    "expected": [
+      "A7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_56",
+    "actual": [
+      "A7"
+    ],
+    "expected": [
+      "A7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_58",
+    "actual": [
+      "A7"
+    ],
+    "expected": [
+      "A7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_59",
+    "actual": [
+      "A7",
+      "A8"
+    ],
+    "expected": [
+      "A7",
+      "A8"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_62",
+    "actual": [
+      "A8",
+      "A9"
+    ],
+    "expected": [
+      "A8",
+      "A9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_70",
+    "actual": [
+      "A9"
+    ],
+    "expected": [
+      "A9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_71",
+    "actual": [
+      "A10",
+      "A9"
+    ],
+    "expected": [
+      "A10",
+      "A9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_72",
+    "actual": [
+      "A10",
+      "A11"
+    ],
+    "expected": [
+      "A10",
+      "A11"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DE_FE_86",
+    "actual": [
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16"
+    ],
+    "expected": [
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMEt_FE_118",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_BE_33",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_BE_42",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_FE_10",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_FE_106",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_FE_34",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set DefMet_FE_43",
+    "actual": [
+      "A16"
+    ],
+    "expected": [
+      "A16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_BE_20",
+    "actual": [
+      "A16",
+      "A17"
+    ],
+    "expected": [
+      "A16",
+      "A17"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_BE_21",
+    "actual": [
+      "A17"
+    ],
+    "expected": [
+      "A17"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_BE_27",
+    "actual": [
+      "A17"
+    ],
+    "expected": [
+      "A17"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_BE_28",
+    "actual": [
+      "A17",
+      "A18"
+    ],
+    "expected": [
+      "A17",
+      "A18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_BE_60",
+    "actual": [
+      "A18"
+    ],
+    "expected": [
+      "A18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_FE_112",
+    "actual": [
+      "A18"
+    ],
+    "expected": [
+      "A18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_FE_130",
+    "actual": [
+      "A18"
+    ],
+    "expected": [
+      "A18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_FE_29",
+    "actual": [
+      "A18"
+    ],
+    "expected": [
+      "A18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_FE_30",
+    "actual": [
+      "A18",
+      "A19"
+    ],
+    "expected": [
+      "A18",
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Dielectric_FE_31",
+    "actual": [
+      "A19"
+    ],
+    "expected": [
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_BE_123",
+    "actual": [
+      "A19"
+    ],
+    "expected": [
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_100",
+    "actual": [
+      "A19"
+    ],
+    "expected": [
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_101",
+    "actual": [
+      "A19"
+    ],
+    "expected": [
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_120",
+    "actual": [
+      "A19"
+    ],
+    "expected": [
+      "A19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_122",
+    "actual": [
+      "A19",
+      "A20"
+    ],
+    "expected": [
+      "A19",
+      "A20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_125",
+    "actual": [
+      "A20"
+    ],
+    "expected": [
+      "A20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_126",
+    "actual": [
+      "A20"
+    ],
+    "expected": [
+      "A20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_127",
+    "actual": [
+      "A20"
+    ],
+    "expected": [
+      "A20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_44",
+    "actual": [
+      "A20"
+    ],
+    "expected": [
+      "A20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Diffusion_FE_94",
+    "actual": [
+      "A20",
+      "B19"
+    ],
+    "expected": [
+      "A20",
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set EPI_36",
+    "actual": [
+      "B19"
+    ],
+    "expected": [
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set EPI_38",
+    "actual": [
+      "B19"
+    ],
+    "expected": [
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_119",
+    "actual": [
+      "B19"
+    ],
+    "expected": [
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_128",
+    "actual": [
+      "B19",
+      "B20"
+    ],
+    "expected": [
+      "B19",
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_132",
+    "actual": [
+      "B20"
+    ],
+    "expected": [
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_74",
+    "actual": [
+      "B20"
+    ],
+    "expected": [
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_88",
+    "actual": [
+      "B20"
+    ],
+    "expected": [
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_90",
+    "actual": [
+      "B20"
+    ],
+    "expected": [
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Implant_91",
+    "actual": [
+      "B20"
+    ],
+    "expected": [
+      "B20"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoMet_BE_18",
+    "actual": [
+      "B5"
+    ],
+    "expected": [
+      "B5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoMet_FE_19",
+    "actual": [
+      "B5"
+    ],
+    "expected": [
+      "B5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoTrack_BE_117",
+    "actual": [
+      "B5",
+      "B6"
+    ],
+    "expected": [
+      "B5",
+      "B6"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoTrack_FE_115",
+    "actual": [
+      "B6",
+      "B7"
+    ],
+    "expected": [
+      "B6",
+      "B7"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoTrack_FE_95",
+    "actual": [
+      "B7",
+      "B8",
+      "B9"
+    ],
+    "expected": [
+      "B7",
+      "B8",
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set LithoTrack_FE_96",
+    "actual": [
+      "B9"
+    ],
+    "expected": [
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_BE_110",
+    "actual": [
+      "B1",
+      "B2"
+    ],
+    "expected": [
+      "B1",
+      "B2"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_BE_93",
+    "actual": [
+      "B2"
+    ],
+    "expected": [
+      "B2"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_BE_99",
+    "actual": [
+      "B2"
+    ],
+    "expected": [
+      "B2"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_FE_111",
+    "actual": [
+      "B2",
+      "B3"
+    ],
+    "expected": [
+      "B2",
+      "B3"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_FE_35",
+    "actual": [
+      "B3"
+    ],
+    "expected": [
+      "B3"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_FE_92",
+    "actual": [
+      "B3",
+      "B4"
+    ],
+    "expected": [
+      "B3",
+      "B4"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_FE_98",
+    "actual": [
+      "B4"
+    ],
+    "expected": [
+      "B4"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_REG_BE_63",
+    "actual": [
+      "B4",
+      "B5"
+    ],
+    "expected": [
+      "B4",
+      "B5"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Litho_REG_FE_64",
+    "actual": [
+      "B4"
+    ],
+    "expected": [
+      "B4"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_BE_75",
+    "actual": [
+      "B10",
+      "B11"
+    ],
+    "expected": [
+      "B10",
+      "B11"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_FE_76",
+    "actual": [
+      "B9"
+    ],
+    "expected": [
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_FE_77",
+    "actual": [
+      "B9"
+    ],
+    "expected": [
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_FE_78",
+    "actual": [
+      "B9"
+    ],
+    "expected": [
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_FE_79",
+    "actual": [
+      "B9"
+    ],
+    "expected": [
+      "B9"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set Planar_FE_80",
+    "actual": [
+      "B10"
+    ],
+    "expected": [
+      "B10"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_BE_2",
+    "actual": [
+      "B11"
+    ],
+    "expected": [
+      "B11"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_BE_23",
+    "actual": [
+      "B11",
+      "B12"
+    ],
+    "expected": [
+      "B11",
+      "B12"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_BE_24",
+    "actual": [
+      "B12"
+    ],
+    "expected": [
+      "B12"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_BE_26",
+    "actual": [
+      "B12"
+    ],
+    "expected": [
+      "B12"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_BE_40",
+    "actual": [
+      "B12",
+      "B13"
+    ],
+    "expected": [
+      "B12",
+      "B13"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_103",
+    "actual": [
+      "B13"
+    ],
+    "expected": [
+      "B13"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_104",
+    "actual": [
+      "B13",
+      "B14"
+    ],
+    "expected": [
+      "B13",
+      "B14"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_113",
+    "actual": [
+      "B14"
+    ],
+    "expected": [
+      "B14"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_131",
+    "actual": [
+      "B14"
+    ],
+    "expected": [
+      "B14"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_3",
+    "actual": [
+      "B14"
+    ],
+    "expected": [
+      "B14"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_FE_5",
+    "actual": [
+      "B14"
+    ],
+    "expected": [
+      "B14"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_Met_FE_45",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set TF_Met_FE_61",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_14",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_16",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_17",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_7",
+    "actual": [
+      "B15"
+    ],
+    "expected": [
+      "B15"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_81",
+    "actual": [
+      "B15",
+      "B16"
+    ],
+    "expected": [
+      "B15",
+      "B16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_82",
+    "actual": [
+      "B16"
+    ],
+    "expected": [
+      "B16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_BE_9",
+    "actual": [
+      "B16"
+    ],
+    "expected": [
+      "B16"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_108",
+    "actual": [
+      "B16",
+      "B17"
+    ],
+    "expected": [
+      "B16",
+      "B17"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_41",
+    "actual": [
+      "B17",
+      "B18"
+    ],
+    "expected": [
+      "B17",
+      "B18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_47",
+    "actual": [
+      "B18"
+    ],
+    "expected": [
+      "B18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_8",
+    "actual": [
+      "B18"
+    ],
+    "expected": [
+      "B18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_83",
+    "actual": [
+      "B18"
+    ],
+    "expected": [
+      "B18"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_84",
+    "actual": [
+      "B18",
+      "B19"
+    ],
+    "expected": [
+      "B18",
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "mapping Bay set WE_FE_85",
+    "actual": [
+      "B19"
+    ],
+    "expected": [
+      "B19"
+    ],
+    "passed": true
+  },
+  {
+    "check": "Bay production totals",
+    "actual": 1068,
+    "expected": 1068,
+    "passed": true
+  },
+  {
+    "check": "one STOCKER per INTRABAY",
+    "actual": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "expected": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "passed": true
+  },
+  {
+    "check": "no production in INTERBAY",
+    "actual": 0,
+    "expected": 0,
+    "passed": true
+  },
+  {
+    "check": "group production totals",
+    "actual": 1068,
+    "expected": 1068,
+    "passed": true
+  },
+  {
+    "check": "strong components",
+    "actual": [
+      2858
+    ],
+    "expected": [
+      2858
+    ],
+    "passed": true
+  },
+  {
+    "check": "Bay directed reachable ordered pairs excluding self",
+    "actual": 1806,
+    "expected": 1806,
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "actual": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "expected": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "actual": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "expected": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build A2_SMAT_group_mapping.csv",
+    "actual": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "expected": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build A2_SMAT_group_mapping.csv",
+    "actual": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "expected": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build 核查结论与实施方案.md",
+    "actual": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "expected": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build 核查结论与实施方案.md",
+    "actual": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "expected": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build SMT2020_LVHM_group_inventory.csv",
+    "actual": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "expected": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build SMT2020_LVHM_group_inventory.csv",
+    "actual": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "expected": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build SMAT_2022_generic.txt",
+    "actual": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "expected": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build SMAT_2022_generic.txt",
+    "actual": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "expected": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "passed": true
+  },
+  {
+    "check": "source unchanged after build SMAT_2022_PINOKIO_documentation.txt",
+    "actual": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "expected": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "passed": true
+  },
+  {
+    "check": "original unchanged after build SMAT_2022_PINOKIO_documentation.txt",
+    "actual": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "expected": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "passed": true
+  }
+]

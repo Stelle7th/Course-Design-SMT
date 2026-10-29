@@ -1,0 +1,68 @@
+{
+  "scope": "joint regional placement, processing and boundary-flow optimization",
+  "bays": [
+    "A2",
+    "A3"
+  ],
+  "equipment_count": 48,
+  "group_count": 4,
+  "geometry_type_count": 7,
+  "regional_operation_count": 59,
+  "positive_internal_reference_transitions": 0,
+  "binary_variables": 173,
+  "processing_variables": 2645,
+  "flow_variables": 5478,
+  "internal_flow_variables": 0,
+  "total_variables": 8296,
+  "constraints": 5660,
+  "equalities": 5526,
+  "capacity_inequalities": 134,
+  "reference_affected_cost": 304663194.1668111,
+  "fixed_layout_lp_cost": 304663194.16681117,
+  "fixed_layout_lp_seconds": 0.060127300006570294,
+  "solver_status": 0,
+  "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver_seconds": 0.06538879999425262,
+  "time_limit_seconds": 60.0,
+  "requested_mip_relative_gap": 0.001,
+  "config": {
+    "horizon_min": 10080,
+    "demand_scale": 0.25,
+    "effective_time_fraction": 0.85,
+    "distance": "same directed representative-port Manhattan rail metric as original E1"
+  },
+  "boundary": "Regional operation volume, each outside source supply and each outside target demand are fixed from the original full-arc reference solution; outside-outside flows are unchanged.",
+  "assumptions": [
+    "Only existing slots are used; equipment group, footprint-class counts and FE/BE stage are preserved.",
+    "Coordinates, anchors, representative ports and batch-time approximations are inherited from E1.",
+    "No complete cleanroom, utility or maintenance clearance specifications are available.",
+    "If present, internal route transitions are retained with reference regional volumes; these are conditional local subproblems rather than full-plant routing optimization."
+  ],
+  "source_sha256": {
+    "week6\\汇报准备\\scripts\\milp_two_bay.py": "6270fc951f20401fe8b39b785d38743e9c8836bf8ac746e7f0642307c65e754e",
+    "week6\\output\\e1_reference_lp_full\\operation_flow.csv": "c7044044ef06c1adc5973b0f5d337d65a9886e9d707be8d0b2d6d59b6f303d3d",
+    "week6\\output\\e1_reference_lp_full\\transport_flow.csv": "5d0534994d534d17bf9f1ca55990907f0a9a5ddbf8c305366d1d1434ecf6edab"
+  },
+  "objective": 302889755.9603954,
+  "improvement_local": 0.005820979495950285,
+  "mip_gap": 0.0,
+  "dual_bound": 302889755.96039546,
+  "node_count": 1,
+  "max_equality_residual": 0.0,
+  "max_capacity_excess": 0.0,
+  "max_binary_residual": 0.0,
+  "secondary_minimum_changed_slots": {
+    "success": true,
+    "status": 0,
+    "objective": 6.0,
+    "solve_seconds": 0.5707097999984398,
+    "primary_cost_tolerance_raw": 0.030288975596039543
+  },
+  "changed_group_slots": 6,
+  "fixed_milp_layout_lp": {
+    "success": true,
+    "objective": 302889755.9603954
+  },
+  "milp_incumbent_objective_before_lp_polish": 302889755.85707265,
+  "preparation_and_solve_seconds": 1.2308460000058403
+}

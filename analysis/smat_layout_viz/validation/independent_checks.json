@@ -1,0 +1,519 @@
+{
+  "alternate_reader": "openpyxl read_only",
+  "checks": [
+    {
+      "check": "Address independent row count",
+      "passed": true
+    },
+    {
+      "check": "Address independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "ZCU independent row count",
+      "passed": true
+    },
+    {
+      "check": "ZCU independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "Rail independent row count",
+      "passed": true
+    },
+    {
+      "check": "Rail independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "Bay independent row count",
+      "passed": true
+    },
+    {
+      "check": "Bay independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "Equipment independent row count",
+      "passed": true
+    },
+    {
+      "check": "Equipment independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "PortType independent row count",
+      "passed": true
+    },
+    {
+      "check": "PortType independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "Port independent row count",
+      "passed": true
+    },
+    {
+      "check": "Port independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "VehicleType independent row count",
+      "passed": true
+    },
+    {
+      "check": "VehicleType independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "Vehicle independent row count",
+      "passed": true
+    },
+    {
+      "check": "Vehicle independent NAME sequence",
+      "passed": true
+    },
+    {
+      "check": "entire 105x43 matrix independent reconciliation",
+      "passed": true
+    },
+    {
+      "check": "POSITION_X output exact source values",
+      "passed": true
+    },
+    {
+      "check": "POSITION_Y output exact source values",
+      "passed": true
+    },
+    {
+      "check": "WIDTH output exact source values",
+      "passed": true
+    },
+    {
+      "check": "HEIGHT output exact source values",
+      "passed": true
+    },
+    {
+      "check": "all equipment retained",
+      "passed": true
+    },
+    {
+      "check": "20 final figure pairs",
+      "passed": true
+    },
+    {
+      "check": "01_equipment_layout nonblank",
+      "passed": true
+    },
+    {
+      "check": "01_equipment_layout resolution",
+      "passed": true
+    },
+    {
+      "check": "01_equipment_layout SVG pair",
+      "passed": true
+    },
+    {
+      "check": "02_rail_network nonblank",
+      "passed": true
+    },
+    {
+      "check": "02_rail_network resolution",
+      "passed": true
+    },
+    {
+      "check": "02_rail_network SVG pair",
+      "passed": true
+    },
+    {
+      "check": "03_equipment_rail_overlay nonblank",
+      "passed": true
+    },
+    {
+      "check": "03_equipment_rail_overlay resolution",
+      "passed": true
+    },
+    {
+      "check": "03_equipment_rail_overlay SVG pair",
+      "passed": true
+    },
+    {
+      "check": "04_tool_group_layout nonblank",
+      "passed": true
+    },
+    {
+      "check": "04_tool_group_layout resolution",
+      "passed": true
+    },
+    {
+      "check": "04_tool_group_layout SVG pair",
+      "passed": true
+    },
+    {
+      "check": "05_workcenter_bay_heatmap nonblank",
+      "passed": true
+    },
+    {
+      "check": "05_workcenter_bay_heatmap resolution",
+      "passed": true
+    },
+    {
+      "check": "05_workcenter_bay_heatmap SVG pair",
+      "passed": true
+    },
+    {
+      "check": "06_bay_equipment_distribution nonblank",
+      "passed": true
+    },
+    {
+      "check": "06_bay_equipment_distribution resolution",
+      "passed": true
+    },
+    {
+      "check": "06_bay_equipment_distribution SVG pair",
+      "passed": true
+    },
+    {
+      "check": "07_bay_directed_network nonblank",
+      "passed": true
+    },
+    {
+      "check": "07_bay_directed_network resolution",
+      "passed": true
+    },
+    {
+      "check": "07_bay_directed_network SVG pair",
+      "passed": true
+    },
+    {
+      "check": "08_topology_and_stockers nonblank",
+      "passed": true
+    },
+    {
+      "check": "08_topology_and_stockers resolution",
+      "passed": true
+    },
+    {
+      "check": "08_topology_and_stockers SVG pair",
+      "passed": true
+    },
+    {
+      "check": "09_equipment_density_grid nonblank",
+      "passed": true
+    },
+    {
+      "check": "09_equipment_density_grid resolution",
+      "passed": true
+    },
+    {
+      "check": "09_equipment_density_grid SVG pair",
+      "passed": true
+    },
+    {
+      "check": "10_equipment_anchor_points nonblank",
+      "passed": true
+    },
+    {
+      "check": "10_equipment_anchor_points resolution",
+      "passed": true
+    },
+    {
+      "check": "10_equipment_anchor_points SVG pair",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86 nonblank",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86 resolution",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86 SVG pair",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86_detail nonblank",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86_detail resolution",
+      "passed": true
+    },
+    {
+      "check": "01_DE_FE_86_detail SVG pair",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95 nonblank",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95 resolution",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95 SVG pair",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95_detail nonblank",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95_detail resolution",
+      "passed": true
+    },
+    {
+      "check": "02_LithoTrack_FE_95_detail SVG pair",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66 nonblank",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66 resolution",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66 SVG pair",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66_detail nonblank",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66_detail resolution",
+      "passed": true
+    },
+    {
+      "check": "03_DE_BE_66_detail SVG pair",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40 nonblank",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40 resolution",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40 SVG pair",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40_detail nonblank",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40_detail resolution",
+      "passed": true
+    },
+    {
+      "check": "04_TF_BE_40_detail SVG pair",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94 nonblank",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94 resolution",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94 SVG pair",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94_detail nonblank",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94_detail resolution",
+      "passed": true
+    },
+    {
+      "check": "05_Diffusion_FE_94_detail SVG pair",
+      "passed": true
+    },
+    {
+      "check": "offline HTML no external assets",
+      "passed": true
+    },
+    {
+      "check": "viewer equipment exact IDs",
+      "passed": true
+    },
+    {
+      "check": "viewer rail count",
+      "passed": true
+    },
+    {
+      "check": "viewer endpoint direction sequence",
+      "passed": true
+    },
+    {
+      "check": "source XLSX SHA256 unchanged",
+      "passed": true
+    },
+    {
+      "check": "report link figures/01_equipment_layout.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/02_rail_network.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/03_equipment_rail_overlay.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/04_tool_group_layout.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/05_workcenter_bay_heatmap.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/06_bay_equipment_distribution.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/07_bay_directed_network.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/08_topology_and_stockers.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/09_equipment_density_grid.png",
+      "passed": true
+    },
+    {
+      "check": "report link figures/10_equipment_anchor_points.png",
+      "passed": true
+    },
+    {
+      "check": "report link interactive/smat_layout_viewer.html",
+      "passed": true
+    },
+    {
+      "check": "data_checks.json all passed",
+      "passed": true
+    },
+    {
+      "check": "browser_checks.json all passed",
+      "passed": true
+    }
+  ],
+  "figure_dimensions": [
+    {
+      "file": "figures/01_equipment_layout.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/02_rail_network.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/03_equipment_rail_overlay.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/04_tool_group_layout.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/05_workcenter_bay_heatmap.png",
+      "width": 5400,
+      "height": 7500
+    },
+    {
+      "file": "figures/06_bay_equipment_distribution.png",
+      "width": 5400,
+      "height": 3300
+    },
+    {
+      "file": "figures/07_bay_directed_network.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/08_topology_and_stockers.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/09_equipment_density_grid.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/10_equipment_anchor_points.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/01_DE_FE_86.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/01_DE_FE_86_detail.png",
+      "width": 2700,
+      "height": 3300
+    },
+    {
+      "file": "figures/selected_workcenters/02_LithoTrack_FE_95.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/02_LithoTrack_FE_95_detail.png",
+      "width": 2700,
+      "height": 3300
+    },
+    {
+      "file": "figures/selected_workcenters/03_DE_BE_66.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/03_DE_BE_66_detail.png",
+      "width": 2700,
+      "height": 3300
+    },
+    {
+      "file": "figures/selected_workcenters/04_TF_BE_40.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/04_TF_BE_40_detail.png",
+      "width": 2700,
+      "height": 3300
+    },
+    {
+      "file": "figures/selected_workcenters/05_Diffusion_FE_94.png",
+      "width": 5700,
+      "height": 3240
+    },
+    {
+      "file": "figures/selected_workcenters/05_Diffusion_FE_94_detail.png",
+      "width": 2700,
+      "height": 3300
+    }
+  ]
+}

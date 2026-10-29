@@ -1,0 +1,38 @@
+[
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\smat2022\\SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\smat2022\\SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "sha256": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0",
+    "bytes": 1051571
+  },
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\smat2022\\A2_SMAT_group_mapping.csv",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\smat2022\\A2_SMAT_group_mapping.csv",
+    "sha256": "14bd1928900aa25770dffaff9c45e6fa97dbabb4b286f8be95eaaf794c589f3c",
+    "bytes": 3713
+  },
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\核查结论与实施方案.md",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\核查结论与实施方案.md",
+    "sha256": "74c83a0317e6aa08556a8545bf89b6cbda79ce31a150f243bc9dca8a1b411891",
+    "bytes": 22726
+  },
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\SMT2020_LVHM_group_inventory.csv",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\SMT2020_LVHM_group_inventory.csv",
+    "sha256": "3f576e8b7b1754caf236855c898e60785e7b5478988f04daa184980cd0fbeec1",
+    "bytes": 3153
+  },
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\smat2022\\SMAT_2022_generic.txt",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\smat2022\\SMAT_2022_generic.txt",
+    "sha256": "038518f86c0d79e6efa02b6cbc1ca4d2382e37c715e955872e76b5ba89cb41ff",
+    "bytes": 3854
+  },
+  {
+    "source": "C:\\Users\\HP\\.codex\\.chatgpt-projects\\g-p-6aae3af666cc8191ae33dfecc4757614\\analysis\\a2_audit\\smat2022\\SMAT_2022_PINOKIO_documentation.txt",
+    "local_path": "F:\\Grade4\\课程设计\\analysis\\a2_audit\\smat2022\\SMAT_2022_PINOKIO_documentation.txt",
+    "sha256": "8f58385a0068870d0242884dbf0c46ef99eeb515f3d8c564117793f882c647d1",
+    "bytes": 1571
+  }
+]

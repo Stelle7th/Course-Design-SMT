@@ -1,0 +1,1750 @@
+=== PAGE 1 ===
+Semiconductor FAB layout design analysis with 300-mm FAB data: ‘‘Is
+minimum distance-based layout design best for semiconductor FAB
+design?”
+Junghoon Kim 1, Gwangjae Yu 1, Young Jae Jang ⇑
+Department of the Industrial and Systems Engineering, Korea Advanced Institute of Science and Technology, Daejeon 305-701, Republic of Korea
+article info
+Article history:
+Available online 19 February 2016
+Keywords:
+Semiconductor FAB design
+AMHS
+Factory layout design
+Material ﬂow design
+abstract
+In this paper, one of the most common layout design approaches in general factory design – minimum
+ﬂow-weighted distance (min-distance) layout – is veriﬁed for semiconductor fabrication facility (FAB)
+design. In min-distance layout design, machines or workstations with high ﬂow rates are allocated close
+to each other to minimize the total distance of the material ﬂow. This approach is widely used in various
+industries including semiconductor manufacturing. However, some research also discusses the draw-
+backs of this approach due to ﬂow congestions and heavy trafﬁc in material handling systems. We vali-
+date the min-distance approach with actual data from a modern 300-mm DRAM FAB. We logically
+generate 18 different cases with different layouts, overhead hoist transport track conﬁgurations, and pro-
+duction scenarios. The effectiveness and drawbacks of the min-distance approach in FAB design is inves-
+tigated with these cases. From the simulation analysis using the Design of Experiments method, we
+logically show that the performance of material delivery is sensitive to the production volume in the
+min-distance layout. Also, the performance of the min-distance layout is signiﬁcantly degraded when
+the volume is heavy; however, performance can be improved considerably with a few modiﬁcations to
+the bays. We also provide practical tips for an effective layout design method from the insight gained
+from the simulation analysis. This paper contributes to the critical analysis of the conventional layout
+design method and the identiﬁcation of its effectiveness and limitations by using actual FAB data.
+/C2112016 Elsevier Ltd. All rights reserved.
+1. Introduction
+Semiconductor wafer fabrication processing is known to be one
+of the most complex of manufacturing systems. A memory chip,
+which is the typical product processed in the wafer fabrication pro-
+cess, requires hundreds of processing steps. Multiple products are
+processed simultaneously in a semiconductor fabrication facility,
+also known as a FAB. Each step requires speciﬁc processing machi-
+nes, which are commonly called tools in the semiconductor indus-
+try. Therefore, hundreds of different types of tools and large ﬂows
+between the tools are required to process wafers.
+The transportation of these wafers is accomplished by the Auto-
+mated Material Handling System (AMHS), which is an automated
+system that moves, stores, and controls the parts and inventory
+throughout the manufacturing process. In a semiconductor FAB,
+the AMHS consists of transportation units such as overhead hoist
+transport (OHT) vehicles, tracks, and storage systems such as over-
+head bins and stockers. With the increasing scale of wafer produc-
+tion, there are generally more than a hundred OHT vehicles to
+transport wafers in the typical memory chip FAB environment.
+The performance measures of the AMHS includes delivery time,
+throughput, and utilization of vehicles ( Lin, Wang, & Yang, 2005 ).
+The key design parameters in the AMHS are track conﬁgurations,
+OHT vehicle parameters such as velocity, loading and unloading
+time, controller logic and algorithms. Since the primary role of
+the AMHS is to transport a lot from one tool to another, allocation
+of the tools is directly related to AMHS performance. Therefore, it is
+common in the semiconductor industry that the tool allocation
+process and the AMHS design process are performed simultane-
+ously during the FAB design stage ( Jang, 2014 ).
+Tool allocation and AMHS design are critical steps in the FAB
+design process. Once they are decided, modiﬁcation is difﬁcult.
+Also, an inefﬁcient design may result in serious performance loss
+and additional costs. For example, it is widely known in the
+http://dx.doi.org/10.1016/j.cie.2016.02.012
+0360-8352//C2112016 Elsevier Ltd. All rights reserved.
+⇑ Corresponding author at: Department of Industrial & Systems Engineering,
+Korea Advanced Institute of Science and Technology 291 Daehak-ro, Daejeon 305-
+701, Republic of Korea. Tel.: +82 42 350 3130/3170; fax: +83 42 350 3110.
+E-mail address: yjang@kaist.ac.kr (Y.J. Jang).
+1 Tel.: +82 42 350 3170.
+Computers & Industrial Engineering 99 (2016) 330–346
+Contents lists available at ScienceDirect
+Computers & Industrial Engineering
+journal homepage: www.elsevier.com/locate/caie
+
+
+=== PAGE 2 ===
+industry that in the mid-2000s one of a leading DRAM manufactur-
+ers (let us name it ‘‘FAB-K”) had to dismantle the existing AMHS in
+one of its FABs and reinstall a new one while ramping up to target
+production volume. The original AMHS, which had been designed
+during the initial FAB design, did not have enough capacity to
+move the lots, and it became the bottleneck as production volume
+increased. Eventually, the engineers concluded that with the orig-
+inal AMHS design, the target production volume could not be
+achieved, and they decided to replace the AMHS with a completely
+new system. The replacement took several months. The direct
+replacement cost and the indirect cost from loss of production
+were enormous ( Jang, 2014 ).
+In the FAB-K case, a primary cause of the underperformance of
+the original AMHS was OHT vehicle congestion in a concentrated
+area within the FAB. Although this trafﬁc congestion occurred in
+a limited area within the FAB, the congestion resulted in the delay
+of vehicle movements throughout the entire FAB when the produc-
+tion volume was increased. The engineers determined that the pri-
+mary cause of the congestion was tool allocations. They allocated
+the bays, which refers to the sections in the FAB containing similar
+types of tools, with a high inter-bay ﬂow close to one another to
+achieve fast lot delivery. Unfortunately, the heavy ﬂow volume
+between the bays resulted in substantial vehicle congestion and
+eventually created a bottleneck for all vehicle trafﬁc in the FAB.
+The research described in this paper is motivated by this inci-
+dent at FAB-K. The method of allocating the bays with high inter-
+bay ﬂow close to each other is called minimum-distance layout
+design or, simply, min-distance layout. The criteria of the min-
+distance approach are widely used in the allocation of tools and
+the design of the AMHS in semiconductor FAB design ( Meller,
+1997; Castillo & Peters, 2004; Ho & Liao, 2012 ). The survey in
+Jang (2014) also indicates that majority of layout designers in
+major semiconductor companies in Korea use the min-distance
+as the primary criteria in layout design. However, some research
+has addressed the weaknesses of the min-distance approach in
+the general context of manufacturing ( Benjaafar, 2002; Zhang,
+Batta, & Nagi, 2009; Zhang, Batta, & Nagi, 2011 ).
+We try to answer the following question with this study: ‘‘Is
+min-distance layout design always best in semiconductor FAB design? ”
+The primary weakness of the min-distance layout approach is
+the congestion of material ﬂow. This weakness is somewhat clear
+and intuitively understandable. However, there has been little
+research to rigorously verify the limitations of this approach in
+the area of the semiconductor FAB design. Given the fact that there
+are hundreds of OHT vehicles moving around on the uni-
+directional OHT tracks in a FAB, heavy ﬂow in a concentrated area
+may cause heavy trafﬁc and delivery delay, eventually creating
+bottlenecks in the AMHS.
+In this paper, we examine the effects of material ﬂow on the
+OHT track with various ﬂow scenarios using data of the actual pro-
+cessing steps from a 300-mm DRAM FAB. We analyze the effects of
+vehicle congestion on the performance of the AMHS using simula-
+tion. We try to answer the following additional questions:
+/C15 What are the weaknesses and limitations of the min-distance
+approach in FAB design?
+/C15 How do various track conﬁgurations and trafﬁc volume inﬂu-
+ence trafﬁc congestion on the OHT track?
+To logically understand the effectiveness of the min-distance
+layout, we generate a max-distance layout, which is the opposite
+extreme of the min-distance approach, and compare the behaviors
+of the two layouts. We hypothesize that if the performance of the
+max-distance case is better than that of the min-distance case
+under certain conditions, we can conclude that the min-distance
+approach may not be the best approach for the given conditions.
+Eighteen different conﬁguration/layout cases are generated for
+the study: min-distance and max-distance layouts, with each lay-
+out having the combination of three different ﬂow-volume scenar-
+ios and another three different OHT-track conﬁgurations, as shown
+in Fig. 1 . The simulation is used to analyze the cases. With the
+results generated from the simulation, we analyze the performance
+of the AMHS, particularly the delivery time, using the Design Of
+Experiments (DOE) method. From the insights gained from the
+simulation study, we provide practical implications and tips for
+layout design process.
+The paper is organized as follows. Section 2 summarizes the
+previous research on layout design methodologies and congestion
+issues. Section 3 deﬁnes the problem. Then, we generate FAB lay-
+outs and input data for the simulation experiments. In Section 4,
+DOE is performed to analyze the simulation results of the AMHS
+for each layout. The simulation results are analyzed and insight
+is provided. In Section 5, we suggest tips for layout design from
+the insights gained from the analysis. In Section 6, we summarize
+this study and make suggestions for future research.
+2. Literature review
+Before considering the methodology for designing the FAB-
+speciﬁc layout, we examine ﬁrst the approaches taken for general
+factory layout design. Recent surveys on this design are found in
+Singh and Sharma (2006) and Drira, Pierreval, and Hajri-Gabouj
+(2007). There are several methods to mathematically formulate
+the layout problems. The Quadratic Assignment Problem (QAP)
+and Mixed Integer Programming (MIP) are the most common mod-
+eling approaches to analytical layout design. In the case of model-
+ing with QAP and variations of QAP, the layout is divided into
+rectangular blocks of equal area and shape, and then N machine
+groups are assigned to the M blocks ( Bozer & Meller, 1997;
+Castillo & Peters, 2003; Hahn, Kim, Guignard, Smith, & Zhu,
+2008). In the MIP modeling approach, machines are assigned to
+the ﬂoor considering the centroid or the location of input/output
+coordinates of the tools ( Bukchin, Meller, & Liu, 2006; Kim &
+Kim, 2000 ). Most QAP and MIP modeling approaches determine
+the location of facilities (or machines) to minimize the total mate-
+rial handling cost, which is a function of the ﬂow-weighted dis-
+tance ( Drira et al., 2007; Bozer & Meller, 1997; Castillo & Peters,
+2003). Bukchin et al. (2006) and Kim and Kim (2000) also minimize
+the ﬂow-weighted distance between input/output points of
+machines. With minimization of the ﬂow-weighted distance, tools
+with high ﬂow interaction are clustered together. In contrast to
+analytical modeling, there are also rule-based approaches in fac-
+tory layout. Systematic Layout Planning (SLP), one of these rule-
+based approaches, places the relative location of tools that have
+heavy inter-ﬂow interactions close to each other ( Muther, 1973 ).
+Tompkins, White, Bozer, and Tanchoco (2010) studied tool assign-
+ment methods based on the material ﬂow intensities and closeness
+ratings.
+FAB has unique characteristics compared to those of other man-
+ufacturing systems. Its characteristics include a facility handling a
+large number of processing steps, re-entrance ﬂows, and a bay-
+type structure ( Chen, Dai, & Chen, 2008 ). Some approaches con-
+sider these FAB-speciﬁc characteristics. Meller (1997) and
+Castillo and Peters (2004) proposed two steps of a mathematical
+model for designing the FAB layout to deal with bay structures.
+They consider assigning tools or departments to bays at ﬁrst and
+then decide on the conﬁguration of the bay. Chen et al. (2008) sug-
+gested a procedure for FAB design with the following tasks:
+machine grouping, bay allocation, and inter-bay and intra-bay
+movement analysis. There are several approaches that consolidate
+the FAB layout and AMHS design. Peters and Yang (1997), Yang,
+Rajasekharan, and Peters (1999), and Ho and Liao (2012) proposed
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 331
+
+=== PAGE 3 ===
+methods to allocate tools and bays and decide the location of
+shortcuts in the AMHS simultaneously. Yang, Su, and Hsu (2000)
+applied SLP to decide the relative location of the machine groups
+in the FAB.
+Track 1 Track 2 Track 3
+Low
+Mid
+High
+Low
+Mid
+High
+Low
+Mid
+High
+Track 1 Track 2 Track 3
+Low
+Mid
+High
+Low
+Mid
+High
+Low
+Mid
+High
+Analysis Scenario
+Layout
+Design
+Track
+Configuration
+Flow
+Vo l u m e
+Min-distance
+FAB Layout
+Max-distance
+FAB Layout
+Fig. 1. Analysis scenario of the three factors: layout design, track conﬁguration, and ﬂow volume.
+Shortcuts
+Additional loop
+Direction
+Bay 16 Bay  15 Bay  14 Bay 13 Bay  12 Bay  11 Bay 10 Bay 9
+Bay 1 Bay 2 Bay 3 Bay  4 Bay  5 Bay  6 Bay  7 Bay  8
+Intra-bay 
+System
+Main loop
+Stocker Branches
+Inter-bay
+System
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+STK
+Fig. 2. The inter- and intra-bay FAB conﬁguration.
+Fig. 3. Production ramp-up scenario.
+Table 1
+Tool count.
+Process
+group
+Number of
+tool groups in
+each process
+group
+Total number
+of tools for
+10,000
+wafers/week
+Total number
+of tools for
+20,000
+wafers/week
+Total number
+of tools for
+30,000
+wafers/week
+CMP 9 28 56 84
+CVD 19 77 154 231
+DIF 17 70 140 210
+DRY 19 135 270 405
+IMP 11 23 46 69
+PVD 6 10 20 30
+PHOTO 6 18 36 54
+WET 18 79 158 237
+332 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 4 ===
+Although special consideration must be given to FAB layout
+design, most of these methods try to minimize the ﬂow-
+weighted distance as does general factory layout design. In
+Meller (1997) and Castillo and Peters (2004) , the objective function
+is to minimize the ﬂow-weighted distance between tools in bays.
+Chen et al. (2008) assigned tools to machine groups that comprise
+Table 2
+Hourly ﬂow-interaction data between process groups (wafers/hour).
+From–To CMP CVD DIF DRY IMP PVD PHO WET
+CMP 0 220.24 101.19 0 0 0 160.71 244.049
+CVD 125 752.98 220.24 101.19 71.43 0 395.83 220.24
+DIF 333.33 300.6 113.1 95.24 151.79 0 184.52 854.175
+DRY 0 5.95 17.86 0 0 0 142.86 1773.81
+IMP 5.95 11.9 125 53.57 494.05 0 59.52 732.14
+PVD 0 5.95 53.57 0 0 53.57 5.95 252.9762
+PHO 53.57 0 53.57 1113.1 452.38 0 71.43 178.57
+WET 208.33 589.29 1348.21 577.38 312.5 318.45 901.79 2633.929
+WET
+WET
+WET
+WET
+WET
+Photo
+Photo CMP
+CVD DRY
+DRY
+PVD
+DIF
+IMP
+CVD
+CVD
+DRY DRY
+DRY
+Bay  1 Bay  2 Bay  3 Bay  4 Bay  5 Bay  6 Bay  7 Bay  8
+Bay 16 Bay 15 Bay 14 Bay 13 Bay 12 Bay 11 Bay 10 Bay 9
+Min-distance Layout
+CVD
+CVD
+CMP
+CVD
+IMP
+DIF
+WET WET
+WET DRY
+DRY
+DRY
+DRY
+WET
+WET
+Photo
+PVD
+Photo
+DRY
+Bay  1 Bay  2 Bay  3 Bay  4 Bay  5 Bay 6 Bay  7 Bay  8
+Bay 16 Bay 15 Bay 14 Bay 13 Bay 12 Bay 11 Bay 10 Bay 9
+Inter-bay Material Handling System
+Inter-bay Material Handling System
+Max-distance Layout
+Fig. 4. Two FAB layouts, the min- and max-distance layouts.
+Track type 1
+Track type 2
+Track type 3
+STK STK STK STK
+STK STK STK STK
+STK STK
+STK STK
+STK STK
+STK STK
+STK STK STK STK
+STK STK STK STK
+STK STK
+STK STK
+STK
+STK
+STK
+STK
+STK STK
+STK STK
+STK
+STK
+STK
+STK
+STK STK
+STK STK
+STK STK
+STK STK
+Fig. 5. The three track conﬁgurations.
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 333
+
+=== PAGE 5 ===
+a large inter-ﬂow intensity among the groups. Peters and Yang
+(1997) used the shortest path algorithm to design shortcuts on
+the OHT track to minimize travel cost. In Yang et al. (1999) , the
+objective function is multi-objective terms, which are used to min-
+imize the material handling cost and the number of turntables in
+an AMHS. The ﬁrst term of the objective function also considers
+the ﬂow-weighted distance to minimize material handling costs.
+Ting and Tanchoco (2000) designed the main loop of a unidirec-
+tional circular loop layout for an AMHS to minimize the total
+ﬂow-weighted distance between stockers. In Ho and Liao (2012) ,
+the objective function is to minimize the total inter-bay ﬂow dis-
+tance. The method in Yang et al. (2000) was SLP that considered
+ﬂow-intensity between machine groups.
+In this paper, we discuss congestion issues related to the FAB
+layout. Although little research has dealt with congestion in the
+FAB layout, several studies have addressed congestion in the con-
+text of general factory layout design. Some researchers mentioned
+that the distance-based layout has poor performance due to con-
+gestion caused by blocking, trafﬁc jams, and vehicle interference.
+Benjaafar (2002) found that the layout designed by the traditional
+distance-based QAP model can be infeasible due to accumulation
+of work in progress caused by ﬂow asymmetry, dimensional asym-
+metry, and the number of transporters. Zhang et al. (2009) and
+Zhang et al. (2011) demonstrated that the shortest path is efﬁcient
+in the low-trafﬁc situation but causes congestion in the moderately
+high-trafﬁc condition. They explained that it may be better to use
+the longer path as an alternative route to mitigate congestion.
+Moreover, Cheng (1987) showed that the Largest Rectilinear Dis-
+tance (LRD) dispatching rule can alleviate congestion. Zhang et al.
+(2009) and Chiang, Kouvelis, and Urban (2002) also mentioned that
+congestion usually occurs at intersections and pick-up and drop-off
+points (P/D points) on the layout due to crossing and overlaying of
+ﬂows.
+There is some research on the alleviation of congestion in the
+general factory layout design. Benjaafar (2002) proposed a layout
+design methodology to minimize work in progress rather than dis-
+tance, and Chiang et al. (2002) developed a layout design to reduce
+the workﬂow interferences caused by crossing at an intersection or
+overlaying of ﬂows. Zhang et al. (2009) and Zhang et al. (2011) con-
+sidered an optimized model for trafﬁc balance on the layout to
+minimize the total expected travel time.
+In summary, most previous research on FAB layout and AMHS
+has focused on minimization of the ﬂow-weighted distance
+between tools. Most research dealing with congestion has focused
+on deadlock detection and vehicle control ( Jang, Suh, & Ferreira,
+2001; Im, Kim, Moon, Park, & Lee, 2010; Bartlett et al., 2014 ), but
+the effects of the conﬁguration of the FAB layout and AMHS design
+on congestion were not considered. Moreover, there has been little
+research to verify the min-distance FAB layout using actual FAB
+data to assess congestion in the FAB. With this research, we verify
+the effectiveness and limitations of the min-distance FAB layout
+through simulation experiments.
+3. Problem deﬁnition
+This section describes the type of FAB and AMHS on which this
+research focuses. Also, scenarios for the simulation analysis are
+presented.
+3.1. Description of semiconductor FAB layout and AMHS
+A typical conﬁguration used in a semiconductor FAB is the spine
+type(Castillo & Peters, 2004; Chen et al., 2008; Peters & Yang, 1997;
+Yang et al., 1999; Yang & Peters, 1997 ). With a spine conﬁguration
+Table 3
+The required number of vehicles for each scenario.
+Track conﬁguration Track type 1 Track type 2 Track type 3
+FAB layout design Min-distance Max-distance layout Min-distance layout Max-distance layout Min-distance layout Max-distance layout
+Flow 10,000 wafers/week 15 19 16 18 15 17
+Volume 20,000 wafers/week 29 32 30 33 31 31
+30,000 wafers/week 52 57 51 58 53 57
+Table 4
+Factors and levels.
+Factors characteristics Level Number
+of levels
+A FAB layout design Min- and max-distance
+layout
+2
+B OHT track
+conﬁguration
+Track type 1, 2, 3 3
+C Flow volume Low, mid, high 3
+Table 5
+From/To data between bays for the min-distance layout (lots/day).
+Bay 1 Bay 2 Bay 3 Bay 4 Bay 5 Bay 6 Bay 7 Bay 8 Bay 9 Bay 10 Bay 11 Bay 12 Bay 13 Bay 14 Bay 15 Bay 16
+Bay 1 0 63.4 172.6 0.0 24.8 36.6 0.6 0 2.9 0 167.1 17.3 38.6 9.6 52.9 20.7
+Bay 2 99.4 0 97.1 31.3 38.4 0 0 0 0 0 81.7 102.7 56.4 78.1 0.0 112.1
+Bay 3 204.6 320.0 0 123.0 147.3 63.6 23.1 0 0 4.8 75.3 249.2 173.6 228.7 157.1 72.6
+Bay 4 26.6 19.0 240.6 0 23.2 43.8 5.0 1.3 0 12.6 44.9 175.9 48.3 121.0 127.1 50.2
+Bay 5 114.7 40.3 196.8 40.4 0 13.4 44.1 5.9 22.2 17.9 249.1 39.9 149.6 42.5 25.0 4.5
+Bay 6 0.1 0 2.4 117.6 25.0 0 0 0 0 0 91.4 167.3 16.7 139.0 0 0.6
+Bay 7 1.0 0 2.4 27.8 220.7 0 0 0 0 0 0 20.1 186.6 34.5 0 0
+Bay 8 0.3 0 0 24.6 8.5 0 0 0 0 0 0 36.6 7.7 25.4 0 0
+Bay 9 1.3 0 0 0.0 147.8 0 0 0 0 0 0 25.4 117.2 11.9 0 0
+Bay 10 0.6 0 12.2 68.8 44.5 0 0 0 0 0 0 113.4 43.4 118.3 0 1.8
+Bay 11 1.9 19.3 72.0 63.5 69.1 24.6 241.5 17.3 190.3 132.2 0 60.6 109.5 47.0 204.7 1.9
+Bay 12 24.3 72.5 144.3 172.2 16.2 226.1 59.2 64.2 31.7 178.2 118.1 0 1.5 36.9 251.8 65.2
+Bay 13 78.2 40.3 406.2 76.8 96.9 12.7 85.3 5.5 56.5 8.4 228.2 23.7 0 50.7 62.7 20.2
+Bay 14 20.7 60.1 337.2 18.4 11.9 57.3 10.1 8.0 0 47.5 94.0 227.3 12.4 0 104.6 121.3
+Bay 15 6.4 40.0 130.3 155.5 122.9 26.8 24.1 0 0 0.5 42.9 100.2 224.9 130.8 0 1.8
+Bay 16 26.9 22.3 28.6 19.5 9.1 55.3 0.1 0.9 0 0.9 62.8 159.8 9.1 56.6 21.2 0
+334 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 6 ===
+of the AMHS, a FAB is divided into several bays that are arranged
+on both side of a central aisle. One bay usually contains similar
+types of processing tools or a group of tool sets( Yang & Peters,
+1997). In a FAB layout, tools performing similar processes are
+generally clustered together to support utility conﬁguration and
+maintenance. Therefore, the bays with similar processing tools
+are generally allocated adjacent to each other. The bays are con-
+nected by the tracks and stockers as shown in Fig. 2 . Two types
+of AMHS use the spine conﬁguration: the inter-bay system and
+the intra-bay system ( Wang & Lin, 2004 ). A stocker is installed in
+each bay to serve as a storage system, and it also works as a con-
+nection point for movement of lots between the inter-bay and
+intra-bay system. The OHT track of the inter-bay system on the
+central aisle transports the lots between stockers located in front
+of each bay. The intra-bay material handling system transports
+the lots within the bay. Since similar processing sequences are
+repeated during all of the steps involved in semiconductor FAB
+processing, there are many re-entrances of ﬂow of the wafers to
+each bay. In the inter-/intra-bay type of FAB, the performance of
+the inter-bay system is highly important to the overall material
+ﬂow ( Yang & Peters, 1997 ). Much research on the FAB layout has
+focused on the inter-bay system ( Meller, 1997; Castillo & Peters,
+2004). In this study, we also consider the inter-bay system only
+to observe the ﬂow behavior of lots between the bays.
+In Fig. 2 , the main loop is a single monorail track that connects
+all bays in the FAB. We also consider an additional loop within the
+main loop in this study. Many practical FABs use custom track con-
+ﬁgurations with shortcuts to enhance their performance ( Wang &
+Lin, 2004 ). Shortcuts on the track allow OHT vehicles to travel
+shorter distances. A lot is loaded or unloaded at the P/D point at
+a stocker.
+3.2. Flow and volumes
+In this research, we perform a simulation analysis using actual
+data from a 300-mm DRAM memory chip FAB. The data include
+information on the processing steps for each product and corre-
+sponding tools for each step. There are four product groups in
+the data and the product mix ratio is 4.5:3.5:1:1. The ﬁrst two
+products are major products, and the last two are minor products.
+The number of steps for each product are 289, 302, 249, and 322,
+Table 6
+From/To data between bays for the max-distance layout (lots/day).
+Bay 1 Bay 2 Bay 3 Bay 4 Bay 5 Bay 6 Bay 7 Bay 8 Bay 9 Bay 10 Bay 11 Bay 12 Bay 13 Bay 14 Bay 15 Bay 16
+Bay 1 0 58.4 191.6 0 0 0 0 0 0 38.6 0 9.4 0 39.5 53.4 27.5
+Bay 2 20.0 0 306.8 0.2 14.0 0 8.7 118.3 51.1 23.4 31.5 24.0 19.7 87.4 108.1 38.4
+Bay 3 19.2 59.3 0 36.6 170.7 53.3 133.8 418.8 216.1 112.4 166.5 24.7 79.8 108.0 52.8 52.4
+Bay 4 0 0 4.7 0 82.0 2.6 0 16.9 21.5 0.6 0 55.2 61.7 214.3 68.3 27.4
+Bay 5 0 19.7 147.0 11.0 0 0.5 0.7 126.0 47.1 1.1 0 29.0 58.3 78.5 10.8 0.8
+Bay 6 9.6 23.5 43.0 1.0 0 0 0 12.2 0 0 0 0 0 0 140.5 127.4
+Bay 7 72.1 95.6 104.7 0.1 1.4 0 0 0 0 0.0 0 0 0 0 12.6 18.9
+Bay 8 25.7 68.4 294.9 84.0 127.7 0 42.0 0 145.7 15.2 14.4 96.7 320.0 144.4 340.1 123.7
+Bay 9 75.2 205.1 163.7 5.6 5.8 0 9.0 120.0 0 0.3 10.0 32.1 5.7 57.1 128.7 130.1
+Bay 10 79.7 51.5 68.5 3.9 1.9 0 0 53.9 0 0 0 0 0 4.6 172.4 102.3
+Bay 11 86.4 165.2 120.8 1.4 1.1 0 0 2.4 0 0 0 0 0 0 7.7 15.1
+Bay 12 12.2 48.7 62.4 0.7 0.0 0 0 68.6 0 0 0 0 0 140.4 137.5 185.5
+Bay 13 14.4 29.6 92.3 135.1 69.2 0 0 97.1 0 0 0 7.1 0 128.8 71.7 51.7
+Bay 14 2.9 7.8 13.7 0 0 247.1 93.3 41.1 308.6 165.6 147.5 239.4 51.4 0 122.8 0.7
+Bay 15 0.3 8.0 74.6 183.1 42.1 25.0 4.7 475.6 128.2 135.8 27.8 84.6 79.8 317.2 0 96.5
+Bay 16 0.9 10.6 15.5 92.5 14.5 28.8 13.2 292.0 30.3 45.7 2.3 53.6 20.6 121.8 256.1 0
+Table 7
+OHT vehicle speciﬁcations.
+Category Speciﬁcation
+Straight speed 2 m/s
+Curve speed 0.5 m/s
+Acceleration 0.98/s 2
+Deceleration 1.47/s 2
+Load/unload time 10 s
+Capacity (FOUP) 1
+Rotation speed 90 deg/s
+Table 8
+Results of ANOVA.
+Effect Degrees of
+freedom
+Sum of
+square
+Mean
+square
+F
+ratio
+P-
+value
+VIF
+A 1 10,658,996 10,658,996 18.15 0.000 1
+B 2 14,682,987 7,341,494 12.50 0.000 1.33
+C 2 39,803,822 19,901,911 33.89 0.000 1.33
+AB 2 16,234,071 8,117,036 13.82 0.000 1.33
+AC 2 23,146,553 11,573,277 19.71 0.000 1.33
+BC 4 29,459,139 7,364,785 12.54 0.000 1.78
+ABC 4 31,841,248 7,960,312 13.56 0.000 1.78
+Fig. 6. Interactions between track conﬁgurations and ﬂow volume.
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 335
+
+=== PAGE 7 ===
+respectively. Note that although the rest of the analysis is based on
+this particular product mix scenario, we show later that the results
+from the analyses are less sensitive to the variation in product mix.
+We discuss this issue in Section V. Practical Implication and
+Suggestions. In our analysis, we consider multiple production vol-
+ume scenarios. With the product mix ratio, three different volume
+cases are analyzed: 10,000 wafers/week, 20,000 wafers/week, and
+30,000 wafers/week. This volume scenario is similar to the produc-
+tion ramp-up scenario for the FAB as shown in Fig. 3. When a new
+FAB starts operation, the production volume is gradually increased
+to the target production level. In our volume scenario, the target
+volume is 30,000 wafers/week, and there are two milestones,
+10,000 wafers/week and 20,000 wafers/week. The number of tools
+and vehicles are gradually increased to meet the demand at each
+milestone. That is, more tools are added to the bays to meet the
+increased production volume. Also, as the tools are added, the
+intra-bay systems are expanded.
+3.3. Tool groups
+Our analysis includes eight groups of semiconductor wafer fab-
+rication processes: chemical mechanical planarization (CMP),
+chemical vapor decomposition (CVD), diffusion (DIF), dry etching
+(DRY), implant (IMP), physical vapor decomposition (PVD), photo
+lithography (PHOTO), and wet etching (WET). We do not consider
+the metrology process in this study. Each process group has a num-
+ber of tool groups that process similar steps. For example, the PVD
+process group includes tool groups such as PVD_END1, PVD_A-
+MAT2, PVD_AMAT3, and others. Tools in each tool group are
+assumed to have the same processing time, utilization, processing
+lot quantity, and other tool characteristics. The number of tools for
+each tool group is determined for each production volume scenario
+using the optimization model presented in Appendix A.1 Table 1
+shows the number of tool groups and tool numbers for each pro-
+cess group for three different volume scenarios.
+Table 2 presents the hourly ﬂow-interaction data among the
+process groups for 10,000 wafers/week. The data for 20,000 and
+30,000 wafers/week can be obtained by multiplying by two and
+three times. These ﬂow rates are used to create the bay layouts.
+3.4. Layouts
+For the min-distance FAB layout, the bays with high ﬂow inter-
+actions are located next to each other. As discussed earlier, to log-
+ically analyze congestion, we also consider the max-distance FAB
+layout. which is the counter case to the min-distance layout. Using
+the optimal bay allocation method presented in Appendix A.2, the
+two layouts are generated as shown in Fig. 4 . This optimization
+allocates the tool groups to bays by considering the tool footprints
+and lot moves between and within tools. For the min-distance lay-
+out, the optimization model allocates the tools to bays to accom-
+plish the total ﬂow distance, whereas the max-distance layout
+maximizes the total ﬂow distance. Details of the optimization
+model are presented in Appendix A.3. The ﬁrst layout is the result
+generated from the min-distance layout, and the second layout is
+that generated from the max-distance layout. The ﬂow-weighted
+distances for the layouts are 25902.82 and 48504.12 for the min-
+distance layout and max-distance layout, respectively. Note that
+the ﬂow-weighted distance for the min-distance layout is shorter
+than that of the max-distance layout.
+According to the ﬂow-interaction data between the process
+groups in Tables 2, the process groups WET and DIF have high ﬂow
+interactions. Therefore, in the min-distance layout, DIF is adjacent
+to WET. However, as shown in Fig. 4 , WET and DIF are far from
+each other in the max-distance layout, as expected. In this study,
+we identify the differences between the two layouts by comparing
+delivery times of the OHT vehicles (hereafter, vehicles).
+Fig. 7. Interaction between the FAB layout and ﬂow volume.
+ Fig. 8. Interaction between the FAB layouts and track conﬁgurations.
+336 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 8 ===
+3.5. Track conﬁgurations
+Many practical FABs use a customized track conﬁguration to
+provide optimal paths for the vehicles ( Wang & Lin, 2004 ). The
+shortcut refers to an inner loop linked to the main loop to provide
+a shorter travel path. Two or more vehicles compete to cross an
+intersection when vehicles meet each other there. If ﬂows are con-
+centrated on or many vehicles pass an intersection, a large number
+of vehicles cluster at the intersection. In this study, we investigate
+how the number of shortcuts affects vehicle ﬂows. In this analysis,
+we consider three types of track conﬁgurations for each FAB layout
+as illustrated in Fig. 5 . Each conﬁguration is distinguished by the
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+W
+E
+T
+W
+E
+T
+W
+E
+T
+W
+E
+T
+D
+I
+F
+D
+I
+F
+C
+M
+P
+C
+M
+P
+C
+V
+D
+C
+V
+D
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+D
+R
+Y
+P
+V
+D
+P
+H
+O
+T
+O
+P
+H
+O
+T
+O
+W
+E
+T
+W
+E
+T
+W
+E
+T
+W
+E
+T
+W
+E
+T
+I
+M
+P
+C
+V
+D
+C
+V
+D
+C
+V
+D
+OHT-vehicles
+Congestion
+Bay 1 Bay 2 Bay 3 Bay  4 Bay  5 Bay  6 Bay  8Bay  7
+Bay 16 Bay  15 Bay  14 Bay 13 Bay  12 Bay  11 Bay 10 Bay 9
+Fig. 9. Congestion on the track (Track type 2) around Bays 2, 3, 14, and 15 (between the DIF and WET process groups).
+CVD
+CVD
+DIF
+CVD
+IMP
+CMP
+WET WET
+WET DRY
+DRY
+DRY
+DRY
+WET
+WET
+Photo
+PVD
+Photo
+DRY
+Bay 16 Bay 15 Bay 14 Bay 13 Bay 12 Bay 11 Bay 10 Bay 9
+CVD
+CVD
+CMP
+CVD
+IMP
+DIF
+WET WET
+WET DRY
+DRY
+DRY
+DRY
+WET
+WET
+Photo
+PVD
+Photo
+DRY
+Bay 1 Bay  2 Bay  3 Bay  4 Bay  5 Bay  6 Bay  7 Bay  8
+Bay 16 Bay 15 Bay 14 Bay 13 Bay 12 Bay 11 Bay 10 Bay 9
+DIF
+CVD
+CVD
+CVD
+IMP
+CMP
+WET WET
+WET DRY
+DRY
+DRY
+DRY
+WET
+WET
+Photo
+PVD
+Photo
+DRY
+Bay 16 Bay 15 Bay 14 Bay 13 Bay 12 Bay 11 Bay 10 Bay 9
+Min-distance layout
+Inter-bay Material Handling System
+Inter-bay Material Handling System
+Bay 1 Bay  2 Bay  3 Bay  4 Bay  5 Bay  6 Bay  7 Bay  8
+Bay 1 Bay  2 Bay  3 Bay  4 Bay  5 Bay  6 Bay  7 Bay  8
+Revised Min-distance layout 1
+Revised Min-distance layout 2
+Inter-bay Material Handling System
+Fig. 10. Min-distance and revised min-distance FAB layouts.
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 337
+
+=== PAGE 9 ===
+number of shortcuts. The ﬁrst type (track type 1) has the highest
+number of shortcuts, whereas the third type (track type 3) has
+the least number of shortcuts. The number of shortcuts in the sec-
+ond type (track type 2) lies somewhere between types 1 and 3. In
+this analysis, we try to understand how the number of shortcuts
+affects material ﬂows.
+As discussed earlier, the numbers of tools and vehicles are
+different depending on the production volume scenario. That is,
+during the ramp-up period, tools are added, and the intra-bay sys-
+tem is also expanded. However, the OHT track in the inter-bay sys-
+tem is normally installed to support the target production level
+even as the FAB starts its operation because the inter-bay OHT
+track cannot be easily expanded once a FAB starts operation. That
+is, the OHT track has enough capacity to handle 30,000 wafers/
+week, even if the experiments here only assess production of
+10,000 or 20,000 wafers/week. However, the number of vehicles
+may vary depending on the volume scenario. Table 3 summarizes
+the results of the estimation of vehicles for each scenario.
+4. Veriﬁcation of FAB layout through DOE
+4.1. DOE settings
+We analyze the simulation results of the AMHS performance of
+the two layouts with different scenarios through DOE. DOE is a sta-
+tistical method used to examine the effect of more than two input
+factors on output results. DOE provides statistical reliability
+through the proper interpretation of the results of simulation.
+There are several types of DOE, including the factorial design, Tagu-
+chi method, and the Response Surface Method (RSM). The factorial
+design analyzes the factors, which are k-ﬁxed input parameters, to
+examine the interaction between them using a response variable,
+which is the results of an experiment. We use factorial design
+because the objective in this study is to analyze factors or interac-
+tions between them that we are interested in.
+Factors and levels for the factorial design are summarized in
+Table 4 . We consider three factors and each factor has its own
+levels. The levels of the ﬁrst factor ‘A’ are the min- and max-
+distance FAB layouts. The second factor ‘B’ has three levels: track
+type 1, 2, and 3, as described in Fig. 5. The third factor ‘C’, ﬂow vol-
+ume, also has three levels: low, mid, and high ﬂow volumes.
+In the factorial design, the average delivery time of the vehicles
+is used as the response variable. Delivery time is one of the widely
+used performance measures of the AMHS in a FAB. Numerous
+papers including Lin et al. (2005) and Mackulak and Savory
+(2001) also support delivery time as the key performance factor
+of the AMHS. We deﬁne the average delivery time as the sum of
+Fig. 11. Results of sensitivity analysis for distance between DIF and WET.
+6
+Bay 2 Bay 3 Bay 4
+Bay 15 Bay 14 Bay 13
+Bay 1 Bay 2 Bay 5
+Bay 16 Bay 15 Bay 12
+Bay 3 Bay 8
+Bay 14 Bay 9
+Min-distance
+Max-distance
+Revised-Min
+1
+2
+3
+4 5
+7
+8 9
+10
+1
+2
+34
+56 7
+8
+10
+1 2
+3
+4 5
+67
+9
+10
+9
+8
+Fig. 12. Key track segments of track type 1 for each FAB layout.
+338 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 10 ===
+the average transport time of the lots by vehicles and the average
+waiting time of the lots.
+4.2. Simulation settings
+Simulation experiments are performed by using AutoMod 12.3.
+The input data for the simulation is the lot move request described
+in the From/To data. The From/To data inputs for each experiment
+are described in Tables 5 and 6 . The data for 20,000 and 30,000
+wafers/week can be obtained by multiplying by two or three times.
+The method of evaluation of these tables are explained in Appendix
+A.4. Five replications are performed in each experiment, and 90
+experiments are performed overall (=2 /C2 3 /C2 3 /C2 5). The simula-
+tion settings are similar to those of simulation analysis using Auto-
+Mod including Lin, Wang, and Wu (2003), Wang and Lin (2004),
+and Kong (2007) . The simulation model is set as follows:
+/C15 A lot contains 25 wafers.
+/C15 The vehicle moves along the shortest path on the OHT track.
+/C15 The closest rule is used for the vehicle dispatching policy – the
+nearest idle vehicle to the job request is dispatched.
+/C15 The lot priority is based on the FIFO rule.
+/C15 Inter-arrival times of the lots at the stockers are exponentially
+distributed.
+/C15 There are no failures or unexpected events for the stockers and
+vehicles.
+/C15 The number of vehicles used in the simulation for each scenario
+is adequate to operate the AMHS.
+/C15 The OHT track has adequate capacity to meet the lot move
+demand.
+/C15 The size of the buffer in the stockers is set to inﬁnity.
+Simulation experiments are run for 5 days after a warm-up per-
+iod of 3 days. We continuously measure the average delivery time
+of the vehicle and that it does not change by more than 10% as it
+reaches the steady-state. We found that the simulation experi-
+ments showed a small variation after 3 days. Once the simulation
+reaches to the steady-state, it is run for an additional 5 days for
+the analysis. Finally, we measure the average delivery time for
+one hour (to assess the performance of the AMHS) for the ﬁnal
+8th day.
+The speciﬁcations of the vehicles used in the simulation are
+summarized in Table 7. Note that these speciﬁcations are not very
+different from those used in other simulation studies such as that
+of Kong (2007) .
+4.3. Simulation results
+We ﬁrst identify the signiﬁcance of the factors A, B, and C and
+the interactions between them with ANOVA. The results are sum-
+marized in Table 8 . The p-values of the main factors are close to
+zero; therefore, we identify FAB layout, OHT track conﬁguration,
+and the ﬂow volumes as being signiﬁcant. The p-values of the
+interactions between them are also close to zero, and therefore,
+they are also identiﬁed as being signiﬁcant. The value of adjust–
+R2 is 74.89%. The 74.89% of total variation for the response variable
+is explained by signiﬁcant factors A, B, C, AB, AC, BC, and ABC. All VIF
+values are less than 10, and therefore, there is no multicollinearity
+between factors.
+Next, we obtain three interaction graphs between the signiﬁ-
+cant factors as shown in Figs. 6–8. First, Fig. 6 shows the interaction
+between track conﬁguration and ﬂow volumes. Note that track
+type 1 has the higher number of shortcuts and type 3 has the least
+Table 9
+Utilization of key segments for high ﬂow volume.
+Segment idex 1 (%) 2 (%) 3 (%) 4 (%) 5 (%) 6 (%) 7 (%) 8 (%) 9 (%) 10 (%)
+Min-distance 60.50 55.50 51.19 33.88 32.13 21.13 5.63 4.83 4.08 1.81
+Max-distance 32.67 15.00 9.69 9.50 8.83 7.00 5.50 5.44 3.44 2.17
+Revised-Min2 17.50 10.44 10.42 9.17 8.38 5.50 2.88 1.31 0.75 0.33
+1 1.5 2 2.5 3
+x 10
+4
+0.1
+0.2
+0.3
+0.4
+0.5
+Flow volume (wafers/week)
+Utilizaation
+1 1.5 2 2.5 3
+x 10
+4
+1000
+2000
+3000
+4000
+5000
+6000
+7000
+Flow volume (wafers/week)
+Delivery time (Sec.)
+Min-distance
+Max-distance
+Revised-Min2
+Min-distance
+Max-distance
+Revised-Min2
+Fig. 13. Relationship between utilization and ﬂow volume (top panel) and average delivery time and ﬂow volume (bottom panel).
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 339
+
+=== PAGE 11 ===
+number, with type 2 somewhere in between. The average delivery
+times for the low ﬂow volume are 231.90, 228.49, and 234.40 s for
+track types 1, 2, and 3, respectively, and those for the medium ﬂow
+volume are 214.26, 202.24, and 227.270 s, respectively. The num-
+ber of shortcuts are insigniﬁcant when the volume is low or med-
+ium. That is, the shortcuts are not effective in these cases because
+having more shortcuts does not improve the travel time. Further-
+more, the shortcuts make the situation worse when the ﬂow vol-
+ume is high. More interesting insights are found in Fig. 7 .
+Fig. 7 shows the interaction between the FAB layout and the
+ﬂow volumes. The average delivery times for the min-distance lay-
+out are 217.42, 199.87, and 2695.10 s for the low, mid, and high
+ﬂow volumes, respectively, but those for the max-distance layout
+are 245.79, 229.32, and 572.43 s. Note that these are slight
+increases in the delivery times for the low-volume case (from
+217.42 to 245.79 s.) and the mid-volume case (from 199.87 to
+229.32 s.), when the layout is changed from the minimum to max-
+imum distance. That is, the min-distance approach is more effec-
+tive because the travel time is smaller. However, the changes are
+insigniﬁcant compared to those of the high-volume case. Interest-
+ingly, the delivery time is signiﬁcantly higher in the min-distance
+layout when the volume is high. In contrast to the low- and
+medium-volume cases, the min-distance layout performs worse
+than the max-distance layout when the volume is high. This result
+indicates that the min-distance layout design is effective only
+when the ﬂow volume is limited. If the volume increases, vehicle
+congestion is created in concentrated areas in the min-distance
+layout, causing inefﬁcient delivery in the overall FAB.
+Fig. 8 represents the interaction of FAB layouts and track conﬁg-
+urations. The average delivery times for the min-distance layout
+are 2205.40, 535.78, and 371.21 s for track types 1, 2, and 3, respec-
+tively, whereas those for the max-distance layout are 318.96,
+371.79, and 356.79 s. From the graphs, it can be observed that
+the number of shortcuts is insensitive in the max-distance layout.
+Interestingly, the delivery time is signiﬁcantly higher with more
+shortcuts for the min-distance case because the shortcuts create
+more concentrated congestions. Fewer shortcuts increase the tra-
+vel distance of the vehicles and spread the vehicle movers in the
+min-distance layout.
+4.4. Analysis of results
+Considerable insight is provided from the results presented in
+the interactions graphs. With the actual FAB data, the high ﬂow
+volume largely effects the performance of the AMHS. From the
+simulation results, we conclude the following. First, the min-
+distance layout is not efﬁcient when the ﬂow volume increases.
+We do not conclude that the max-distance layout is better than
+the min-distance layout because the max-distance layout is ana-
+lyzed only to understand the opposite extreme of the min-
+distance layout. This is why we conclude that the min-distance lay-
+out is not effective rather than that the max-distance layout is
+effective. Another interesting ﬁnding is that the shortcuts in the
+OHT track can improve delivery times when the ﬂow rate is mod-
+erate. However, if the volume increases, the shortcuts cause the
+vehicle trafﬁc to worsen in the min-distance layout. Finally, the
+performance of lot delivery is sensitive to the ﬂow volume and
+OHT track conﬁguration in the min-distance layout. To obtain
+robust performance, the min-distance layout is not recommended.
+5. Practical implication and suggestions
+In this analysis, most of the congestions in the min-distance lay-
+out occur in the areas around Bays 2, 3, 14, and 15 as shown in
+Fig. 9 . This congestion is caused by relatively heavy ﬂows within
+and between the DIF and WET processes. Since the bays for these
+processing tools are located next to each other, heavy trafﬁc is cre-
+ated in this area. When the ﬂow volume increases, the congestion
+becomes worse, and the trafﬁc in the area eventually blocks the
+ﬂow on the entire track.
+With the understanding of the cause of the congestion, we pro-
+vide practical design suggestions with the following additional
+experiments. Again, note that the max-distance layout is not the
+alternative solution. The max-distance layout is analyzed simply
+as the extreme case to validate the effectiveness of the min-
+distance layout. Therefore, we do not suggest that practitioners
+adopt the max-distance approach. Let us consider the following
+layouts.
+First, allocate the bays based on the min-distance. Let us focus
+on the two tool groups with the highest ﬂows between them. Since
+the layout design is based on the min-distance approach, the
+groups must be located next each other, and, in our case, they
+are DIF and WET. We call this layout the one-bay-away conﬁgura-
+tion, as depicted in the ﬁrst panel in Fig. 10 , because the tool
+groups are located next to each other. Then, we re-allocate these
+tool groups (i.e., DIF and WET) two bays and three bays away from
+each other from their locations in the original min-distance layout.
+These layouts are illustrated in the second and third panels in
+Fig. 10 , respectively. Fig. 11 shows the simulation experiments
+for the one-, two-, and three-bay-away layouts. It can be observed
+that the delivery time is radically reduced even when DIF and WET
+are separated in the two-bay-away conﬁguration. Also note that
+for the two-bay- and three-bay-away solutions, the delivery time
+is less sensitive to the track conﬁgurations. These revised min-
+distance layouts (two-bay and three-bay cases) also outperform
+the max-distance layout. To quantify and compare the levels of
+congestion for the min-, max-, and revised min-distance cases,
+track utilization for the top 10 most highly utilized tracks are indi-
+cated in Fig. 12, and their utilization rates are provided in Table 9.
+For the min-distance cases, some of the tracks have greater than
+50% utilization. In contrast, for the max-distance and revised
+min-distance cases, the tracks have signiﬁcantly less utilization.
+From this ﬁgure, we can also observe that the delivery service
+request meets the demand for both conﬁgurations. However, due
+to the heavy congestion in the min-distance case, the delivery is
+delayed.
+Table 10
+Notations for the layout design model.
+Notation Deﬁnition
+Decision
+variables
+f ijkl Flow amount from process group i of bay j to
+process group k of bay l
+tij Integer, number of tools for process group i
+assigned to bay j
+dij Binary, 1 if any tool of process group i is
+assigned to bay j, 0 otherwise
+sij Binary, 1 if j is the ﬁrst index of the bays
+assigned for process group i, 0 otherwise
+Parameters Cij Distance from bay j to bay l
+Pi Penalty cost of assigning additional tools to
+process group i
+Ni Number of tools planned for process group i
+Bi Number of bays planned for process group i
+At
+i Area space required for a tool of the process
+group i
+Ab
+j Area space available for the bay j
+Fik Material ﬂow amount from process group i to
+k
+M Big number M, the upper bound for the
+variables tij and f ijkl
+340 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 12 ===
+Fig. 13 shows the average utilization vs. ﬂow volume (top
+panel) and the average delivery time vs. ﬂow volume (bottom
+panel) for the min-, max-, and revised min-distance cases. The
+average utilization value is the average utilization for the ﬁrst ﬁve
+highly utilized segments in the corresponding tracks conﬁgura-
+tions. For the min-distance conﬁguration, the utilization radically
+increases at 28,000 wafers/week, and this is the point at which
+the delivery time starts to increase. However, the utilization and
+delivery times for the max- and revised min-distance conﬁgura-
+tions are both relatively low even though they reach 30,000
+wafers/week.
+The analysis shown in Fig. 13 demonstrates that the delivery
+and utilization trends follow the concepts of the queueing theory.
+As the utilization of the service reaches a certain level, the delivery
+time starts to increase radically. This nonlinear behavior is also
+observed in our track-vehicle system. It might be interesting to
+investigate queueing modeling to show the behavior of the system
+analytically. We reserve this investigation for a future study.
+Therefore, from a practical layout design, we suggest the
+following:
+(1) Allocate the bays based on the min-distance layout.
+(2) Try to increase the ﬂow volume until a signiﬁcant delivery
+delay is identiﬁed.
+(3) Identify the process groups with the highest trafﬁc or ﬂows.
+(4) Re-allocate the process groups by separating them by one
+bay.
+(5) If the delivery time is substantially reduced and it is insensi-
+tive to the track conﬁguration, stop. Otherwise repeat step 4.
+The idea behind this approach is that the bays with high ﬂow
+are separated to avoid congestion while other bays are allocated
+to minimize the ﬂow-weighted distance. This approach has been
+tested with other product mix scenarios, and the layouts using this
+approach outperform both the min- and max-distance layouts.
+Note that all of the analyses are based on a particular product
+mix scenario. However, even though the product mix is varied,
+the results will not be changed. To show this, we investigated 10
+different product cases in Appendix B. Table 14 shows the different
+product mix scenarios. The number of required tools is evaluated,
+and the tools are allocated with the same approach used in the pre-
+vious analysis for each product mix case. The tool counts are
+shown in Table 15 . Interestingly, even though the product mix is
+varied, the tool counts and allocations to the bays are not very dif-
+ferent because DRAM process ﬂows are not radically different from
+one product to another as long as they are in the same product
+family using the same technology node within the same allocation
+rule. Because the tool allocations are similar, material moves
+between bays will be the same. In our analysis, we used the partic-
+ular product mix ratio of 4.5:3.5:1:1 because this product mix ﬁg-
+ure is provided from the manufacturer. However, as our analysis in
+Appendix B shows, even though the product mix is changed, the
+results remain the same.
+6. Conclusion
+In this paper, we validate the min-distance layout design
+through simulation. Although some research in the past has
+reported the limitations of the min-distance layout approach in
+the context of general factory layout design, little research exists
+in the context of FAB design. The actual wafer ﬂow data from a
+300-mm DRAM memory chip manufacturing FAB is used for the
+simulation analysis. The layouts and AMHS are constructed based
+on the standard optimization procedures widely used in the semi-
+conductor industry. To logically understand the effectiveness of the
+min-distance layout, we generate the max-distance layout, which
+is the opposite extreme to the min-distance approach, and
+compare the two layouts. We hypothesize that if the performance
+of the max-distance layout is better than that of the min-distance
+layout, we can conclude that the min-distance layout may not be
+the best approach to use. We use the DOE method to analyze
+the simulation results generated from 18 different cases: min-
+and max-distance layouts and each layout with three different
+ﬂow-volume scenarios and with three different OHT track
+conﬁgurations.
+We discover that the min-distance layout is not effective when
+the ﬂow volume is heavy. The delivery time for the min-distance
+layout is signiﬁcantly larger compared to that of the max-
+distance layout when the ﬂow volume increases. This performance
+degradation remains even when additional shortcuts on the OHT
+tracks are provided. In fact, more shortcuts even increase the travel
+time on the min-distance layout when the ﬂow volume is high. The
+delay in delivery time is caused by the congestion of vehicles on
+the OHT track. The heavy ﬂows within and between the DIF and
+WET bays create signiﬁcant vehicle trafﬁc, and trafﬁc back-up
+propagates to the entire track when the ﬂow volume is increased.
+In the max-distance layout, however, the ﬂow congestion is not
+concentrated to a limited area and ﬂows are spread out.
+Although this ﬁnding is somewhat intuitive and expected, it is
+signiﬁcant because we numerically show that there is a certain
+limitation with the min-distance layout design in the context of
+FAB design. Our ﬁnding aligns exactly with that of the actual
+FAB-K case mentioned in the Introduction. While ramping up the
+FAB, the increased ﬂow volume created serious congestion in a lim-
+ited area that caused serious delay in lot delivery by the OHT vehi-
+cles. The layout of the FAB-K was based on the min-distance
+approach.
+Table 11
+Notations for the tool allocation model.
+Notation Deﬁnition
+Decision
+variables
+f sis kn Wafer ﬂow rate per minute at step i of product
+s from bay k to n
+ysis jk Number of tools j allocated to bay k for step i
+of product s
+tjk Integer, Number of tools j allocated to bay k
+Parameters Mkn Distance between bay k to bay n
+Ds Required production rate of the product s
+Csis j Production rate or capacity of the tool j for
+step i of product s
+Nj Number of tools j available for allocation,
+output result from the design step 1
+Sjk 0 or 1 setup indicator for the tool j at bay k,
+output result from the design step 2
+At
+j Relative space size of the tool j
+Ab
+k
+Relative space size of the bay k
+Table 12
+Notations for the layout planning model.
+Notations Deﬁnition
+Decision
+variable
+xijklmn Number of lots from step i, tool j, and bay k to step
+l, tool m, and bay n
+Parameters Fil Number of lots from step i to step l
+Dkn Rectilinear distance between the bays k and n
+Pij Step-to-tool ratio for step i and tool j
+Ajk Tool-to-bay ratio for tool j and bay k
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 341
+
+=== PAGE 13 ===
+For practitioners, we provide tips for layout design from the
+insights gained from this analysis. Note that the goal of this paper
+is not to provide the best layout design method or approach. The
+tips are not analytically or mathematically proven (if, indeed, there
+is any way to prove that there is an optimal method of layout
+design). However, the approach is insightful and proven with the
+numerical data. We propose more rigorous research on the devel-
+opment of layout design methods from the insight gained with this
+research. We believe that there are great opportunities in this area.
+There are certainly limitations in this study. First, the OHT vehi-
+cle movement logic is simple: lot delivery is assigned to the closest
+vehicle, and vehicles move according to the shortest path algo-
+rithm. Vehicle zone-control or more advanced OHT vehicle logic
+may need to be applied. However, we conjecture that advanced
+logic may improve the performance if there is enough track capac-
+ity and its effectiveness is limited when too much ﬂow occurs
+within a concentrated area. However, we leave the further discus-
+sion of this issue for future research. In our research, the track con-
+ﬁgurations varied by the number of shortcuts. However, there are
+countless different alternatives for track conﬁguration. The analy-
+sis of more complicated OHT track conﬁgurations with different
+layout options for FAB design would be an interesting study. In this
+research, we only consider the FAB using an inter- and intra-bay
+separated layout concept. However, more FABs are adopting the
+direct delivery approach without inter-/intra-bay separation.
+Analyzing the effectiveness of the min-distance approach for the
+Table 13
+Results of the capacity planning step.
+Tool
+Group
+ID
+Process
+group
+Total number of
+tools for 10,000
+wafers/week
+Total number of
+tools for 20,000
+wafers/week
+Total number of
+tools for 30,000
+wafers/week
+Tool
+Group
+ID
+Process
+group
+Total number of
+tools for 10,000
+wafers/week
+Total number of
+tools for 20,000
+wafers/week
+Total number of
+tools for30,000
+wafers/week
+1 CMP 7 14 21 100 DRY 2 4 6
+3 CMP 4 8 12 101 DRY 4 8 12
+4 CMP 3 6 9 104 DRY 4 8 12
+5 CMP 2 4 6 105 DRY 7 14 21
+7 CMP 2 4 6 106 DRY 4 8 12
+14 CMP 3 6 9 107 DRY 4 8 12
+15 CMP 1 2 3 108 DRY 1 2 3
+16 CMP 4 8 12 110 DRY 7 14 21
+17 CMP 2 4 6 111 DRY 1 2 3
+19 CVD 2 4 6 112 DRY 22 44 66
+20 CVD 3 6 9 115 DRY 12 24 36
+22 CVD 2 4 6 118 IMP 1 2 3
+23 CVD 2 4 6 120 IMP 2 4 6
+24 CVD 1 2 3 121 IMP 2 4 6
+25 CVD 10 20 30 122 IMP 2 4 6
+27 CVD 8 16 24 123 IMP 1 2 3
+28 CVD 7 14 21 124 IMP 1 2 3
+29 CVD 4 8 12 127 IMP 6 12 18
+35 CVD 1 2 3 128 IMP 2 4 6
+36 CVD 3 6 9 130 IMP 3 6 9
+37 CVD 6 12 18 131 IMP 1 2 3
+39 CVD 1 2 3 133 IMP 2 4 6
+41 CVD 2 4 6 134 PVD 1 2 3
+42 CVD 9 18 27 135 PVD 1 2 3
+43 CVD 3 6 9 136 PVD 1 2 3
+44 CVD 7 14 21 143 PVD 2 4 6
+45 CVD 4 8 12 145 PVD 3 6 9
+47 CVD 2 4 6 147 PVD 2 4 6
+48 DIF 7 14 21 150 PHO 6 12 18
+50 DIF 2 4 6 154 PHO 4 8 12
+51 DIF 2 4 6 158 PHO 1 2 3
+53 DIF 5 10 15 159 PHO 1 2 3
+56 DIF 2 4 6 162 PHO 1 2 3
+59 DIF 1 2 3 170 PHO 5 10 15
+60 DIF 1 2 3 175 WET 1 2 3
+61 DIF 4 8 12 177 WET 1 2 3
+62 DIF 5 10 15 178 WET 5 10 15
+64 DIF 1 2 3 180 WET 4 8 12
+72 DIF 11 22 33 181 WET 3 6 9
+73 DIF 9 18 27 183 WET 1 2 3
+76 DIF 7 14 21 184 WET 1 2 3
+77 DIF 3 6 9 192 WET 1 2 3
+79 DIF 2 4 6 196 WET 4 8 12
+80 DIF 3 6 9 198 WET 3 6 9
+84 DIF 5 10 15 199 WET 1 2 3
+86 DRY 15 30 45 200 WET 8 16 24
+88 DRY 1 2 3 201 WET 1 2 3
+90 DRY 1 2 3 203 WET 2 4 6
+91 DRY 10 20 30 204 WET 34 68 102
+92 DRY 2 4 6 206 WET 3 6 9
+94 DRY 8 16 24 211 WET 3 6 9
+95 DRY 26 52 78 212 WET 3 6 9
+99 DRY 4 8 12
+342 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 14 ===
+direct-delivery AMHS will be very practical and interesting
+research. We leave this topic to future research.
+Appendix A. Design of the FAB layout
+A.1. Number of tool evaluations
+The ﬁrst step in designing the layout is to evaluate the number
+of tools necessary to meet a certain production volume. Layout
+design is basically a process of allocating the necessary tools to
+the speciﬁc areas while meeting certain constraints. The number
+of tools directly affects the conﬁguration of the layout design.
+There are various methods already published to evaluate the
+number of tools in the FAB environment. Most modern semicon-
+ductor processing tools can process multiple recipes for multiple
+part types, and evaluation of the right number of tools for multiple
+product mixes is not a trivial job. In this research, we used the opti-
+mization method of the tool counts method presented in Lars
+Mnch and Fowler (2012) and Yu (2013) .
+The tools counts for each of the tool groups in our study are
+summarized in Table 13 .
+A.2. Layout design
+The term Layout Design in this paper indicates the process of
+allocating the process groups to the speciﬁc bay on the FAB ﬂoor.
+The goal of this process is to determine which bay should be
+located in which area of the FAB. We use the optimization method
+for allocation of the process tool groups to the bays. The input val-
+ues for the optimization are the tools counts for each tool group,
+the footprint of each tool, and the processing steps. The optimiza-
+tion method we use in this study is distinguished from the conven-
+tional QAP or its variant in that we consider the material ﬂow of
+each of the process steps. By considering step-ﬂow, more detailed
+allocation can be achieved. The OPT-Layout model is the basic
+structure of the layout optimization model. The deﬁnition of deci-
+sion variables and parameters are summarized in Table 10 .
+ðOPT /C0 LayoutÞ Min=Max
+X
+ijkl
+Cjl /C1 f ijkl ð1Þ
+subject to
+X
+j
+tij ¼ Ni 8i ð2Þ
+X
+i
+At
+i /C1 tij 6 Ab
+j 8j ð3Þ
+X
+jl
+f ijkl ¼ Fik 8i; k ð4Þ
+X
+l
+f ijkl ¼ Fik
+Ni
+/C1 tij 8i; j; k ð5Þ
+X
+j
+f ijkl ¼ Fik
+Nk
+/C1 tkl 8i; k; l ð6Þ
+X
+ijk
+f ijkl ¼
+X
+ijk
+f klij 8l ð7Þ
+tij 6 M /C1 dij 8i; j ð8Þ
+f ijkl 6 M /C1ð dij þ dkl /C0 1Þ 8i; j; k; l ð9ÞX
+j
+dij ¼ Bi 8i ð10Þ
+X
+j
+sij ¼ 1 8i ð11Þ
+di1 ¼ si1 8i ð12Þ
+dij 6 sij þ di;j/C0 1 8i; j ¼ 2; ... ; J ð13Þ
+The main decision variables are the number of tools in a tool
+group to be allocated in a bay. The objective in this OPT-Layout,
+which is expressed in (1), is the total ﬂow distance. Note that the
+objective function is either minimum or maximum depending on
+which layout approach is used as described in Section 3.4. The con-
+straint (2) is the tool counts equality condition. Eq. (3) indicates the
+bay space constraint. The equations from (4)–(7) are the ﬂow con-
+straints. The conservation of ﬂow between the bays and tools must
+be maintained. Eqs. (8) and (9) are the constraints enforcing tools
+with the same tool types to be allocated to close-by bays. For
+example, in Fig. 4 , which shows the layouts generated from the
+optimization algorithm, the WET process requires 5 bays. These
+WET bays are located closer together in both the min-distance
+and max-distance layouts. The remaining constraints cover auxil-
+iary conditions. This model is basically the extension of the model
+proposed in Yu (2013) . A more detailed analysis and an algorithm
+for optimization are found in Yu and Jang (2016) . Note that in prac-
+tice, the size of the bay is continuously modiﬁed during this design
+stage. This issue is also discussed in Yu and Jang (2016) .
+A.3. Tool allocation to the bay
+The previous step concerns allocation of the bay in the FAB,
+whereas this step concerns which speciﬁc tool has to be allocated
+to which bay. In Fig. 4 , for example, there are ﬁve WET bays, and
+we need to ﬁgure out which tools in the WET process group should
+be allocated to which WET bay. We also use optimization modeling
+for this allocation problem and call it OPT-Tool. The primary goal of
+the OPT-Tool model is to improve the ﬂow efﬁciency of the mate-
+rial ﬂow within the bay while it ofﬂoads the material moving on
+the inter-bay system. Therefore, it is also called the intra-bay opti-
+mization model. The decision variables and parameters are listed
+in Table 11 .
+ðOPT /C0 ToolÞ Minimize
+X
+sis kn
+Mkn /C1 f sis kn ð14Þ
+subject to
+X
+kn
+f sis kn P Ds 8s; is ð15Þ
+X
+k
+f sis kn ¼
+X
+k
+xs;is þ1;n;k
+8s; n; and is ¼ 1; ... ; Is /C0 1 ð16ÞX
+n
+f sis kn 6
+X
+j
+Csis j /C1 ysis jk 8s; is; k ð17Þ
+X
+sis
+ysis jk 6 tjk 8j; k ð18Þ
+X
+k
+tjk ¼ Nj 8j ð19Þ
+X
+sis j
+At
+j /C1 tjk 6 Ab
+k 8k ð20Þ
+tjk 6 M /C1 Sjk 8j; k ð21Þ
+The objective function, which is depicted in (14), is to minimize the
+material ﬂow, and constraints from (15)–(17) are concerned with
+Fig. 14. Evaluation of the number of vehicles.
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 343
+
+=== PAGE 15 ===
+ﬂow conservation and ﬂow demand. The constraints (18) and (19)
+relate to tool counts. The constraint (20) is the restriction on bay
+space, and the last equation, (21), is an auxiliary constraint relating
+to allowable tools in the bay. This model is the extension of the
+model proposed in Yu (2013) , and more speciﬁc details on the
+optimization model can be found in Yu and Jang (2016) .
+A.4. From/To matrix
+Once the previous step is completed, tools are assigned to speci-
+ﬁc bays. However, to simulate inter-bay material ﬂow, the lot
+move rate between bays needs to be evaluated. This rate, i.e., the
+rate of lot moves from one bay to another bay, is often described
+in a matrix form and is called a From/To table or matrix. Each ele-
+ment in the table indicates the lot move per unit time from one bay
+to another bay. This From/To table is used as input to the inter-bay
+simulation.
+Note that due to the complexity of the modern FAB, a simula-
+tion program such as AutoMod, which is the most widely used
+software package for FAB simulation, cannot simulate the lot
+moves based on the ﬂow of the processing steps. Instead, lot moves
+Table 14
+Product mix scenarios.
+Product mix
+scenario
+S1 S2 S3 S4 S5 S6 S7 S8 S9 S10
+Product 1 1.5 2 2.5 2.5 3.5 4 4.5 5 3 2
+Product 2 1.5 2 2.5 3.5 3.5 4 3.5 3 3 2
+Product 3 3 2.5 2 2 1.5 1 1 1 1 4
+Product 4 4 3.5 3 2 1.5 1 1 1 3 2
+Table 15
+Total number of tools in each process group for each scenario.
+Process
+group
+S1 S2 S3 S4 S5 S6 S7 S8 S9 S10
+CMP 27 28 29 29 29 29 28 28 28 27
+CVD 69 70 72 73 77 77 77 77 77 67
+DIF 67 68 69 69 68 70 70 70 70 64
+DRY 135 136 136 135 134 135 135 135 139 128
+IMP 24 25 23 23 24 23 23 23 23 24
+PVD 11 10 10 10 10 10 10 10 10 9
+Photo 18 18 17 18 17 18 18 18 18 18
+WET 80 79 80 79 80 79 79 79 81 78
+Fig. 15. The from-to ﬂow between the tool groups for all product mix scenarios.
+344 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346
+
+=== PAGE 16 ===
+between bays in the From/To table are used as an input and simu-
+late the vehicle deliveries.
+The generation of the From/To table is not intuitive because
+tools are processing multiple steps, and the same tools may be allo-
+cated to different bays. We also use the optimization model for the
+generation of the From/To table as shown in OPT-From/To. The
+decision variables and parameters are listed in Table 12 .
+ðOPT /C0 From=ToÞ Minimize
+X
+ijklmn
+xijklmn /C1 Dkn ð22Þ
+subject to
+X
+ijk
+xijklmn ¼
+X
+pqr
+xlmnpqr for all l ; m; n ð23Þ
+X
+mn
+xijklmn ¼ Fil /C1 Pij /C1 Ajk for all i ; j; k; l ð24Þ
+Again, more details on this optimization model are given in
+Kim, Jang, and Kurtz (2014) .
+A.5. Number of vehicles evaluation
+The last step in running the simulation for the inter-bay moves
+is to evaluate the appropriate number of OHT vehicles needed. Too
+few vehicles will cause an inter-bay AMHS bottleneck, whereas too
+many will result in unnecessary vehicle blockage by idling vehicles
+because the idle vehicles may block the working vehicles on the
+track. We evaluate the number of vehicles with a standard simula-
+tion method used in industry as described in Jang (2014) and Kim
+et al. (2014). The basic idea of the method is that it ﬁrst analytically
+evaluates a rough estimate of the required number of vehicles
+described in Eq. (25).
+Then number of vehicle is increased for each simulation run and
+evaluate it average delivery time. As shown in Fig. 14, the average
+delivery time is decreased when more vehicle is added. Then it
+starts increases more vehicles. Then we select the lowest point as
+the vehicle counts for the case. This simulation based approach is
+employed to evaluate the vehicle counts for the analysis in the
+study. We understand that there are more rigorous method avail-
+able proposed in the academic literature. However, we found that
+this method is good enough for our purpose of the study.
+Appendix B. Different product mix case
+In this study, we focus on one product mix for the simulation
+experiments. The product mix can be changed according to the
+production ramp-up phases or the production plans. A different
+product mix can cause the required number of tools for each tool
+group to change, and thus, it may affect the FAB layout. However,
+our analysis found that as long as the products are in the same
+DRAM family, FAB layout is less likely to change even if the product
+mix is varied.
+Table 14 shows 10 different product mix scenarios for the four
+products in the DRAM product family, and Table 15 lists the tool
+counts for each scenario. Note that although the product mix is
+varied, the number of tool counts are not radically different
+because as long as the products are in the same DRAM family,
+the process steps are similar and the required tools are not very
+different.
+Fig. 15 shows the from-to ﬂow between the tool groups. The x-
+axis for each subplot indicates the 10 different product mix scenar-
+ios, and the y-axis indicates the from-to amount of ﬂow. Note that
+for each subplot, the ﬂow amount is almost similar even though
+the product mix scenarios are different. The tools are allocated
+based on the tool counts and ﬂow volume between tool groups.
+According to the tool counts in Table 15 and the from-to ﬂow vol-
+umes in Fig. 15 , no signiﬁcant difference was observed among the
+different product mix scenarios. As a result, the tool allocations
+should also be similar for the different product mix scenarios.
+Appendix C. Supplementary material
+Supplementary data associated with this article can be found, in
+the online version, at http://dx.doi.org/10.1016/j.cie.2016.02.012.
+References
+Bartlett, K., Lee, J., Ahmed, S., Nemhauser, G., Sokol, J., & Na, B. (2014). Congestion-
+aware dynamic routing in automated material handling systems. Computers &
+Industrial Engineering, 70 , 176–182 .
+Benjaafar, S. (2002). Modeling and analysis of congestion in the design of facility
+layouts. Management Science, 48 (5), 679–704 .
+Bozer, Y. A., & Meller, R. D. (1997). A reexamination of the distance-based facility
+layout problem. IIE Transactions, 29 (7), 549–560 .
+Bukchin, Y., Meller, R. D., & Liu, Q. (2006). Assembly system facility design. IIE
+Transactions, 38 (1), 53–65 .
+Castillo, I., & Peters, B. A. (2003). An extended distance-based facility layout
+problem. International Journal of Production Research, 41 (11), 2451–2479 .
+Castillo, I., & Peters, B. A. (2004). Integrating design and production planning
+considerations in multi-bay manufacturing facility layout. European Journal of
+Operational Research, 157 (3), 671–687 .
+Chen, J. C., Dai, R.-D., & Chen, C.-W. (2008). A practical fab design procedure for
+wafer fabrication plants. International Journal of Production Research, 46 (10),
+2565–2588.
+Cheng, T. (1987). A simulation study of automated guided vehicle dispatching.
+Robotics and Computer-Integrated Manufacturing, 3 (3), 335–338 .
+Chiang, W.-C., Kouvelis, P., & Urban, T. L. (2002). Incorporating workﬂow
+interference in facility layout design: The quartic assignment problem.
+Management Science, 48 (4), 584–590 .
+Drira, A., Pierreval, H., & Hajri-Gabouj, S. (2007). Facility layout problems: A survey.
+Annual Reviews in Control, 31 (2), 255–267 .
+Hahn, P. M., Kim, B.-J., Guignard, M., Smith, J. M., & Zhu, Y.-R. (2008). An algorithm
+for the generalized quadratic assignment problem. Computational Optimization
+and Applications, 40 (3), 351–372 .
+Ho, Y.-C., & Liao, T.-W. (2012). The layout design of semiconductor bays with spine
+and perimeter inter-bay guide path loops. International Journal of Production
+Research, 50 (3), 719–741 .
+Im, K., Kim, K., Moon, Y., Park, T., & Lee, S. (2010). The deadlock detection and
+resolution method for a uniﬁed transport system. International Journal of
+Production Research, 48 (15), 4423–4435 .
+Jang, Y. J. (2014). The fab operation analysis for the major semiconductor fabs in South
+Korea (Korean) KAIST-internal report . Tech. rep., Daejeon, South Korea:
+Department of Industrial and Systems Engineering, KAIST.
+Jang, J., Suh, J., & Ferreira, P. M. (2001). An AGV routing policy reﬂecting the current
+and future state of semiconductor and LCD production lines. International
+Journal of Production Research, 39 (17), 3901–3921 .
+Kim, J., Jang, Y. J., & Kurtz, B. (2014). Simulation veriﬁcation for layout design – Is
+shortest distance always good? In Proceedings of the international symposium on
+semiconductor manufacturing .
+Kim, J.-G., & Kim, Y.-D. (2000). Layout planning for facilities with ﬁxed shapes and
+input and output points. International Journal of Production Research, 38 (18),
+4635–4653.
+Kong, S. H. (2007). Two-step simulation method for automatic material handling
+system of semiconductor fab. Robotics and Computer-Integrated Manufacturing,
+23(4), 409–420 .
+Number of vehicles ¼ ðTotal flow in inter -bay AMHS =unit time Þ/C3ð Average tra vel time =one vehicleÞ
+ðUtilization rate =one vehicleÞ ð25Þ
+J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346 345
+
+=== PAGE 17 ===
+Lars Mnch, S. J. M., & Fowler, John W. (2012). Production planning and control for
+semiconductor wafer fabrication facilities: Modeling, analysis, and systems (Vol.
+52). Springer Science & Business Media .
+Lin, J. T., Wang, F.-K., & Wu, C.-K. (2003). Simulation analysis of the connecting
+transport AMHS in a wafer fab. IEEE Transactions on Semiconductor
+Manufacturing, 16 (3), 555–564 .
+Lin, J. T., Wang, F., & Yang, C. (2005). The performance of the number of vehicles in a
+dynamic connecting transport AMHS. International Journal of Production
+Research, 43 (11), 2263–2276 .
+Mackulak, G. T., & Savory, P. (2001). A simulation-based experiment for comparing
+AMHS performance in a semiconductor fabrication facility. IEEE Transactions on
+Semiconductor Manufacturing, 14 (3), 273–280 .
+Meller, R. (1997). The multi-bay manufacturing facility layout problem.
+International Journal of Production Research, 35 (5), 1229–1237 .
+Muther, R. (1973). Systematic layout planning . Cahners Books .
+Peters, B. A., & Yang, T. (1997). Integrated facility layout and material handling
+system design in semiconductor fabrication facilities. IEEE Transactions on
+Semiconductor Manufacturing, 10 (3), 360–369 .
+Singh, S., & Sharma, R. (2006). A review of different approaches to the facility layout
+problems. International Journal of Advanced Manufacturing Technology, 30 (5–6),
+425–433.
+Ting, J.-H., & Tanchoco, J. (2000). Unidirectional circular layout for overhead
+material handling systems. International Journal of Production Research, 38 (16),
+3913–3935.
+Tompkins, J. A., White, J. A., Bozer, Y. A., & Tanchoco, J. M. A. (2010). Facilities
+planning. John Wiley & Sons .
+Wang, F.-K., & Lin, J. T. (2004). Performance evaluation of an automated material
+handling system for a wafer fab. Robotics and Computer-Integrated
+Manufacturing, 20 (2), 91–100 .
+Yang, T., & Peters, B. A. (1997). A spine layout design method for semiconductor
+fabrication facilities containing automated material-handling systems.
+International Journal of Operations & Production Management, 17 (5), 490–501 .
+Yang, T., Rajasekharan, M., & Peters, B. A. (1999). Semiconductor fabrication facility
+design using a hybrid search methodology. Computers & Industrial Engineering,
+36(3), 565–583 .
+Yang, T., Su, C.-T., & Hsu, Y.-R. (2000). Systematic layout planning: A study on
+semiconductor wafer fabrication facilities. International Journal of Operations &
+Production Management, 20 (11), 1359–1371 .
+Yu, G. (2013). Analytical method for the layout design of a semiconductor fab to
+maximize its operation efﬁciency . Master’s thesis, KAIST, Daejeon, Korea. < http://
+hdl.handle.net/10203/182470>.
+Yu, G., & Jang, Y. J. (2016). Analytical approach for the semiconductor fab design
+procedure. KAIST technical report (2016-01-JANG-SEMI-01).
+Zhang, M., Batta, R., & Nagi, R. (2009). Modeling of workﬂow congestion and
+optimization of ﬂow routing in a manufacturing/warehouse facility.
+Management Science, 55 (2), 267–280 .
+Zhang, M., Batta, R., & Nagi, R. (2011). Designing manufacturing facility layouts to
+mitigate congestion. IIE Transactions, 43 (10), 689–702 .
+346 J. Kim et al. / Computers & Industrial Engineering 99 (2016) 330–346

@@ -1,0 +1,91 @@
+
+SMAT 2022
+Semiconductor Manufacturing with AMHS Testbed 2022
+Release 0.1 – 11/2022
+
+Introduction
+The purpose of this document is to describe Semiconductor Manufacturing with AMHS Testbed 2022 (SMAT2022). SMAT2022 contains 16 different types of tables: 7 tables from SMT2020 and nine new tables describing AMHS in modern FABs. A summary of the purpose of tables is as follows:
+Table	Description
+Address	Information on all nodes of an OHT rail network and their characteristics
+ZCU	Information on ZCUs (Zone Control Units) 
+Rail	Information on all links of an OHT rail network
+Bay	Information on bays (Intrabay and Interbay)
+Equipment	Information on equipment belonging to toolgroup
+PortType	Information about the types of ports that interact with vehicles
+Port	Information on ports
+VehicleType	Information on the types of vehicles
+Vehicle	Information on vehicles
+
+Description of ZCU
+In this dataset, we represent an OHT rail network as a graph consisting of nodes and links. In this section, we briefly introduce some terminology about the OHT rail network. OHT can drive following the rails in one direction. Usually, deadlock situations can happen in merging sections, as shown in Fig. 1. This dataset includes zone control units (ZCU). ZCUs are located at every junction in the OHT network. It keeps OHT to avoid deadlock situations. For each ZCU, there are stop nodes and reset nodes. When an OHT arrives at a stop node of a ZCU, the ZCU allows the OHT to pass that junction. If another vehicle arrives during the OHT passing, the ZCU blocks it from passing to prevent deadlock situations. For example, as shown in Fig. 1, there is one ZCU. n1 and n2 are stop nodes of that ZCU. In contrast, n3 is a reset node.
+
+Fig. 1 Example of OHT network
+Description of the tables
+Each table will be described briefly in this section. A description of each column will be provided.
+Address
+Column	Description
+NAME	The name of node
+POSITION_X	X coordinate of node
+POSITION_Y	Y coordinate of node
+ZCU_NAME	The name of connected ZCU
+ZCU_TYPE	Node type for ZCU (STOP/RESET)
+
+ZCU
+Column	Description
+NAME	The name of zone control unit
+
+Rail
+Column	Description
+NAME	The name of link
+BAY_NAME	The name of bay containing the link
+FROM_NODE	The name of the node at the origin of the link
+TO_NODE	The name of the node at the end of the link
+MAX_SPEED	The maximum rate of OHT on the link
+CURVE	Whether the link is curved
+
+Bay
+Column	Description
+NAME	The name of bay
+TYPE	The type of bay (Interbay/Intrabay)
+RETICLE	Whether the bay is reticle bay
+NEIGHBOR_BAY	The names of neighboring bays
+
+Equipment
+Column	Description
+NAME	The name of equipment
+TOOL_GROUP	The name of toolgroup that containing equipment
+BAY	The name of the bay in which equipment is located
+WIDTH	equipment width
+HEIGHT	equipment height
+POSITION_X	X coordinate of equipment
+POSITION_Y	Y coordinate of equipment
+
+PortType
+Column	Description
+NAME	Port type name
+SIZE	The size of port type
+INOUT_TYPE	Connection Type (IN/OUT/BOTH)
+
+Port
+Column	Description
+NAME	The name of port
+PORT_TYPE	Type of port (From PortType table)
+EQP_NAME	The name of equipment connecting with port
+RAILLINE_NAME	The name of link to dock with port
+DISTANCE	The position on the link to dock with port
+
+VehicleType
+Column	Description
+NAME	Vehicle type name
+SIZE	The size of vehicle on the link
+MAX_SPEED	The maximum speed of vehicle (mm/s)
+ACCELERATION	The acceleration specification of vehicle (mm/s^2)
+DECELERATION	The deceleration specification of vehicle (mm/s^2)
+MIN_DISTANCE	The minimum distance gap between vehicles
+
+Vehicle
+Column	Description
+NAME	The name of vehicle
+TYPE	Type of vehicle (From VehicleType table) 
+RAILLINE_NAME	The name of link where the vehicle is initially located
+DISTANCE	The initial position on link of vehicle

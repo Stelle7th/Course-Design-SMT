@@ -1,0 +1,104 @@
+{
+  "tested_url": "http://127.0.0.1:8765/interactive/smat_layout_viewer.html",
+  "browser": "Codex In-app Browser",
+  "checks": [
+    {
+      "name": "initial counts",
+      "actual": {
+        "production": 1068,
+        "facilities": 48,
+        "rails": 3424
+      },
+      "passed": true
+    },
+    {
+      "name": "Litho filter",
+      "actual": 188,
+      "passed": true
+    },
+    {
+      "name": "LithoTrack_FE_95 highlight",
+      "actual": {
+        "equipment": 47,
+        "bays": 3
+      },
+      "passed": true
+    },
+    {
+      "name": "B8 plus Litho filter",
+      "actual": {
+        "production": 20,
+        "facilities": 1,
+        "highlighted": 20
+      },
+      "passed": true
+    },
+    {
+      "name": "rail and facility toggles",
+      "actual": {
+        "rails": 0,
+        "facilities": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "direction arrow layer",
+      "actual": "checked, rendered and visually inspected",
+      "passed": true
+    },
+    {
+      "name": "fit filtered equipment",
+      "actual": "B8 and B1 local views inspected",
+      "passed": true
+    },
+    {
+      "name": "LITH0101 selected details",
+      "actual": {
+        "port_count": 4,
+        "port_rail": "rl_B1_2_3",
+        "coordinates_displayed": true
+      },
+      "passed": true
+    },
+    {
+      "name": "wheel zoom",
+      "actual": {
+        "before": 0.0049430263782856195,
+        "after": 0.0102162314162038
+      },
+      "passed": true
+    },
+    {
+      "name": "drag pan",
+      "actual": {
+        "origin_x_before": "255.9731130063235",
+        "origin_x_after": "300.9731130063235"
+      },
+      "passed": true
+    },
+    {
+      "name": "DE_FE_86 highlight",
+      "actual": {
+        "equipment": 149,
+        "bays": 6
+      },
+      "passed": true
+    },
+    {
+      "name": "Diffusion_FE_94 highlight",
+      "actual": {
+        "equipment": 14,
+        "bays": 2
+      },
+      "passed": true
+    },
+    {
+      "name": "browser error logs",
+      "actual": [],
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "file:// navigation is disallowed by this browser tool; direct double-click opening was not tested. The exact self-contained HTML was tested through local HTTP without external dependencies."
+  ]
+}

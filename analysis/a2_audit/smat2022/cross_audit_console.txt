@@ -1,0 +1,178 @@
+{
+  "workbook_sheets": [
+    "Address",
+    "ZCU",
+    "Rail",
+    "Bay",
+    "Equipment",
+    "PortType",
+    "Port",
+    "VehicleType",
+    "Vehicle"
+  ],
+  "workbook_sheet_count": 9,
+  "sheet_record_counts": {
+    "Address": 2858,
+    "ZCU": 734,
+    "Rail": 3424,
+    "Bay": 43,
+    "Equipment": 1116,
+    "PortType": 6,
+    "Port": 22120,
+    "VehicleType": 1,
+    "Vehicle": 500
+  },
+  "equipment_tool_group_count": 108,
+  "extra_groups_vs_A2_physical": {
+    "COMMIT": 4,
+    "COMPLETE": 4,
+    "STOCKER": 40
+  },
+  "explicit_SMAT_to_A2_name_aliases": {
+    "DefMet_FE_118": "DefMEt_FE_118"
+  },
+  "A2_physical_groups_missing_in_SMAT": [],
+  "matched_physical_group_count": 105,
+  "matched_physical_equipment_qty": 1068,
+  "groups_with_identical_qty": 47,
+  "groups_with_different_qty": 58,
+  "physical_groups_in_multiple_bays": 32,
+  "physical_group_max_bay_count": 6,
+  "bay_types": {
+    "INTRABAY": 40,
+    "INTERBAY": 3
+  },
+  "bay_reticle": {
+    "0": 34,
+    "1": 9
+  },
+  "port_types": {
+    "LSTB": 5920,
+    "RSTB": 5920,
+    "UTB": 5920,
+    "COMMIT": 4,
+    "COMPLETE": 4,
+    "EQPPort": 4352
+  },
+  "port_type_specs": [
+    {
+      "NAME": "COMMIT",
+      "SIZE": "314",
+      "INOUT_TYPE": "OUT"
+    },
+    {
+      "NAME": "COMPLETE",
+      "SIZE": "314",
+      "INOUT_TYPE": "IN"
+    },
+    {
+      "NAME": "EQPPort",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "LSTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "RSTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    },
+    {
+      "NAME": "UTB",
+      "SIZE": "314",
+      "INOUT_TYPE": "BOTH"
+    }
+  ],
+  "vehicle_type_specs": [
+    {
+      "NAME": "OHTV0",
+      "SIZE": "784",
+      "MAX_SPEED": "1500",
+      "ACCELERATION": "2000",
+      "DECELERATION": "3000",
+      "MIN_DISTANCE": "125"
+    }
+  ],
+  "rail_speed_values": {
+    "1": 3424
+  },
+  "rail_curve_values": {
+    "0": 2473,
+    "1": 951
+  },
+  "bad_rail_endpoint_count": 0,
+  "bad_port_rail_count": 0,
+  "bad_port_equipment_reference_count": 0,
+  "port_equipment_refs_histogram": {
+    "1": 8,
+    "4": 1068,
+    "2": 40
+  },
+  "bad_vehicle_rail_count": 0,
+  "directed_graph_scc_sizes": [
+    2858
+  ],
+  "node_xy_range_raw": {
+    "POSITION_X": [
+      0.0,
+      300327.952795275
+    ],
+    "POSITION_Y": [
+      -5580.35714285714,
+      147247.023836096
+    ]
+  },
+  "straight_rail_port_distance_overruns_gt1_raw_unit_count": 0,
+  "straight_rail_port_distance_overrun_examples": [],
+  "example_group_mapping": [
+    {
+      "group": "DE_BE_11",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 9,
+      "SMAT_equipment_qty": 12,
+      "difference": 3,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_12",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 7,
+      "SMAT_equipment_qty": 9,
+      "difference": 2,
+      "SMAT_bays": "A1",
+      "bay_count": 1
+    },
+    {
+      "group": "DE_BE_13",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 13,
+      "SMAT_equipment_qty": 16,
+      "difference": 3,
+      "SMAT_bays": "A1|A2",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_48",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 11,
+      "SMAT_equipment_qty": 14,
+      "difference": 3,
+      "SMAT_bays": "A2|A3",
+      "bay_count": 2
+    },
+    {
+      "group": "DE_BE_50",
+      "area": "Dry_Etch",
+      "A2_LVHM_qty": 10,
+      "SMAT_equipment_qty": 12,
+      "difference": 2,
+      "SMAT_bays": "A3",
+      "bay_count": 1
+    }
+  ],
+  "equipment_without_ports_count": 0
+}

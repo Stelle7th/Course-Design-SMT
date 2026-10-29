@@ -1,0 +1,12 @@
+# Keep Office documents, reference papers and figure assets byte-for-byte.
+*.pdf binary
+*.pptx binary
+*.docx binary
+*.xlsx binary
+*.xls binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.sqlite binary

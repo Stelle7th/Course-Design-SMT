@@ -1,0 +1,2065 @@
+=== PAGE 1 ===
+Designing Resilient Factory Layouts Through Data-Driven 
+Scenario Analysis with an Industrial Application
+Sadra Shoarinejad, a
+ Soheil Derakhshan Nejad, a Metin T ¨u rkay a,*
+a Department of Industrial Engineering, Koc ¸ University, Istanbul 34450, T¨u rkiye 
+*Corresponding author 
+sshoarinejad19@ku.edu.tr (S. Shoarinejad), snejad19@ku.edu.tr (S. D. Nejad), mturkay@ku.edu.tr (M. T¨u rkay) 
+https://orcid.org/0000-0002-6679-7062(S. Shoarinejad), https://orcid.org/0000-0003-4769-6714(M. T¨u rkay) 
+Received: September 1, 2025 
+Revised: January 13, 2026; March 29, 2026; 
+April 30, 2026; May 29, 2026 
+Accepted: June 15, 2026 
+Published Online in Articles in Advance: 
+September 9, 2026 
+https://doi.org/10.1287/inte.2025.0258
+Copyright: © 2026 INFORMS
+Abstract. Developing resilient and robust facility layouts is a long-term strategic problem 
+for contemporary manufacturing systems, particularly in settings with operational uncer -
+tainty and spatial complexity. When departments are assigned to multiple layout blocks of 
+different area requirements and material flows are prone to disruption, conventional deter -
+ministic models are not able to provide robust solutions. This paper bridges this gap by 
+introducing a scenario-based robust facility layout model as a mixed-integer linear pro -
+gramming (MILP) problem. We introduce an MILP formulation that couples the unequal- 
+area facility layout problem with a capacitated network flow problem. Unlike standard 
+models that assume direct paths, this approach explicitly models interblock logistics 
+through capacity-constrained gateways (ramps). The model employs a penalty-based 
+robust objective function that integrates expected cost minimization with stability devia -
+tions and soft capacity constraints, allowing the identification of feasible solutions even 
+under compound disruption scenarios where rigid models would fail. The proposed 
+approach is demonstrated on a real-life application case from a leading European home 
+appliance manufacturer based in Turkey, where the plant layout must fit changing opera -
+tional conditions and capacity restrictions. Leveraging actual production data and expert 
+knowledge such as observations of material surges and production shutdowns, realistic 
+disruption scenarios are defined for the model to develop solutions that remain feasible 
+and efficient in different operating states. Simulation-based verification shows that opti -
+mized layouts preserve robust performance under dynamic and uncertain flow conditions. 
+The proposed layout reduced total material handling distance by 19.3% and increased pro -
+duction area utilization by 31% compared with the current layout. The study provides a 
+scalable and data-driven approach to industrial facility planning and demonstrates the 
+practical applicability of robust optimization to increase resilience under uncertainty in 
+production settings.
+History: This paper was refereed.
+Funding: This work was supported by the Scientific and Technological Research Council of T¨u rkiye 
+[Grants 118C128 and BIDEB 2244].
+Keywords: scenario-based optimization • facility layout problem • resilient facility layout • operational uncertainty •
+mixed integer linear programming
+Introduction
+The facility layout problem (FLP) is a classical area of 
+research in industrial engineering and operations 
+research that has a direct influence on the performance 
+of manufacturing systems. FLP is concerned with find -
+ing the most appropriate location for departments, 
+machines, or workstations in a facility to reduce material 
+handling costs and improve overall production perfor -
+mance (Deshpande et al. 2016, Sun et al. 2018). An effec -
+tive layout eliminates unnecessary movement, improves 
+production capacity, minimizes energy consumption 
+and resource utilization, and ultimately reduces opera -
+tional costs (Ku et al. 2011, Navidi et al. 2012). In contrast, 
+ineffective layouts may result in higher transportation 
+costs and lower production capacity, eventually increas -
+ing production costs. Even a small improvement in lay -
+out design can bring about quantifiable gains.
+Previously, the majority of FLP research made 
+simplifying assumptions, for example, equally sized 
+departments or deterministic flow matrices. More recent 
+work shows that such assumptions do not reflect the 
+complexity of operational processes in contemporary 
+manufacturing settings. In practice, departments are dif -
+ferent in shape and size and have to meet a variety of 
+operational constraints (Loiola et al. 2007, Grobelny and 
+Michalski 2017). In order to capture these complexities, 
+1 
+INFORMS JOURNAL ON APPLIED ANALYTICS 
+Articles in Advance, pp. 1–18 
+ISSN 2644-0865 (print), ISSN 2644-0873 (online) 
+https://pubsonline.informs.org/journal/ijaa 
+
+=== PAGE 2 ===
+recent research has considered the unequal-area FLP 
+(UA-FLP), trying to locate departments of varying 
+dimensions in constrained space such that nonoverlap 
+and realistic placement are guaranteed (Drira et al. 
+2007 ).
+Furthermore, the feasibility of the layout is also influ -
+enced by physical constraints, such as fixed infrastruc -
+ture, safety clearances, and transportation pathways. 
+Such factors are of prime importance in real-world 
+environments and can play a major role in influencing 
+material routing and department location. For example, 
+obstacles in the form of walls or pillars can limit viable 
+solutions and make internal logistics more complex, 
+especially when material handling is vehicle-based 
+using forklifts or automated guided vehicles (AGVs) 
+(Besbes et al. 2020 ). Along with these complexities, real 
+production environments experience high operational 
+variability. Remanufacturing environments, for exam -
+ple, experience significant processing-time variability 
+due to uncertainty in core quality and condition, as dem -
+onstrated by Kekre et al. ( 2003 ). Material flows among 
+departments may vary according to the type of product, 
+season, or availability of resources, whereas dynamic 
+layout models attempt to modify and evolve over time. 
+However, such reconfigurations are often expensive and 
+disruptive, leading to production downtime (Anjos and 
+Vieira 2017 , Hosseini-Nasab et al. 2018 , Kikolski et al. 
+2018 ). This challenge has been observed in studies of 
+next-generation factory layouts. Benjaafar et al. ( 2002 ) 
+argued that facilities need layouts designed for robust -
+ness when both production uncertainty and relayout 
+costs are high, rather than layouts optimized for a single 
+set of conditions. Instead of frequent time-based modifi -
+cations, this research aims to create a layout that main -
+tains consistent performance across a set of predefined 
+disruption scenarios. The physical layout remains 
+fixed, whereas flow routing and ramp selection adapt 
+to each scenario. This scenario-based strategy enables 
+long-term planning through the capture of essential 
+operational variations without demanding repeated 
+physical reconfigurations.
+Uncertainty is a key issue in FLP modeling. Material 
+flows in the real world vary based on seasonality, equip -
+ment breakdowns, scheduling changes, and supply 
+unpredictability. Home appliance manufacturing indus -
+tries that handle various product lines, process depen -
+dencies, and multimodal transport type are primarily 
+subject to such uncertainty (Derakhshan Asl and Wong 
+2017 ). Disregarding these layout inconsistencies can 
+lead to inefficient or unrealistic designs when applied to 
+real-world environments. There have been some 
+attempts to account for uncertainty through probabilis -
+tic, interval-based, or scenario-based approaches. For 
+example, Peng et al. ( 2018 ) dealt with stochastic flows, 
+and Yazdani et al. ( 2023 ) suggested robust optimization 
+models based on uncertainty scenarios. Most of these 
+models provide theoretical contributions but are not 
+applied in practice. They tend to employ hypothetical 
+scenarios and omit essential aspects or operational 
+details. Moreover, few have used historical production 
+data to estimate uncertainty or examine the robustness 
+of the layout under real disruptions.
+To fill these gaps, this article proposes a scenario-based 
+robust optimization model that advances the standard 
+UA-FLP by incorporating a simultaneous routing and 
+layout logic. The model is a mixed-integer linear program 
+(MILP) formulation that treats interblock connections not 
+as infinite-capacity links, but as capacity-constrained bot -
+tlenecks (ramps) whose availability varies by scenario. By 
+integrating soft constraints for capacity violations, the 
+model prioritizes operational feasibility under stress con -
+ditions, a critical feature for industrial realism often miss -
+ing in rigid academic formulations.
+The proposed approach is validated through a case 
+study of a leading European home appliance manufac -
+turer. We focused on the washing machine plant, where 
+departments such as plastic injection, metal forming, 
+painting, and final assembly are physically distributed 
+among blocks. Material flow between blocks occurs 
+through designated ramps, subject to capacity and avail -
+ability constraints.
+The main contributions of this research are threefold. 
+• Methodological Integration of Layout and Rout -
+ing: We present a formulation that solves the facility 
+layout problem and the interblock network flow prob -
+lem simultaneously. This allows the model to optimize 
+department locations based on the availability and 
+capacity of specific transport ramps across different 
+scenarios, providing a higher degree of realism than 
+distance-based metrics alone.
+• Feasibility-Robust Formulation: Unlike tradi -
+tional robust models that may become infeasible under 
+severe disruptions, our model incorporates a penalty- 
+based soft constraint mechanism. This allows the sys -
+tem to identify the “least-disruptive” feasible layout 
+even when scenarios exceed nominal design capacities 
+(e.g., during combined ramp failures).
+• Data-Driven Validation Framework: We demon -
+strate a systematic framework for converting raw his -
+torical maintenance and production logs into discrete 
+disruption scenarios. This bridges the gap between the -
+oretical uncertainty modeling and practical industrial 
+data availability, validated via simulation to quantify 
+transport efficiency gains.
+The remainder of this paper is structured as follows. 
+The Literature Review section surveys the literature. The 
+Model section presents the mathematical framework. 
+The application section explains the case study and 
+development of the scenario. The Results section reports 
+the computational results and findings. Finally, the Con -
+clusion section concludes the paper and suggests future 
+research.
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+2 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 3 ===
+Related Literature
+Facility layout design is a classic industrial engineering 
+problem that deals with the arrangement of depart -
+ments, machines, or workstations to enhance efficiency 
+and minimize material handling costs. Classical models 
+generally presume static layouts, deterministic data, and 
+single-floor settings. The increased sophistication of con -
+temporary manufacturing—marked by flexible systems, 
+dynamic flows, and environmental concerns—has 
+prompted researchers to examine more realistic pro -
+blems with dynamic, uncertain, and multifloor settings. 
+These have led to new modeling directions including 
+dynamic facility layout problems, robust and stochastic 
+formulations, and multiobjective models addressing 
+cost, energy, and space utilization.
+In the literature, several papers have reviewed devel -
+opments on the facility layout problem. Drira et al. ( 2007 ) 
+typified layout issues by space configurations, decision 
+variables, and solution approaches. Ahmadi et al. ( 2017 ) 
+highlighted modeling complications of multifloor set -
+tings, including elevator design and interfloor flows. 
+P ´erez-Gosende et al. ( 2021 ) surveyed the growing appli -
+cation of metaheuristics and hybrid optimization techni -
+ques in practical layouts. Building on these foundational 
+reviews, this paper focuses on optimization-based, robust 
+and dynamic, simulation-supported, and application- 
+specific facility layout models. Special attention is paid to 
+research addressing uncertainty, accommodating opera -
+tional variability, and striving for practical applicability in 
+complicated manufacturing systems.
+Optimization-Based and Metaheuristic Methods
+A significant portion of the FLP literature has concentrated 
+on optimization techniques, both mathematical program -
+ming and metaheuristics. These techniques address 
+increasingly difficult layout issues—like unequal-area 
+departments, energy-efficient layouts, multifloor layouts, 
+or dynamic redesigns—while enhancing efficiency, reduc -
+ing costs, or optimizing space.
+Numerous studies have applied mathematical model -
+ing and hybrid heuristics to enhance layout decision- 
+making. Dorrah and Marzouk ( 2021 ) combined agent- 
+based modeling, queuing theory, and a multiobjective 
+assignment model for administrative facilities. Zhang 
+and Lin ( 2024 ) applied multiagent reinforcement learn -
+ing with 3D A* search in connector assembly, whereas 
+Subulan et al. ( 2023 ) proposed a heuristic decomposition 
+model including machine capabilities for the UA-FLP. 
+Other metaheuristics include learning-based simulated 
+annealing (Lin et al. 2024 ), a modified Non-dominated 
+Sorting Genetic Algorithm II for an air conditioner plant 
+(Guo et al. 2023 ), and teaching-learning–based optimiza -
+tion for through-aisle layouts (Zhang et al. 2024 ).
+Recent studies have incorporated sustainability and 
+energy efficiency into facility layout modeling. Zhang 
+et al. ( 2022 ) proposed an energy-conscious model using 
+multiobjective particle swarm optimization, and Peron 
+et al. ( 2020 ) developed dynamic layout planning via 
+three-dimensional (3D) mapping and motion capture. 
+Mayadunne et al. ( 2024 ) presented a two-stage MILP for 
+warehouse storage efficiency and bin sizing. Other niche 
+methods include Monarch butterfly optimization for 
+AGV-based single-loop layouts (Kim and Chae 2019 ), 
+discrete multiobjective particle swarm optimization in 
+multiworkshop settings (Guan et al. 2019 ), and differen -
+tial evolution in double-row layouts (Ji et al. 2023 ).
+Reinforcement learning and hybrid metaheuristics 
+have been considered for their flexibility under uncer -
+tainty. Kaven et al. ( 2024 ) utilized multiagent reinforce -
+ment learning with proximal policy optimization in 
+flexible layouts, and Klar et al. ( 2022 ) demonstrated 
+enhancements in large-scale layouts with double deep Q 
+network. Configuration-space and slicing-based encod -
+ings were developed in Liu et al. ( 2020 ) and La Scalia 
+et al. ( 2019 ). Fuzzy programming and robust models 
+were presented in Kaveh et al. ( 2014 ) and Saeidi ( 2024 ), 
+whereas simulation-supported optimization appeared 
+in Emami and Nookabadi ( 2013 ) and Jolai et al. ( 2012 ). 
+Fuzzy models combined with metaheuristics were used 
+in Abedzadeh et al. ( 2013 ), Zhun et al. ( 2021 ), and Besbes 
+et al. ( 2021 ). Layout models were also extended with 
+domain-specific constraints and multiobjective perfor -
+mance, such as double-row MILPs with valid inequalities 
+(Amaral 2024 ), I/O- constrained UA-FLPs (Muhayat and 
+Utamima 2024 ), and mixed-integer nonlinear formula -
+tions (Seyedi et al. 2024 ). Multifloor or multiobjective lay -
+outs were studied using ant colony (Liu and Liu 2019 ) or 
+permutation-based Genetic Algorithms (GAs) (Kalita and 
+Datta 2024 ). Other contributions include robust layout 
+enhancements by power values with normal search 
+Abedzadeh et al. ( 2013 ), hybrid simulated annealing 
+approaches (Matai 2015 , Oktaviani and Utamima 2024 ), 
+and simulation-integrated demand forecasting using 
+long short-term memory (Shoushtari et al. 2024 ). Collec -
+tively, these works show that metaheuristic and mathe -
+matical models continue to advance toward more 
+realistic layout problems. Nonetheless, they generally do 
+not address scenario-based robustness, flow uncertainty, 
+or spatial constraints like interblock routing and ramp 
+limitations, which this research seeks to address.
+Dynamic and Robust Layout Models
+Robust manufacturing layouts are needed to remain 
+effective under unforeseen conditions such as fluctuat -
+ing demand, supply disruptions, or shifting product 
+flows. Frequent reconfigurations are costly, and disrup -
+tive, which motivates the use of strong and flexible 
+facility layout models that change internally and main -
+tain performance across multiple scenarios. A classifica -
+tion framework for layout design based on production 
+uncertainty and relayout cost was developed by Benjaafar 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 3 
+
+=== PAGE 4 ===
+et al. ( 2002 ). For scenarios with high reconfiguration 
+costs, they advocated for robust layouts capable 
+of acceptable performance under each scenario 
+rather than optimization for a single condition. This 
+scenario-based robustness concept forms the founda -
+tion for modern approaches to layout design under 
+uncertainty.
+Several studies have implemented scenario-based 
+approaches specifically for facility layout modeling. 
+Krishnan et al. ( 2008 ) presented a genetic algorithm- 
+based model under different production scenarios, offer -
+ing flexibility and lower costs than static models. 
+Scenario-based models for safety were proposed by 
+Jung et al. ( 2010 ) and D ´ıaz-Ovalle et al. ( 2010 ), optimiz -
+ing facility location under toxic vapor leak conditions to 
+reduce risks. To address unpredictable material move -
+ments, Şahinkoc ¸ and Bilge ( 2018 ) used a quadratic 
+assignment problem–based model with genetic algo -
+rithms, whereas Reisinger et al. ( 2022 ) proposed a multi -
+objective evolutionary process for flexible facility 
+scenarios. Shoushtari et al. ( 2024 ) combined machine 
+learning–based demand forecasting with scenario-based 
+genetic optimization to improve layout adaptability and 
+sustainability.
+Broader robust optimization methods were later sug -
+gested for adaptive uncertainty handling. Pourvaziri 
+et al. ( 2021 ) proposed a robust MILP model with a 
+hybrid genetic-Tabu search algorithm, ensuring internal 
+routing adaptations for layout stability without repeated 
+physical reconfigurations. Similarly, Cheng et al. ( 2021 ) 
+used a two-stage robust model with column-and- 
+constraint generation to determine facility allocations 
+for disruption risk mitigation. Xiao et al. ( 2019 ) opti -
+mized unequal-area dynamic layouts using improved 
+particle swarm optimization to reduce rearrangement 
+costs. In the healthcare sector, Tongur et al. ( 2020 ) dem -
+onstrated robust optimization with metaheuristics for 
+hospital layouts with variable patient and staff move -
+ments, achieving significant efficiency improvement.
+Multilevel and spatial issues were considered by Iza -
+dinia et al. ( 2014 ), who applied the robust price and 
+inventory model by Bertsimas and Sim ( 2004 ) to multi -
+floor installations without frequent physical updates. 
+Stochastic demand was handled by Moslemipour et al. 
+( 2017 ) using a quadratic assignment model with simu -
+lated annealing to reduce sensitivity to demand varia -
+tions. Peng et al. ( 2018 ) applied robust inventory and 
+pricing with Monte Carlo simulation and genetic algo -
+rithms, incorporating transportation planning with 
+dynamic facility layout design to enhance dependability 
+under variable demands.
+Although these works extensively advance layout 
+modeling, none combine scenario-based robustness 
+with interblock routing and spatial limitations like ramp 
+capacities—a gap this paper addresses. By creating a 
+scenario-based robust MILP model with these realistic 
+industrial operating constraints, this work closes the gap 
+between theoretical research and practical industrial 
+applications in layout design under uncertainty.
+Simulation-Based Approaches
+Simulation approaches have become increasingly valuable 
+for facility layout design under uncertain and variable con -
+ditions. Combining simulation with optimization, machine 
+learning, or reinforcement learning allows scholars to eval -
+uate layout performance under varying conditions and 
+enhance decision-making flexibility.
+Recent studies have explored simulation-integrated 
+layout design using advanced algorithms and hybrid 
+frameworks. For instance, Bi et al. ( 2024 ) proposed an 
+optimization approach for workshop layouts using the 
+sparrow search algorithm (SSA), aiming to reduce trans -
+portation costs and improve nonlogistic relationships. 
+Their results, verified via FlexSim, showed that SSA pro -
+vided stable and optimal solutions. Likewise, Klar et al. 
+( 2024 ) developed a transferable framework for multiob -
+jective layout planning using discrete event simulation 
+and deep reinforcement learning, which proved efficient 
+for uncertain planning with transfer learning. In another 
+study, Z ´u ˜niga et al. ( 2020 ) introduced a five-phase 
+simulation and optimization framework for redesigning 
+facility layouts, leading to more usable and resilient 
+arrangements in industrial cases. Choi and Kim ( 2024 ) 
+proposed an intelligent arrangement system combining 
+MILP, simulation-based optimization, and digital twin 
+technologies to refine layouts and reduce time and effort 
+for efficient design.
+Modeling realistic spatial limitations, Besbes et al. 
+( 2020 ) integrated the A* pathfinding algorithm with 
+simulation and a genetic algorithm for more real- 
+world-like arrangements, introducing movement logic 
+into layout decision making. In modular construction, 
+Yang and Lu ( 2023 ) contrasted arrangement configura -
+tions using simulation-based optimization and revealed 
+cost-productivity tradeoffs. Safety was considered by 
+Vasudevan and Son ( 2011 ), who used a multiparadigm 
+simulation framework to analyze productivity and emer -
+gency evacuation, demonstrating that some layouts could 
+achieve both. Lee ( 2012 ) combined an MILP model with 
+simulation logic and preprocessing to improve computa -
+tional efficiency and solution quality. These studies dem -
+onstrate that simulation enables robust layout assessment 
+under uncertainty, spatial constraints, and time-varying 
+flow, and its integration with optimization and learning 
+enhances flexibility for industrial applications. A sum -
+mary of robust facility location papers is provided in 
+Table 1 .
+Although metaheuristics and reinforcement learning 
+have shown promise for facility layout optimization, 
+this research employs MILP because it naturally accom -
+modates the multiscenario structure of the problem. 
+MILP allows for explicit modeling of a fixed layout 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+4 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 5 ===
+that must perform well across multiple disruption 
+scenarios simultaneously, with scenario-specific flow 
+routing decisions optimized within a unified frame
+-
+work. This approach provides deterministic solutions 
+with known optimality bounds and enables transparent 
+tradeoff analysis between expected cost, layout stability, 
+and constraint violations—critical requirements for 
+long-term industrial facility planning.
+Table 1. Summary of Robust Facility Layout Literature
+Study Solution method Uncertainty method
+Benjaafar et al. (2002) Conceptual Scenario based
+Krishnan et al. (2008) Metaheuristic Scenario based
+Jung et al. (2010) MILP Scenario based
+D ´ıaz-Ovalle et al. (2010) MILP Scenario based
+Şahinkoc ¸ and Bilge (2018) Metaheuristic Stochastic
+Moslemipour et al. (2017) Metaheuristic Stochastic
+Besbes et al. (2021) Metaheuristic Stochastic
+Xiao et al. (2019) Metaheuristic Dynamic
+Tongur et al. (2020) Metaheuristic Robust
+Peng et al. (2018) Simulation Stochastic
+Pourvaziri et al. (2021) MILP+
+metaheuristic
+Robust
+Cheng et al. (2021) MILP Two-stage robust
+Reisinger et al. (2022) Metaheuristic Scenario based
+Shoushtari et al. (2024) ML+
+metaheuristic
+Scenario based
+Note. MILP, mixed-integer linear programming; ML, machine learning.
+Although the facility layout problem has been studied 
+in detail, there are still important gaps. Most models 
+focus on specific issues such as unequal-area depart -
+ments, changing demand, or uncertainty, but few com -
+bine these in a clear and practical way. Very few 
+consider more than one spatial or operational constraint, 
+such as interblock flows or low-capacity ramps. 
+Scenario-based models are becoming more common but 
+are often limited to simplified cases and are rarely tested 
+with real manufacturing data. Models that consider flow 
+changes or space constraints often cannot scale to large 
+systems or provide practical solutions.
+To address these problems, we present a scenario- 
+based facility layout model designed to reflect realistic 
+operating conditions. Using real flow and layout data 
+from a home appliance factory, the model is solved across 
+multiple disruption scenarios based on historical records. 
+Although scenario-based robust optimization for facility 
+layout has gained attention in recent literature, system
+-
+atic scenario generation from disaggregated historical 
+production data remains underexplored. Our approach 
+extracts disruption characteristics—including failure fre
+-
+quencies, demand variations, and capacity constraints— 
+from three years of operational records combined with 
+expert validation, grounding the optimization model in 
+observed patterns rather than theoretical assumptions. It 
+also includes spatial constraints like interblock ramp lim
+-
+its and additional cost effects. By solving one large MILP 
+model for all scenarios at once, the approach provides 
+layout solutions that work well in normal conditions and 
+remain reliable during disruptions. This study offers a 
+practical and robust tool to support layout planning in 
+real manufacturing environments.
+Mathematical Model
+This section presents the single-period robust facility 
+layout model to address uncertainty in flow volumes, 
+transportation costs, and ramp capacities. The model 
+makes two types of decisions: strategic design decisions 
+(department locations and block assignments) that 
+remain permanently fixed across all scenarios and tacti -
+cal operational decisions (flow routing and ramp usage) 
+that adapt internally to each scenario’s conditions with -
+out requiring physical reconfiguration. This formulation 
+is appropriate for greenfield facility design or major 
+brownfield redesign projects where the spatial layout 
+represents a long-term commitment, and operational 
+flexibility is achieved through intelligent routing rather 
+than costly physical rearrangements.
+The objective function includes three components: (i) 
+expected transportation cost across scenarios; (ii) devia -
+tion penalties to ensure layout stability; and (iii) soft pen -
+alties for violations such as ramp capacity overruns. 
+Two parameters regulate the tradeoffs: the deviation 
+penalty weight controls how much the model values 
+cost stability versus expected cost, whereas the violation 
+penalty weight represents the cost of capacity overruns 
+(e.g., overtime, expedited handling, or temporary capac
+-
+ity expansion). This formulation ensures that the result -
+ing layout is not only cost-effective under expected 
+conditions but also remains robust and functional when 
+disruptions occur, avoiding designs that perform well 
+on average but fail catastrophically in certain scenarios.
+Transportation costs include internal movement 
+within blocks (based on Manhattan distances and flow 
+volumes), external transfers between blocks via ramps 
+(based on ramp-to-ramp distances and scenario-specific 
+cost factors), and closeness penalties for separating 
+departments that should remain adjacent due to work
+-
+flow or operational requirements. The model enforces 
+several operational constraints that vary by scenario. 
+Material flows between departments in different blocks 
+must be routed through designated ramp pairs, whereas 
+flows within the same block incur only internal transport 
+costs. Each ramp has a capacity limit that can be 
+exceeded at a penalty cost, allowing the model to find 
+feasible solutions even when all scenarios cannot be 
+accommodated within strict capacity bounds. The model 
+tracks which ramps are actually used for each flow path, 
+ensuring that routing decisions reflect real material han -
+dling requirements rather than artificial shortcuts.
+The model ensures geometric feasibility through sev -
+eral spatial constraints. Departments within the same 
+block are positioned such that they do not overlap, with 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 5 
+
+=== PAGE 6 ===
+their internal distances (calculated as Manhattan dis -
+tances) used for cost calculations and closeness penal -
+ties. Each department is assigned to exactly one block, 
+and departments must fit entirely within their assigned 
+block boundaries based on their dimensions. To encour -
+age compact layouts and facilitate solution interpreta -
+tion, blocks are filled sequentially, meaning lower- 
+numbered blocks must be occupied before higher- 
+numbered blocks can be used. Finally, the model 
+enforces logical consistency in department positioning 
+through symmetry and transitivity constraints, ensuring 
+that relative positions between departments are coher -
+ent and geometric conflicts are avoided.
+The complete mathematical formulation is presented in 
+Appendix A , including the objective function (Equation 
+( A.1 )), scenario-dependent flow and capacity constraints 
+(Equations ( A.9 )–( A.14 )), spatial layout constraints (Equa -
+tions ( A.15 )–( A.22 )), block assignment and sequencing 
+logic (Equations ( A.23 )–( A.30 )), and precedence consis -
+tency constraints (Equations ( A.31 )–( A.32 )).
+Application: Real-World Facility Layout at 
+a Home Appliance Plant
+The suggested scenario-based robust facility layout 
+design model is implemented in production plant of one 
+of the largest producers of home appliances in Europe. 
+The factory manufactures various products such as 
+refrigerators, dishwashers, washing machines, dryers, 
+ovens, and cooling units. The plant is a high-volume 
+facility with stringent efficiency demands and contains 
+many departments performing metal forming, coating, 
+subassembly, final assembly, and testing. These depart -
+ments are spread over physically distinct layout blocks, 
+and hence the design issue is especially difficult because 
+of interblock material flows and space limitations.
+A prominent feature of the facility is that it possesses 
+nonuniform departmental area requirements and a 
+dynamic production environment. Departments such as 
+plastic injection and metal forming require large floor 
+areas for heavy machinery, whereas final assembly and 
+testing stations occupy smaller, more flexible spaces. Pro -
+duction scheduling must simultaneously accommodate 
+multiple washing machine models with different proces -
+sing sequences, creating competing demands for shared 
+painting lines and material handling capacity. Not only 
+are material flows between departments high density and 
+high volume, but they are also sensitive to demand pat -
+tern changes, product mix variations, and sensitive to 
+operational disruptions. The presence of multiple ramps 
+connecting blocks further complicates the routing options 
+under varying capacity and cost considerations. All these 
+factors make the facility an excellent application case for 
+the study of robust and flexible layout designs.
+To represent realistic operating complexity, the layout 
+model considers multiple future scenarios instead of one 
+nominal or worst-case flow matrix. The scenarios repre -
+sent possible variations in internal flows, external trans -
+port distances, and ramp availability. Each scenario is 
+generated from historical production data and domain 
+knowledge and is assigned a probability to represent its 
+likelihood. The formulation enables the model to deter -
+mine a layout that is feasible and cost-effective for a broad 
+range of operating conditions, representing realistic tra -
+deoffs between efficiency, stability, and robustness.
+Scenario Definition and Disruption Modeling
+In order to assess the proposed layout’s performance in 
+the face of uncertainty, 10 discrete scenarios were estab -
+lished, each of which corresponds to a conceivable future 
+state of the production system. The scenarios were cre -
+ated to embody common disruptions witnessed in indus -
+trial environments, such as flow variations, ramp 
+outages, shifts in demand, and higher transportation 
+expenses. This structured framework allows the model to 
+process a broad spectrum of operating conditions.
+The scenarios considered in this study were defined 
+after a detailed analysis of historical production data 
+and consultation with production experts. The data are 
+composed of disaggregated daily and shift-level infor -
+mation for material flows among departments, record -
+ing seasonal fluctuations, annual growth, planned 
+shutdowns, and statutory holidays. We reviewed these 
+data to identify normal patterns and rare events, such as 
+sudden increases in demand, slowdowns, supply inter -
+ruptions, and ramp failures. For events that were not fre -
+quent in the observed data, their frequency and impact 
+were defined based on maintenance records and expert 
+judgment. In this way, each scenario in the model has 
+either direct empirical support from the operational data 
+or the practical experience of specialists in the 
+manufacturing environment. This ensures that the test -
+ing of layout performance is conducted with realistic 
+scenarios and covers the major sources of uncertainty 
+faced by decision makers. The definition of these scenar -
+ios involved an iterative process. Initial model runs 
+based purely on theoretical failure rates were reviewed 
+by plant managers; based on their feedback, the proba -
+bility and impact of the Combined Stress scenario were 
+refined to better align with the frequency of actual his -
+torical maintenance incidents, ensuring the final results 
+represented actionable operational risks.
+Ten disruption scenarios were formulated from expert 
+opinion and historical data to capture a variety of real- 
+world operating conditions. Scenario 1 is the base case 
+with nominal flow volumes and all ramps available 
+(25%). Scenario 2 assumes a moderate escalation of criti -
+cal flows (peak demand, 15%), and Scenario 3 simulates a 
+uniform decrease in total flow (low demand, 15%). Sce -
+nario 4 models the failure of one ramp (ramp 2 failure, 
+10%), and Scenario 5 assumes decreased output in 
+selected key departments (production disruption, 8%). 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+6 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 7 ===
+Scenario 6 blends greater flow demand with a ramp fail -
+ure (combined stress, 8%). Scenario 6 (Combined Stress) 
+explicitly models co-occurrence of peak demand and 
+ramp failure, representing the most operationally critical 
+compound disruption based on expert assessment and 
+historical incident analysis. Scenario 7 depicts a localized 
+shortage of incoming materials (supply shortage, 6%). Sce -
+nario 8 postulates a greater system throughput require -
+ment (future expansion, 8%), Scenario 9 assumes a large 
+increase in interblock transportation costs (energy crisis, 
+3%), and Scenario 10 considers additional flow resulting 
+from rework across all units (quality problems, 2%). A prob
+-
+ability was associated with each scenario to reflect its prac -
+tical likelihood and guide the scenario-based optimization 
+process. These scenarios reflect operational variability pat -
+terns identified through analysis of historical production 
+data and consultation with plant managers, capturing the 
+range of conditions the facility experiences during normal 
+operations and disruption events.
+Each scenario is defined by a particular flow matrix p ω
+ij, 
+ramp capacity vector R ω
+r
+, and, where applicable, external 
+transport cost coefficient cext
+ω. Flow data for Scenario 1 are 
+extracted directly from actual plant records, whereas the 
+remaining scenarios were constructed by applying pre -
+defined modification rules to the base flow matrix. Sce -
+nario 2 models a surge in production demand for specific 
+operations, Scenario 3 imposes an across-the-board 30% 
+reduction to reflect a planned slow-down, and Scenario 9 
+alters the cost parameters on interblock transportation by 
+tripling cext
+ω, discouraging transfers when energy prices 
+rise or carbon constraints tighten. In disruption cases 
+such as equipment failure, ramp capacities were set to 
+zero. The capacity of ramps between blocks varied by sce -
+nario. In Scenarios 4 and 6, Ramp 2 is completely closed, 
+and the model must reroute flows through the remaining 
+ramps. Two optimization parameters were robustly set.
+Computational Results
+Within this section, we present the computational results 
+of the solution of the proposed scenario-based robust 
+facility layout model. We focus on the performance of 
+the layout, cost structure, and robustness in the defined 
+scenarios. All experiments were conducted using actual 
+data of the above-presented case study. Table 2
+sum -
+marizes scenario parameters and characteristics.
+Table 2. Scenario Parameters and Characteristics
+Scenario Probability (%) Ramp status Description
+Base case 25 All active Nominal flow volumes
+Peak demand 15 All active 40% increase in critical flows
+Low demand 15 All active Uniform 30% flow reduction
+Ramp 2 failure 10 R2 �0 Infrastructure failure
+Production disruption 8 All active 30% capacity in key production areas
+Combined stress 8 R2 �0 Peak demand +ramp failure
+Supply shortage 6 All active 50% drop in input flows
+Future expansion 8 All active 30% throughput expansion
+Energy crisis 3 All active Tripled external transport cost
+Increased rework 2 All active 20% rework-induced inefficiency
+Notes. Probabilities reflect scenario likelihoods based on historical data and expert judgment. All parameters sum 
+to 100%.
+The scenario-based robust facility layout problem was 
+solved with Gurobi 12.0.1 on a 12-core processor with 
+multithreading. The optimization took 1,650.34 seconds, 
+and the final optimality gap was less than 1%.
+The total objective value was 831,553.2 units and had 
+three principal components: expected scenario cost, 
+deviation penalty, and capacity violation penalty. Table 
+3
+gives the numerical values and contributions of each 
+term. The expected cost term ( P
+s πszs), with 726,496.4 
+units (87.4%), is the weighted average operational cost 
+across all scenarios by its probability. This term repre -
+sents the overall performance of the fixed layout design 
+under variable flow and ramping conditions.
+The deviation penalty adds 77,086.7 units (9.3%). It 
+penalizes uncertainty in scenario costs and encourages 
+stable layout performance under uncertainty. This devia -
+tion penalty ensures consistent layout performance across 
+scenarios rather than excelling in some while failing in 
+others. This stability is critical for manufacturing man
+-
+agers, as layouts optimized only for average conditions 
+might become severely inefficient during peak produc -
+tion or equipment failures, forcing costly adjustments like 
+overtime material handling or emergency rerouting 
+through congested pathways. The last element is the vio
+-
+lation penalty (w ·Pv), which is worth 27,970.2 units 
+(3.4
+%), and it represents total ramp capacity exceedance 
+over scenarios, based on the penalty multiplier. This term 
+encourages the model to avoid infeasibility but permit 
+soft constraint handling when absolutely required.
+This decomposition emphasizes the tradeoff among 
+cost efficiency, operational stability, and robustness in 
+layout design. Expected cost is prioritized as much as 
+possible, whereas deviation and violation penalties keep 
+the layout resilient and realistically implementable over 
+a broad spectrum of disruptions.
+Figure 1 and Table 4show the overall cost for each of 
+the ten predefined disruption scenarios. The costs 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 7 
+
+=== PAGE 8 ===
+indicate how the final robust layout operates under 
+varying flow configurations, ramp capacities, and exter -
+nal cost levels. The layout is kept constant for all the sce -
+narios, and only flow routing and ramp utilization 
+change according to scenario-dependent parameters. 
+The list of departments is listed in Table 5.
+Table 3. Objective Function Components
+Component Value Share (%)
+Expected cost ( P
+ωπωC ω) 726,496.4 87.4%
+Deviation penalty (λ · σ) 77,086.7 9.3%
+Violation penalty (w ·
+X
+v) 27,970.2 3.4%
+Total objective 831,553.2 100%
+Notes. Values 
+are in cost units. Shares indicate the percentage 
+contribution to the total objective. σ�P
+ω∈Ωπω(δ+,ω+ δ� ,ω).
+The minimum cost occurs in the Production Disruption 
+case (286,184.2 units), followed by Low Demand 
+(497,033.0 units), both of which are decreased levels of 
+operation. The counterintuitively low cost in the Produc -
+tion Disruption scenario arises because this scenario mod -
+els a partial production shutdown with only 30% 
+capacity in key departments, resulting in substantially 
+reduced material flow volumes (1,890 units total inter
+-
+block flow, as shown later in Table 8). Although opera -
+tionally undesirable due to lost production, the reduced 
+material movement translates directly to lower transpor -
+tation costs within the layout optimization model. This 
+highlights an important distinction: the model mini -
+mizes material handling costs for a given flow pattern, 
+not production output or revenue. In practice, produc
+-
+tion managers would seek to avoid such disruptions 
+despite their lower handling costs, as the revenue losses 
+far exceed any transportation savings. The Base Case and 
+Ramp 2 Failure cases both have the same cost of 710,027.0 
+units, meaning that the layout has the capacity to absorb 
+a ramp failure at no extra cost.
+Figure 1. (Color online) Scenario-Wise Total Cost Comparison 
+Note. The figure illustrates how total costs vary across disruption scenarios while the layout remains fixed.
+Table 4. Scenario-Wise Total Costs
+Scenario Total cost
+Production disruption 286,184.2
+Low demand 497,033.0
+Base case 710,027.0
+Ramp 2 failure 710,027.0
+Supply shortage 698,538.0
+Quality problems 852,023.0
+Future expansion 923,021.0
+Peak demand 951,764.0
+Combined stress 951,764.0
+Energy crisis 961,251.0
+Note. The layout performs cheapest under Production Disruption and 
+Low Demand, remains stable in Ramp 2 Failure, and reaches its highest 
+costs in Combined Stress and Energy Crisis.
+Medium-range costs are found in Supply Shortage 
+(698,538.0) and Quality Problems (852,023.0), where flow 
+disruptions are isolated. Higher costs are incurred in 
+Future Expansion (923,021.0) and Peak Demand (951,764.0) 
+because of high flow volumes and near-capacity ramp 
+utilization. The most costly scenarios are Combined Stress 
+(951,764.0) and Energy Crisis (961,251.0), involving sev
+-
+eral disruptions such as ramp failures and high external 
+costs.
+Overall, the scenario spread showcases the model’s 
+capacity to accommodate a broad set of disruptions. The 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+8 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 9 ===
+cost spread between the worst and best scenarios 
+amounts to almost 70%, illustrating the benefit of robust 
+planning.
+Table 5. Department Reference: ID to Area Description
+ID Area description
+1 Mainplant Semi Product Whse.
+2 Plastic Warehouse
+3 Plastic Raw Material Whse.
+4 Mechanic Warehouse
+5 Export Goods Warehouse
+6 Packaging Warehouse
+7 Pre Assembly Line
+8 Assembly Line
+9 Final Assembly Line
+10 Foamed Door Line
+11 Packaging Line
+12 Compressor Warehouse
+13 Foamed Body Line
+14 Door Glass Warehouse
+15 Gasket Raw Material Whse.
+16 Pipe Roll Warehouse
+17 Plastic Sheet Whse./Extruder
+18 CTF
+19 DTF
+20 Fin Warehouse
+21 Other Production
+Notes. Department identifiers used in Figures 5and 6. Critical (high- 
+volume) departments are highlighted in the layout figures.
+Figure 2 gives the average utilization of the ramps 
+over all the scenarios, weighted by scenario probabili -
+ties. Ramp R1 has the highest relative utilization of 
+94.4%, which corresponds to an average of 236.1 units of 
+flow. Although it has lower capacity, R1 is busy in the 
+majority of the scenarios as it is involved in short inter -
+block transfers. Ramp R2 has the highest volume (1,669 
+units in total) but has only 47.7% utilization because of 
+its high capacity. It is the default route for large flows 
+but has sufficient buffer to accommodate peak or stress 
+loads. Ramp R3 has 70.0% utilization, frequently being 
+used as a flexible backup when R1 or R2 are congested.
+Figure 2. (Color online) Average Ramp Utilization (Weighted Across Scenarios) 
+Note. Ramp R1 is the busiest due to frequent short transfers, R2 carries the largest volume but with spare capacity, and R3 serves as a flexible 
+backup.
+Figure 3illustrates ramp usage by scenario. Ramp R2 
+dominates high-flow scenarios such as Peak Demand and 
+Future Expansion, but stays under capacity. Ramp R3 
+experience peaks in Combined Stress and Production Dis -
+ruption, reflecting its use as overflow routes. Ramp R1 is 
+used continuously, with a peak in usage for exceptional 
+circumstances such as Combined Stress . 
+In the Ramp 2 
+Failure scenario, R2 usage falls, whereas R1 and R3 com -
+pensate effectively, validating layout resilience.
+Figure 4provide a comprehensive overview of ramp 
+capacity violations for all specified scenarios. Figure 4(a)
+illustrates the number of scenarios for which each ramp 
+has a capacity violation. Interestingly, all three ramps 
+(R1, R2, and R3) have violations in just 2 of the 10 
+scenarios—namely, the Combined Stress and Ramp 2 Fail
+-
+ure instances.
+Figure 4(b)further disaggregates the total violation 
+amount by scenario. Violations are mostly localized in 
+the most extreme disruption scenarios: the Combined 
+Stress scenario incurs the highest cumulative violation 
+(2,224 units), followed by Ramp 2 Failure (1,017 units). All 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 9 
+
+=== PAGE 10 ===
+remaining scenarios, including those pertaining to 
+demand fluctuations, quality issues, and supply disrup -
+tions, result in either zero or negligible violations. This 
+trend indicates that the model is most sensitive to com -
+pound or ramp-specific disruptions, which can drive 
+one or more ramps outside of their design specifications. 
+By contrast, normal fluctuations are contained within 
+available capacities.
+Figure 3. (Color online) Ramp Utilization by Scenario 
+Note. R2 dominates in high-flow cases, R3 absorbs stress peaks, and R1 remains continuously active, with balanced compensation during Ramp 
+2 failure.
+Figure 4. (Color online) Scenario-Based Violation Analysis: (a) Number of Scenarios with Ramp Capacity Violations and (b) 
+Total Violation Amounts 
+Note. Violations occur only in the most severe cases, with peaks in Combined Stress and Ramp 2 Failure, whereas all other scenarios remain within 
+capacity.
+The violation statistics for each ramp reveal that 
+although all ramps are violated in the same number of 
+scenarios (two each), they differ in the extent of viola -
+tions: R1 is the most violated ramp with a total violation 
+of 1,850 units, followed by R3 (1,354 units) and R2 (1,017 
+units). These variations capture both the starting ramp 
+capacity values and the underlying flow distribution in 
+the disrupted scenarios. The extensive violations for R1, 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+10 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 11 ===
+specifically, underscore its sensitivity under compound 
+stress conditions and indicate a likely bottleneck in the 
+design. Operational managers validated this finding, not -
+ing that the Combined Stress scenario currently necessi -
+tates overtime labor in the actual facility, mirroring the 
+model’s reported violations. Consequently, rather than 
+constraining the model to force unrealistic zero-violation 
+solutions, the calculated violation magnitudes are used to 
+dimension contingency budgets for these high-risk peri -
+ods. In total, these findings validate the application of 
+scenario-based robustness to facility layout design. 
+Although the model succeeds in avoiding violations in 
+most instances, selective refinement of ramp capacity or 
+flow assignment for certain high-risk scenarios (like com -
+bined stress or ramp failure) would further increase the 
+system’s resilience. This study highlights the value of con -
+sidering not just the frequency but also the severity of 
+capacity violations in assessing layout robustness.
+Figure 5. (Color online) Final Robust Facility Layout 
+Note. The layout clusters high-volume and high-risk departments near ramps, allowing flows to be flexibly split and rerouted under disruptions, 
+achieving both efficiency and resilience.
+Optimal Layout and Flow Behavior
+Figure 5shows the final robust facility arrangement for 
+the scenario-based MILP model presented in this study, 
+with department identifiers listed in Table 5. It integrates 
+disruptions from all scenarios to achieve responsiveness 
+and stability. The arrangement positions 21 departments 
+in two blocks with only four active interblock flows after 
+optimization, achieving low external transport cost. The 
+block assignments for the departments are shown in 
+Table 6.
+The model determines ramp utilization patterns for 
+each scenario during optimization, identifying a layout 
+that accommodates varying flow demands and ramp 
+capacities across different operational conditions. Rather 
+than strict balance, the model enables some ramps—like 
+Ramp 2—to carry a greater proportion of high-volume 
+flows as required. Seven high-volume or high-risk 
+departments have been strategically located in the two- 
+block configuration to minimize disruption and enable 
+efficient movement between blocks. Clustering high- 
+interaction departments close to the ramps also enables 
+the system to easily redirect flows in response to chang -
+ing conditions.
+In Block 2, Departments 11 and 6 are located adjacent 
+to all three ramps and are thus important points for the 
+transfer of material between blocks. This arrangement 
+accommodates significant outbound flows to Block 1, 
+particularly to Department 9, which is situated near its 
+own ramps. Other major flows, such as those involving 
+Departments 5 and 12, also move through these gate -
+ways as circumstances dictate. Large flows are split over 
+several ramps, which helps ensure both efficiency and 
+redundancy. Under normal circumstances, flows such 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 11 
+
+=== PAGE 12 ===
+as from Departments 9 to 11 or from 5 to 7, are spread 
+over a number of ramps to prevent congestion. When 
+disruptions happen—such as a ramp failure or an unex -
+pected shift in demand—the system responds by rerout -
+ing flows as necessary.
+Table 6. Department-to-Block Assignments
+Block Departments assigned
+Block 1 1, 2, 3, 4, 5, 6, 8, 10, 13, 14, 15, 16, 17, 18, 19
+Block 2 7, 9, 11, 12, 20, 21
+Note. The assignments show that Block 1 accommodates most 
+departments, whereas Block 2 contains a smaller subset, reflecting the 
+final distribution across blocks.
+The general arrangement distinguishes clearly 
+between stable and variable processes, locating stable 
+departments in less busy areas and retaining more vari -
+able or higher-risk ones in closer proximity to principal 
+access points. This modular approach enables the facility 
+to respond well to various operational challenges. By 
+strategically locating departments and utilizing ramps 
+with flexibility, the arrangement realizes a pragmatic 
+balance between efficiency, resilience, and flexibility.
+The model accommodates flexible routing through 
+the possibility of splitting flows across ramp pairs. Table 
+7highlights the main multiramp flows. For example, 
+one of the high-volume flows (5→7) utilizes all same- 
+type ramp pairs (R1-R1, R2-R2, R3-R3) and switches to 
+R1 and R3 under Ramp 2 failure. Flow 9→11 utilizes 
+R1-R1 and R2-R2 and adapts under combined stress. 
+Some flows such as 8→12 are invariant under all scenar -
+ios, whereas others experience redistributions under 
+stress or peak demand, reflecting the model’s flexibility.
+Table 8shows total interblock flow volumes per sce -
+nario. Production Disruption experiences the lowest flow 
+(1,890 units), caused by reduced demand. Low Demand 
+also yields a relatively small flow of 2,783 units. In con -
+trast, Energy Crisis and Combined Stress scenarios gener -
+ate the highest volumes (4,198 and 4,122 units), which 
+are in line with capacity violations discussed earlier.
+Base Case and Ramp 2 Failure scenarios provide the 
+same flow (3,220 units), which means that the model 
+compensates for Ramp 2 loss by redistribution without 
+reducing overall transport amount. The variation in 
+flow, from 1,890 to 4,198 units, demonstrates the robust -
+ness of the layout under different production and ramp 
+conditions.
+Table 7. Main Interblock Flows Using Multiple Ramps 
+Across Scenarios
+Flow (i →j) Ramps used Consistency across scenarios
+5 → 7 R1, R2, R3 Always multiramp
+5 → 10 R1, R2, R3 Always multiramp
+9 → 11 R1, R2, R3 R3 not used in some low flows
+12 → 13 R1, R2, R3 Always multiramp
+Note. The table highlights major interblock flows that consistently 
+distribute across multiple ramps, indicating robust routing flexibility 
+even under varying scenario conditions.
+Table 8. Total Interblock Flow per Scenario
+Scenario Total interblock flow (units)
+Production disruption 1,890
+Low demand 2,783
+Base case 3,220
+Ramp 2 failure 3,220
+Supply shortage 3,408
+Quality problems 3,601
+Future expansion 3,880
+Peak demand 4,025
+Combined stress 4,122
+Energy crisis 4,198
+Note. Interblock flows increase steadily from reduced-operation 
+cases to stress scenarios, with the lowest flow in Production Disruption 
+and the highest in Energy Crisis.
+Simulation Analysis
+To validate the operational improvement achieved by 
+the optimized facility layout, a simulation-based com -
+parison was carried out using visTABLE 3.0.322, which 
+is factory layout and material flow simulation software. 
+Both the original layout—representing the plant’s layout 
+prior to optimization—and the optimized layout— 
+achieved through the proposed scenario-based robust 
+MILP model—were simulated within the same spatial 
+boundaries. Logistics performance was quantified in 
+terms of total transportation effort and space utilization. 
+Prior to optimization, several managerial consolidation 
+decisions were made to better reflect functional group
+-
+ings. Specifically, the two Mainplant Semi Product 
+Warehouses were merged into one, and the two plastic 
+and two final warehouses were each combined, reduc -
+ing the total from 23 to 21 departments in the optimized 
+layout. Figure 
+6 presents a comparison of the current 
+and optimized layouts.
+For transportation efforts, the simulation quantified 
+the total traveled distance for all intralogistics activities, 
+disaggregated by mode of transport: conveyors, 
+forklifts/AGVs, and manual handling. As can be seen in 
+Table 9
+, the optimized layout reduced the overall trans -
+port distance from 233.02 km to 188.17 km within the 
+operational period, an overall decrease of 19.3%. Signifi -
+cant improvements were recorded in all transport 
+modes: Manual handling was reduced by 64.7%, 
+forklift/AGV travel by 23.9%, and conveyor usage by 
+16.8%. These improvements are attributable to the 
+improved spatial proximity of interdependent depart
+-
+ments and more effective ramp assignments identified 
+by optimization. Although labor costs were not explic
+-
+itly modeled, the reduction in manual transport distance 
+serves as a proxy for workforce impact. This decrease 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+12 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 13 ===
+directly correlates with reduced operator fatigue and 
+labor hours, demonstrating quantifiable gains in human 
+productivity. Qualitatively, the simulation shows a clear 
+structural change. In the original layout, busy depart
+-
+ments were scattered near the building’s edges, which 
+forced materials to cross the center repeatedly. The opti -
+mized layout groups these high-volume departments 
+right next to the ramps. This change replaces long, cross -
+ing paths with short, direct routes, greatly simplifying 
+the flow of materials.
+Figure 6. (Color online) Comparison of Current and Optimized Facility Layouts 
+Note. The optimized layout consolidates departments and repositions high-flow units closer to ramps, reducing interblock travel distances and 
+improving spatial efficiency.
+In addition to flow efficiency, space utilization was 
+also evaluated. Both layouts were designed within the 
+same total floor area of 1,333 m 2, but their internal alloca -
+tion of production and open space differed significantly. 
+As shown in Table 10and Figure 7, the optimized layout 
+increased the production area from 748.7 m 2 to 980.7 m2 
+and reduced open space from 584.0 m 2 to 352.1 m2. This 
+represents a 31% increase in space dedicated to produc -
+tion activities, boosting the production area share from 
+56.2% to 73.6%.
+Overall, these simulation results reinforce the practi -
+cal value of the proposed layout model. By reducing 
+material handling distances and enhancing space utili -
+zation, the optimized layout supports leaner internal 
+logistics and more efficient use of production floor 
+space. From a managerial perspective, such improve -
+ments contribute directly to lower operational costs, 
+reduced congestion, and smoother production flow. 
+More importantly, the scenario-based design approach 
+offers decision-makers a resilient and forward-looking 
+layout that remains effective under changing production 
+conditions, enabling better long-term planning and 
+reduced need for disruptive reconfigurations.
+Table 9. Comparison of Logistics Performance Between 
+Original and Optimized Layouts
+Metric
+Original 
+layout
+Optimized 
+layout Improvement
+Total distance (km) 233.02 188.17 � 19.3%
+Conveyor distance (km) 177.78147.98 � 16.8%
+Forklift/AGV distance (km) 50.82 38.63 � 23.9%
+Manual distance (km) 4.42 1.56 � 64.7%
+Note. The optimized layout reduces travel distances across all 
+transport modes, with the largest relative improvement in manual 
+handling and notable gains in forklift and conveyor movements.
+Table 10. Comparison of Space Utilization Between 
+Original and Optimized Layouts
+Metric Original layout Optimized layout
+Production area (m 2) 748.7 980.7
+Open space (m 2) 584.0 352.1
+Production share (%) 56.2% 73.6%
+Note. The optimized layout increases production area and share 
+while reducing unused open space, indicating more efficient 
+utilization of available floor capacity.
+Conclusions
+This research presented a scenario-based robust 
+facility layout model to tackle the uncertainty and 
+operational variability that are commonly found in 
+real-world manufacturing practice. In contrast to 
+deterministic models that optimize the layout with 
+respect to a single nominal assumption, the proposed 
+model integrated 10 disruption scenarios, each reflect
+-
+ing a realistic operational condition. Scenario probabil -
+ities were introduced to reflect the likelihood of every 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 13 
+
+=== PAGE 14 ===
+disruption, enabling the model to provide a reliable 
+layout in a broad spectrum of future states. Joint opti -
+mization of department placement, flow routing, and 
+ramp utilization made the layout cost-effective even in 
+the event of equipment breakdown, high demand, or 
+limited capacity.
+Figure 7. (Color online) Comparison of Production and Open Space Share in Original and Optimized Layouts 
+Note. The optimized layout dedicates a greater share of the fixed floor area to production, reducing unused space and improving overall 
+utilization.
+The results confirmed that the proposed layout 
+effectively balanced spatial efficiency, transport cost, 
+and robustness. Departments with high flow intensity 
+were placed in such a manner as to restrict interblock 
+traffic, and routing flexibility across a range of ramp 
+types created the capacity to respond to stress without 
+appreciable loss of performance. Although the average 
+utilization of the ramps was within capacity, the 
+scenario-based analysis revealed how stress condi -
+tions would create overloads on specific ramps, parti -
+cularly when the key infrastructure was out of service. 
+The model handled such occurrences by intelligent 
+redistribution of flows, achieving operational feasibil -
+ity for most scenarios and minimizing violations when 
+unavoidable.
+Significantly, the model was not premised on fixed 
+routing or inflexible assignments. Rather, the model 
+evaluates how flow paths would be routed under differ -
+ent disruption circumstances during the design phase, 
+ensuring the layout remains feasible and efficient across 
+operational scenarios. Scenario-by-scenario flow volume 
+profiles also illustrated the model’s capacity to accom -
+modate different demand levels and supply bottlenecks 
+without sacrificing transport efficiency.
+Cumulatively, this research offers a robust and resil -
+ient solution to facility layout design under uncertainty. 
+The model constitutes a rigorous decision support 
+instrument for industrial planners that can anticipate 
+and mitigate the impact of real-world disruptions. 
+Through the combination of probabilistic modeling, 
+ramp-level routing, and spatial constraints in a unified 
+optimization framework, the study advances the state of 
+layout planning in complex production systems. The 
+major obstacles were in developing realistic disruption 
+scenarios and managing computational intensity in solv -
+ing a large-scale MILP. These were addressed through 
+data preprocessing and careful scenario design so that 
+the final model was still manageable but representative 
+of industrial scenarios.
+Future work can address integration into simula -
+tion environments, digital twins, or real-time layout 
+adjustment based on live production data. The results 
+of this research form a basis for such extensions and 
+demonstrate the practical applicability of robust lay -
+out optimization in today’s dynamic manufacturing 
+environment.
+From a managerial perspective, the model provides a 
+systematic yet adaptive decision support instrument 
+that allows layout planners to actively assess the impact 
+of various disruption scenarios—be it equipment break -
+downs, capacity changes, or demand spikes—on spatial 
+assignments, interblock routing, and ramp usage. Rather 
+than responding to disruptions after they have occurred, 
+managers are able to utilize the model to create facility 
+layouts that are resilient by design, with a guarantee of 
+operational continuity and cost-effectiveness even in 
+stressed situations.
+Acknowledgments
+The authors thank Professor Metin T¨urkay from Koc ¸ Uni -
+versity for guidance and support throughout this research. 
+The authors also gratefully acknowledge the contributions 
+of Arc ¸elik A.Ş.–Beko for collaboration.
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+14 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 15 ===
+Appendix A. Mathematical Model
+Table A.1. Sets
+Notation Description
+i,j ∈N Departments
+k,k1,k2,t ∈ M Blocks
+r,r1,r2 ∈R Ramps
+ω∈ Ω Scenarios
+Table A.2. Parameters
+Notation Description
+li,w i Length/width of department i
+¯L , ¯W Length/width of each block
+p ω
+ij Flow from department i to j in scenario ω
+cint
+ij
+Internal transportation cost from i to j
+cext ,ω External transport cost in scenario ω
+R ω
+r
+Capacity of ramp r in scenario ω
+D r1r2 Distance between ramps r1 and r2
+κij Closeness rating between departments i and j
+πω Probability of scenario ω
+λ Weight of cost-deviation penalty
+W Weight of violation penalty
+Note. ¯L and ¯W are fixed scalar parameters representing the identical 
+dimensions for all blocks k ∈ M.
+Table A.3. Scenario-Independent (Design Variables) 
+Decision Variables
+Variable Description
+Y ik 1 if department i is assigned to block k; 0 
+otherwise
+T k 1 if block k is used; 0 otherwise
+xik,yik Coordinates of department i in block k
+uijk 1 if departments i and j are both in block k; 0 
+otherwise
+dint ,x
+ij ,dint ,y
+ij Internal distance components between 
+departments i and j
+αijk, βijk Nonoverlap direction indicators for departments i 
+and j in block k (binary): (1,1 ) : i precedes j 
+horizontally; (0,0) : j precedes i horizontally; 
+(1,0 ) : i precedes j vertically; (0,1) : j precedes i 
+vertically
+Table A.4. Scenario-Dependent (Control Variables) 
+Decision Variables
+Variable Description
+F ω
+ijk1k2r1r2
+Flow from department i in block k1 to department j in 
+block k2 via ramps r1 and r2 under scenario ω
+Z ω
+ijk1k2r1r2
+1 if route from i in block k1 to j in block k2 uses ramps 
+r1 and r2 in scenario ω; 0 otherwise
+dext ,ω
+ij External distance between departments i and j in 
+scenario ω
+v ω
+kr
+Capacity violation at ramp r in block k under scenario 
+ω
+C ω Total transportation cost in scenario ω
+δ+,ω, δ� ,ω Positive/negative deviation from expected cost in 
+scenario ω
+Table A.5. Auxiliary Variables
+Variable Description
+¯C Expected total cost across all scenarios
+V Total weighted penalty for capacity violations
+A.1. Objective Function
+min ¯C + λ
+X
+ω∈Ω
+πω(δ+,ω + δ� ,ω) +w ·V , (A.1) 
+where ¯C �
+X
+ω∈Ω
+πωC ω, (A.2) 
+C ω� ¯C � δ+,ω� δ� ,ω ∀ ω∈ Ω, (A.3) 
+V �
+X
+ω∈Ω
+πωX
+k∈M
+X
+r∈R
+v ω
+kr , (A.4) 
+C ω �C ω
+int
++C ω
+ext
++P ∀ ω∈ Ω, (A.5) 
+C ω
+int
+�
+X
+i∈N
+X
+j≠ i
+j∈N
+p ω
+ij
+cint
+ij
+(dint ,x
+ij +dint ,y
+ij ), (A.6) 
+C ω
+ext
+�cext ,ωX
+i∈N
+X
+j≠ i
+j∈N
+X
+k1≠ k2
+k1,k2 ∈M
+X
+r1,r2 ∈R
+F ω
+ijk
+1k2r1r2 D r1r2, (A.7) 
+P �
+X
+i∈N
+X
+j≠ i
+j∈N
+κij 1�
+X
+k∈M
+uijk
+ !
+: (A.8) 
+Subject to:X
+k1 ≠ k2
+k1,k2 ∈M
+X
+r1,r2 ∈R
+F ω
+ijk
+1k2r1r2 �p ω
+ij 1�
+X
+k∈M
+uijk
+ !
+∀ i,j ∈N, i ≠ j, ∀ ω∈ Ω,
+(A.9) 
+F ω
+ijk1k2r1r2 ≤ p ω
+ij
+Y ik1 Y jk2
+∀ i,j ∈N, i ≠ j, ∀ ω∈ Ω
+∀ k1,k2 ∈ M,k1 ≠ k2, ∀ r1,r2 ∈R , (A.10) 
+X
+i∈N
+X
+j≠ i
+j∈N
+X
+k ′≠ k
+k ′ ∈M
+X
+r ′ ∈R
+F ω
+ijkk
+′rr ′ ≤ R ω
+r
++v ω
+kr∀ ω∈ Ω, ∀ k ∈ M, ∀ r ∈R , (A.11) 
+F ω
+ijk1k2r1r2 ≤ MZ ω
+ijk
+1k2r1r2
+∀ i,j ∈N, i ≠ j, ∀ ω∈ Ω
+∀ k1,k2 ∈ M,k1 ≠ k2, ∀ r1,r2 ∈R , (A.12) 
+dext ,ω
+ij ≤ M 1�
+X
+k∈M
+uijk
+ !
+∀ i,j ∈N, i ≠ j, ω∈ Ω,
+(A.13) 
+dext ,ω
+ij p ω
+ij 1�
+X
+k∈M
+uijk
+ !
+≥
+X
+k1 ≠ k2
+k1,k2 ∈M
+X
+r1,r2 ∈R
+F ω
+ijk
+1k2r1r2 D r1r2 � M
+X
+k∈M
+uijk,
+∀ i,j ∈N, i ≠ j, ∀ ω∈ Ω ∈ Ω, (A.14) 
+xik � xjk ≤ dint ,x
+ij + ¯L · 1�
+X
+t∈M
+uijt
+ !
+∀ i,j ∈N, i ≠ j, ∀ k ∈ M, (A.15) 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 15 
+
+=== PAGE 16 ===
+x
+jk
+� x
+ik
+≤ d
+int , x
+ij
++
+¯
+L · (1 �
+X
+t∈M
+u
+ijt
+)
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M , (A.16) 
+y
+ik
+� y
+jk
+≤ d
+int , y
+ij
++
+¯
+W · 1 �
+X
+t∈M
+u
+ijt
+ !
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M , (A.17) 
+y
+jk
+� y
+ik
+≤ d
+int , y
+ij
++
+¯
+W · 1 �
+X
+t∈M
+u
+ijt
+ !
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M , (A.18) 
+2
+¯
+L
+X
+t∈M
+u
+ijt
++ d
+int , x
+ij
+≥ x
+ik
++ x
+jg
+∀ i, j ∈ N, i ≠ j, ∀ k ≠ g ∈ M , (A.19) 
+2
+¯
+W
+X
+t∈M
+u
+ijt
++ d
+int , y
+ij
+≥ y
+ik
++ y
+jg
+∀ i, j ∈ N, i ≠ j, ∀ k ≠ g ∈ M , (A.20) 
+x
+ik
++ 0:5l
+i
+Y
+ik
+≤ x
+jk
+� 0:5l
+j
+Y
+jk
++
+¯
+L (2 � α
+ijk
+� β
+ijk
+)
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M, (A.21) 
+y
+ik
++ 0:5w
+i
+Y
+ik
+≤ y
+jk
+� 0:5w
+j
+Y
+jk
++
+¯
+W (1 + α
+ijk
+� β
+ijk
+)
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M, (A.22) 
+X
+k∈M
+Y
+ik
+� 1 ∀ i ∈ N, (A.23) 
+T
+k
+≤ T
+k� 1
+∀ k ∈ M, k > 1, (A.24) 
+X
+i∈N
+Y
+ik
+≥ T
+k
+∀ k ∈ M, (A.25) 
+T
+k
+· | N | ≥
+X
+i∈N
+Y
+ik
+∀ k ∈ M, (A.26) 
+u
+ijk
+≤ 0:5(Y
+ik
++ Y
+jk
+) ∀ i, j ∈ N, i ≠ j, ∀ k ∈ M, (A.27) 
+u
+ijk
++ 1 ≥ Y
+ik
++ Y
+jk
+∀ i, j ∈ N, i ≠ j, ∀ k ∈ M, (A.28) 
+0:5l
+i
+Y
+ik
+≤ x
+ik
+≤ (
+¯
+L � 0:5l
+i
+)Y
+ik
+∀ i ∈ N, ∀ k ∈ M, (A.29) 
+0:5w
+i
+Y
+ik
+≤ y
+ik
+≤ (
+¯
+W � 0:5w
+i
+)Y
+ik
+∀ i ∈ N, ∀ k ∈ M, (A.30) 
+α
+ijk
++ α
+jik
+� 1, β
+ijk
++ β
+jik
+� 1 ∀ i, j ∈ N, i ≠ j, ∀ k ∈ M
+,
+(A.31) 
+α
+isk
++ α
+sjk
+� α
+ijk
+≤ 1, β
+isk
++ β
+sjk
+� β
+ijk
+≤ 1
+∀ i, s, j ∈ N and distinct , ∀ k ∈ M ,
+(A.32) 
+Y
+ik
+, T
+k
+, u
+ijk
+, Z
+ω
+ijk
+1
+k
+2
+r
+1
+r
+2
+, α
+ijk
+, β
+ijk
+∈ {0, 1}, (A.33) 
+x
+ik
+, y
+ik
+, d
+int , x
+ij
+, d
+int , y
+ij
+, d
+ext , ω
+ij
+, v
+ω
+kr
+,
+F
+ω
+ijk
+1
+k
+2
+r
+1
+r
+2
+, C
+ω
+, δ
++ , ω
+, δ
+� , ω
+,
+¯
+C , V ≥ 0:
+(A.34) 
+Objective Function ( A.1 ) minimizes the sum of expected 
+transportation cost, cost deviation penalty, and ramp viola -
+tion penalty. Equation ( A.2 ) defines the expected cost as the 
+probability-weighted sum of scenario costs. Equation ( A.3 ) 
+captures positive and negative deviations of each scenario 
+cost from the expected cost. Equation ( A.4 ) aggregates 
+ramp capacity violations across all scenarios, blocks, and 
+ramps. Equation ( A.5 ) decomposes each scenario cost into 
+internal transport, external transport, and closeness penalty 
+components, defined in ( A.6 )–( A.8 ). Constraint ( A.9 ) 
+ensures all interblock flow between departments i and j is 
+fully routed through available ramp pairs. Constraint 
+( A.10 ) restricts flow to routes where i and j are assigned to 
+blocks k
+1 
+and k
+2
+, respectively. Constraint ( A.11 ) limits out -
+bound flow through each ramp to its scenario-specific 
+capacity, with excess captured by v
+ω
+kr
+. Constraint ( A.12 ) 
+links the flow variable to the binary route indicator via big- 
+M. Constraint ( A.13 ) forces external distance to zero when 
+departments share a block. Constraint ( A.14 ) computes 
+weighted external distance based on ramp-to-ramp dis -
+tances. Constraints ( A.15 )–( A.18 ) compute Manhattan dis -
+tance components between departments within the same 
+block. Constraints ( A.19 )–( A.20 ) bound internal distances 
+when departments are in different blocks. Constraints 
+( A.21 )–( A.22 ) enforce nonoverlap between departments 
+within the same block. Constraint ( A.23 ) assigns each 
+department to exactly one block. Constraints ( A.24 )–( A.26 ) 
+enforce sequential block usage. Constraints ( A.27 )–( A.28 ) 
+link the colocation variable u
+ijk 
+to block assignments. Con -
+straints ( A.29 )–( A.30 ) ensure departments fit within block 
+boundaries. Constraints ( A.31 )–( A.32 ) enforce symmetry 
+and transitivity of directional positioning variables. Con -
+straints ( A.33 )–( A.34 ) define variable domains.
+References
+Abedzadeh M, Mazinani M, Moradinasab N, Roghanian E (2013) 
+Parallel variable neighborhood search for solving fuzzy multi- 
+objective dynamic facility layout problem. Internat. J. Adv. 
+Manufacturing Tech. 65:197–211.
+Ahmadi A, Pishvaee MS, Jokar MRA (2017) A survey on multi-floor 
+facility layout problems. Computers Industrial Engrg. 107:158–170.
+Amaral AR (2024) A mixed-integer programming formulation for 
+optimizing the double row layout problem. Optim. Methods 
+Software 39(6):1428–1444.
+Anjos MF, Vieira MV (2017) Mathematical optimization approaches 
+for facility layout problems: The state-of-the-art and future 
+research directions. Eur. J. Oper. Res. 261(1):1–16.
+Benjaafar S, Heragu SS, Irani SA (2002) Next generation factory lay -
+outs: Research challenges and recent progress. Interfaces (Provi -
+dence) 32(6):58–76.
+Bertsimas D, Sim M (2004) The price of robustness. Oper. Res. 
+52(1):35–53.
+Besbes M, Zolghadri M, Affonso RC (2021) A method to solve 2d facil -
+ity layout problem with equipment inputs/outputs constraints 
+using meta-heuristics algorithms. Proc. CIRP 104:1698–1703.
+Besbes M, Zolghadri M, Costa Affonso R, Masmoudi F, Haddar M 
+(2020) A methodology for solving facility layout problem con -
+sidering barriers: Genetic algorithm coupled with a* search. J. 
+Intelligent Manufacturing 31(3):615–640.
+Bi S, Shao L, Zheng J, Yang R (2024) Workshop layout optimization 
+method based on sparrow search algorithm: A new approach. 
+J. Industrial Production Engrg. 41(4):324–343.
+Cheng C, Adulyasak Y, Rousseau LM (2021) Robust facility location 
+under demand uncertainty and facility disruptions. Omega 
+(Westport) 103:102429.
+Choi SH, Kim BS (2024) Intelligent factory layout design framework 
+through collaboration between optimization, simulation, and 
+digital twin. J. Intelligent Manufacturing 1–15.
+Derakhshan Asl A, Wong KY (2017) Solving unequal-area static and 
+dynamic facility layout problems using modified particle 
+swarm optimization. J. Intelligent Manufacturing 28:1317–1336.
+Deshpande V, Patil ND, Baviskar V, Gandhi J (2016) Plant layout 
+optimization using Craft and Aldep methodology. Productivity 
+J. 57(1):32–42.
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+16 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 17 ===
+D ´ıaz-Ovalle C, V ´azquez-Rom ´an R, Mannan MS (2010) An approach 
+to solve the facility layout problem based on the worst-case sce -
+nario. J. Loss Prevention Process Industries 23(3):385–392.
+Dorrah DH, Marzouk M (2021) Integrated multi-objective optimiza -
+tion and agent-based building occupancy modeling for space 
+layout planning. J. Building Engrg. 34:101902.
+Drira A, Pierreval H, Hajri-Gabouj S (2007) Facility layout problems: 
+A survey. Annual Rev. Control 31(2):255–267.
+Emami S, Nookabadi A (2013) Managing a new multi-objective 
+model for the dynamic facility layout problem. Internat. J. Adv. 
+Manufacturing Tech. 68.
+Grobelny J, Michalski R (2017) A novel version of simulated anneal -
+ing based on linguistic patterns for solving facility layout pro -
+blems. Knowledge Based Systems 124:55–69.
+Guan C, Zhang Z, Liu S, Gong J (2019) Multi-objective particle 
+swarm optimization for multi-workshop facility layout prob -
+lem. J. Manufacturing Systems 53:32–48.
+Guo W, Jiang P, Yang M (2023) Unequal area facility layout prob -
+lem-solving: A real case study on an air-conditioner production 
+shop floor. Internat. J. Production Res. 61(5):1479–1496.
+Hosseini-Nasab H, Fereidouni S, Fatemi Ghomi SMT, Fakhrzad MB 
+(2018) Classification of facility layout problems: A review 
+study. Internat. J. Adv. Manufacturing Tech. 94:957–977.
+Izadinia N, Eshghi K, Salmani MH (2014) A robust model for 
+multi-floor layout problem. Comput. Industrial Engrg. 78: 
+127–134.
+Ji D, Zhang Z, Liang W, Wang C, He Z (2023) Mathematical formu -
+lation and a novel two-stage algorithm for double-row layout 
+problem with fixed loading and unloading points. J. Manufactur -
+ing Systems 69:242–254.
+Jolai F, Tavakkoli-Moghaddam R, Taghipour M (2012) A multi- 
+objective particle swarm optimisation algorithm for unequal 
+sized dynamic facility layout problem with pickup/drop-off 
+locations. Internat. J. Production Res. 50(15):4279–4293.
+Jung S, Ng D, Lee JH, Vazquez-Roman R, Mannan MS (2010) An 
+approach for risk reduction (methodology) based on optimizing 
+the facility layout and siting in toxic gas release scenarios. J. 
+Loss Prevention Process Indrustries 23(1):139–148.
+Kalita Z, Datta D (2024) A constrained multi-objective multi-floor 
+facility layout problem. Internat. J. Interactive Design Manufactur -
+ing 18(4):2597–2608.
+Kaveh M, Dalfard V, Amiri S (2014) A new intelligent algorithm for 
+dynamic facility layout problem in state of fuzzy constraints. 
+Neural Comput. Appl. 24:1171–1186.
+Kaven L, Huke P, G ¨oppert A, Schmitt RH (2024) Multi agent rein -
+forcement learning for online layout planning and scheduling 
+in flexible assembly systems. J. Intelligent Manufacturing 35(8): 
+3917–3936.
+Kekre S, Rao US, Swaminathan JM, Zhang J (2003) Reconfiguring a 
+remanufacturing line at Visteon, Mexico. Interfaces (Providence) 
+33(6):30–43.
+Kikolski M, Ko C, et al. (2018) Facility layout design—Review of 
+current research directions. Engrg. Management Production Ser -
+vices 10(3):70–79.
+Kim M, Chae J (2019) Monarch butterfly optimization for facility 
+layout design based on a single loop material handling path. 
+Mathematics 7:154.
+Klar M, Hussong M, Ruediger-Flore P, Yi L, Glatt M, Aurich JC 
+(2022) Scalability investigation of double deep q learning for 
+factory layout planning. Proc. CIRP 107:161–166.
+Klar M, Schworm P, Wu X, Simon P, Glatt M, Ravani B, Aurich JC 
+(2024) Transferable multi-objective factory layout planning 
+using simulation-based deep reinforcement learning. J. 
+Manufacturing Systems 74:487–511.
+Krishnan KK, Cheraghi SH, Nayak CN (2008) Facility layout design 
+for multiple production scenarios in a dynamic environment. 
+Internat. J. Industrial Systems Engrg. 3(2):105–133.
+Ku MY, Hu MH, Wang MJ (2011) Simulated annealing based paral -
+lel genetic algorithm for facility layout problem. Internat. J. Pro -
+duction Res. 49(6):1801–1812.
+La Scalia G, Micale R, Giallanza A, Marannano G (2019) Firefly 
+algorithm based upon slicing structure encoding for unequal 
+facility layout problem. Internat. J. Indust. Engrg. Comput. 
+10:349–360.
+Lee HY (2012) Integrating simulation and ant colony optimization 
+to improve the service facility layout in a station. J. Comput. 
+Civil Engrg. 26(2):259–269.
+Lin J, Shen A, Wu L, Zhong Y (2024) Learning-based simulated 
+annealing algorithm for unequal area facility layout problem. 
+Soft Comput. 28:5667–5682.
+Liu J, Liu J (2019) Applying multi-objective ant colony optimization 
+algorithm for solving the unequal area facility layout problems. 
+Appl. Soft Comput. 74:167–189.
+Liu J, Liu S, Liu Z, Li B (2020) Configuration space evolutionary 
+algorithm for multi-objective unequal-area facility layout pro -
+blems with flexible bays. Appl. Soft Comput. 89:106052.
+Loiola EM, De Abreu NMM, Boaventura-Netto PO, Hahn P, Quer -
+ido T (2007) A survey for the quadratic assignment problem. 
+Eur. J. Oper. Res. 176(2):657–690.
+Matai R (2015) Solving multi objective facility layout problem 
+by modified simulated annealing. Appl. Math. Comput. 261: 
+302–311.
+Mayadunne S, Rajagopalan HK, Sharer E (2024) A multi-step mixed 
+integer programming heuristic for warehouse layout optimiza -
+tion. Supply Chain Analytics 8:100088.
+Moslemipour G, Lee T, Loong Y (2017) Performance analysis of 
+intelligent robust facility layout design. Chinese J. Mechanical 
+Engrg. 30:407–418.
+Muhayat H, Utamima A (2024) Solving unequal area facility layout 
+problems with differential evolution and particle swarm opti -
+mization. Proc. Comput. Sci. 234:302–309.
+Navidi H, Bashiri M, Messi Bidgoli M (2012) A heuristic approach 
+on the facility layout problem based on game theory. Internat. J. 
+Production Res. 50(6):1512–1527.
+Oktaviani A, Utamima A (2024) Solving unequal area facility layout 
+problems using population-based simulated annealing and ant 
+colony optimisation. Proc. Beyond Technology Summit Inform. 
+Internat. Conf. (BTS-I2C) (IEEE, Piscataway, NJ), 670–675.
+Peng Y, Zeng T, Fan L, Han Y, Xia B (2018) An improved genetic 
+algorithm based robust approach for stochastic dynamic facil -
+ity layout problem. Discrete Dynamics Nature Soc. 2018(1): 
+1529058.
+P ´erez-Gosende P, Mula J, D ´ıaz-Madro ˜nero M (2021) Facility layout 
+planning. An extended literature review. Internat. J. Production 
+Res. 59(12):3777–3816.
+Peron M, Fragapane G, Sgarbossa F, Kay M (2020) Digital facility 
+layout planning. Sustainability 12:3349.
+Pourvaziri H, Salimpour S, Niaki S, Azab A (2021) Robust facility 
+layout design for flexible manufacturing: A DOE-based heuris -
+tic. Internat. J. Production Res. 60:1–22.
+Reisinger J, Zahlbruckner MA, Kovacic I, K ´an P, Wang-Sukalia X, 
+Kaufmann H (2022) Integrated multi-objective evolutionary 
+optimization of production layout scenarios for parametric 
+structural design of flexible industrial buildings. J. Building 
+Engrg. 46:103766.
+Saeidi S (2024) A two-objective mathematical model for solving the 
+facility layout problem using fuzzy goal programming and arti -
+ficial bee colony optimization. J. Industrial Engrg. Management 
+Stud. 11(1):127–139.
+Şahinkoc ¸ M, Bilge 
+¨
+U (2018) Facility layout problem with qap formu -
+lation under scenario-based uncertainty. Inform. Systems Oper. 
+Res. 56(4):406–427.
+Seyedi SB, Attari MYN, Ghadim VAP, Ala A (2024) An efficient 
+computational model for unequal-area dynamic facility layout 
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 17 
+
+=== PAGE 18 ===
+problems considering input/output locations under algorithms 
+case. S ¯adhan ¯a 49(3):211.
+Shoushtari F, Zadeh EK, Daghighi A (2024) Facilities layout in 
+uncertainty demand and environmental requirements by 
+machine learning approach. Internat. J. Industrial Engrg. Oper. 
+Res. 6(2):64–75.
+Subulan K, Varol B, Baykaso ˘glu A (2023) Unequal-area capability-based 
+facility layout design problem with a heuristic decomposition-based 
+iterative mathematical programming approach. Expert Systems Appl. 
+214:119199.
+Sun X, Lai LF, Chou P, Chen LR, Wu CC (2018) On GPU implemen -
+tation of the island model genetic algorithm for solving the 
+unequal area facility layout problem. Appl. Sci. 8(9):1604.
+Tongur V, Hacibeyoglu M, Ulker E (2020) Solving a big-scaled hos -
+pital facility layout problem with meta-heuristics algorithms. 
+Engrg. Sci. Tech. 23(4):951–959.
+Vasudevan K, Son YJ (2011) Concurrent consideration of evacuation 
+safety and productivity in manufacturing facility planning 
+using multi-paradigm simulations. Comput. Industrial Engrg. 
+61(4):1135–1148.
+Xiao X, Hu Y, Wang W, Ren W (2019) A robust optimization ap -
+proach for unequal-area dynamic facility layout with demand 
+uncertainty. Proc. CIRP 81:594–599.
+Yang Z, Lu W (2023) Facility layout design for modular construction 
+manufacturing: A comparison based on simulation and optimi -
+zation. Automated Construction 147:104713.
+Yazdani D, Omidvar MN, Yazdani D, Branke J, Nguyen TT, 
+Gandomi AH, Jin Y, et al. (2023) Robust optimization over 
+time: A critical review. IEEE Trans. Evolutionary Comput. 28(5): 
+1265–1285.
+Zhang Q, Lin Y (2024) Integrating multi-agent reinforcement 
+learning and 3d a* search for facility layout problem consid -
+ering connector-assembly. J. Intelligent Manufacturing 35(7): 
+3393–3418.
+Zhang Z, Zhang Y, Chen F, Liu J, Wang C (2024) Optimizing multi- 
+row layouts with the through-aisle structure: A hybrid 
+approach of teaching-learning-based optimization and linear 
+programming. IEEE Trans. Automation Sci. Engrg. 22:4972–4987.
+Zhang Z, Wu L, Wu Z, Zhang W, Jia S, Peng T (2022) Energy-saving 
+oriented manufacturing workshop facility layout: A solution 
+approach using multi-objective particle swarm optimization. 
+Sustainability 14:2788.
+Zhun X, Liyun X, Xufeng L (2021) An improved pigeon-inspired 
+optimization algorithm for solving dynamic facility layout 
+problem with uncertain demand. Proc. CIRP 104:1203–1208.
+Z ´u ˜niga ER, Moris MU, Syberfeldt A, Fathi M, Rubio-Romero JC 
+(2020) A simulation-based optimization methodology for facility 
+layout design in manufacturing. IEEE Access 8: 163818–163828.
+Verification Letter
+Arma ˘gan Aktop, Director, Supplier Development & Digital 
+Transformation, Beko, Beyo ˘glu 34445 Istanbul, Turkey, writes:
+“This letter is to confirm that the study presented in the manu -
+script titled “Designing Resilient Factory Layouts Through 
+Data-Driven Scenario Analysis with an Industrial Application,” 
+authored by Sadra Shoarinejad et al., was developed in collabo -
+ration with Beko (Arc ¸elik A.Ş.), specifically considering one of 
+our washing machine production plants.
+“The proposed approach addresses a facility layout planning 
+problem that reflects our operational environment. The results 
+obtained from the study have provided valuable insights for the 
+redesign and reconfiguration of the facility layout.
+“We support the submission of this work to the INFORMS 
+Journal on Applied Analytics.”
+Sadra Shoarinejad is a researcher at the Supplier Development 
+and Digital Transformation Team at Beko Corporate. He works on the 
+development of optimization and simulation-based methods for per -
+formance improvement of suppliers and supplier facility layout design. 
+He holds a PhD degree in industrial engineering from Koc ¸ University.
+Soheil Derakhshan Nejad is a PhD candidate in the industrial 
+engineering program at Koc ¸ University. He works on the develop -
+ment of optimization and machine learning–based methods for facil -
+ity location and network design problems. He holds a BS degree 
+from Sharif University of Technology and an MS degree from Teh -
+ran University, both in industrial engineering.
+Metin T ¨urkay is professor of industrial engineering at Koc ¸ Uni -
+versity. His research focuses on the development of optimization 
+and machine learning–based models and algorithms for end-to-end 
+supply chain management. He has authored more than 150 papers 
+and holds 14 international patents on digitalization of supply chains 
+and systems biology.
+Shoarinejad, Nejad, and T ¨urkay: Data-Driven Scenario Analysis for Layout Design 
+18 INFORMS Journal on Applied Analytics, Articles in Advance, pp. 1–18, © 2026 INFORMS 
+
+=== PAGE 19 ===
+Copyright of INFORMS Journal on Applied Analytics is the property of INFORMS: Institute
+for Operations Research & the Management Sciences and its content may not be copied or
+emailed to multiple sites without the copyright holder's express written permission.
+Additionally, content may not be used with any artificial intelligence tools or machine
+learning technologies. However, users may print, download, or email articles for individual
+use.

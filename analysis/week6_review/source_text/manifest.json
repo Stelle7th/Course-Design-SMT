@@ -1,0 +1,79 @@
+[
+  {
+    "source": "F:\\Grade4\\课程设计\\0-课程设计工作周报（模板）.pptx",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\00_0-课程设计工作周报（模板）.txt",
+    "pages": 7,
+    "chars": 1102,
+    "sha256": "bffbd7e259eef888c32d7aa2d2b70116f4513ecd234928ff5330c74215e4432e"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\1-课程设计开题汇报（模板）.pptx",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\01_1-课程设计开题汇报（模板）.txt",
+    "pages": 10,
+    "chars": 3186,
+    "sha256": "2ef229c94b707fa7c2eb642d87ac3c9cd051ea20604983e7bddb909c56670090"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2组_开题汇报(1).pptx",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\02_A2组_开题汇报(1).txt",
+    "pages": 10,
+    "chars": 3272,
+    "sha256": "09a96a63ff4da2ad6964696f7da631f4671e1fa89e46405a28e400610556573c"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\EBSCO-FullText-10_14_2026.pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\03_EBSCO-FullText-10_14_2026.txt",
+    "pages": 19,
+    "chars": 86680,
+    "sha256": "69a1a06615abb657007b75fa8d6c799083fbd1079b38e05ad2a11c70af2d103d"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\1-课程设计开题汇报（模板）.pptx",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\04_1-课程设计开题汇报（模板）.txt",
+    "pages": 10,
+    "chars": 3117,
+    "sha256": "50c653ab6d28ba4d16697a5d749782e111907ac7bd48a43dfb4005841f8b141a"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化.pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\05_A2-数据驱动的半导体制造系统布局与物料搬运调度优化.txt",
+    "pages": 6,
+    "chars": 5995,
+    "sha256": "1196386b6ae6a40de1f9da96a0a96c3a60609acfdc8e72a1773f61daa5790bc9"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\Kim 等 - 2016 - Semiconductor FAB layout design analysis with 300-mm FAB data “Is minimum distance-based layout des(1).pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\06_Kim 等 - 2016 - Semiconductor FAB layout design analysis with 300-mm FAB data “Is minimum distance-based layout des(1).txt",
+    "pages": 17,
+    "chars": 73998,
+    "sha256": "0de5ac2cba1e538762cb1c011d6296b19349d965bc9e785d9190665f7aa90f6a"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\Kopp 等 - 2020 - SMT2020—A Semiconductor Manufacturing Testbed(1).pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\07_Kopp 等 - 2020 - SMT2020—A Semiconductor Manufacturing Testbed(1).txt",
+    "pages": 10,
+    "chars": 56999,
+    "sha256": "bede007e1db64df6e986f0b569c4a9230158119fee46f3823b668c8405afe35e"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\Peters和Yang - 1997 - Integrated facility layout and material handling system design in semiconductor fabrication faciliti(1).pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\08_Peters和Yang - 1997 - Integrated facility layout and material handling system design in semiconductor fabrication faciliti(1).txt",
+    "pages": 10,
+    "chars": 41049,
+    "sha256": "98ebab8abbfaac785107216efd35e694f2b45cca4d7524f2a7616e3c6b509be1"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\A2-数据驱动的半导体制造系统布局与物料搬运调度优化\\方案+计划.pptx",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\09_方案+计划.txt",
+    "pages": 3,
+    "chars": 728,
+    "sha256": "a09e7c0af586e9b816b34beec99596aa98e544da2e07c10cd6f0eaceada6ce35"
+  },
+  {
+    "source": "F:\\Grade4\\课程设计\\week5\\A2组_第五周周报_精简版(1).pdf",
+    "extracted": "F:\\Grade4\\课程设计\\analysis\\week6_review\\source_text\\10_A2组_第五周周报_精简版(1).txt",
+    "pages": 6,
+    "chars": 1132,
+    "sha256": "50c7a69007c38135b7d8d1c88cea8c7cc05e2407957a94da7743dab917a2065e"
+  }
+]

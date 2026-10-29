@@ -1,0 +1,40 @@
+var matchingSlide=await artifactSession.run(async({presentation})=>{
+  const notes=presentation.slides.items[0].speakerNotes.text;
+  presentation.slides.keep([]);
+  presentation.theme.defaultFont='FandolHei';
+  const s=presentation.slides.add({width:1400,height:7500938/9525,background:{fill:'#FFFFFF'}});
+  function tx(name,text,x,y,w,h,size=25.6,color='#20212A',bold=false,align='left'){
+    const t=s.shapes.add({geometry:'textbox',name,position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0,style:'solid'}});
+    t.text=text;t.text.style={fontSize:size,typeface:'FandolHei',fontFamily:'FandolHei',color,bold,alignment:align,verticalAlignment:'top',lineSpacing:1.25,wrap:'none',autoFit:'none',insets:0};
+    return t;
+  }
+  tx('slide-title','E2：两 Bay 局部优化验证',58,47,1284,79,38.44*4/3,'#20212A',true);
+  tx('framing','在两 Bay 固定边界下验证联合优化，并进一步拆解运输收益来源。',58,147,1284,43);
+  tx('scope-heading','验证范围与优化内容',58,226,650,40,25.6,'#713A80',true);
+  tx('scope-body','A2、A3：48 台设备、4 个设备组。',58,279,650,36);
+  tx('scope-operations','覆盖 59 道区域工序，外部供需与槽位固定。',58,326,650,36);
+  tx('optimization-body','联合优化设备位置、加工量与进出物流。',58,373,650,36);
+  tx('verification-heading','模型验证结果',58,450,650,40,25.6,'#713A80',true);
+  tx('verification-gap','调整 6 个槽位，主目标 gap = 0。',58,501,650,36);
+  tx('verification-checks','设备数量、产能与流量守恒检查通过。',58,550,650,36);
+  tx('benefit-heading','收益集中在 DE_BE_50',739,226,610,40,25.6,'#713A80',true);
+  tx('benefit-scope','18 道受益工序的加权运输距离',739,279,610,36);
+  tx('benefit-rate','降低 2.13%；其余 41 道基本不变。',739,320,610,36);
+  tx('benefit-share','受益工序占基准运输成本的 27.3%。',739,373,610,36);
+  tx('overall-heading','整体改善率如何计算',739,450,610,40,25.6,'#713A80',true);
+  tx('overall-formula','27.3% × 2.13% ≈ 0.582%。',739,501,610,36);
+  tx('overall-scope','0.582% 为全部 59 道工序的加权结果。',739,550,610,36);
+  tx('example-label','示例：part_5 第 169 步',739,610,610,36);
+  tx('example-result','进出总路径缩短 2.146%。',739,651,610,36);
+  const link=tx('OPEN_MILP_HTML','打开 HTML 交互展示',58,625,650,43,25.6,'#713A80');
+  link.text.get('打开 HTML 交互展示').underline='sng';
+  link.text.get('打开 HTML 交互展示').link={uri:'MILP交互展示.html',isExternal:true};
+  tx('validation-note','需求系数 0.25；基准已优化加工与物流分配。当前收益为局部位置调整的新增收益，未计搬迁成本。',58,710,1280,26,13.43*4/3,'#696B75');
+  tx('footer','A2 组   第六周课程设计',58,744,650,27,13.43*4/3,'#696B75');
+  tx('page-number','5',1260,744,82,27,13.43*4/3,'#696B75',false,'right');
+  s.speakerNotes.text='【新增结果解释，建议先讲，约 35 秒】\n这里同时给出整体与受益部分的口径。全部 59 道工序的局部加权运输距离下降 0.582%。拆开后，收益全部来自 DE_BE_50 对应的 18 道工序，其基准成本为 83,172,889.195，优化后 81,399,450.989，按成本合计计算下降 2.132%；其余 41 道工序基本不变。受益工序占全部基准成本的 27.300%，因此总改善约等于 27.3%×2.13%=0.582%。这是加权成本分解，不能用 18/59 代替成本权重，也不是工序改善率的简单平均。受益集合来自本次结果分解，2.13% 不能作为全部工序的改善率。\n基准固定布局 LP 已经优化加工和物流分配，本次是开放局部位置调整后的新增收益。现有槽位、设备组及尺寸数量、外部供需与轨道固定；本例没有正的区域内部直接转移流。因此本周定位为联合模型的局部验证，不据此宣称全厂或经济收益显著。6 个变化槽位是在主目标最优后尽量减少槽位改变的结果，并非预先限制最多只能动 6 个。\n数据来源：week6/交互展示/milp-data.json 中 operations 与 groups，week6/汇报准备/MILP_A2_A3/summary.json。\n\n'+notes.replaceAll('紫色链接','下划线链接');
+  await presentation.render({slide:0,scale:1});
+  await presentation.export({format:'pptx',fileName:'two-bay-benefit-explained.pptx'});
+  return {slideCount:1,style:'source dimensions, title, font, colors and footer',link:'MILP交互展示.html'};
+},{artifactRef:'artifact_zkDfxJr0mE0dde1U8uupJ5UxaHls6TnZ',artifactType:'presentation'});
+nodeRepl.write(matchingSlide);

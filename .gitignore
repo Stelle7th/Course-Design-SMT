@@ -1,0 +1,33 @@
+# Local credentials, agent state and machine-specific settings
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+*.pem
+*.key
+
+# Python / JavaScript environments and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vs/
+.DS_Store
+Thumbs.db
+
+# Temporary authoring and validation files
+~$*
+*.tmp
+*.log
+.codex-finalizer/
+analysis/week6_review/one_slide_build/
+
+# Redundant local copies; extracted data and reports are versioned
+/新建文件夹/
+*.zip

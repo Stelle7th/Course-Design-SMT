@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMAT2022 原始布局查看器</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;color:#22354a;font:14px 'Microsoft YaHei',system-ui,sans-serif}header{padding:18px 26px;background:#fff;border-bottom:1px solid #d7e0e8}h1{font-size:23px;margin:0 0 8px}p{margin:5px 0;color:#536577;line-height:1.65}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:12px 26px;background:#fff}label{display:flex;align-items:center;gap:6px}select,button{font:inherit;padding:7px;border:1px solid #bbc8d4;border-radius:4px;background:#fff;color:#22354a;max-width:270px}button{cursor:pointer}button:hover{background:#eaf1f6}input{accent-color:#0072b2}main{padding:10px 20px}.legend{display:flex;gap:8px 15px;flex-wrap:wrap;font-size:12px;margin:8px 6px}.legend span{display:inline-flex;align-items:center;gap:5px}.swatch{width:12px;height:12px;display:inline-block}.view{position:relative;background:#fff;border:1px solid #d7e0e8;overflow:hidden}canvas{display:block;width:100%;height:65vh;min-height:420px;touch-action:none;cursor:grab}canvas.dragging{cursor:grabbing}#tooltip{display:none;position:absolute;pointer-events:none;background:#20354a;color:#fff;padding:9px 12px;white-space:pre-line;border-radius:4px;font-size:12px;max-width:330px;line-height:1.7;z-index:5}#status{padding:10px 4px;color:#294b68}#detail{padding:15px;background:#fff;min-height:90px;line-height:1.7;overflow-x:auto}h2{font-size:17px;margin:0 0 7px}table{border-collapse:collapse;font-size:12px}td,th{text-align:left;border-bottom:1px solid #dfe5eb;padding:5px 12px 5px 0;white-space:nowrap}.note{font-size:12px;margin:10px 4px}.keys{float:right;color:#718095;font-size:12px}a{color:#0072b2}@media(max-width:700px){header,.controls{padding:12px}h1{font-size:19px}main{padding:8px}select{max-width:210px}canvas{min-height:360px;height:55vh}.keys{float:none;display:block}}
+</style></head><body>
+<header><h1>SMAT2022 · 设备与有向轨道原始布局</h1><p>1068 个生产设备实例 · 40 STOCKER · 4 COMMIT · 4 COMPLETE · 3424 Rail · 43 Bay</p><p>原始坐标，X/Y 等比例。矩形暂按坐标为中心绘制，锚点未获文档确认。虚线仅示意曲线轨道端点连接。</p></header>
+<section class="controls" aria-label="布局筛选与图层">
+<label>工艺类别 <select id="area"><option value="">全部 11 类</option></select></label>
+<label>Bay <select id="bay"><option value="">全部 43 Bay</option></select></label>
+<label>高亮工作中心 <select id="wc"><option value="">无高亮</option></select></label>
+<label><input type="checkbox" id="rail" checked>轨道</label>
+<label><input type="checkbox" id="directions">全部方向箭头</label>
+<label><input type="checkbox" id="facilities" checked>物流设施</label>
+<label><input type="checkbox" id="labels" checked>Bay 标签</label>
+<button id="reset">全厂视野</button><button id="fit">定位筛选设备</button>
+</section>
+<main><div id="legend" class="legend" aria-label="工艺颜色图例"></div>
+<div class="view"><canvas id="layout" aria-label="SMAT2022 原始设备布局，滚轮缩放，拖动平移，点击设备查看端口" role="img"></canvas><div id="tooltip" role="tooltip"></div></div>
+<div id="status" role="status" aria-live="polite"></div>
+<section id="detail" aria-label="选中设备详情"><h2>设备与端口详情</h2>悬停查看设备名称、STNFAM、Bay、原始坐标及尺寸；点击设备查看其端口。工作中心高亮时其他生产设备淡化；工艺与 Bay 筛选共同生效。</section>
+<p class="note">滚轮以指针为中心缩放；拖动平移；双击恢复全厂。<span class="keys">坐标轴刻度 ×1000 原始单位，未将长度单位认定为 mm 或 m。</span></p>
+<p class="note">端口仅在点击设备后显示。CURVE=0 按 FROM_NODE + DISTANCE 推导位置；曲线端口保留 Rail + DISTANCE 原值，不伪造坐标。全部箭头指 FROM_NODE→TO_NODE。无运输任务，图中不表示实际拥堵。</p>
+</main>
+<script id="data" type="application/json">__LAYOUT_DATA__</script>
+<script>
+'use strict';
+const D=JSON.parse(document.getElementById('data').textContent), $=s=>document.getElementById(s);
+const canvas=$('layout'),ctx=canvas.getContext('2d'),tip=$('tooltip');
+const eq=D.equipment, rs=D.rails, portsByEq=new Map();
+D.ports.forEach(p=>{if(!portsByEq.has(p.EQP_NAME))portsByEq.set(p.EQP_NAME,[]);portsByEq.get(p.EQP_NAME).push(p)});
+const prod=eq.filter(d=>d.kind==='PRODUCTION');
+const natural=(a,b)=>a.localeCompare(b,undefined,{numeric:true});
+function option(id,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;$(id).append(o)}
+Object.keys(D.colors).sort().forEach(k=>option('area',k,`${k} (${prod.filter(d=>d.area===k).length})`));
+D.bays.slice().sort((a,b)=>natural(a.NAME,b.NAME)).forEach(b=>option('bay',b.NAME,`${b.NAME} · ${b.TYPE} (${prod.filter(e=>e.BAY===b.NAME).length})`));
+[...new Set(prod.map(e=>e.STNFAM))].sort(natural).forEach(g=>option('wc',g,`${g} (${prod.filter(e=>e.STNFAM===g).length})`));
+for(const [k,c] of Object.entries({...D.colors,...D.facilities})){
+ const span=document.createElement('span'),sw=document.createElement('i');sw.className='swatch';sw.style.background=c;span.append(sw,document.createTextNode(k));$('legend').append(span)
+}
+let W=1000,H=600,scale=1,ox=0,oy=0,selected=null,visible=[],drag=null,moved=false;
+const world=(x,y)=>[(x-ox)/scale,(oy-y)/scale],screen=(x,y)=>[ox+x*scale,oy-y*scale];
+const display=n=>(Math.abs(Number(n))<1e-8?0:Number(n)).toLocaleString('zh-CN',{maximumFractionDigits:3});
+function fitBounds(x0,y0,x1,y1){scale=Math.min((W-95)/(x1-x0),(H-70)/(y1-y0));ox=W/2-(x0+x1)*scale/2;oy=H/2+(y0+y1)*scale/2;draw()}
+function reset(){fitBounds(-5000,-10000,305000,152000)}
+function included(e){return (!$('area').value||e.kind!=='PRODUCTION'||e.area===$('area').value)&&(!$('bay').value||e.BAY===$('bay').value)&&(e.kind==='PRODUCTION'||$('facilities').checked)}
+function focused(e){return !$('wc').value||e.kind!=='PRODUCTION'||e.STNFAM===$('wc').value}
+function tickStep(distance){const p=10**Math.floor(Math.log10(distance)),q=distance/p;return (q<2?2:q<5?5:10)*p}
+function axes(){
+ const [x0,y1]=world(45,15),[x1,y0]=world(W-15,H-32),step=tickStep(65/scale);
+ ctx.lineWidth=1;ctx.font='11px Microsoft YaHei';ctx.textAlign='center';ctx.textBaseline='top';
+ for(let x=Math.ceil(x0/step)*step;x<x1;x+=step){const [sx]=screen(x,0);ctx.strokeStyle='#edf1f5';ctx.beginPath();ctx.moveTo(sx,12);ctx.lineTo(sx,H-30);ctx.stroke();ctx.fillStyle='#627286';ctx.fillText(display(x/1000),sx,H-25)}
+ ctx.textAlign='left';ctx.textBaseline='middle';
+ for(let y=Math.ceil(y0/step)*step;y<y1;y+=step){const [,sy]=screen(0,y);ctx.strokeStyle='#edf1f5';ctx.beginPath();ctx.moveTo(42,sy);ctx.lineTo(W-12,sy);ctx.stroke();ctx.fillStyle='#627286';ctx.fillText(display(y/1000),4,sy)}
+ ctx.textAlign='right';ctx.fillStyle='#627286';ctx.fillText('X /1000',W-8,H-8);ctx.textAlign='left';ctx.fillText('Y /1000',5,8);
+}
+function draw(){
+ ctx.clearRect(0,0,W,H);axes();const railOn=$('rail').checked,bay=$('bay').value,focus=$('wc').value;
+ if(railOn){for(let curve=0;curve<=1;curve++){
+  ctx.strokeStyle=curve?'#ce9d51':'#6e839a';ctx.globalAlpha=.57;ctx.lineWidth=.7;ctx.setLineDash(curve?[4,3]:[]);ctx.beginPath();
+  rs.forEach(r=>{if(r.CURVE!==curve)return;const [x,y]=screen(r.x0,r.y0),[u,v]=screen(r.x1,r.y1);ctx.moveTo(x,y);ctx.lineTo(u,v)});ctx.stroke();
+ }ctx.setLineDash([]);ctx.globalAlpha=1;
+ if($('directions').checked){ctx.fillStyle='#29465d';rs.forEach(r=>{const [x,y]=screen(r.x0*.43+r.x1*.57,r.y0*.43+r.y1*.57),[u,v]=screen(r.x1,r.y1),[s,t]=screen(r.x0,r.y0),angle=Math.atan2(v-t,u-s);ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.beginPath();ctx.moveTo(3,0);ctx.lineTo(-2,-2);ctx.lineTo(-2,2);ctx.closePath();ctx.fill();ctx.restore()})}}
+ visible=eq.filter(included);
+ for(const e of visible){const [x,y]=screen(e.POSITION_X-e.WIDTH/2,e.POSITION_Y+e.HEIGHT/2),w=e.WIDTH*scale,h=e.HEIGHT*scale;
+  ctx.globalAlpha=focused(e)?1:.12;ctx.fillStyle=e.kind==='PRODUCTION'?D.colors[e.area]||'#999':D.facilities[e.kind];ctx.fillRect(x,y,w,h);
+  if(e.STNFAM===focus||selected===e){ctx.globalAlpha=1;ctx.strokeStyle=selected===e?'#111':'#263b50';ctx.lineWidth=selected===e?2:1;ctx.strokeRect(x-1,y-1,w+2,h+2)}
+ }ctx.globalAlpha=1;
+ if($('labels').checked){ctx.textAlign='center';ctx.font='bold 11px Microsoft YaHei';D.bays.forEach(b=>{
+  const tracks=rs.filter(r=>r.BAY_NAME===b.NAME),xs=tracks.flatMap(r=>[r.x0,r.x1]).sort((a,b)=>a-b),ys=tracks.flatMap(r=>[r.y0,r.y1]).sort((a,b)=>a-b);
+ let x=xs[Math.floor(xs.length/2)],y=b.TYPE==='INTRABAY'?(b.NAME.startsWith('A')?143500:-2800):ys[Math.floor(ys.length/2)];if(b.TYPE==='INTERBAY')x=153000;
+  const [px,py]=screen(x,y);ctx.fillStyle='rgba(255,255,255,.88)';const width=ctx.measureText(b.NAME).width;ctx.fillRect(px-width/2-2,py-8,width+4,16);ctx.fillStyle=b.NAME===bay?'#bb3f37':'#3b4c5e';ctx.fillText(b.NAME,px,py+3)
+ })}
+ let shownPorts=0,missingPorts=0;
+ if(selected&&included(selected)){for(const p of portsByEq.get(selected.NAME)||[]){if(p.derived_x===null){missingPorts++;continue}const [x,y]=screen(p.derived_x,p.derived_y);ctx.fillStyle='#e22334';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();shownPorts++}}
+ const vp=visible.filter(e=>e.kind==='PRODUCTION'),hi=vp.filter(e=>e.STNFAM===focus);
+ $('status').textContent=`当前显示：${vp.length} 台生产设备 + ${visible.length-vp.length} 个物流设施；轨道 ${railOn?rs.length:0} 条${focus?`；高亮 ${focus}：${hi.length} 台 / ${new Set(hi.map(e=>e.BAY)).size} Bay`:''}${selected?`；已绘端口 ${shownPorts}，曲线坐标不可恢复 ${missingPorts}`:''}`;
+ // Read-only diagnostics allow repeatable browser QA without altering source data.
+ canvas.dataset.viewScale=scale;canvas.dataset.originX=ox;canvas.dataset.originY=oy;
+ canvas.dataset.diagnostics=JSON.stringify({productionShown:vp.length,facilitiesShown:visible.length-vp.length,railsShown:railOn?rs.length:0,highlighted:focus?hi.length:0,highlightedBays:new Set(hi.map(e=>e.BAY)).size,selected:selected?.NAME||null,portMarkers:shownPorts,missingPortCoordinates:missingPorts,scale,visibleEquipment:visible.length,width:W,height:H});
+}
+function locate(){let d=eq.filter(included).filter(e=>!$('wc').value||e.STNFAM===$('wc').value);if(!d.length)return;fitBounds(Math.min(...d.map(e=>e.POSITION_X-e.WIDTH/2))-4000,Math.min(...d.map(e=>e.POSITION_Y-e.HEIGHT/2))-4000,Math.max(...d.map(e=>e.POSITION_X+e.WIDTH/2))+4000,Math.max(...d.map(e=>e.POSITION_Y+e.HEIGHT/2))+4000)}
+function hit(x,y){const [wx,wy]=world(x,y);return visible.slice().reverse().find(e=>Math.abs(wx-e.POSITION_X)<=Math.max(e.WIDTH/2,3/scale)&&Math.abs(wy-e.POSITION_Y)<=Math.max(e.HEIGHT/2,3/scale))}
+function coords(ev){const r=canvas.getBoundingClientRect();return [ev.clientX-r.left,ev.clientY-r.top]}
+function showDetail(e){selected=e;const box=$('detail');box.replaceChildren();const h=document.createElement('h2');h.textContent=`${e.NAME} · ${e.STNFAM} · ${e.BAY}`;box.append(h);const text=document.createElement('p');text.textContent=`工艺：${e.area}；坐标 (${display(e.POSITION_X)}, ${display(e.POSITION_Y)})；尺寸 ${display(e.WIDTH)} × ${display(e.HEIGHT)} 原始单位。`;box.append(text);
+ const table=document.createElement('table'),head=document.createElement('tr');['Port 名称','类型','关联 Rail','DISTANCE','直线推导 X','直线推导 Y'].forEach(s=>{const th=document.createElement('th');th.textContent=s;head.append(th)});table.append(head);
+ for(const p of portsByEq.get(e.NAME)||[]){const tr=document.createElement('tr');[p.NAME,p.PORT_TYPE,p.RAILLINE_NAME,display(p.DISTANCE),p.derived_x===null?'曲线几何不足':display(p.derived_x),p.derived_y===null?'曲线几何不足':display(p.derived_y)].forEach(s=>{const td=document.createElement('td');td.textContent=s;tr.append(td)});table.append(tr)}box.append(table);draw()}
+canvas.addEventListener('wheel',ev=>{ev.preventDefault();const [x,y]=coords(ev),[wx,wy]=world(x,y),factor=Math.exp(-ev.deltaY*.001);scale=Math.min(.25,Math.max(.0002,scale*factor));ox=x-wx*scale;oy=y+wy*scale;draw()},{passive:false});
+canvas.addEventListener('pointerdown',ev=>{const [x,y]=coords(ev);drag={x,y,ox,oy};moved=false;canvas.setPointerCapture(ev.pointerId);canvas.classList.add('dragging');tip.style.display='none'});
+canvas.addEventListener('pointermove',ev=>{const [x,y]=coords(ev);if(drag){const dx=x-drag.x,dy=y-drag.y;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;ox=drag.ox+dx;oy=drag.oy+dy;draw();return}const e=hit(x,y);if(!e){tip.style.display='none';return}tip.textContent=`${e.NAME}\n${e.STNFAM} · ${e.area}\nBay ${e.BAY}\nX ${display(e.POSITION_X)} / Y ${display(e.POSITION_Y)}\n宽 ${display(e.WIDTH)} / 高 ${display(e.HEIGHT)}（原始单位）`;tip.style.display='block';tip.style.left=Math.min(x+14,W-320)+'px';tip.style.top=Math.max(4,Math.min(y+14,H-150))+'px'});
+canvas.addEventListener('pointerup',ev=>{const [x,y]=coords(ev);if(!moved){const e=hit(x,y);if(e)showDetail(e)}drag=null;canvas.classList.remove('dragging')});
+canvas.addEventListener('pointercancel',()=>{drag=null;canvas.classList.remove('dragging')});canvas.addEventListener('pointerleave',()=>tip.style.display='none');canvas.addEventListener('dblclick',reset);
+['area','bay','wc','rail','directions','facilities','labels'].forEach(id=>$(id).addEventListener('change',draw));$('reset').addEventListener('click',reset);$('fit').addEventListener('click',locate);
+const resize=()=>{const oldW=W,oldH=H;W=canvas.clientWidth;H=canvas.clientHeight;const dpr=window.devicePixelRatio||1;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ox+=(W-oldW)/2;oy+=(H-oldH)/2;draw()};
+new ResizeObserver(resize).observe(canvas);resize();reset();window.smatReady=true;
+</script></body></html>

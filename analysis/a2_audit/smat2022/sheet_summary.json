@@ -1,0 +1,291 @@
+{
+  "Address": {
+    "nonempty_rows_including_header": 2859,
+    "headers": [
+      "NAME",
+      "FAB_NAME",
+      "POSITION_X",
+      "POSITION_Y",
+      "ZCU_NAME",
+      "ZCU_TYPE"
+    ],
+    "sample": [
+      [
+        "rn_A10_1",
+        "SMT",
+        "139206.29917322801",
+        "73958.333330676003",
+        "ZCU_A10_1",
+        "NONE"
+      ],
+      [
+        "rn_A10_10",
+        "SMT",
+        "139206.29917322801",
+        "126041.66669323901",
+        "ZCU_A10_5",
+        "RESET"
+      ],
+      [
+        "rn_A10_11",
+        "SMT",
+        "139206.29917322801",
+        "135208.33330676",
+        "ZCU_A10_6",
+        "STOP"
+      ]
+    ]
+  },
+  "ZCU": {
+    "nonempty_rows_including_header": 735,
+    "headers": [
+      "NAME",
+      "FAB_NAME"
+    ],
+    "sample": [
+      [
+        "ZCU_A10_1",
+        "SMT"
+      ],
+      [
+        "ZCU_A10_10",
+        "SMT"
+      ],
+      [
+        "ZCU_A10_11",
+        "SMT"
+      ]
+    ]
+  },
+  "Rail": {
+    "nonempty_rows_including_header": 3425,
+    "headers": [
+      "NAME",
+      "FAB_NAME",
+      "BAY_NAME",
+      "FROM_NODE",
+      "TO_NODE",
+      "MAX_SPEED",
+      "CURVE"
+    ],
+    "sample": [
+      [
+        "rl_A10_10_11",
+        "SMT",
+        "A10",
+        "rn_A10_10",
+        "rn_A10_11",
+        "1",
+        "0"
+      ],
+      [
+        "rl_A10_11_12",
+        "SMT",
+        "A10",
+        "rn_A10_11",
+        "rn_A10_12",
+        "1",
+        "0"
+      ],
+      [
+        "rl_A10_11_13",
+        "SMT",
+        "A10",
+        "rn_A10_11",
+        "rn_A10_13",
+        "1",
+        "1"
+      ]
+    ]
+  },
+  "Bay": {
+    "nonempty_rows_including_header": 44,
+    "headers": [
+      "NAME",
+      "FAB_NAME",
+      "TYPE",
+      "RETICLE",
+      "NEIGHBOR_BAY"
+    ],
+    "sample": [
+      [
+        "A1",
+        "SMT",
+        "INTRABAY",
+        "0",
+        "A2,B1"
+      ],
+      [
+        "A10",
+        "SMT",
+        "INTRABAY",
+        "0",
+        "A9,A11"
+      ],
+      [
+        "A11",
+        "SMT",
+        "INTRABAY",
+        "0",
+        "A10,A12"
+      ]
+    ]
+  },
+  "Equipment": {
+    "nonempty_rows_including_header": 1117,
+    "headers": [
+      "NAME",
+      "TOOL_GROUP",
+      "BAY",
+      "WIDTH",
+      "HEIGHT",
+      "POSITION_X",
+      "POSITION_Y"
+    ],
+    "sample": [
+      [
+        "COMMIT1",
+        "COMMIT",
+        "InterBay1",
+        "2090.6880000000001",
+        "2090.6880000000001",
+        "4960.6299212598396",
+        "-4544.00510204081"
+      ],
+      [
+        "COMMIT2",
+        "COMMIT",
+        "InterBay1",
+        "2090.6880000000001",
+        "2090.6880000000001",
+        "292322.83464566898",
+        "-4544.00510204081"
+      ],
+      [
+        "COMMIT3",
+        "COMMIT",
+        "InterBay3",
+        "2090.6880000000001",
+        "2090.6880000000001",
+        "8031.4960629921197",
+        "146210.14030612199"
+      ]
+    ]
+  },
+  "PortType": {
+    "nonempty_rows_including_header": 7,
+    "headers": [
+      "NAME",
+      "SIZE",
+      "INOUT_TYPE"
+    ],
+    "sample": [
+      [
+        "COMMIT",
+        "314",
+        "OUT"
+      ],
+      [
+        "COMPLETE",
+        "314",
+        "IN"
+      ],
+      [
+        "EQPPort",
+        "314",
+        "BOTH"
+      ]
+    ]
+  },
+  "Port": {
+    "nonempty_rows_including_header": 22121,
+    "headers": [
+      "NAME",
+      "FAB_NAME",
+      "PORT_TYPE",
+      "EQP_NAME",
+      "RAILLINE_NAME",
+      "DISTANCE"
+    ],
+    "sample": [
+      [
+        "A10_LSTB_100_Port",
+        "SMT",
+        "LSTB",
+        ",",
+        "rl_A10_18_19",
+        "9167"
+      ],
+      [
+        "A10_LSTB_101_Port",
+        "SMT",
+        "LSTB",
+        ",",
+        "rl_A10_18_19",
+        "9792"
+      ],
+      [
+        "A10_LSTB_102_Port",
+        "SMT",
+        "LSTB",
+        ",",
+        "rl_A10_20_21",
+        "1042"
+      ]
+    ]
+  },
+  "VehicleType": {
+    "nonempty_rows_including_header": 2,
+    "headers": [
+      "NAME",
+      "SIZE",
+      "MAX_SPEED",
+      "ACCELERATION",
+      "DECELERATION",
+      "MIN_DISTANCE"
+    ],
+    "sample": [
+      [
+        "OHTV0",
+        "784",
+        "1500",
+        "2000",
+        "3000",
+        "125"
+      ]
+    ]
+  },
+  "Vehicle": {
+    "nonempty_rows_including_header": 501,
+    "headers": [
+      "NAME",
+      "FAB_NAME",
+      "TYPE",
+      "RAILLINE_NAME",
+      "DISTANCE"
+    ],
+    "sample": [
+      [
+        "SMT_oht_0",
+        "SMT",
+        "OHTV0",
+        "rl_B1_2_3",
+        "797.19387755102002"
+      ],
+      [
+        "SMT_oht_1",
+        "SMT",
+        "OHTV0",
+        "rl_B1_2_3",
+        "1992.9846938775499"
+      ],
+      [
+        "SMT_oht_10",
+        "SMT",
+        "OHTV0",
+        "rl_B1_8_9",
+        "1992.9846938775499"
+      ]
+    ]
+  }
+}

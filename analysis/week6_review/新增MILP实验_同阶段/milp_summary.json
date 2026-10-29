@@ -1,0 +1,68 @@
+{
+  "experiment": "restricted local fixed-flow equipment-slot MILP",
+  "scope": "8 devices in equal-footprint Dry_Etch slots, with FE/BE stage preserved; all other 1060 production devices fixed; reference operation/transport flows frozen during MILP",
+  "selection": "Greedily select four disjoint improving swap pairs from the 127-device same-process equal-footprint pool, then optimize all 8 selected slots jointly.",
+  "selection_pairs": [
+    {
+      "a": "ECH0249",
+      "b": "ECH0458",
+      "pair_swap_delta": -7419250.588075697
+    },
+    {
+      "a": "ECH0262",
+      "b": "ECH0459",
+      "pair_swap_delta": -6794737.140412213
+    },
+    {
+      "a": "ECH0127",
+      "b": "ECH0207",
+      "pair_swap_delta": -6400618.868961946
+    },
+    {
+      "a": "ECH0163",
+      "b": "ECH0192",
+      "pair_swap_delta": -5075102.94826064
+    }
+  ],
+  "candidate_pool_count": 127,
+  "selected_device_count": 8,
+  "internal_positive_flow_pairs": 0,
+  "binary_count": 64,
+  "total_variable_count": 64,
+  "constraint_count": 16,
+  "solver_status": 0,
+  "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "mip_gap": 0.0,
+  "milp_solve_seconds": 0.06538820000423584,
+  "milp_node_count": 1,
+  "reference_cost": 5803123608.491466,
+  "frozen_flow_milp_cost": 5777433898.945756,
+  "frozen_flow_improvement": 0.004426876158232895,
+  "restricted_problem_dual_bound": 5777433898.945759,
+  "moved_device_count": 8,
+  "assumptions": [
+    "Equal source/target footprint preserves reference slot occupancy under the same anchor convention.",
+    "Dry_Etch process family and FE/BE stage are preserved; utility/cleanroom compatibility remains unverified.",
+    "A moved equipment uses the target slot port; tracks and ports remain fixed.",
+    "The optimality certificate applies only to this selected frozen-flow subproblem."
+  ],
+  "enumeration_check": {
+    "feasible_permutations": 576,
+    "minimum_cost": 5777433898.945759,
+    "absolute_difference_vs_milp": 2.86102294921875e-06
+  },
+  "lp_evaluation": {
+    "success": false,
+    "status": 1,
+    "message": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is None)",
+    "solve_seconds": 91.56930879999709,
+    "model": {
+      "variable_count": 2033918,
+      "equality_count": 170305,
+      "inequality_count": 1068,
+      "transport_arc_count": 1950637,
+      "capacity_row_count": 1068
+    }
+  },
+  "total_preparation_milp_lp_seconds": 99.67422880000959
+}

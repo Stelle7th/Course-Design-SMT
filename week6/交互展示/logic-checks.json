@@ -1,0 +1,18 @@
+{
+  "htmlBytes": 288138,
+  "javascriptSyntax": true,
+  "staticIdsUnique": true,
+  "referenceSlots": 48,
+  "optimizedSlots": 48,
+  "equipmentFollow": true,
+  "fixedSlotCompare": true,
+  "loadColorMode": true,
+  "deemphasizedUnchangedSlots": 42,
+  "improvedOperations": 18,
+  "worsenedOperations": 0,
+  "pathViewsChecked": 59,
+  "defaultActualIncomingAndOutgoingDistances": true,
+  "boundaryDataCostTotalsMatch": true,
+  "browserRenderingVerified": false,
+  "verificationMethod": "Non-browser JavaScript unit checks with an in-memory DOM stub; no browser or UI automation."
+}

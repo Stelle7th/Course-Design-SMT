@@ -1,0 +1,136 @@
+=== PAGE 1 ===
+ቔᇛБ
+ุᇅᄯ༢๤
+߄
+SMAT2022༅ა Bay–ଆ
+ᅚ
+ଆ྘b
+A2ਾ೏െ ෤ᒲဘ ᇛ౒૿
+ٙ2026 ୍ 10 ᄅ 16 ರ
+
+=== PAGE 2 ===
+SMAT2022گ߫
+ᄝ SMT2020ԤഈđҀԉഡСቕѓaBayྐ༏b
+b
+L VHM_Eࣟ
+ളӁഡС 1,068
+ቔᇏྏ 105
+ളӁ Bay 40
+֡݅3,424
+ቔᇏྏა Bay؟ؓ؟
+32۱؟Bay۽
+๝ಒ
+b
+҃अҰुఖ
+টჷğSMAT2022ᆇb
+A2࠹2 / 6
+
+=== PAGE 3 ===
+ॖྛྟ
+ൻೆ
+BayোഡСሹඔ Ngၜਫ਼ཌa
+ԛೆ१b
+஥ᇂथҦ
+xgc ∈ Z≥0۬c ᇏ g োഡС෻ඔb
+෻ഡСb
+Ⴈ Dcd
+Bayb
+ॴ Bayሇᄎ
+b
+ॖྛ
+Kc۬cđngckކk ᇏ
+g োഡСඔb
+∑
+c
+xgc = Ngޚ
+∑
+k∈Kc
+λck = 1ކ
+xgc =
+∑
+k∈Kc
+ngckλck
+λck ∈ {0, 1}ॢ஥ᇂb
+ཋᇅ૫
+ᇂb
+קܥ؍ࢨBayຉ௪b෮Ⴕ Dcdഡb
+A2࠹3 / 6
+
+=== PAGE 4 ===
+྽ੀਈაϬᄎӮЧ
+ypsgc ≥ 0ğӁ௖ p྽ s ᄝഡСো྘ g۬cਈb
+fpscd ≥ 0྽ s, s + 1۬c֞d໾ੀਈb
+ހڵ
+∑
+c
+∑
+g∈Gps
+ypsgc = qp
+∑
+p,s: g∈Gps
+τpsgypsgc ≤ Hηgxgc
+GpsಸഡСো྘đqpֆਈđLp྽ඔb
+τpsgൈđHηgൈb
+ޚ
+∑
+d
+fpscd =
+∑
+g∈Gps
+ypsgc
+∑
+c
+fpscd =
+∑
+g∈Gp,s+1
+yp,s+1,g,d
+Ⴟੀԛਈđ
+Ⴟੀೆਈb
+ሹϬᄎӮЧ
+min Z =
+∑
+p
+Lp−1∑
+s=1
+∑
+c,d
+Dcd fpscd
+֤֞From–To इᆔ Fcd = ∑
+p
+∑
+s<Lp fpscdb
+A2࠹4 / 6
+
+=== PAGE 5 ===
+࠹
+MILPཌ
+Ұଆ྘ॖྛྟđ
+ቋႪྟҵएb
+ࡎ
+קܥxഡ༯đႨ LP
+߄y, fӮЧ C∗(x)b
+ൔა RLb
+RLᇂഡС
+ሑ෿ა໾ੀྐ༏b
+ቔb
+ჿඏᇂb
+ຩ઎ CNNaGCN щ઒đDueling Double DQNቔb
+rT = − C∗(x)
+Cref
+Cref > 0ࠇLPാϧӲ
+ჿඏb
+ᇅb
+A2࠹5 / 6
+
+=== PAGE 6 ===
+࣮
+ཬෘ২
+01 ᆜ৘ଆ྘ൻೆֆაӮЧइᆔb
+02 ဒᆣ MILPb
+03ࡹRL࣢ߌቔჿඏა LPބMILPb
+۽ࡆ
+ٟ
+b
+ᆇb
+ᇶေ၇ऌğSMAT2022čLeeđ2022Ď ĠHongč2014Ď ĠKlarč2024Ď ĠVan Hasseltč2016ჷ઒Їb
+A2࠹6 / 6

@@ -1,0 +1,1032 @@
+=== PAGE 1 ===
+522 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 33, NO. 4, NOVEMBER 2020
+SMT2020—A Semiconductor
+Manufacturing Testbed
+Denny Kopp , Michael Hassoun ,A d a rK a l i r, and Lars Mönch
+Abstract—We present a new set of simulation models, orga-
+nized in a testbed. The aim of the testbed consists in pro-
+viding researchers with a platform able to credibly represent
+the complexity of modern semiconductor manufacturing. The
+testbed is open to public use, and include so far four mod-
+els. A high-volume/low-mix model and a low-volume/high-mix
+model constitutes the foundation of the testbed. Two additional
+models incorporate the complexity of engineering lots. We con-
+clude this paper by presenting a case study that demonstrates
+that the third and fourth model can be used to assess the
+performance of integrated dispatching strategies for production
+and engineering lots.
+Index Terms—Discrete-event simulation, semiconductor man-
+ufacturing, testbed, production planning and control, simulation
+experiments.
+I. I NTRODUCTION
+M
+ANY semiconductor companies rely on simula-
+tion as an important tool for decision support [1].
+Moreover, discrete-event simulation equips researchers in
+semiconductor manufacturing with a real-world like, risk-free
+environment [2] to test policies. The standard models used by
+researchers, are usually made available to the community as
+datasets, each representing a functioning fab, and collected
+together under a testing platform often referred as a testbed.
+A testbed also includes a documentation of the features of the
+different datasets together with some benchmark results for
+replication purposes. Simulation models designed and applied
+Manuscript received March 20, 2020; revised May 22, 2020; accepted
+June 9, 2020. Date of publication June 12, 2020; date of current version
+October 29, 2020. The work of Denny Kopp and Lars Mönch was sup-
+ported by the iDev 4.0 Project. The iDev40 Project has received funding
+from the ECSEL Joint Undertaking (JU) under Grant 783163. The JU receives
+support from the European Union’s Horizon 2020 Research and Innovation
+Programme. It is co-funded by the consortium members, grants from Austria,
+Germany, Belgium, Italy, Spain, and Romania. (Corresponding author:
+Michael Hassoun.)
+Denny Kopp and Lars Mönch are with the Department of Mathematics
+and Computer Science, University of Hagen, 58097 Hagen, Germany (e-mail:
+denny.kopp@fernuni-hagen.de; lars.moench@fernuni-hagen.de).
+Michael Hassoun is with the Department of Industrial Engineering
+and Management, Ariel University, Ariel 40700, Israel (e-mail:
+michaelh@ariel.ac.il).
+Adar Kalir is with the Fab/Sort Manufacturing Division, Intel Corporation,
+Qiriat-Gat 82109, Israel, and also with the Department of Industrial
+Engineering and Management, Ben-Gurion University of the Negev,
+Beer-Sheva 8410501, Israel (e-mail: kalira@post.bgu.ac.il).
+This article has supplementary downloadable material available at
+http://ieeexplore.ieee.org, provided by the authors.
+Color versions of one or more of the ﬁgures in this article are available
+online at http://ieeexplore.ieee.org.
+Digital Object Identiﬁer 10.1109/TSM.2020.3001933
+by practitioners usually tend to represent as much as possi-
+ble the semiconductor wafer fabrication facility (wafer fab) at
+hand, i.e., high-ﬁdelity models are used. It is possible to study
+long-term phenomena in wafer fabs and semiconductor sup-
+ply chains using multiple scenarios and replications. Tactical
+and also time-critical operational decisions can be made using
+simulation models that are initialized based on the current
+situation in the manufacturing system. Various full factory
+simulation studies are conducted using speciﬁc simulation set-
+tings, e.g., on production planning, and on factory performance
+in a transient period [3], [4]. These studies provide often use-
+ful insights but are somehow limited in their abilities to share,
+replicate, and compare results with other researchers and prac-
+titioners using simulation. Academic researchers are interested
+in using generic simulation models to study phenomena and
+design policies at the different decision levels of a wafer fab.
+But designing and building simulation models for the purpose
+of a unique research team leads to the following disadvantages:
+1. It is likely that the obtained simulation results and
+insights are strongly model-dependent.
+2. Ensuring reproducibility of the simulation results by
+other researchers is extremely difﬁcult or simply
+impossible.
+3. The conclusions reached on simpliﬁed simulation mod-
+els used by academic researchers are often received with
+suspicion by practitioners in wafer fabs. Since a criti-
+cal level of complexity is missing the results are often
+considered as not relevant for actual fab operations.
+Due to these reasons, a standardized simulation testbed that
+addresses the following two needs is highly desirable:
+1. The simulation models of the testbed serve as a common
+testing platform for researchers.
+2. The models serve as a bridge between academic research
+and industrial application of simulation.
+The ﬁrst of these needs is the easier one to achieve since
+all that is required is a level of details and plasticity that
+ﬁts the need of researchers. The second need, however, is
+more difﬁcult to reach. It requires that model details, features,
+and scale satisfy practitioners if the conclusions supported by
+the simulation models of the testbed are to be accepted as
+relevant to the industry. Among many wafer fab simulation
+models, the Measurement and Improvement of Manufacturing
+Capacity (MIMAC) datasets [5] have been highly success-
+ful over the last 25 years. Various research efforts are based
+on the simulation models of this testbed. These models
+form until today the best available testbed for simulation-
+based semiconductor manufacturing research, and, with no
+0894-6507 c⃝ 2020 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 2 ===
+KOPP et al.: SMT2020—SEMICONDUCTOR MANUFACTURING TESTBED 523
+better alternative, remain the major benchmark of choice for
+researchers, e.g., [6], [7]. However, while some of the model
+features are outdated, others are lacking when modern wafer
+fabs are considered.
+Therefore, it is a highly desirable undertaking to propose
+and create a new set of simulation models in the same spirit
+but with features that are more appropriate for representing
+state-of-the-art wafer fabs. Recently, the main features of such
+a testbed were formulated by Hassoun and Kalir [8]. We refer
+to the testbed as Semiconductor Manufacturing Testbed 2020,
+or SMT2020 for short. A high-volume/low-mix simulation
+model as part of SMT2020 is already described by the present
+authors in [9]. The present paper is a considerably extended
+version of [9]. The model presented in [9] is improved and
+three additional simulation models are presented which are
+representative of the current technology intricacies. Moreover,
+an application of the SMT2020 simulation models is outlined
+by means of a case study.
+The remainder of this paper is organized as follows.
+Requirements for a semiconductor manufacturing simulation
+testbed are formulated in Section II, including a discus-
+sion of previous work. The SMT2020 testbed features are
+described in Section III. The performance of the different
+simulation models is studied in Section IV . An application
+of the SMT2020 simulation models is discussed by means of
+a case study in Section V . The usage of the testbed is described
+in Section VI. Conclusions and future research directions are
+presented in Section VII.
+II. P
+ROBLEM ANALYSIS AND RELATED WORK
+A. Requirements for a State-of-the-Art Simulation Testbed
+We brieﬂy summarize the main functional requirements for
+the SMT2020 testbed based on [8], [9]:
+1. Support of Different Simulation Model Types: The
+testbed has to include simulation models of low-
+volume/high-mix (LV/HM) and high-volume/low-mix
+(HV/LM) wafer fabs. The LV/HM setting is used to
+represent make-to-order (MTO) environments such as
+foundries, producing either logic or memory devices.
+The corresponding models have to contain at least ten
+products. Due dates are required for all lots, the moving
+entities in wafer fabs. A lot consists of wafers, thin
+silicon discs. In the HV/LM setting, two high-volume
+products should be modeled to represent dedicated
+fabs, typically producing logic devices in a make-
+to-stock (MTS) environment. The number of process
+steps per route should be more than 500 to reﬂect
+the complexity of modern wafer fabs [1]. More than
+100 tool groups, i.e., work centers, have to be modeled
+in each simulation model for the same reason. Moreover,
+given the importance of engineering activities in wafer
+fabs [10], SMT2020 has to include simulation models
+that incorporate engineering activities.
+2. Availability Modeling: Scheduled and unscheduled
+downtimes should be represented in all simulations mod-
+els of SMT2020 since preventative maintenance (PM)
+actions and tool breakdowns are typical for the compli-
+cated machinery of wafer fabs [1].
+3. Machine Rate Modeling: Batch processing machines, i.e.
+tools where several lots are processed at the same time
+on a single tool [1] and cascading tools [11] have to be
+represented in the models to mimic important process
+features. Load and unload times on the tools and trans-
+portation times between tool groups have to be modeled.
+Moreover, setups, most importantly sequence-dependent
+setups which are often longer than the pure process-
+ing time [1], [2], have to be modeled in some detail to
+represent the offered capacity in a correct way.
+4. Functional Area Speciﬁc Complexities: Important fea-
+tures of certain functional areas have to be represented
+in SMT2020 models. Such features are, for instance,
+lot-to-lens dedications for steppers in the photolithogra-
+phy area, sampling rates for metrology tools, and critical
+queue time (CQT) constraints for the dry etch area.
+5. Operational Complexities: High priority lots, so-called
+hot lots, are known to have a disruptive impact on the
+work-in-process (WIP) ﬂow [12], and as such, are to
+be represented in all SMT2020 models. It is important
+to represent engineering lots in some simulation models
+of the testbed due to the fact that up to one third of
+all WIP lots in a wafer fab can belong to engineering
+activities [10]. CQT process segments [13] are another
+disruptive feature of many modern fabs and these have
+been incorporated at least in some of the SMT2020 mod-
+els. In contrast to the MIMAC datasets [5], [14], there is
+no need to model operators given the degree of automa-
+tion with respect to loading, unloading, and lot transport
+in modern wafer fabs.
+We identify two additional non-functional requirements
+related to the usage of the SMT2020 testbed:
+1. Representation of the Simulation Models of the
+Testbed: The simulation models belonging to the
+SMT2020 testbed should be represented in such a way
+that potential users can implement them without relying
+on a proprietary simulation tool. ASCII or Excel ﬁles
+with a format similar to the MIMAC datasets [14] and
+their derivatives [15] are preferable.
+2. Providing Performance Measure Values of the
+Simulation Models: The values of common performance
+measures in wafer fabs including cycle time (CT), avail-
+ability per functional area, tool utilization, bottlenecks,
+and operating curves must be reported to provide
+potential users with a way to check whether their
+implementation of a simulation model works as
+intended or not.
+B. Discussion of Related Work
+Discrete-event simulation is an important tool for decision-
+making in wafer fabs [1]. There is some evidence that
+building a full wafer fab simulation model from scratch is
+time-consuming and error-prone [2]. Therefore, researchers in
+semiconductor manufacturing are interested in applying sim-
+ulation models of testbeds. The following four simulation
+testbeds are fairly often applied by researchers.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 3 ===
+524 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 33, NO. 4, NOVEMBER 2020
+1. The most common one is the MIMAC testbed [5], [14].
+The testbed is publicly available under [16] and is com-
+posed of six full fab models of different complexity.
+Each wafer fab model includes up to 260 machines
+used to process several products (up to 21) whose route
+length can reach 340 process steps. One of the most
+popular models, the MIMAC dataset 1, is used in numer-
+ous research efforts. Based on this model, [17] assesses
+scheduling algorithms for wafer fabs in a rolling hori-
+zon setting. In [18], the formation of multiple orders per
+job and release algorithms is discussed. The MIMAC
+dataset is also applied to evaluate release schedules
+for wafer fabs in a dynamic and stochastic setting by
+executing them in the simulation model [19], [20]. The
+MIMAC 1 dataset is applied in [21], [22] to evaluate
+qualiﬁcation management decisions in a rolling horizon
+setting. MIMAC dataset 6 is also used extensively in
+research. For example, dispatching problems are tack-
+led in [23], [24], while genetic programming is used
+in [25] and [26] to evaluate dispatching rules. In [27],
+dataset 1 is again used to design and assess methods
+for CT prediction in wafer fabs. Engineering lots are
+added to dataset 1 in [28] to assess integrated planning
+formulations for both production and engineering lots in
+a rolling horizon setting.
+2. The MiniFab model proposed by Spier and Kempf
+in [29] is a reduced-scale simulation model that mimics
+the typical behavior of a wafer fab. It contains reentrant
+process ﬂows, batch processes, and sequence-dependent
+setup times. Using this model, problem instances for
+evaluating a full wafer fab scheduling approach are
+derived in [30]. An integrated scheduling and auto-
+mated material handling approach is assessed in [31] in
+a rolling horizon setting using the MiniFab model.
+3. A scaled-down representation of a real-world wafer fab
+at Harris Semiconductor is described in [32]. It is used
+by Kacar and Uzsoy [33] to estimate clearing functions
+using simulation-based optimization. Production plan-
+ning approaches for wafer fabs are assessed in a rolling
+horizon setting using this model in [34], [35].
+4. A generic 300 mm model including automated material
+handing features is proposed by SEMATECH in [36].
+It is used, for instance, in [37] to generate problem
+instances for global fab-wide scheduling approaches.
+This model is less frequently applied in comparison to
+the three other testbeds and simulation models described
+before.
+Table I summarizes the main characteristics of existing
+testbeds and simulation models. All the discussed testbeds and
+simulation models except the SEMATECH 300mm model are
+publicly available at [16].
+We see from Table I that the model scale is too small,
+i.e., the number of machines and work centers is too low,
+and the process routes are too short to accurately represent
+state-of-the-art wafer fabs. A process route is a sequence of
+process steps necessary to the manufacture of a certain prod-
+uct. A set of possible machines is assigned to each step
+within a route [1]. Moreover, only limited efforts exist to
+TABLE I
+PROPERTIES OF TESTBEDS /SIMULATION MODELS
+provide testbeds for semiconductor supply chain simulation.
+One example is the testbed designed by Ewen et al. [15]. The
+nodes of the simulations models that represent wafer fabs are
+based on the MIMAC dataset 1. A generic data model for
+semiconductor supply chains as a prerequisite for simulation
+models is proposed in [38].
+Overall, we conclude that the existing set of testbeds and
+simulation models, despite having provided the research com-
+munity an excellent platform to tackle a variety of research
+questions, is now aging. These models are still excellent tools
+to study operations of legacy wafer fabs, yet the addition
+of new models that incorporate the scale and complexity of
+modern wafer fabs is required.
+III. SMT2020 F
+EATURES
+We provide details on the various SMT2020 models avail-
+able at this stage. Building baseline models do not require
+them to be precisely matching any speciﬁc fab, just to pro-
+vide the community a baseline that makes sense and is widely
+accepted. During the preparation of this paper, feedback from
+the community was collected to ensure as much as possible
+that reasonable features are chosen for the datasets and that
+they are parameterized in an appropriate way.
+The models are designed and tested under steady state.
+Speciﬁc transient scenarios are left to the users to design
+and run to answer their speciﬁc needs. In general, the mod-
+els presented in SMT2020 can be seen as an update on the
+MIMAC datasets. The main differences between these two
+generations of testbeds are the following:
+• The larger size (number of tools and steps) proposed in
+SMT2020 better ﬁts current fab scale.
+• SMT2020 provides a detailed modelling of scheduled and
+unscheduled downtime instead of a uniﬁed distribution
+for stoppage and repair times.
+• Hot Lots and engineering lots are represented.
+• Complex operational features that were irrelevant or
+non-existent at the time of the MIMAC creation are
+represented:
+- lot-to-Lens dedication
+- cascading
+- critical queue times.
+A. General Structure
+The different datasets in SMT2020 are realistic in their
+scale. Depending on the models, close to a thousand machines
+of 105 types are modeled. Identical machines share all their
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 4 ===
+KOPP et al.: SMT2020—SEMICONDUCTOR MANUFACTURING TESTBED 525
+characteristics (availability patterns, machine rates, qualiﬁca-
+tions etc.) and are grouped in what we denote as a tool group.
+These are grouped in the following functional areas, including
+three metrology areas:
+• diffusion
+• wet etch
+• dry etch
+• implant
+• lithography
+• dielectric
+• planarization
+• thin ﬁlms
+• lithography metrology
+• thin ﬁlms metrology
+• defectivity metrology.
+Because we avoid modeling complex availability and
+machine rate schemes that allow partial machine functions or
+hybrid tools such as in dry etch and thin ﬁlms, individual
+entities (chambers) are deﬁned as machines (tools).
+Ten products with route lengths ranging from 242 to
+583 operations are deﬁned. Routes 1 to 3 are long (more than
+500 steps) and the rest are shorter. The maximum number of
+layers is 44. These routes share some of their operations with
+other routes. Datasets 1 and 3 (HV/LM) are based on two
+products only (one long and one short), while datasets 2 and
+4 (LV/HM) make use of all ten products. Datasets 3 and 4 add
+engineering lots to datasets 1 and 2, respectively.
+The production rates are deﬁned for each tool type based
+on a processing time for a single wafer, a lot of 25 wafers,
+or for a batch. Batches are used in the diffusion area and are
+groups of lots that are processed at the same time on a single
+diffusion tube. The processing time is sampled from a contin-
+uous uniform distribution ( +−5% around the nominal value)
+in each simulation run. A ﬁxed loading and unloading time
+is added to the processing time for the lot or batch. The time
+required to transfer lots between tool groups is represented by
+a delay uniformly sampled between 5 to 10 minutes.
+In all SMT2020 datasets, the maximum batch size is set
+between 100 and 150 wafers with an allowance of one lot to
+allow for some ﬂexibility in the operation. For example, if
+the maximum batch size is 6 lots (150 wafers), a batch can
+be processed as soon as 5 lots are found waiting in the tool
+group queue.
+A special regime, denoted as cascading, takes place in cer-
+tain tools that allow different parts, i.e., wafers or lots, to
+undergo part of their process in parallel with others. This is
+illustrated in Figure 1 for the simplest case of a two-stage pro-
+cess. Practically, this means that the time required for the ﬁrst
+process unit (wafer or lot) of a group is longer than for the
+remainder. It also means that loading and unloading phases are
+only accounted for once, at the beginning and end of the cas-
+cade. The remaining loading/unloading operations take place
+in parallel with processing of other lots and therefore do not
+contribute to the processing time. All tools in implant, pla-
+narization, thin ﬁlms and wet etch areas, and about half of the
+tools in dielectric area operate with cascading.
+When setups apply, a setup avoidance function is added to
+the regular prioritization scheme that forces the tool to remain
+Fig. 1. Wafer cascading.
+set on the same operation as long as there are lots waiting for
+it in the queue. Hot lots are triggered by a change in demand.
+In that regard, whether it is a direct demand from a customer
+in a make-to-order system or a sudden depleting of stock in
+a make-to-stock system makes little difference at the opera-
+tional level, and the practice shows that there are no across
+the board differences in the proportion of hot lots in either
+LV/HM or HV/LM systems. This is why, in all models, the
+same proportion of 2.5% of all lots have been deﬁned as hot
+lots which means that they take precedence on all other lots,
+and when necessary, trigger setups.
+For each of the proposed datasets, the number of tools in
+each tool group was determined to attain a certain target level
+of utilization coherent with what is found in the industry within
+the tool speciﬁc functional area, and for a loading level of
+about 10,000 wafer starts per week (WSPW). As is usually the
+case in fabs, and with the exception of a few chosen tools, we
+avoid having what is called in the fab jargon “one of a kind”
+tools, meaning that a minimum number of two machines was
+set to ensure a minimum tool redundancy.
+B. Availability Modeling
+The level of detail in the availability modeling sets the
+models in SMT2020 apart from their predecessors that tend
+to model all stoppages as a set of distributions for the time
+between failures and the time to repair. In SMT2020 PM, also
+known as scheduled down time (SDT) and breakdowns, i.e.,
+unscheduled down time (UDT), are modeled separately. For
+each area, UDT and SDT are carefully balanced. In areas
+known for their stability like metrology or planarization, we
+aim at 90% of the total down time accounted by SDT and
+only 10% by UDT, while in lithography, where reliability is
+an issue, the target for SDT is set at 50% of the total down
+time only.
+1) UDT: Under the UDT are found a wide range of events
+causing production to stop unexpectedly: First and foremost,
+equipment malfunction, but also SPC out-of-control, either
+recipe-speciﬁc or related to defectivity, delays or breakdowns
+in ancillary or transport systems, shortages of replacement
+parts required in troubleshooting either in the fab or from the
+supplier etc. Although other distributions are sometimes better
+suited to precisely render the TBF and TTR distribution, the
+exponential distribution offers a reasonable baseline (see [39]),
+and is simple to implement. This is why we use an exponential
+distribution to sample both time before failure (TBF) and time
+to repair (TTR). The mean time before failure (MTBF) is set
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 5 ===
+526 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 33, NO. 4, NOVEMBER 2020
+at one week for all tools. The mean time to repair (MTTR) is
+then computed to reach a certain target availability and a cer-
+tain target balance between UDT and SDT, both deﬁned at the
+area level.
+2) SDT: For lithography, diffusion, and all types of
+metrology, the maintenance is time-based. All tools undergo
+a long quarterly PM and a monthly PM of medium dura-
+tion. In addition, lithography tools undergo a shorter weekly
+PM. Maintenance for all other tools is based on usage (counter-
+based). To provide a realistic baseline PM frequency for these
+tools, all counters are set to trigger a long duration PM quar-
+terly, a medium duration PM monthly, and a short duration
+PM weekly.
+C. Metrology and Quality Modeling
+The frequency of inspection on metrology tools is deﬁned
+by a sampling rate set individually for each operation. All lots
+are inspected (100% rate) for approximately half of lithogra-
+phy metrology operations, the other half is characterized by
+measurement rates between 10% and 50%. Thin ﬁlms metrol-
+ogy operations have inspection rates ranging from 30% to
+40%. Typically, the process front-end where the transistors are
+built is more sensitive to particle contamination than the back-
+end where the metal layers are formed. This is why defectivity
+metrology uses a sampling rate set between 50% and 60% in
+the front-end and 10% in the back-end. In some lithography
+operations (about one third) 0.5% to 2% of lots are reworked.
+Rework involves a re-doing of the process segment imme-
+diately preceding the rework operation, following the same
+recipes and on the same machines.
+D. Constraints
+To cope with setups, operators tend to run long series of
+lots of the same operation on a machine before switching to
+another. This mode of operation is one of the major sources of
+variability that plagues WIP ﬂow in fabs. Setups are therefore
+a critical feature of the proposed models, and are incorporated
+in three areas. Two tool groups in the lithography area undergo
+setups for reticle change. In the back-end of the process two
+dry etch tool groups have simple sequence-dependent setups
+(two groups of operations). In the implant area, setups are
+required for gas change, and so three setup groups are deﬁned.
+In lithography, a lot-to-lens dedication scheme is applied on
+three different tool groups, and for three groups of operations.
+The sensibility to overlay issues is a characteristic of modern
+processes as opposed to older ones. Depending on the process,
+the machinery, and the product value, companies differ in their
+way to tackle this topic. They may simply accept the yield
+loss if the value is low and the time to market is critical (typi-
+cally for memories) or try to balance between operational and
+quality concerns either by running critical steps under a strict
+Lot-to-Lens dedication scheme or by allowing some kind of
+tool grouping based on their optical characteristics, allowing
+lots to be processed indistinctively within said groups. In our
+models, when a lot-to-lens dedication applies, once a lot is
+processed on a speciﬁc tool for the ﬁrst of these operations, it
+must be returned to the same tool for the remaining operations
+in the group.
+CQTs are deﬁned and provided for the datasets, but no
+special dispatching rule is applied at the entrance of a CQT
+segment at this point.
+E. Speciﬁcs of SMT2020 Models
+1) Preliminary Steps: One of the key metrics of a fab
+behavior is CT. Since it is product-dependent, and in order
+to be able to present aggregated results, we normalize each
+product’s CT by its minimum achievable value, denoted as
+raw processing time (RPT). The result is what is known as
+ﬂow factor (FF) [1], calculated as the ratio of the product
+CT and its RPT. As a preliminary step, we ﬁrst run a model
+with lots starting at very long intervals. As a result, these
+lots progress in an empty fab and their waiting time is close
+to zero (the speciﬁc model is unimportant since the number
+of tools has no impact on a single lot trajectory). In such
+a setup, no minimum batch size is required for these lots in
+order not to wait extremely long period of times at diffusion
+tools. The products’ minimum CT is then measured to obtain
+the RPT. The source of variability in the resultant CT lays in
+the fact that some lots experience delays due to PMs or that
+they are sampled in metrology steps. The resultant RPTs for
+all ten products (regular and hot lots) are given in Table II.
+2) Dataset 1: For this ﬁrst model which aims at represent-
+ing a HV/LM fab, only routes 3 and 4 are used, whose lengths
+are 583 and 343 steps, respectively. Although the capacity
+of the fab is around 10,200 WSPW, the proposed working
+point in order to reach a realistic utilization is 10,000 WSPW
+(5,000 WSPW for each product), from which 2.5% are hot lots.
+This translates to the introduction of a new regular lot of each
+product every 51.69 minutes, and of a hot lot every 2,016 min-
+utes. Often, high-volume manufacturing is associated with
+a MTS mode. Therefore, we do not represent any due date for
+the lots and adopt a simple First-Come First-Served (FCFS)
+dispatching rule along the process.
+3) Dataset 2: This second model aims at representing
+a LV/HM fab. All ten products, with route length ranging from
+242 steps for product 5 to 583 steps for product 3, are used
+and launched into the fab at the same rate. Although the model
+seems stable for a load as high as 10,250 WSPW, we decided
+to set the working point of this model to 10,000 WSPW
+(1,000 WSPW per product) to reach a realistic maximum uti-
+lization. Here too, 2.5% of lots are hot lots. This translates
+to the introduction of a new regular lot every 258.46 minutes
+and of a hot lot every 10,080 minutes for each product.
+This basic high-mix model aims at representing a foundry
+fab which is mostly running in MTO mode. Thus, the criti-
+cal ratio (CR) dispatching rule is used to prioritize between
+lots. CR can be considered as a derivative of the earliest due
+date (EDD) rule that takes into consideration not only the due
+date but also the remaining process time required to complete
+production. The CR index of a lot is deﬁned as the ratio of the
+time remaining to due date and the processing time required to
+completion [1]. In dataset 2, lot due dates are determined as:
+d
+j: = rj + zj · FFi · RPTi, (1)
+where dj and rj are the due date and release date of lot j,
+respectively. It is assumed that lot j belongs to product i.T h e
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 6 ===
+KOPP et al.: SMT2020—SEMICONDUCTOR MANUFACTURING TESTBED 527
+TABLE II
+BASELINE FLOW FACTORS FOR DATASET 2
+quantity zj is sampled from a continuous uniform distribution
+between 0.8 and 1.2 to randomize due dates, RPTi is product
+i’s RPT, and FFi is a user-determined FF for product i.F o r
+each product i, baseline values for FFi were calculated as the
+92% percentile FF while running the model under a FCFS
+rule at 10,000 WSPW. In Table II we provide the RPTs and
+baseline FF values both for regular and hot lots.
+4) Datasets 3 and 4: Datasets 3 and 4 are extensions of
+datasets 1 and 2 that include engineering products. Dataset
+3 represents a HV/LM wafer fab with one engineering prod-
+uct whose route is inherited from route 3. For this dataset,
+40 engineering lots are released per week in addition to the
+10,000 WSPW, i.e., 400 production lots. The FCFS rule is
+applied as for dataset 1. Dataset 4 is based on the same ten
+products as dataset 2 with the addition of three engineering
+products derived from products 1, 2, and 3. It is a LV/HM
+wafer fab. Given a release of 400 production lots per week,
+a total of 80 engineering lots are launched per week, while
+the number of lots for each engineering product is the same.
+The due dates are set as described for dataset 2, and the CR
+rule is applied as for dataset 2.
+20% of all engineering lots are hot lots in both datasets. The
+ﬁrst and the second half of the engineering lots are released
+on Monday and Wednesday morning each week, respectively.
+The number of wafers per engineering lot is distributed accord-
+ing to DU[1, 10] where DU[a, b] denotes a discrete uniform
+distribution over the integers {a,..., b}.
+The difference between the routes of production and engi-
+neering products consists in an additional calibration effort for
+engineering lots on speciﬁc operations. First, a setup has to
+be performed for each operation of engineering lots on the
+planarization tools. The setup time is distributed according
+to U[15, 60], where U[a, b] refers to a continuous uniform
+distribution over the interval [ a, b]. An additional calibration
+time is also required on lithography tools for reticle change,
+i.e., a calibration time of 16 or 30 minutes is added to the
+baseline setups time. The overall time for calibration and ret-
+icle change in minutes is distributed according to U[16, 32]
+or U[30, 60] except for the last three photolithography steps
+TABLE III
+MAIN CHARACTERISTICS AND PERFORMANCE MEASURES OF DATASET 1
+of the routes where the overall time is distributed according
+to U[52.5, 127.5] due to the fact that calibration is more cru-
+cial for these operations. Batches can only contain production
+and engineering lots belonging to the same route and same
+operation, e.g., production lots belonging to product 3 and
+engineering lots from the engineering product derived from
+product 3 can be batched together.
+Due to the higher load, more tools than in datasets 1 and 2
+are required in datasets 3 and 4, especially for tool groups with
+lot-based processing. Moreover, the counters for the PMs are
+changed for both datasets. This is the main reason why we
+introduce the two new datasets with engineering features.
+IV . P
+ERFORMANCE OF THE DIFFERENT MODELS
+A. Availability, Utilization, and Bottlenecks
+An overview of the characteristics and performance mea-
+sures of each functional area of SMT2020 datasets 1 and 2 is
+presented in Tables III and IV. These are reviewed at the
+tool group level in the electronic supplement that will be pro-
+vided online. The ﬁrst two columns provide the number of
+tool groups and total number of tools in the area.
+Tool availability is the result of a set of decisions about
+the duration (or frequency) of PMs and the relative proportion
+of SDT, which is representative of the level of availability
+randomness and has an important impact on the variability of
+the tool’s capacity. In Tables III and IV we provide the average
+availability in each area and the proportion of SDT.
+Metrology tools show the highest availability and are also
+more stable in the fab, with only about 10% of their down-
+time attributed to breakdowns. On the other end of the scale,
+tools in implant, dielectric, and planarization have availability
+values of around 80% on average. Lithography tools are the
+most unstable, with roughly half of the down time attributed
+to breakdowns.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 7 ===
+528 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 33, NO. 4, NOVEMBER 2020
+TABLE IV
+MAIN CHARACTERISTICS AND PERFORMANCE MEASURES OF DATASET 2
+By design, we try to make the lithography area the fab
+constraint by adjusting the number of tools in preliminary
+simulation experiments. Consequently, the highest utilization
+ﬁgures above 92% belong to lithography tools. At the other
+extreme, most tool groups presenting a very low utilization
+are those where only a single tool is required, but two tools
+are installed to ensure redundancy.
+B. Operating Curve
+The behavior of the fab is typically represented by what is
+denoted as its operating curve, presenting the evolution of CT
+as a function of the fab load. In our case, in order to unify the
+results of several products, we show FF values instead of CT
+values. We present in Figure 2 and Figure 3 the percentiles
+of the FF curves as a function of the load (ratio of wafer
+starts and what has been determined as the model capacity,
+i.e., 10,200 and 10,250 for datasets 1 and 2 respectively). The
+lowest and highest curves are for the shortest and longest CT
+respectively, with the other curves ordered one above the other
+for percentiles from 5% to 95% in an increasing order. Only
+regular lots are represented, hot lots have a FF close to 1.0.
+The quantiles shown in Figures 2 and 3 are computed based
+on a single simulation run with a length of eight years where
+the ﬁrst year serves as warmup period. All lot cycle times are
+collected to derive the order statistics which are required to
+compute the quantiles. More advanced sequential procedures
+for estimating quantiles with a given precision such as the
+zoom in (ZI) procedure [40] are not used in this paper since
+the importance of the precision is secondary to the main goal
+of the paper which consists in introducing the models and
+showing their general behavior.
+At 10,000 WSPW (the proposed working point for both
+models), the median of FF is 1.85 and 1.95, for datasets 1
+and 2, respectively, while the maximum reach values of 2.37
+Fig. 2. Operating curves for dataset 1.
+Fig. 3. Operating curves for dataset 2.
+and 2.46, respectively. 90% of all lots have a FF between 1.73
+and 2.01 for dataset 1, and between 1.79 and 2.13 for dataset 2
+corresponding to the 5% and 95% percentiles, respectively.
+Interestingly, we remark that for dataset 2, and for the
+largest FF values (percentile 75 and above) the curves are ﬁrst
+decreasing with the load. This seemingly counter-intuitive phe-
+nomenon is due to the fact that for low fab loadings some lots
+undergo long periods of waiting at diffusion tools for batches
+to be formed. This does not occur in dataset 1 because it is
+a high-volume scheme in which the number of lots of each
+type is ﬁve times higher than in dataset 2 (for each load, half
+of the products are of the same type in dataset 1 and only one
+tenth in dataset 2). Detailed performance measure values for
+datasets 1 and 2 can be found in Appendix I of the electronic
+supplement.
+V. C
+ASE STUDY
+A. Dispatching Strategies for Production and Engineering
+Lots
+This study aims at demonstrating the usage of models from
+the testbed to answer questions that require some extension
+of the models. We will assess the performance of dispatching
+strategies for production and engineering activities that are
+already used for the Kayton model [10] and the MIMAC 1
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 8 ===
+KOPP et al.: SMT2020—SEMICONDUCTOR MANUFACTURING TESTBED 529
+TABLE V
+DESIGN OF EXPERIMENTS
+dataset [28]. Note that proposing new dispatching strategies is
+beyond the scope of this study.
+A basic dispatching strategy, abbreviated by BASE, is
+used for all tool groups in datasets 3 and 4. Production hot
+lots (PHL) and engineering hot lots (EHL) have a higher prior-
+ity than production-related regular lots (PRL) and engineering-
+related regular lots (ERL), i.e., hot lots are always preferred
+to regular lots. Given lots with the same priority, FCFS for
+dataset 3 and CR for dataset 4 are applied. The priorities for
+EHL, PHL, ERL, and PRL are 20, 20, 10, and 10, respec-
+tively. Moreover, integrated dispatching strategies similar to
+the ones from [10] for both production lots (PLs) and engi-
+neering lots (ELs) are applied. PLs and ELs consist of hot and
+regular production and engineering lots, respectively. The ﬁrst
+additional strategy is called engineering ﬁrst (EF), where ELs
+have a higher priority than PLs, i.e., if lots of type EL are avail-
+able they are always preferred. The priorities for EHL, PHL,
+ERL, and PRL are chosen as 25, 20, 15, and 10, respectively.
+The EF strategy is applied to all tool groups.
+The capacity allocation to engineering (CAtE) strategy
+only allows engineering activities within so-called engineering
+intervals with the exception that if no ELs are available within
+the engineering interval, production activities are allowed
+and vice versa. The lengths of the engineering and produc-
+tion intervals have to be chosen. Production and engineering
+intervals are repeated in a consecutive manner, i.e., it is enough
+to specify pairs (lp, le) where lp is the length of the produc-
+tion interval and le the length of the engineering interval. The
+settings (151.2, 16.8), (75.6, 8.4), and (21.6, 2.4) in hours are
+used for dataset 3, whereas (134.6, 33.4), (67.2, 16.8), and
+(19.2, 4.8) are the corresponding settings for the simulation
+experiments with dataset 4. This leads to a periodicity of one
+week, half a week, and a single day.
+A tool group-speciﬁc number of lots, a so-called trigger
+limit, must be prescribed for the changeover trigger (CoT)
+strategy. If the number of ELs waiting in front of a particular
+tool group reaches or exceeds the trigger limit, this number
+of ELs will be processed. Trigger limits of 100, 50, 25, and
+10 lots are applied for both datasets in the experiments.
+Both CAtE and CoT are only used for dispatching on the
+LithoTrack_FE_95 and LithoTrack_FE_115 tool groups which
+are formed by steppers, typical bottlenecks in wafer fabs. For
+the remaining tool groups, the BASE strategy is applied. The
+design of experiments is summarized in Table V.
+Fig. 4. Average cycle times in days for dataset 3.
+A simulation horizon of two years including a warm-
+up phase of one year which is excluded from the statistics
+is used. We report the global performance measure values
+throughput (TH), i.e., the number of completed lots within the
+simulation horizon, the average cycle time (ACT) in days, and
+the percentage of lots ﬁnished on time (%ONTIME). Average
+values of all performance measure values are provided based
+on 20 independent simulation replications.
+The commercial simulation engine AutoSched AP 11.3.0 is
+applied. The CAtE and CoT strategies are coded in the C ++
+programming language applying customization features of the
+AutoSched AP software.
+B. Performance Assessment
+Detailed simulation results are only provided in Appendix II
+of the electronic supplement due to space limitations. The ACT
+values for datasets 3 and 4 are shown in Figures 4 and 5 where
+the results are grouped according to the EHL, PHL, ERL, and
+PRL lot types.
+First, we see from Tables AII-1 and AII-3 in the supple-
+mentary material that the ACT values of the different ELs are
+less than the ones of the corresponding PLs since the number
+of wafers is much smaller for the ELs. We observe from the
+tables and the Figures 3 and 4 that the performance measure
+values of the ELs are the best under the EF strategy. However,
+at the same time the performance measure values of the PLs
+are the worst compared to all other strategies. The Tables AII-1
+- AII-4 in the supplementary material show that a long pro-
+duction interval for the CAtE policy results in less TH and
+larger ACT values for ELs and less ELs completed on time
+due to long waiting times in front of the tool groups.
+The same behavior is observed for large values of the trigger
+limit. We see from Table AII-1, in the supplementary mate-
+rial that in these situations the ACT values of the PL and
+the percentage of PLs ﬁnished on time are worse too. But
+if the CR rule is used as for dataset 4, this deterioration of
+the performance values for PLs cannot be observed (see Tables
+AII-3, AII-4, in the supplementary material and Figure 4) since
+the effect is more balanced. This is because the CAtE and CoT
+strategies are only applied on two stepper tool groups.
+Moreover, we can see that the deterioration for ELs is
+reduced, i.e., the TH and the ACT values are very similar for
+ERLs for different parameterizations of the CAtE and CoT
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 9 ===
+530 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 33, NO. 4, NOVEMBER 2020
+Fig. 5. Average cycle times in days for dataset 4.
+strategies. However, to achieve short CT values as for the
+EHLs long production intervals or high trigger limits are more
+difﬁcult to compensate.
+VI. A CCESSING AND USING THE DATASETS
+The testbed was created and tested using the AutoSched
+AP simulation software. The four simulation models with the
+discussed features are publicly available at [16]. We provide
+access to the testbed models on the following levels:
+1. The four datasets of the testbed are represented as
+a set of EXCEL sheets in a generic, i.e., simulation
+tool-independent manner (ﬁles SMT_20-20_Model_Da-
+ta_*.xlsx in the folder General_Data of the testbed).
+2. We provide a detailed documentation of
+the testbed for users of Autosched AP (ﬁle
+SMT_2020_AutoSched_AP_documentation.pdf in
+the AutoSched folder of the testbed). The ﬁle contains
+the technical information necessary to navigate and
+use the data ﬁles of the simulation models. The main
+features of the different datasets are described and their
+implementation using AutoSched AP are explained.
+Applicants of the testbed can use the simulation models
+directly in AutoSched AP. They are located in the
+AutoSched folder of the testbed.
+3. It is also possible to use the datasets for other
+discrete-event simulation tools. For instance, the sim-
+ulation engine AnyLogic is popular in semiconduc-
+tor manufacturing [41]. To make such attempts eas-
+ier we also provide a simulation tool-independent
+documentation of the datasets by means of the ﬁle
+SMT_2020_generic_format.pdf which is again located
+in the General_Data folder of the testbed [16].
+The following procedure is recommended to use the
+datasets:
+1. In a ﬁrst step, the model has to be implemented using
+the simulation tool of choice. Alternatively, the provided
+simulation models can be directly used if the AutoSched
+AP software is available.
+2. Simulation runs have then to be carried out based on
+the simulation models from Step 1. Statistics have to be
+gathered for TH and CT for all the models, whereas the
+number of ontime lots has to be additionally collected
+for the LV/HM models. Simulation results can be found
+in the electronic supplement for a direct comparison.
+3. If the values of the performance measures of interest
+obtained in Step 2 are close to the ones from the sup-
+plement, the simulation models can be used to answere
+speciﬁc questions. This might require to add additional
+functionality to the simulation models or to couple
+the simulation models with planning and control algo-
+rithms. In the latter situation, the infrastructure sketched
+in [15], [42] can be applied.
+VII. C
+ONCLUSION
+Concluding a two-year long development effort, we present
+the semiconductor manufacturing researchers and practitioners
+the new simulation testbed SMT2020 which aims at mim-
+icking the behavior of modern fabs. During this development
+phase, the main ideas and preliminary results were presented
+in [8], [9] to the community who was asked to provide feed-
+back. We carefully incorporated the required features and
+validated the result to ensure the relevance of our models.
+The core of SMT2020 is composed of a set of four mod-
+els, namely datasets 1 and 2 which provide the foundation
+of the testbed by representing a HV/LM fab and a LV/HM
+fab respectively and datasets 3 and 4 which add engineering
+lots to datasets 1 and 2, respectively. SMT2020 is available
+under [16], and we encourage researchers to use it when issues
+relevant to modern fabs are to be studied. The characteristics
+of the simulation models are reviewed herein and we presented
+important performance measure values to allow comparisons
+with future bodies of work.
+We demonstrated the usage of the testbed datasets by per-
+forming a simulation study where we assessed the performance
+of integrated dispatching strategies for production and engi-
+neering activities. Datasets 3 and 4 were extended by adding
+customized dispatching strategies. Related performance mea-
+sure values are reported.
+There are several directions for future research. Consistent
+with the idea of tackling managerial issues related to features
+that emerged in modern fabs, our planned next steps are to
+tackle the issue of CQT constraints and how to reduce their
+impact on operation. As a second research avenue, we are
+interested in extending the integrated planning formulations
+from [43] for production and engineering activities towards
+datasets 3 and 4. It is also desirable to include some of the
+SMT2020 models as nodes in the semiconductor supply chain
+testbed proposed in [15].
+R
+EFERENCES
+[1] L. J. Mönch, W. Fowler, and S. J. Mason, Production Planning and
+Control for Semiconductor Wafer Fabrication Facilities: Modeling,
+Analysis, and Systems (Operations Research/Computer Science
+Interfaces), vol. 52. New York, NY , USA: Springer, 2013.
+[2] J. W. Fowler, L. Mönch, and T. Ponsignon, “Discrete-event simulation
+for semiconductor wafer fabrication facilities: A tutorial,” Int. J. Ind.
+Eng. Theory Appl. Pract. , vol. 22, no. 5, pp. 661–682, 2015.
+[3] M. A. Dümmler, “Analysis of the instationary behavior of a wafer
+fab during product mix changes,” in Proc.Winter Simulat. Conf., 2000,
+pp. 1436–1442.
+[4] M. Klein and A. Kalir, “A full factory transient simulation model for the
+analysis of expected performance in a transition period,” in Proc.Winter
+Simulat. Conf., 2006, pp. 1836–1839.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 10 ===
+KOPP et al.: SMT2020—SEMICONDUCTOR MANUFACTURING TESTBED 531
+[5] J. W. Fowler and J. Robinson, “Measurement and improvement of manu-
+facturing capacity (MIMAC) ﬁnal report,” Sematech, Austin, TX, USA,
+Rep. 95062861A-TR, 1995.
+[6] J. Shin, D. Grosbard, J. R. Morrison, and A. Kalir, “Decomposition
+without aggregation for performance approximation in queueing network
+models of semiconductor manufacturing,” Int. J. Prod. Res. , vol. 57,
+no. 22, pp. 7032–7045, 2019.
+[7] T. Ziarnetzky, L. Mönch, and R. Uzsoy, “Simulation-based performance
+assessment of production planning models with safety stock and forecast
+evolution in semiconductor wafer fabrication,” IEEE Trans. Semicond.
+Manuf., vol. 33, no. 1, pp. 1–12, Feb. 2020.
+[8] M. Hassoun and A. Kalir, “Towards a new simulation testbed for
+semiconductor manufacturing,” in Proc. Winter Simulat. Conf. , 2017,
+pp. 612–3623.
+[9] M. Hassoun, D. Kopp, A. Kalir, and L. Mönch, “A new high-
+volume/low-mix simulation testbed for semiconductor manufacturing,”
+in Proc.Winter Simulat. Conf., 2019, pp. 2419–2428.
+[10] K. Crist and R. Uzsoy, “Prioritizing production and engineering lots
+in wafer fabrication facilities: A simulation study,” Int. J. Prod. Res ,
+vol. 49, no. 11, pp. 3105–3125, 2011.
+[11] C. D. Geiger, K. G. Kempf, and R. Uzsoy, “A tabu search approach
+to scheduling an automated wet etch station,” J. Manuf. Syst. , vol. 16,
+no. 2, pp. 102–116, 1997.
+[12] Y . Narahari and L. M. Khan, “Modeling the effect of hot lots in semicon-
+ductor manufacturing systems,” IEEE Trans. Semicond. Manuf., vol. 10,
+no. 1, pp. 185–188, Feb. 1997.
+[13] A. Klemmt and L. Mönch, “Scheduling jobs with time constraints
+between consecutive process steps in semiconductor manufacturing,” in
+Proc. Winter Simulat. Conf. , 2012, pp. 2173–2182.
+[14] G. E. Feigin, J. W. Fowler, and R. C. Leachman, “Semiconductor wafer
+manufacturing data format speciﬁcation,” Sematech, Austin, TX, USA,
+Rep., 1994.
+[15] H. Ewen, L. Mönch, H. Ehm, T. Ponsignon, J. W. Fowler, and
+L. Forstner, “A testbed for simulating semiconductor supply chains,”
+IEEE Trans. Semicond. Manuf., vol. 30, no. 3, pp. 293–305, Aug. 2017.
+[16] (2020). Testbeds Data Sets . [Online]. Available:
+http://p2schedgen.fernuni-hagen.de/index.php?id=simulation&L=1
+[17] L. Mönch and J. Zimmermann, “A computational study of a shifting
+bottleneck heuristic for multi-product complex job shops,” Prod. Plan.
+Control, vol. 22, no. 1, pp. 25–40, 2011.
+[18] L. Mönch, J. Zimmermann, S. Mason, and J. W. Fowler, “Multiple
+orders per job formation and release strategies in large scale wafer fabs:
+A simulation study,” J. Simulat., vol. 5, no. 1, pp. 25–43, 2011.
+[19] N. B. Kacar, L. Mönch, and R. Uzsoy, “Planning wafer starts using
+nonlinear clearing functions: A large-scale experiment,” IEEE Trans.
+Semicond. Manuf., vol. 26, no. 4, pp. 602–612, Nov. 2013.
+[20] N. B. Kacar, L. Mönch, and R. Uzsoy, “Modeling cycle times in pro-
+duction planning models for wafer fabrication,” IEEE Trans. Semicond.
+Manuf., vol. 29, no. 2, pp. 153–167, May 2016.
+[21] D. Kopp and L. Mönch, “A hierarchical approach to qualiﬁcation
+management in wafer fabs,” in Proc. Winter Simulat. Conf. , 2018,
+pp. 3514–3525.
+[22] D. Kopp, L. Mönch, D. Pabst, and M. Stehli, “Qualiﬁcation management
+in wafer fabs: Optimization approach and simulation-based performance
+assessment,” IEEE Trans. Autom. Sci. Eng., vol. 17, no. 1, pp. 475–489,
+Jan. 2020.
+[23] M. Mittler and A. K. Schoemig, “Comparison of dispatching rules
+for reducing the mean and variability of cycle times in semiconductor
+manufacturing,” in Proc. Oper. Res. Proc., 2000, pp. 479–485.
+[24] Z. Zhou and O. Rose, “A composite rule combining due date control
+and WIP balance in a wafer fab,” in Proc. Winter Simulat. Conf., 2011,
+pp. 2080–2087.
+[25] T. Hildebrandt, D. Goswami, and M. Freitag, “Large-scale simulation-
+based optimization of semiconductor dispatching rules,” in Proc. Winter
+Simulat. Conf., 2014, pp. 2580–2590.
+[26] M. Kück, E. Broda, M. Freitag, T. Hildebrandt, and E. M. Frazzon,
+“Towards adaptive simulation-based optimization to select individual
+dispatching rules for production control,” in Proc. Winter Simulat. Conf.,
+2017, pp. 3852–3863.
+[27] M. Hassoun, “On improving the predictability of cycle time in an NVM
+fab by correct segmentation of the process,” IEEE Trans. Semicond.
+Manuf., vol. 26, no. 4, pp. 613–618, Nov. 2013.
+[28] T. Ziarnetzky and L. Mönch, “Incorporating engineering process
+improvement activities into production planning formulations using
+a large-scale wafer fab model,” Int. J. Prod. Res. , vol. 54, no. 21,
+pp. 6416–6435, 2016.
+[29] J. Spier and K. G. Kempf, “Simulation of emergent behavior in man-
+ufacturing systems,” in Proc. IEEE/SEMI Adv. Semicond. Manuf. Conf.
+Workshops, 1995, pp. 90–94.
+[30] M. E. Pfund, H. Balasubramanian, J. W. Fowler, S. J. Mason, and
+O. Rose, “A multi-criteria approach for scheduling semiconductor wafer
+fabrication facilities,” J. Schedul., vol. 11, pp. 29–47, Nov. 2008.
+[31] R. Driessel and L. Mönch, “An integrated scheduling and material han-
+dling approach for complex job shops: A computational study,” Int. J.
+Prod. Res., vol. 50, no. 20, pp. 5966–5985, 2012.
+[32] D. Kayton, T. Teyner, C. Schwartz, and R. Uzsoy, “Focusing main-
+tenance improvement efforts in a wafer fabrication facility operating
+under the theory of constraints,” Prod. Invent. Manag. J., vol. 38, no. 4,
+pp. 51–77, 1997.
+[33] N. B. Kacar and R. Uzsoy, “Estimating clearing functions for production
+resources using simulation optimization,” IEEE Trans. Autom. Sci. Eng.,
+vol. 12, no. 2, pp. 539–552, Apr. 2015.
+[34] T. Ziarnetzky, B. Kacar, L. Mönch, and R. Uzsoy, “Simulation-based
+performance assessment of production planning formulations for semi-
+conductor wafer fabrication,” in Proc. Winter Simulat. Conf. , 2015,
+pp. 2884–2895.
+[35] T. Ziarnetzky, L. Mönch, and R. Uzsoy, “Rolling horizon production
+planning for wafer fabs with chance constraints and forecast evolution,”
+Int. J. Prod. Res. , vol. 56, no. 18, pp. 6112–6134, 2018.
+[36] E. Campbell and J. Ammenheuser, “300mm factory layout and mate-
+rial handling modeling: Phase II report,” Sematech, Austin, TX, USA,
+Rep. 99113848BENG, 2000.
+[37] A. A. Upasani, R. Uzsoy, and K. Sourirajan, “A problem reduc-
+tion approach for scheduling semiconductor wafer fabrication facil-
+ities,” IEEE Trans. Semicond. Manuf. , vol. 19, no. 2, pp. 216–225,
+2006.
+[38] G. Laipple, S. Dauzère-Pérès, T. Ponsignon, and P. Vialletelle, “Generic
+data model for semiconductor manufacturing supply chains,” in Proc.
+Winter Simulat. Conf. , 2018, pp. 3615–3626.
+[39] A. Schömig and O. Rose, “On the suitability of the Weibull distribution
+for the approximation of machine failures,” inProc. Ind. Eng. Res. Conf.,
+May 2003, p. 1820.
+[40] E. J. Chen and W. D. Kelton, “Quantile and tolerance-interval estimation
+in simulation,” Eur. J. Oper. Res., vol. 168, no. 2, pp. 520–540, 2006.
+[41] J. Yuan and T. Ponsignon, “Towards a semiconductor supply chain sim-
+ulation library (SCSC-SIMLIB),” in Proc. Winter Simulat. Conf. , 2014,
+pp. 2522–2532.
+[42] T. Ponsignon and L. Mönch, “Simulation-based performance assess-
+ment of master planning approaches in semiconductor manufacturing,”
+OMEGA, vol. 46, pp. 21–35, Jul. 2014.
+[43] T. Ziarnetzky, L. Mönch, T. Ponsignon, and H. Ehm, “Integrated plan-
+ning of production and engineering activities in semiconductor supply
+chains: A simulation study,” in Proc. Winter Simulat. Conf. , 2019,
+pp. 2324–2335.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 03,2026 at 08:23:20 UTC from IEEE Xplore.  Restrictions apply. 

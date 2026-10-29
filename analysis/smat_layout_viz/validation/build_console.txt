@@ -1,0 +1,191 @@
+Computing sampled directed topology betweenness (k=128, seed=2022)...
+Saved 01_equipment_layout
+Saved 02_rail_network
+Saved 03_equipment_rail_overlay
+Saved 04_tool_group_layout
+Saved 05_workcenter_bay_heatmap
+Saved 06_bay_equipment_distribution
+Saved 07_bay_directed_network
+Saved 08_topology_and_stockers
+Saved 09_equipment_density_grid
+Saved 10_equipment_anchor_points
+Saved selected_workcenters/01_DE_FE_86
+Saved selected_workcenters/01_DE_FE_86_detail
+Saved selected_workcenters/02_LithoTrack_FE_95
+Saved selected_workcenters/02_LithoTrack_FE_95_detail
+Saved selected_workcenters/03_DE_BE_66
+Saved selected_workcenters/03_DE_BE_66_detail
+Saved selected_workcenters/04_TF_BE_40
+Saved selected_workcenters/04_TF_BE_40_detail
+Saved selected_workcenters/05_Diffusion_FE_94
+Saved selected_workcenters/05_Diffusion_FE_94_detail
+{
+  "passed_checks": 189,
+  "counts": {
+    "PRODUCTION": 1068,
+    "STOCKER": 40,
+    "COMPLETE": 4,
+    "COMMIT": 4
+  },
+  "top_groups": [
+    {
+      "STNFAM": "DE_FE_86",
+      "area": "Dry_Etch",
+      "equipment_count": 149,
+      "bay_count": 6,
+      "bays": "A11|A12|A13|A14|A15|A16",
+      "max_anchor_distance_raw": 92477.28570500368,
+      "x_span_raw": 75622.09051181097,
+      "y_span_raw": 56666.7028061216,
+      "both_A_B_rows": false
+    },
+    {
+      "STNFAM": "LithoTrack_FE_95",
+      "area": "Litho",
+      "equipment_count": 47,
+      "bay_count": 3,
+      "bays": "B7|B8|B9",
+      "max_anchor_distance_raw": 61245.09883975856,
+      "x_span_raw": 30248.836192912495,
+      "y_span_raw": 55833.36894132654,
+      "both_A_B_rows": false
+    },
+    {
+      "STNFAM": "DE_BE_66",
+      "area": "Dry_Etch",
+      "equipment_count": 21,
+      "bay_count": 2,
+      "bays": "A4|A5",
+      "max_anchor_distance_raw": 56730.1154678124,
+      "x_span_raw": 15124.4181023622,
+      "y_span_raw": 55833.36894132559,
+      "both_A_B_rows": false
+    },
+    {
+      "STNFAM": "DE_FE_62",
+      "area": "Dry_Etch",
+      "equipment_count": 21,
+      "bay_count": 2,
+      "bays": "A8|A9",
+      "max_anchor_distance_raw": 56525.08722239682,
+      "x_span_raw": 15124.418090551,
+      "y_span_raw": 55625.0354751266,
+      "both_A_B_rows": false
+    },
+    {
+      "STNFAM": "TF_BE_40",
+      "area": "TF",
+      "equipment_count": 21,
+      "bay_count": 2,
+      "bays": "B12|B13",
+      "max_anchor_distance_raw": 56474.09984062339,
+      "x_span_raw": 15124.418149605946,
+      "y_span_raw": 54411.17466517856,
+      "both_A_B_rows": false
+    }
+  ],
+  "top_complex_bays": [
+    {
+      "Bay": "A16",
+      "type": "INTRABAY",
+      "reticle": 0,
+      "production_count": 27,
+      "workcenter_count": 9,
+      "stocker_count": 1,
+      "commit_count": 0,
+      "complete_count": 0,
+      "rail_count": 40,
+      "equipment_envelope_area_raw2": 733642180.4144801,
+      "equipment_rect_area_sum_raw2": 214105446.42675376,
+      "count_per_1e8_envelope_raw2": 3.6802682180495703,
+      "rail_endpoint_xmin": 221618.897598425,
+      "rail_endpoint_xmax": 245077.1653937,
+      "rail_endpoint_ymin": 73958.333330676,
+      "rail_endpoint_ymax": 136458.33330676
+    },
+    {
+      "Bay": "A19",
+      "type": "INTRABAY",
+      "reticle": 0,
+      "production_count": 40,
+      "workcenter_count": 7,
+      "stocker_count": 1,
+      "commit_count": 0,
+      "complete_count": 0,
+      "rail_count": 40,
+      "equipment_envelope_area_raw2": 715323888.0321203,
+      "equipment_rect_area_sum_raw2": 207617402.59564,
+      "count_per_1e8_envelope_raw2": 5.591872530643611,
+      "rail_endpoint_xmin": 266992.125944881,
+      "rail_endpoint_xmax": 290450.393740157,
+      "rail_endpoint_ymin": 73958.333330676,
+      "rail_endpoint_ymax": 136458.33330676
+    },
+    {
+      "Bay": "B15",
+      "type": "INTRABAY",
+      "reticle": 0,
+      "production_count": 22,
+      "workcenter_count": 7,
+      "stocker_count": 1,
+      "commit_count": 0,
+      "complete_count": 0,
+      "rail_count": 40,
+      "equipment_envelope_area_raw2": 737580655.0420532,
+      "equipment_rect_area_sum_raw2": 199182945.61519215,
+      "count_per_1e8_envelope_raw2": 2.982724648431251,
+      "rail_endpoint_xmin": 206494.488188976,
+      "rail_endpoint_xmax": 229952.755866141,
+      "rail_endpoint_ymin": 5208.3333330676,
+      "rail_endpoint_ymax": 67708.333330676
+    },
+    {
+      "Bay": "B19",
+      "type": "INTRABAY",
+      "reticle": 0,
+      "production_count": 26,
+      "workcenter_count": 7,
+      "stocker_count": 1,
+      "commit_count": 0,
+      "complete_count": 0,
+      "rail_count": 40,
+      "equipment_envelope_area_raw2": 707945700.4068736,
+      "equipment_rect_area_sum_raw2": 173230770.29073715,
+      "count_per_1e8_envelope_raw2": 3.672598051666557,
+      "rail_endpoint_xmin": 266992.125944881,
+      "rail_endpoint_xmax": 290450.393740157,
+      "rail_endpoint_ymin": 5208.3333330676,
+      "rail_endpoint_ymax": 67708.333330676
+    },
+    {
+      "Bay": "A7",
+      "type": "INTRABAY",
+      "reticle": 0,
+      "production_count": 24,
+      "workcenter_count": 6,
+      "stocker_count": 1,
+      "commit_count": 0,
+      "complete_count": 0,
+      "rail_count": 40,
+      "equipment_envelope_area_raw2": 738862853.3710053,
+      "equipment_rect_area_sum_raw2": 192694901.7840784,
+      "count_per_1e8_envelope_raw2": 3.248234755679195,
+      "rail_endpoint_xmin": 85499.2125944881,
+      "rail_endpoint_xmax": 108957.480318897,
+      "rail_endpoint_ymin": 73958.333330676,
+      "rail_endpoint_ymax": 136458.33330676
+    }
+  ],
+  "bay_edges": 236,
+  "stocker_same_bay": 565,
+  "anchor_diagnostics": [
+    {
+      "convention": "center",
+      "overlapping_rectangle_pairs": 533
+    },
+    {
+      "convention": "lower_left",
+      "overlapping_rectangle_pairs": 521
+    }
+  ]
+}

@@ -1,0 +1,784 @@
+=== PAGE 1 ===
+360 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 10, NO. 3, AUGUST 1997
+Integrated Facility Layout and
+Material Handling System Design
+in Semiconductor Fabrication Facilities
+Brett A. Peters and Taho Yang
+Abstract—Semiconductor manufacturing is an important com-
+ponent of the U.S. manufacturing industry. Most of today’s
+fabrication facilities and those being designed for the near future
+use a bay layout conﬁguration and an overhead monorail system
+for moving material between bays. These material handling
+systems are usually designed with a spine or perimeter type of
+conﬁguration. This paper investigates the layout and material
+handling system design integration problem in semiconductor
+fabrication facilities and proposes a methodology for solving
+this integrated design problem. A spaceﬁlling curve approach
+is used to address the facility layout, while the structure of
+the spine and perimeter conﬁgurations are exploited to create
+a network ﬂow problem to determine the material handling
+system design. Computational results are presented and show
+exceptional promise for this procedure in solving the integrated
+design problem in a semiconductor manufacturing environment.
+Index Terms— Computer integrated manufacturing, facilities
+design, layout, materials handling.
+I. I NTRODUCTION
+S
+EMICONDUCTOR manufacturing is an important com-
+ponent of the U.S. manufacturing industry. Most of to-
+day’s fabrication facilities (fabs) and those being designed
+for near future use a bay layout conﬁguration [1]. In this
+approach, the facility is divided into a number of bays that
+contain processing equipment. Typically, the bays contain
+similar pieces of equipment, e.g., ion implanters. This situation
+creates a large amount of material ﬂow between bays (interbay
+movement), especially since the semiconductor manufacturing
+process is highly reentrant.
+While there may be other, perhaps more efﬁcient layout
+arrangement strategies, the semiconductor industry is reluctant
+to adopt these strategies since the bay conﬁguration offers
+many advantages in terms of maintenance and operation of
+the physical equipment [1]. That is, since all of the equipment
+in a bay is of the same type, the utility distribution system can
+be simpliﬁed. Furthermore, the equipment used in semicon-
+ductor processing is very sensitive, due to the tight tolerances
+required, and hence is down for preventive maintenance and
+repair a large portion of the time. Having the processing
+equipment of a particular type collocated ensures that the
+production can continue during these maintenance periods.
+Finally, having similar processing equipment collocated allows
+Manuscript received April 1, 1996; revised January 24, 1997.
+The authors are with the Department of Industrial Engineering,
+Texas A&M University, College Station, TX 77843-3131 USA (e-mail:
+bpeters@tamu.edu).
+Publisher Item Identiﬁer S 0894-6507(97)05254-8.
+Fig. 1. Spine conﬁguration.
+Fig. 2. Perimeter conﬁguration.
+maintenance passages to be constructed between the bays for
+monitoring and repairing the equipment. These maintenance
+areas are separate from the cleanroom space and allow access
+to some parts of the equipment without disrupting production.
+Most new fabs use an overhead monorail system for mov-
+ing material between bays. This type of automated material
+handling system (AMHS) is usually designed with a spine or
+perimeter type of conﬁguration, which forms a material ﬂow
+loop within the facility. An AMHS with a spine conﬁguration
+typically has one directed ﬂow loop and crossover turntables
+for changing travel directions [1], [2] as shown in Fig. 1.
+An AMHS with a perimeter conﬁguration is typically de-
+signed with two physically separate loops to form unimpeded
+two-way travel around the perimeter of the facility and with
+crossover turntables for switching travel directions [2] as
+shown in Fig. 2. In this conﬁguration, each bay can contain
+at most two departments to ensure that each department will
+have at least one boundary on the perimeter to interface with
+the AMHS.
+Because of the process layout of the semiconductor fab,
+the interbay material handling function becomes extremely
+0894–6507/97$10.00  1997 IEEE
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 2 ===
+PETERS AND YANG: INTEGRATED FACILITY LAYOUT AND MATERIAL HANDLING SYSTEM DESIGN 361
+important. This material handling function provides the critical
+exchange between sequential fabrication process steps [3].
+Furthermore, experimental data suggests that installation of an
+AMHS in a semiconductor fab can signiﬁcantly reduce shocks
+and vibrations from material handling and potentially increase
+yield [4].
+The interactions between the facility layout and material
+handling system are widely recognized. The impact of these
+factors on the performance of the manufacturing system is also
+widely acknowledged [5]. Hence, a good layout and material
+handling system design is required to achieve the beneﬁts of
+improved fab performance and justify the large investment
+costs of a semiconductor wafer fabrication facility.
+In this paper, a spaceﬁlling curve (SFC) heuristic is pro-
+posed to solve the layout and material handling system design
+integration problem. Section II reviews the literature pertinent
+to this integration design problem. The details of the proposed
+procedures for the spine and perimeter conﬁgurations are
+discussed in Sections III and IV, respectively. Section V
+contains empirical illustrations of the proposed approach.
+Conclusions and suggestions for future research are given in
+Section VI.
+II. L
+ITERATURE REVIEW
+Most of the literature related to design of semiconductor
+fabrication facilities has concentrated on the material handling
+system, e.g., [1] and [2]. Most of these approaches have used
+simulation models to analyze alternative material handling
+system designs given a fab layout [2]. These approaches do
+not provide information on how to create a good design or
+how to integrate the design of the layout with the material
+handling system.
+There has also been previous research investigating facility
+layout and material handling system design in applications
+not speciﬁc to semiconductor manufacturing. For example,
+Dowlatshahi [6] and Lacksonen [7] both provide broad frame-
+works for integrating manufacturing system design issues.
+However, detailed design procedures are not provided in these
+frameworks.
+Montreuil [8] proposed a modeling framework for inte-
+grating layout and undirected ﬂow network designs. Chhajed
+et al. [9] provided a detailed ﬂow network design on an
+existing layout. Langevin et al. [10] solved a spine layout
+design problem with an undirected material ﬂow network.
+Their procedure searches for a rectangular layout shape along
+a central spine. While this method is effective at solving many
+manufacturing system design problems, it is not easily applied
+to the fab design problem because its output must be modiﬁed
+to ﬁt the fab design criteria. These modiﬁcation requirements,
+and their potential detrimental effect on performance, are due
+to two major reasons. First, the design objective considers an
+undirected ﬂow network, which is not typical of AMHS used
+in semiconductor fabs. Second, it does not enforce the cell
+geometry and exact P/D point positions, which are necessary
+and important components of the fab design problem.
+Given a ﬁxed single-loop material ﬂow path, Wu and Egbelu
+[11] developed a procedure to determine an optimal layout
+design along this path. Banerjee and Zhou [12] designed a
+directed, single loop machine layout by sequentially deter-
+mining the ﬂow sequence between machines and the layout
+of the machines. Yang and Peters [13] used a spaceﬁlling
+curve approach to solve a facility layout design problem in
+an FMS with a simple material ﬂow loop conﬁguration. They
+then add shortcuts to the material handling loop using a one
+at a time procedure to attempt to reduce the material handling
+cost. All of these methods could potentially be applied to the
+semiconductor fab design problem. However, each would re-
+quire manual adjustment to the resulting solution, as discussed
+above. Thus, the ultimate quality of the resulting layout would
+be suspect. Furthermore, none of these procedures exploit the
+structure of the fab design problem, which allows a specialized
+procedure to be developed that is both effective and efﬁcient
+at determining the fab layout and material handling system
+design.
+Tong [14] and Tate and Smith [15] developed a sequential
+construction technique and a genetic search heuristic, respec-
+tively, to solve a ﬂexible bay structure layout, which is similar
+to the perimeter bay conﬁguration shown in Fig. 2. This design
+allows a bay to contain more than two departments; hence,
+it is possible, when this procedure is applied to a perimeter
+conﬁguration semiconductor fab, to have a department that
+cannot interface with the AMHS since it doesn’t have a
+boundary on the perimeter of the layout.
+The current paper considers a directed material ﬂow path
+but it also exploits the special structure of a semiconductor
+fab conﬁguration. It differs from previous literature in that it
+integrates the layout and material handling system design by
+considering shortcuts that result from the addition of crossover
+turntables and generates a bay layout design that is customized
+for a semiconductor fabrication facility.
+III. S
+PINE CONFIGURATION
+A. Overview
+When modeling the integrated design problem with a spine
+conﬁguration, three interesting aspects are noted. First, the
+material handling system can be modeled as a single loop with
+crossover points. Second, the bay layout arrangement with a
+centralized spine material handling system requires that each
+department have exactly one boundary on the center spine of
+the ﬂoor space in order to access the material handling system,
+which implies that exactly one department can be located in
+each bay.
+Third, the bay height is usually constant across the entire
+length of the facility. Typically, the bay height will be the
+same in the upper row and the lower row, which implies
+that the material handling system is in the center of the
+facility. However, the procedures described in this paper allow
+the upper and lower row heights to differ. We will assume,
+however, that these heights are design parameters that are
+based on the desired bay conﬁgurations and available ﬂoor
+space and, hence, are speciﬁed prior to solving the integrated
+layout problem.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 3 ===
+362 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 10, NO. 3, AUGUST 1997
+Fig. 3. Address assignment for spine conﬁguration.
+B. Spaceﬁlling Curve Formulation
+Spaceﬁlling curves (SFC) have been used to develop efﬁ-
+cient heuristics to solve several types of combinatorial prob-
+lems such as traveling salesman, routing, and partitioning
+problems [16]–[18], and more recently layout problems [13],
+[19].
+The typical SFC approach divides the available ﬂoor space
+and departments into small equal-size square blocks. When
+this approach is applied to the fab layout, the ﬂoor space is
+divided into equal area unit rectangular blocks . Each block
+extends the full height of the bay, with the width of the unit
+blocks depending on the height of the row. Each block is
+assigned a distinctive value as its address. Fig. 3 illustrates
+the address assignment, which is used to determine the set
+of blocks that are occupied by a department. Note that,
+for modeling convenience, the numbering of the address
+assignments follows the AMHS ﬂow direction with the upper-
+left corner block as the starting block.
+The position of a pickup/dropoff (P/D) point (typically a
+stocker) of a department is represented by its distance from
+the starting block that deﬁnes the department boundary; hence,
+it is the distance from the left-hand side of the starting block
+when the department is located in the upper row, while it is the
+distance from the right-hand side of the starting block when
+the department is located in the lower row. Obviously, the
+P/D point is located on the department boundary adjacent to
+the material handling system.
+When the SFC is applied to the spine conﬁguration, there
+is a unique SFC that is coincident with the AMHS ﬂow loop.
+Based on the SFC, an initial ﬂow sequence is speciﬁed and
+used to create a layout.
+Fig. 4 shows the SFC and an example ﬂow sequence and
+resulting initial layout.
+Since the ﬂow sequence is not unique, multiple layouts can
+be generated and evaluated. The user can then determine the
+set of ﬂow sequences and layouts to consider further, which
+is a similar idea to other layout procedures including CRAFT
+[20], ALDEP [21], and MULTIPLE [19].
+Once the SFC and initial ﬂow sequence have been de-
+termined, the material handling system design determines
+the number of shortcuts to be added to the layout and the
+location for each shortcut. This material handling system
+design problem is modeled using a network ﬂow formulation
+(as described in the next section) to minimize the trade-
+off between the increase in shortcut investment costs and
+the decrease in material handling costs. The procedures for
+determining the layout arrangement and material handling
+Fig. 4. SFC example for spine conﬁguration.
+system design are embedded into an iterative steepest-descent-
+pairwise-interchange (SDPI) procedure for solving the overall
+integrated design problem.
+C. Crossover Turntable Design
+1) Background: The addition of a crossover turntable
+forms a shortcut on the AMHS loop and reduces material
+handling costs. Crossover turntables are added to the single-
+loop material ﬂow path, which forms the core of the wafer
+fab with a spine conﬁguration. The design of the number
+and location of the crossover turntables depends on the
+available ﬂoor space, control strategy employed, acquisition
+and installation costs, etc.
+In general, there is a tradeoff between the additional costs
+associated with installing a crossover turntable and the result-
+ing decrease in material handling costs. Therefore, additional
+crossover turntables will be installed as long as the incremental
+cost of adding the turntable is offset by the savings in material
+handling cost. The following subsections present a network
+ﬂow formulation for determining the optimal number and
+location of crossover turntables given a layout.
+2) Modeling of the Crossover Turntable Design Problem: In
+practice, there are two design constraints for installing a
+crossover turntable. First, there must be a minimum clearance
+between the crossover turntable and the nearest P/D point,
+as well as between two crossover turntables. This clearance
+depends on the particular material handling system technology
+and will be denoted by e. In addition, the crossover turntable
+uses the shortest path to divide the AMHS loop as illustrated
+in Fig. 1, which implies that the crossover turntable rail is
+perpendicular to the material handling rail.
+The proposed design procedure ﬁrst sorts the P/D points
+in the horizontal direction beginning from the left boundary
+of the ﬂoor space so that the positions of P/D points can
+be transformed from a two-dimensional space to a single
+dimension. For the example shown in Fig. 4, the P/D point
+of department 2 when projected to the horizontal line, is
+1.0 distance unit from the left boundary of the ﬂoor space.
+Similarly, the P/D point for departments 3, 1, and 4 are 1.5, 5.0,
+and 5.5 distance units, respectively. The resulting projections
+are shown in Fig. 5.
+In this example, there are three candidate intervals to locate
+the crossover turntable: one between departments 2 and 3, one
+between 3 and 1, and the other between departments 1 and
+4. The candidate locations of the crossover turntables inside
+an interval can be restricted by considering the nature of the
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 4 ===
+PETERS AND YANG: INTEGRATED FACILITY LAYOUT AND MATERIAL HANDLING SYSTEM DESIGN 363
+Fig. 5. P/D point sorting example.
+Fig. 6. Shortcut conﬁguration example.
+material ﬂow. Consider an interval between two P/D points
+and lying on a clockwise material ﬂow path and assume that
+wafer lot boxes are transported on the shortest path. Any lots
+originating from departments on the lower row to the right of
+with destinations in the upper row to the right of will pull
+the crossover turntable as close to as possible to minimize
+the travel distance. Similarly, loads originating in the upper
+row to the left of
+that are destined for the lower row to
+the left of will pull the crossover turntable as close to
+as possible.
+If two turntables are located in the interval with one next
+to and with one next to , then no other turntable located
+between these two will ever lie on the shortest path between
+any origin/destination pair, and hence this turntable will never
+be used. Therefore, if a shortcut is added, it will be as close
+to a P/D point as possible. Due to the minimum clearance
+restrictions, the candidate crossover turntable design for an
+interval with length
+has three conditions:
+1) If , then it is not feasible to install a crossover
+turntable in this interval and therefore the interval is
+excluded from further consideration.
+2) If
+, then the interval has two candidate
+locations but can contain at most one crossover turntable.
+3) If , then there are two candidate locations for
+crossover turntables and both can be selected.
+Each candidate location for the installation of a crossover
+turntable adds two vertices to the ﬂow network as illustrated
+in Fig. 6 (from the example in Fig. 4). In this ﬁgure, the
+shortcut under consideration is located in the interval between
+departments 3 and 1. Note that vertices 5, 6, 7, and 8 are
+pseudo vertices representing the crossover turntable position.
+If vertices (
+) represent the P/D points of departments and
+the pseudo nodes of crossover turntables in the layout, and
+edges (
+) represent directed ﬂow segments between vertices,
+then the standard network representation can be
+used to describe the problem.
+Fig. 7. Integrated design improvement procedure.
+Fig. 8. Address assignment for perimeter bay conﬁguration.
+Determining the objective function is usually a challenge
+for the facility design engineer due to the potential conﬂicting
+objectives and other factory-wide design factors. Furthermore,
+the operational design issues such as scheduling strategies,
+product types, and production demands, all impact the layout
+and material handling system design objective but are very
+difﬁcult to predict exactly at the design stage. Therefore,
+we follow the common practice of minimizing the weighted
+ﬂow distance for layout and material handling system design
+problems. In the following discussions, “cost” will be used
+in the objective function although it is not necessary to be a
+dollar unit. Developing a design that can efﬁciently handle the
+anticipated production requirements should enable the material
+handling system to effectively respond to dynamic operation
+requests.
+Given a feasible AMHS ﬂow path conﬁguration and the
+candidate shortcuts, the length of each arc is known. Let
+be the directed ﬂow distance of an arc ( ). Deﬁne a directed
+ﬂow density from the P/D point of a department to the P/D
+point of another department as a commodity , then the set of
+directed ﬂow densities is with . Let be the cost
+per unit distance for routing commodity , and be the cost
+per unit for routing commodity on the directed arc ( ).
+Then, .
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 5 ===
+364 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 10, NO. 3, AUGUST 1997
+Fig. 9. Flow network for perimeter conﬁguration.
+Fig. 10. Spine conﬁguration integrated design.
+Fig. 11. Sensitivity analysis of ﬁxed crossover turntable cost.
+Let be the cost per period for the installation of a
+crossover turntable. Note that the per-period-cost not only
+considers the system acquisition costs, but may also include
+operating costs, and is discounted to reﬂect the useful life of
+the material handling system. Other system costs are assumed
+independent of the layout and material handling system design
+and are therefore not included in the analysis. The following
+additional notation is needed to model the problem.
+Area of department.
+Height of the upper row (as illustrated in Fig. 3).
+Height of the lower row (as illustrated in Fig. 3).
+Length of the complete AMHS loop.
+Fixed distance across the center spine.
+Flow of commodity on the directed arc .
+Crossover turntable (shortcut) arc .
+Dropoff point (sink node) of commodity .
+Pickup point (source node) of commodity .
+Set of directed shortcut arcs (connecting pseudo
+nodes),
+.
+Fig. 12. Fixed cost versus number of crossover turntables.
+TABLE I
+SPINE CONFIGURATION COSTS
+TABLE II
+PERIMETER CONFIGURATION COSTS
+Set of undirected shortcut arcs (connecting pseudo
+nodes), .
+The width of a unit-rectangular block in the upper row is
+assumed to be 1. This width can be easily achieved by normal-
+izing the scale. Then, the width of the unit-rectangular block
+in the lower row is
+. Note that and are
+used to calculate the arc length , which is a straightforward
+calculation given these parameters and the layout arrangement
+of departments in bays. Then, the integrated shortcut design
+is formulated as (1)–(5).
+Minimize
+(1)
+st:
+if
+if and
+otherwise
+(2)
+and (3)
+and (4)
+(5)
+Given a ﬂow sequence, (1) optimizes the trade-off between
+the increased crossover turntable investment costs and the
+decreased material handling costs. Equation (2) are the conser-
+vation of ﬂow constraints for each commodity
+. The forcing
+constraints, (3), state that if i.e., if shortcut ( ) is not
+included in the design, then the ﬂow of every commodity on
+this arc must be zero in both directions. This formulation is a
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 6 ===
+PETERS AND YANG: INTEGRATED FACILITY LAYOUT AND MATERIAL HANDLING SYSTEM DESIGN 365
+TABLE III
+DEPARTMENT AREA INFORMATION FOR 8-BAY PROBLEM
+Fig. 13. Perimeter conﬁguration integrated design.
+multi-commodity network ﬂow problem with the addition of
+ﬁxed charge variables for certain arcs. The network properties
+will be exploited in efﬁciently determining a solution.
+D. Integrated Design Improvements
+A steepest-descent-pairwise-interchange (SDPI) heuristic is
+used to improve the solution by evaluating the cost reduc-
+tion resulting from exchanging two departments in the ﬂow
+sequence. The procedure iterates until there is no further
+improvement. Note that since a department cannot split across
+the center spine into both the upper and lower rows, some ﬂow
+sequence solutions will be excluded from further consideration
+since they would result in infeasible layout designs.
+Each pairwise interchange of departments results in a new
+ﬂow sequence, which leads to a new layout, which in turn
+results in a new layout cost. Let
+and be the starting
+block and P/D point position for department , respectively.
+For the example shown in Fig. 4 (assume that and
+there are no shortcuts), . Since
+a directed material ﬂow path is being used, if departments 3
+and 1 are interchanged, .
+This pairwise exchange heuristic has been effective in solving
+quadratic assignment problems. Readers are referred to Francis
+et al. [22] for a more detailed discussion of the basic SDPI
+heuristic.
+Using these insights and results described above, the overall
+procedure for determining the integrated design is shown in
+Fig. 7, where
+is the total number of departments to be
+included in the layout.
+IV. P ERIMETER CONFIGURATION
+A. Overview
+In this section, the SFC formulation from Section III-B is
+modiﬁed to solve the perimeter conﬁguration design problem.
+With a perimeter conﬁguration, there are several modeling
+TABLE IV
+FROM-TO DEPARTMENTAL FLOW MATRIX FOR THE 8-BAY PROBLEM
+TABLE V
+FLOW SEQUENCES FOR 8-BAY PROBLEM
+aspects that must be considered. First, the material handling
+system can be modeled as a double-loop with crossover points.
+In addition, the bay layout arrangement with a perimeter
+material handling system requires that each department have at
+least one boundary on the perimeter of the ﬂoor space in order
+to access the material handling system, which implies that at
+most two departments can be located in any bay. Finally, the
+requirement of the maintenance spaces between bays dictates
+that the bay width must be constant across the entire width of
+the facility. These aspects are illustrated in Fig. 2.
+Thus, the problem becomes one of determining the number
+of bays, the width of each bay, the departments assigned to
+each bay, the location of the P/D points, and the number
+and location of crossover turntables on the material handling
+system.
+B. SFC Formulation
+The SFC formulation divides the bay ﬂoor space and depart-
+ments into equal size unit rectangular blocks as illustrated in
+Fig. 8. The SFC in this case is just a line from left to right. For
+a general design in practice, there will be two departments in a
+bay; hence, a pseudo department, which pairs two departments
+together, is proposed to ﬁll the ﬂoor space following the SFC
+pattern. Given an initial ﬂow sequence, e.g.,
+, the ﬁrst
+pseudo department consists of the ﬁrst and last departments
+in the sequence, i.e., 1 and , the second pseudo department
+consists of the second and next-to-last departments, i.e., 2 and
+, the third pseudo department consists of departments
+3 and , and so forth. When there is an odd number
+of departments, the last included department, which is in the
+middle of the sequence, will occupy a bay by itself.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 7 ===
+366 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 10, NO. 3, AUGUST 1997
+TABLE VI
+DEPARTMENT AREA INFORMATION FOR 14-BAY PROBLEM
+TABLE VII
+FROM-TO DEPARTMENTAL FLOW MATRIX FOR THE 14-BAY PROBLEM
+Let represent department areas in
+terms of number of unit rectangular blocks. For the example
+in Fig. 8, the department area matrix is
+.
+If the initial ﬂow sequence is ( ),
+then the pairing results in three pseudo departments which
+have departments 2 and 1 as the ﬁrst pseudo department,
+departments 4 and 3 as the second pseudo department, and
+ﬁnally department 5 as the third pseudo department. Let
+be the area matrix of the pseudo departments, then
+for this example. The pseudo departments then ﬁll
+the ﬂoor space according to the SFC. If a pseudo department
+is comprised of two departments, then the boundary between
+these two departments is determined by the ratio of their areas.
+For example, in pseudo department 1, the bay is divided into
+two regions with a 2:1 ratio in area for departments 2 and 1,
+respectively. This procedure creates a ﬂow sequence and then
+places departments in the layout so that this ﬂow sequence
+is maintained, given the perimeter-based material handling
+system.
+C. Crossover Turntable Design
+The problem of locating a crossover turntable can be trans-
+formed to a standard network ﬂow formulation and solved
+efﬁciently. Since a department’s P/D point can only interface
+with the inner AMHS loop, which we deﬁne as circuit I, any
+ﬂow must move back to this circuit in order to pickup or
+dropoff wafer lot boxes at a department.
+Thus, the double-loop, perimeter AMHS conﬁguration can
+be mapped to two separate circuits as illustrated in Fig. 9
+for the example from Fig. 8. At least one crossover turntable
+is required to use the outer loop (circuit II). The addition
+of a crossover turntable adds an arc (
+) to connect the
+two circuits as shown in Fig. 9. For the outer loop to be
+useful, at least one additional crossover turntable is needed to
+connect the inner and outer loop, e.g., arc ( ). Otherwise,
+a vehicle can get on the outer loop but must complete the
+entire circuit and return to the crossover in order to get back
+on the inner loop, which puts the vehicle exactly back where
+it started. Therefore, in general there will be two or more
+crossover turntables associated with the double-loop, perimeter
+AMHS conﬁguration. The ﬂow path from the P/D point of a
+department to the P/D point of another department will be the
+shortest path between the two vertices representing the actual
+pickup/deposit points (not the pseudo vertices used in circuit
+II, although they may be intermediate vertices in the path).
+The determination of the number and location of candidate
+shortcuts is carried out as discussed in Section III-C with
+the integrated design problem formulated as a network ﬂow
+problem so that it can be solved efﬁciently.
+D. Integrated Design Improvements
+Every potential ﬂow sequence results in a potential layout,
+with an objective function value representing the material
+handling cost. The SDPI heuristic discussed in Section III-
+D is used to improve an initial ﬂow sequence and search for
+the best solution. Note that after each interchange, the ﬂow
+sequence and pseudo departments must be updated in order to
+compute the resulting material handling cost.
+The integrated shortcut design formulation is the same as
+(1)–(5) and the improvement procedure is as shown in Fig. 7
+for the spine conﬁguration, although now the calculation of
+the material handling distance is using the two circuit network
+shown in Fig. 9. Therefore, the details of the design procedures
+are not repeated here.
+V. E
+MPIRICAL ILLUSTRATIONS
+In order to demonstrate the proposed procedures, three
+example problems, with eight, 14, and 20 bays, are generated
+using the data in Carpenter et al. [2] as a guide. The area
+information and inter-department ﬂow densities are as shown
+in Tables III–XI. It is assumed that the minimum distance
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 8 ===
+PETERS AND YANG: INTEGRATED FACILITY LAYOUT AND MATERIAL HANDLING SYSTEM DESIGN 367
+TABLE VIII
+FLOW SEQUENCES FOR 14-BAY PROBLEM
+TABLE IX
+DEPARTMENT AREA INFORMATION FOR 20-BAY PROBLEM
+TABLE X
+FROM-TO DEPARTMENTAL FLOW MATRIX FOR THE 20-BAY PROBLEM
+TABLE XI
+FLOW SEQUENCES FOR 20-BAY PROBLEM
+between a crossover turntable and a P/D point (or another
+crossover turntable) is equal to 0.6 distance units.
+The proposed procedures are coded in C and imple-
+mented on an IBM RS/6000 computer. Each integrated short-
+cut design formulation is solved using a combined network-
+dual simplex method optimizer provided by CPLEX [23] in
+a callable library.
+A. Spine Conﬁguration
+For the spine conﬁguration, additional assumptions include:
+1) both and are equal to 5 distance units; 2) the
+discounted ﬁxed cost per period for a crossover turntable is
+70; and 3) the length between the two bay rows in the spine
+conﬁguration is 2 distance units.
+Since the initial ﬂow sequence impacts the solution quality
+for the SDPI procedure, each problem is repeated ﬁve times
+with different initial ﬂow sequences as shown in Tables V,
+VIII, and XI. The experimental results are summarized in
+Table I. The second column shows the lowest cost obtained
+from the ﬁve runs. The third and fourth columns are included
+to illustrate the dependency of the algorithm on the initial
+ﬂow sequence. As can be seen, the average is slightly higher,
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 9 ===
+368 IEEE TRANSACTIONS ON SEMICONDUCTOR MANUFACTURING, VOL. 10, NO. 3, AUGUST 1997
+but the algorithm is able to achieve a good solution from a
+variety of starting sequences, which is important for this type
+of problem. Fig. 10 illustrates one of the integrated designs
+determined by the procedure.
+The solution quality of this proposed integrated design
+procedure is demonstrated by comparing it with the solu-
+tion from an exact layout design formulation, a modiﬁed
+quadratic set covering formulation (QSCP). The modiﬁed
+QSCP formulation is capable of optimally solving the fab
+layout design problem with a simple ﬂow path; however, it
+is computationally prohibitive for a realistic size problem.
+Readers are referred to Peters and Yang [24] for a detailed
+discussion of the QSCP formulation in the context of a more
+general layout design problem.
+Once the optimal layout design is found using the modiﬁed
+QSCP formulation, the shortcut design is then solved by
+using (1)–(5). For the 8-bay spine conﬁguration problem, the
+resulting integrated design cost by using the modiﬁed QSCP
+formulation is 5737.5 which is higher than all of the costs from
+the ﬁve repetitions of the SFC procedure. Clearly, integrating
+the consideration of the layout and material handling system
+design yields beneﬁts relative to a sequential solution approach
+even if an optimal layout procedure is used.
+Clearly, there is a tradeoff between the investment cost
+of additional crossover turntables and the reduced material
+handling costs. The integrated design procedure will determine
+the best solution given the ﬁxed crossover turntable cost. To
+illustrate this relationship, the ﬁxed cost was varied and the
+resulting solution in terms of the material handling cost and
+total cost as well as the number of shortcuts was determined.
+These results are shown graphically for the 8-bay problem in
+Figs. 11 and 12. The procedure can be used to provide this type
+of sensitivity analysis in situations where there is uncertainty
+in the additional cost associated with installing a crossover
+turntable.
+B. Perimeter Conﬁguration
+For the perimeter conﬁguration, the examples assume that:
+1) the bay length is equal to 10 units for a perimeter conﬁgura-
+tion; 2) the crossover turntable cost is 60, and 3) the length of
+crossover turntable is 0.5, which is smaller than the length of
+2.0 for a spine conﬁguration and contributes to the lower cost.
+Each problem size is repeated ﬁve times with different initial
+ﬂow sequences as shown in Tables V and VIII. Table II shows
+the integrated design costs and Fig. 13 illustrates one of the
+integrated designs that was obtained. Notice that the cost of
+the perimeter conﬁguration is signiﬁcantly higher than the cost
+of the spine conﬁguration for the corresponding problem.
+VI. C
+ONCLUSIONS
+This paper presents a combined spaceﬁlling curve and
+network ﬂow procedure that solves the integrated layout
+and material handling system design problem efﬁciently and
+effectively for both the spine and perimeter conﬁgurations in
+semiconductor fabrication facilities. The special structure of
+semiconductor fabs was exploited in developing the proce-
+dures. Experimental results with the procedure were presented
+and are very encouraging.
+Since the bay conﬁguration with an overhead monorail
+material handling system is the trend for future semiconductor
+facility designs, the procedure developed in this paper is an
+important step toward efﬁcient and effective semiconductor
+fab design in order to improve the system performance in
+terms of throughput, yield increases, WIP reduction, tool
+utilization, etc. In addition, this integrated design procedure
+can be adapted to the intrabay integrated design problem,
+which is a micro-version of the interbay design problem.
+Therefore, the integrated design procedure is applicable to real
+world problems facing the semiconductor industry.
+R
+EFERENCES
+[1] G. Cardarelli and P. J. Pelagagge, “Simulation tool for design and
+management optimization of automated interbay material handling and
+storage systems for large wafer fab,” IEEE Trans. Semiconduct. Manu-
+fact., vol. 8, pp. 44–49, Feb. 1995.
+[2] B. Carpenter, R. Gibson, and N. Pierce, “Generic interbay automated
+material handling system discrete-event simulation,” SEMATECH Tech-
+nol. Transf. Doc. 93011441A-GEN, 1993.
+[3] L. F. McGinnis, “Material handling systems failure rate analysis and
+modeling: MHS-FRAME,” SEMATECH Final Rep., 1992.
+[4] V. Wowk and R. Billings, “Vibration and shock from manual and
+automated material movement,” SEMATECH Technol. Transf. Doc.
+94102603A-GEN, Nov. 1994.
+[5] T. M. Allegri, Material Handling: Principles and Practices. New
+York: Van Nostrand, 1984.
+[6] S. Dowlatshahi, “A modeling approach to design of integrated facilities,”
+Int. J. Prod. Res., vol. 32, no. 6, pp. 1313–1330, 1994.
+[7] T. Lacksonen, “Integrating material ﬂow into a concurrent engineering
+framework,” in Proc. Int. Material Handling Research Colloq., Grand
+Rapids, MI, June 13–15, 1994, pp. 235–248.
+[8] B. Montreuil, “A modeling framework for integrating layout design and
+ﬂow network design,” Progress in Material Handling and Logistics, J.
+White and I. W. Pence, Eds. Berlin: Springer-Verlag, 1991, vol. 2, pp.
+95–115.
+[9] D. Chhajed, B. Montreuil, and T. Lowe, “Flow network design for
+manufacturing systems layout,” Eur. J. Oper. Res., vol. 57, pp. 145–161,
+1992.
+[10] A. Langein, B. Montreuil, and D. Riopel, “Spine layout design,” Int. J.
+Prod. Res., vol. 32, no. 2, pp. 429–442, 1994.
+[11] C. T. Wu and P. J. Egbelu, “Concurrent design of shop layout and
+material handling,” in Proc. Int. Material Handling Research Colloq.,
+Grand Rapids, MI, June 13–15, 1994, pp. 119–140.
+[12] P. Banerjee and Y. Zhou, “Facility layout design optimization with
+single loop material ﬂow path conﬁguration,” Int. J. Prod. Res., vol.
+33, no. 1, pp. 183–204, 1995.
+[13] T. Yang and B. A. Peters, “The integrated layout and ﬂow path design
+in ﬂexible manufacturing systems,” Working Paper, 1995.
+[14] X. Tong, “SECOT: A sequential construction technique for facility
+design,” Doctoral dissertation, Ind. Eng. Dept., Univ. Pittsburgh, Pitts-
+burgh, PA, 1991.
+[15] D. M. Tate and A. E. Smith, “Unequal-area facility layout by genetic
+search,” IIE Trans., vol. 27, pp. 465–472, 1995.
+[16] J. J. Bartholdi and L. K. Platzman, “An O(NlogN) planar traveling
+salesman heuristics based on spaceﬁlling cures,” Oper. Res. Lett., vol.
+1, no. 4, pp. 121–125, 1982.
+[17]
+, “Heuristics based on spaceﬁlling cures for combinatorial prob-
+lems in Euclidean space,” Manage. Sci., vol. 34, no. 3, pp. 291–305,
+1988.
+[18] L. K. Platzman and J. J. Bartholdi, “Space ﬁlling curves and the planar
+traveling salesman problem,” J. ACM, vol. 36, no. 4, pp. 719–737, 1989.
+[19] Y. A. Bozer, R. D. Meller, and S. J. Erlebacher, “An improvement-type
+layout algorithm for single and multiple-ﬂoor facilities,” Manage. Sci.,
+vol. 40, no. 7, pp. 918–932, 1994.
+[20] G. C. Armour and E. S. Buffa, “A heuristic algorithm and simulation
+approach to relative location of facilities,” Manage. Sci., vol. 8, no. 2,
+pp. 294–309, 1963.
+[21] J. M. Seehof and W. O. Evans, “Automated layout design program,” J.
+Ind. Eng., vol. 18, pp. 690–695, 1967.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 
+
+=== PAGE 10 ===
+PETERS AND YANG: INTEGRATED FACILITY LAYOUT AND MATERIAL HANDLING SYSTEM DESIGN 369
+[22] R. L. Francis, L. F. McGinnis, and J. A. White, Facility Layout and
+Location: An Analytical Approach. Englewood Cliffs, NJ: Prentice-
+Hall, 1992, pp. 189–199 and 563–566.
+[23] CPLEX User’s Manual, Version 3.0. Incline Village, NV: CPLEX
+Optimization Inc., 1994.
+[24] B. A. Peters and T. Yang, “A combined adjacency graph/integer program
+formulations for facility layout problems in ﬂexible manufacturing
+systems,” Working Paper, Ind. Eng. Dept., Texas A&M Univ., College
+Station, July, 1995.
+Brett A. Peters received the B.S.I.E. degree from
+the University of Arkansas, Fayetteville, in 1987,
+and the M.S. and Ph.D. degrees in industrial engi-
+neering from the Georgia Institute of Technology,
+Atlanta, in 1988 and 1992, respectively.
+He is an Assistant Professor in the Industrial
+Engineering Department, Texas A&M University,
+College Station. His research and teaching interests
+include facilities design, material handling systems,
+and the design, analysis, operation, and control of
+manufacturing systems.
+Dr. Peters is a member of SME, IIE, and INFORMS.
+Taho Yang was born in Keelung, Taiwan, R.O.C.,
+on July 28, 1963. He received the Ph.D. degree from
+the Industrial Engineering Department, Texas A&M
+University, College Station, in 1996.
+He then joined Tefen USA as an Industrial En-
+gineer and is currently leading its semiconductor
+operations in Taiwan. His primary research interests
+include design and control of manufacturing systems
+with emphasis on semiconductor fabrication facili-
+ties, and the integrated layout and material handling
+system design problems.
+Authorized licensed use limited to: Tsinghua University. Downloaded on July 06,2026 at 01:50:09 UTC from IEEE Xplore.  Restrictions apply. 

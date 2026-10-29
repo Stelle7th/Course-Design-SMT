@@ -1,0 +1,2 @@
+# Shared dependencies for the audit, LP, MILP and layout analysis scripts.
+-r analysis/smat_layout_viz/scripts/requirements.txt
