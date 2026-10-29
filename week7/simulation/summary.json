@@ -1,0 +1,551 @@
+{
+  "metrics": [
+    {
+      "scenario": "regular",
+      "layout": "before",
+      "task_count": 560,
+      "completed": 560,
+      "completed_by_horizon": 549,
+      "wip_at_horizon": 11,
+      "unfinished_by_horizon": 11,
+      "makespan_min": 10367.026866,
+      "mean_wait_vehicle_min": 0.007995,
+      "mean_wait_equipment_min": 47.705101,
+      "mean_wait_machine_min": 47.705101,
+      "mean_transport_min": 6.14644,
+      "mean_transport_request_min": 6.14644,
+      "p95_transport_min": 7.963123,
+      "p95_transport_request_min": 7.963123,
+      "mean_loaded_transport_min": 5.678931,
+      "mean_empty_transport_min": 4.605955,
+      "mean_sojourn_min": 193.102939,
+      "mean_region_time_min": 193.102939,
+      "loaded_distance_raw": 286218103.67192,
+      "total_loaded_distance_raw": 286218103.67192,
+      "empty_distance_raw": 232140133.142029,
+      "total_empty_distance_raw": 232140133.142029,
+      "vehicle_utilization": 0.165899,
+      "equipment_utilization": 0.149791
+    },
+    {
+      "scenario": "regular",
+      "layout": "after",
+      "task_count": 560,
+      "completed": 560,
+      "completed_by_horizon": 547,
+      "wip_at_horizon": 13,
+      "unfinished_by_horizon": 13,
+      "makespan_min": 10451.512205,
+      "mean_wait_vehicle_min": 0.050503,
+      "mean_wait_equipment_min": 65.403543,
+      "mean_wait_machine_min": 65.403543,
+      "mean_transport_min": 6.014602,
+      "mean_transport_request_min": 6.014602,
+      "p95_transport_min": 7.838691,
+      "p95_transport_request_min": 7.838691,
+      "mean_loaded_transport_min": 5.643778,
+      "mean_empty_transport_min": 4.334923,
+      "mean_sojourn_min": 210.537705,
+      "mean_region_time_min": 210.537705,
+      "loaded_distance_raw": 284446431.22137,
+      "total_loaded_distance_raw": 284446431.22137,
+      "empty_distance_raw": 218480108.925395,
+      "total_empty_distance_raw": 218480108.925395,
+      "vehicle_utilization": 0.160457,
+      "equipment_utilization": 0.148581
+    },
+    {
+      "scenario": "burst",
+      "layout": "before",
+      "task_count": 560,
+      "completed": 560,
+      "completed_by_horizon": 560,
+      "wip_at_horizon": 0,
+      "unfinished_by_horizon": 0,
+      "makespan_min": 8539.209005,
+      "mean_wait_vehicle_min": 458.718716,
+      "mean_wait_equipment_min": 2474.153894,
+      "mean_wait_machine_min": 2474.153894,
+      "mean_transport_min": 236.026755,
+      "mean_transport_request_min": 236.026755,
+      "p95_transport_min": 713.921313,
+      "p95_transport_request_min": 713.921313,
+      "mean_loaded_transport_min": 5.678931,
+      "mean_empty_transport_min": 5.655864,
+      "mean_sojourn_min": 3079.312362,
+      "mean_region_time_min": 3079.312362,
+      "loaded_distance_raw": 286218103.67192,
+      "total_loaded_distance_raw": 286218103.67192,
+      "empty_distance_raw": 285055522.511196,
+      "total_empty_distance_raw": 285055522.511196,
+      "vehicle_utilization": 0.218623,
+      "equipment_utilization": 0.181854
+    },
+    {
+      "scenario": "burst",
+      "layout": "after",
+      "task_count": 560,
+      "completed": 560,
+      "completed_by_horizon": 560,
+      "wip_at_horizon": 0,
+      "unfinished_by_horizon": 0,
+      "makespan_min": 9527.916309,
+      "mean_wait_vehicle_min": 445.516454,
+      "mean_wait_equipment_min": 2566.068205,
+      "mean_wait_machine_min": 2566.068205,
+      "mean_transport_min": 229.386887,
+      "mean_transport_request_min": 229.386887,
+      "p95_transport_min": 705.278365,
+      "p95_transport_request_min": 705.278365,
+      "mean_loaded_transport_min": 5.643778,
+      "mean_empty_transport_min": 5.613542,
+      "mean_sojourn_min": 3157.946938,
+      "mean_region_time_min": 3157.946938,
+      "loaded_distance_raw": 284446431.22137,
+      "total_loaded_distance_raw": 284446431.22137,
+      "empty_distance_raw": 282922533.837661,
+      "total_empty_distance_raw": 282922533.837661,
+      "vehicle_utilization": 0.194799,
+      "equipment_utilization": 0.162983
+    }
+  ],
+  "queue_attribution": {
+    "regular": {
+      "groups": [
+        {
+          "group": "DE_BE_13",
+          "tasks": 220,
+          "before_wait_sum_min": 13976.959658,
+          "after_wait_sum_min": 7775.168844,
+          "queue_increase_min": -6201.790814,
+          "before_mean_wait_min": 63.531635,
+          "after_mean_wait_min": 35.341677,
+          "before_active_slots": [
+            "ECH0123",
+            "ECH0124",
+            "ECH0125",
+            "ECH0126",
+            "ECH0127"
+          ],
+          "after_active_slots": [
+            "ECH0123",
+            "ECH0124",
+            "ECH0125",
+            "ECH0126",
+            "ECH0127"
+          ]
+        },
+        {
+          "group": "DE_BE_48",
+          "tasks": 160,
+          "before_wait_sum_min": 6953.256717,
+          "after_wait_sum_min": 4511.957315,
+          "queue_increase_min": -2441.299402,
+          "before_mean_wait_min": 43.457854,
+          "after_mean_wait_min": 28.199733,
+          "before_active_slots": [
+            "ECH0144",
+            "ECH0145",
+            "ECH0147",
+            "ECH0148",
+            "ECH0149",
+            "ECH0150"
+          ],
+          "after_active_slots": [
+            "ECH0144",
+            "ECH0145",
+            "ECH0147",
+            "ECH0148",
+            "ECH0149",
+            "ECH0150"
+          ]
+        },
+        {
+          "group": "DE_BE_50",
+          "tasks": 180,
+          "before_wait_sum_min": 5784.63993,
+          "after_wait_sum_min": 24338.858185,
+          "queue_increase_min": 18554.218255,
+          "before_mean_wait_min": 32.136888,
+          "after_mean_wait_min": 135.215879,
+          "before_active_slots": [
+            "ECH0160",
+            "ECH0161",
+            "ECH0162",
+            "ECH0163"
+          ],
+          "after_active_slots": [
+            "ECH0146",
+            "ECH0168",
+            "ECH0170"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "slot": "ECH0168",
+          "before_tasks": 0,
+          "after_tasks": 80,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 15691.382189,
+          "queue_increase_min": 15691.382189
+        },
+        {
+          "slot": "ECH0170",
+          "before_tasks": 0,
+          "after_tasks": 60,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 7879.427956,
+          "queue_increase_min": 7879.427956
+        },
+        {
+          "slot": "ECH0148",
+          "before_tasks": 20,
+          "after_tasks": 30,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 1537.35957,
+          "queue_increase_min": 1537.35957
+        },
+        {
+          "slot": "ECH0125",
+          "before_tasks": 10,
+          "after_tasks": 40,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 1030.26233,
+          "queue_increase_min": 1030.26233
+        },
+        {
+          "slot": "ECH0147",
+          "before_tasks": 30,
+          "after_tasks": 40,
+          "before_wait_sum_min": 1825.481809,
+          "after_wait_sum_min": 2611.980684,
+          "queue_increase_min": 786.498875
+        },
+        {
+          "slot": "ECH0124",
+          "before_tasks": 60,
+          "after_tasks": 50,
+          "before_wait_sum_min": 4291.317014,
+          "after_wait_sum_min": 5075.995802,
+          "queue_increase_min": 784.678788
+        },
+        {
+          "slot": "ECH0146",
+          "before_tasks": 0,
+          "after_tasks": 40,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 768.04804,
+          "queue_increase_min": 768.04804
+        },
+        {
+          "slot": "ECH0144",
+          "before_tasks": 10,
+          "after_tasks": 30,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 242.76092,
+          "queue_increase_min": 242.76092
+        },
+        {
+          "slot": "ECH0150",
+          "before_tasks": 30,
+          "after_tasks": 30,
+          "before_wait_sum_min": 76.034637,
+          "after_wait_sum_min": 119.856141,
+          "queue_increase_min": 43.821504
+        },
+        {
+          "slot": "ECH0149",
+          "before_tasks": 20,
+          "after_tasks": 10,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": 0.0
+        },
+        {
+          "slot": "ECH0160",
+          "before_tasks": 30,
+          "after_tasks": 0,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": 0.0
+        },
+        {
+          "slot": "ECH0123",
+          "before_tasks": 40,
+          "after_tasks": 40,
+          "before_wait_sum_min": 1147.370434,
+          "after_wait_sum_min": 779.333679,
+          "queue_increase_min": -368.036755
+        },
+        {
+          "slot": "ECH0162",
+          "before_tasks": 40,
+          "after_tasks": 0,
+          "before_wait_sum_min": 935.445313,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -935.445313
+        },
+        {
+          "slot": "ECH0161",
+          "before_tasks": 40,
+          "after_tasks": 0,
+          "before_wait_sum_min": 1196.830089,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -1196.830089
+        },
+        {
+          "slot": "ECH0126",
+          "before_tasks": 50,
+          "after_tasks": 40,
+          "before_wait_sum_min": 2334.628525,
+          "after_wait_sum_min": 519.71997,
+          "queue_increase_min": -1814.908555
+        },
+        {
+          "slot": "ECH0163",
+          "before_tasks": 70,
+          "after_tasks": 0,
+          "before_wait_sum_min": 3652.364528,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -3652.364528
+        },
+        {
+          "slot": "ECH0145",
+          "before_tasks": 50,
+          "after_tasks": 20,
+          "before_wait_sum_min": 5051.740271,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -5051.740271
+        },
+        {
+          "slot": "ECH0127",
+          "before_tasks": 60,
+          "after_tasks": 50,
+          "before_wait_sum_min": 6203.643685,
+          "after_wait_sum_min": 369.857063,
+          "queue_increase_min": -5833.786622
+        }
+      ]
+    },
+    "burst": {
+      "groups": [
+        {
+          "group": "DE_BE_13",
+          "tasks": 220,
+          "before_wait_sum_min": 563705.924689,
+          "after_wait_sum_min": 466359.555358,
+          "queue_increase_min": -97346.369331,
+          "before_mean_wait_min": 2562.299658,
+          "after_mean_wait_min": 2119.816161,
+          "before_active_slots": [
+            "ECH0123",
+            "ECH0124",
+            "ECH0125",
+            "ECH0126",
+            "ECH0127"
+          ],
+          "after_active_slots": [
+            "ECH0123",
+            "ECH0124",
+            "ECH0125",
+            "ECH0126",
+            "ECH0127"
+          ]
+        },
+        {
+          "group": "DE_BE_48",
+          "tasks": 160,
+          "before_wait_sum_min": 331556.079962,
+          "after_wait_sum_min": 307955.339892,
+          "queue_increase_min": -23600.74007,
+          "before_mean_wait_min": 2072.2255,
+          "after_mean_wait_min": 1924.720874,
+          "before_active_slots": [
+            "ECH0144",
+            "ECH0145",
+            "ECH0147",
+            "ECH0148",
+            "ECH0149",
+            "ECH0150"
+          ],
+          "after_active_slots": [
+            "ECH0144",
+            "ECH0145",
+            "ECH0147",
+            "ECH0148",
+            "ECH0149",
+            "ECH0150"
+          ]
+        },
+        {
+          "group": "DE_BE_50",
+          "tasks": 180,
+          "before_wait_sum_min": 490264.175815,
+          "after_wait_sum_min": 662683.299816,
+          "queue_increase_min": 172419.124001,
+          "before_mean_wait_min": 2723.689866,
+          "after_mean_wait_min": 3681.573888,
+          "before_active_slots": [
+            "ECH0160",
+            "ECH0161",
+            "ECH0162",
+            "ECH0163"
+          ],
+          "after_active_slots": [
+            "ECH0146",
+            "ECH0168",
+            "ECH0170"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "slot": "ECH0168",
+          "before_tasks": 0,
+          "after_tasks": 80,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 348566.537201,
+          "queue_increase_min": 348566.537201
+        },
+        {
+          "slot": "ECH0170",
+          "before_tasks": 0,
+          "after_tasks": 60,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 237099.857083,
+          "queue_increase_min": 237099.857083
+        },
+        {
+          "slot": "ECH0146",
+          "before_tasks": 0,
+          "after_tasks": 40,
+          "before_wait_sum_min": 0.0,
+          "after_wait_sum_min": 77016.905532,
+          "queue_increase_min": 77016.905532
+        },
+        {
+          "slot": "ECH0125",
+          "before_tasks": 10,
+          "after_tasks": 40,
+          "before_wait_sum_min": 886.546272,
+          "after_wait_sum_min": 73854.019761,
+          "queue_increase_min": 72967.473489
+        },
+        {
+          "slot": "ECH0144",
+          "before_tasks": 10,
+          "after_tasks": 30,
+          "before_wait_sum_min": 4816.050241,
+          "after_wait_sum_min": 56619.6165,
+          "queue_increase_min": 51803.566259
+        },
+        {
+          "slot": "ECH0147",
+          "before_tasks": 30,
+          "after_tasks": 40,
+          "before_wait_sum_min": 56737.472408,
+          "after_wait_sum_min": 103077.19489,
+          "queue_increase_min": 46339.722482
+        },
+        {
+          "slot": "ECH0148",
+          "before_tasks": 20,
+          "after_tasks": 30,
+          "before_wait_sum_min": 28556.32619,
+          "after_wait_sum_min": 56700.921741,
+          "queue_increase_min": 28144.595551
+        },
+        {
+          "slot": "ECH0150",
+          "before_tasks": 30,
+          "after_tasks": 30,
+          "before_wait_sum_min": 54722.584179,
+          "after_wait_sum_min": 63004.804802,
+          "queue_increase_min": 8282.220623
+        },
+        {
+          "slot": "ECH0123",
+          "before_tasks": 40,
+          "after_tasks": 40,
+          "before_wait_sum_min": 73932.176536,
+          "after_wait_sum_min": 71293.134126,
+          "queue_increase_min": -2639.04241
+        },
+        {
+          "slot": "ECH0149",
+          "before_tasks": 20,
+          "after_tasks": 10,
+          "before_wait_sum_min": 23825.43128,
+          "after_wait_sum_min": 4851.219967,
+          "queue_increase_min": -18974.211313
+        },
+        {
+          "slot": "ECH0160",
+          "before_tasks": 30,
+          "after_tasks": 0,
+          "before_wait_sum_min": 26277.42014,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -26277.42014
+        },
+        {
+          "slot": "ECH0126",
+          "before_tasks": 50,
+          "after_tasks": 40,
+          "before_wait_sum_min": 115963.275347,
+          "after_wait_sum_min": 80048.551165,
+          "queue_increase_min": -35914.724182
+        },
+        {
+          "slot": "ECH0124",
+          "before_tasks": 60,
+          "after_tasks": 50,
+          "before_wait_sum_min": 187617.480512,
+          "after_wait_sum_min": 128836.000212,
+          "queue_increase_min": -58781.4803
+        },
+        {
+          "slot": "ECH0127",
+          "before_tasks": 60,
+          "after_tasks": 50,
+          "before_wait_sum_min": 185306.446022,
+          "after_wait_sum_min": 112327.850094,
+          "queue_increase_min": -72978.595928
+        },
+        {
+          "slot": "ECH0162",
+          "before_tasks": 40,
+          "after_tasks": 0,
+          "before_wait_sum_min": 78082.820539,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -78082.820539
+        },
+        {
+          "slot": "ECH0161",
+          "before_tasks": 40,
+          "after_tasks": 0,
+          "before_wait_sum_min": 122624.272868,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -122624.272868
+        },
+        {
+          "slot": "ECH0145",
+          "before_tasks": 50,
+          "after_tasks": 20,
+          "before_wait_sum_min": 162898.215664,
+          "after_wait_sum_min": 23701.581992,
+          "queue_increase_min": -139196.633672
+        },
+        {
+          "slot": "ECH0163",
+          "before_tasks": 70,
+          "after_tasks": 0,
+          "before_wait_sum_min": 263279.662268,
+          "after_wait_sum_min": 0.0,
+          "queue_increase_min": -263279.662268
+        }
+      ]
+    }
+  },
+  "interpretation": "描述性分解：比较相同任务及到达规则下不同加工槽位分配的等待总量，不把队列变化全部归因于单台设备搬迁。MILP目标未惩罚排队或保证负荷均衡。"
+}

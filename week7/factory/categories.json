@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "definitions": [
+    {
+      "id": "Def_Met",
+      "label": "缺陷量测",
+      "color": "#0072B2",
+      "aliases": [
+        "DefMet",
+        "DefMEt",
+        "缺陷检测"
+      ]
+    },
+    {
+      "id": "Dielectric",
+      "label": "介质沉积",
+      "color": "#E69F00",
+      "aliases": [
+        "Dielectric",
+        "介质"
+      ]
+    },
+    {
+      "id": "Diffusion",
+      "label": "扩散 / 热处理",
+      "color": "#009E73",
+      "aliases": [
+        "Diffusion",
+        "扩散",
+        "热处理"
+      ]
+    },
+    {
+      "id": "Dry_Etch",
+      "label": "干法刻蚀",
+      "color": "#CC79A7",
+      "aliases": [
+        "DE",
+        "Dry_Etch",
+        "干刻"
+      ]
+    },
+    {
+      "id": "Implant",
+      "label": "离子注入 / EPI",
+      "color": "#D55E00",
+      "aliases": [
+        "Implant",
+        "EPI",
+        "离子注入",
+        "外延"
+      ]
+    },
+    {
+      "id": "Litho",
+      "label": "光刻 / 涂胶显影",
+      "color": "#6A51A3",
+      "aliases": [
+        "Litho",
+        "LithoTrack",
+        "光刻",
+        "涂胶显影"
+      ]
+    },
+    {
+      "id": "Litho_Met",
+      "label": "光刻量测",
+      "color": "#56B4E9",
+      "aliases": [
+        "LithoMet",
+        "Litho_REG",
+        "光刻检测"
+      ]
+    },
+    {
+      "id": "Planar",
+      "label": "平坦化",
+      "color": "#8C6D31",
+      "aliases": [
+        "Planar",
+        "平坦化"
+      ]
+    },
+    {
+      "id": "TF",
+      "label": "薄膜沉积",
+      "color": "#BCBD22",
+      "aliases": [
+        "TF",
+        "薄膜"
+      ]
+    },
+    {
+      "id": "TF_Met",
+      "label": "薄膜量测",
+      "color": "#E377C2",
+      "aliases": [
+        "TF_Met",
+        "薄膜检测"
+      ]
+    },
+    {
+      "id": "Wet_Etch",
+      "label": "湿法刻蚀",
+      "color": "#3B5B60",
+      "aliases": [
+        "WE",
+        "Wet_Etch",
+        "湿刻"
+      ]
+    },
+    {
+      "id": "Fixed_AMHS",
+      "label": "固定物流设施",
+      "color": "#70859A",
+      "aliases": [
+        "COMMIT",
+        "COMPLETE",
+        "STOCKER",
+        "入站",
+        "出站",
+        "库存"
+      ]
+    }
+  ],
+  "groupToCategory": {
+    "COMMIT": "Fixed_AMHS",
+    "COMPLETE": "Fixed_AMHS",
+    "DE_BE_11": "Dry_Etch",
+    "DE_BE_12": "Dry_Etch",
+    "DE_BE_13": "Dry_Etch",
+    "DE_BE_48": "Dry_Etch",
+    "DE_BE_50": "Dry_Etch",
+    "DE_BE_65": "Dry_Etch",
+    "DE_BE_66": "Dry_Etch",
+    "DE_BE_67": "Dry_Etch",
+    "DE_BE_69": "Dry_Etch",
+    "DE_FE_1": "Dry_Etch",
+    "DE_FE_51": "Dry_Etch",
+    "DE_FE_53": "Dry_Etch",
+    "DE_FE_54": "Dry_Etch",
+    "DE_FE_56": "Dry_Etch",
+    "DE_FE_58": "Dry_Etch",
+    "DE_FE_59": "Dry_Etch",
+    "DE_FE_62": "Dry_Etch",
+    "DE_FE_70": "Dry_Etch",
+    "DE_FE_71": "Dry_Etch",
+    "DE_FE_72": "Dry_Etch",
+    "DE_FE_86": "Dry_Etch",
+    "DefMEt_FE_118": "Def_Met",
+    "DefMet_BE_33": "Def_Met",
+    "DefMet_BE_42": "Def_Met",
+    "DefMet_FE_10": "Def_Met",
+    "DefMet_FE_106": "Def_Met",
+    "DefMet_FE_34": "Def_Met",
+    "DefMet_FE_43": "Def_Met",
+    "Dielectric_BE_20": "Dielectric",
+    "Dielectric_BE_21": "Dielectric",
+    "Dielectric_BE_27": "Dielectric",
+    "Dielectric_BE_28": "Dielectric",
+    "Dielectric_BE_60": "Dielectric",
+    "Dielectric_FE_112": "Dielectric",
+    "Dielectric_FE_130": "Dielectric",
+    "Dielectric_FE_29": "Dielectric",
+    "Dielectric_FE_30": "Dielectric",
+    "Dielectric_FE_31": "Dielectric",
+    "Diffusion_BE_123": "Diffusion",
+    "Diffusion_FE_100": "Diffusion",
+    "Diffusion_FE_101": "Diffusion",
+    "Diffusion_FE_120": "Diffusion",
+    "Diffusion_FE_122": "Diffusion",
+    "Diffusion_FE_125": "Diffusion",
+    "Diffusion_FE_126": "Diffusion",
+    "Diffusion_FE_127": "Diffusion",
+    "Diffusion_FE_44": "Diffusion",
+    "Diffusion_FE_94": "Diffusion",
+    "EPI_36": "Implant",
+    "EPI_38": "Implant",
+    "Implant_119": "Implant",
+    "Implant_128": "Implant",
+    "Implant_132": "Implant",
+    "Implant_74": "Implant",
+    "Implant_88": "Implant",
+    "Implant_90": "Implant",
+    "Implant_91": "Implant",
+    "LithoMet_BE_18": "Litho_Met",
+    "LithoMet_FE_19": "Litho_Met",
+    "LithoTrack_BE_117": "Litho",
+    "LithoTrack_FE_115": "Litho",
+    "LithoTrack_FE_95": "Litho",
+    "LithoTrack_FE_96": "Litho",
+    "Litho_BE_110": "Litho",
+    "Litho_BE_93": "Litho",
+    "Litho_BE_99": "Litho",
+    "Litho_FE_111": "Litho",
+    "Litho_FE_35": "Litho",
+    "Litho_FE_92": "Litho",
+    "Litho_FE_98": "Litho",
+    "Litho_REG_BE_63": "Litho_Met",
+    "Litho_REG_FE_64": "Litho_Met",
+    "Planar_BE_75": "Planar",
+    "Planar_FE_76": "Planar",
+    "Planar_FE_77": "Planar",
+    "Planar_FE_78": "Planar",
+    "Planar_FE_79": "Planar",
+    "Planar_FE_80": "Planar",
+    "STOCKER": "Fixed_AMHS",
+    "TF_BE_2": "TF",
+    "TF_BE_23": "TF",
+    "TF_BE_24": "TF",
+    "TF_BE_26": "TF",
+    "TF_BE_40": "TF",
+    "TF_FE_103": "TF",
+    "TF_FE_104": "TF",
+    "TF_FE_113": "TF",
+    "TF_FE_131": "TF",
+    "TF_FE_3": "TF",
+    "TF_FE_5": "TF",
+    "TF_Met_FE_45": "TF_Met",
+    "TF_Met_FE_61": "TF_Met",
+    "WE_BE_14": "Wet_Etch",
+    "WE_BE_16": "Wet_Etch",
+    "WE_BE_17": "Wet_Etch",
+    "WE_BE_7": "Wet_Etch",
+    "WE_BE_81": "Wet_Etch",
+    "WE_BE_82": "Wet_Etch",
+    "WE_BE_9": "Wet_Etch",
+    "WE_FE_108": "Wet_Etch",
+    "WE_FE_41": "Wet_Etch",
+    "WE_FE_47": "Wet_Etch",
+    "WE_FE_8": "Wet_Etch",
+    "WE_FE_83": "Wet_Etch",
+    "WE_FE_84": "Wet_Etch",
+    "WE_FE_85": "Wet_Etch"
+  },
+  "counts": {
+    "Def_Met": 17,
+    "Dielectric": 67,
+    "Diffusion": 75,
+    "Dry_Etch": 393,
+    "Fixed_AMHS": 48,
+    "Implant": 36,
+    "Litho": 188,
+    "Litho_Met": 57,
+    "Planar": 33,
+    "TF": 93,
+    "TF_Met": 5,
+    "Wet_Etch": 104
+  },
+  "sources": [
+    "analysis/smat_layout_viz/tables/process_colors.csv",
+    "analysis/smat_layout_viz/tables/workcenter_distribution_summary.csv",
+    "analysis/smat_layout_viz/tables/raw/Equipment.csv"
+  ],
+  "note": "设备种类沿用项目既有工艺区域分类，不替代设备组兼容性。生产设备为 11 类；固定物流设施单列。",
+  "classificationNotes": [
+    "Litho 包含 LithoTrack；Litho_REG 按原表归入 Litho_Met。",
+    "EPI_36、EPI_38 在原 SMT 工具表及项目既有区域映射中归入 Implant，故显示“离子注入 / EPI”；保留该来源分类，不单独改归。"
+  ]
+}

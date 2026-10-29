@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Optional DOM interaction checks; the offline simulator has no runtime dependencies.",
+  "type": "module",
+  "scripts": {"test:ui": "node tests/check_factory.mjs && node tests/check_factory_focus.mjs && node tests/check_product_line.mjs", "test:legacy-ui": "node tests/check_player.mjs"},
+  "devDependencies": {"linkedom": "0.18.12"}
+}

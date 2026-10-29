@@ -1,0 +1,19 @@
+{
+  "productLineActualHistory": true,
+  "processView": true,
+  "exactOperation": true,
+  "activeFilteredTraffic": true,
+  "emptyScopeMessage": true,
+  "categoryPalette": true,
+  "stateStrokes": true,
+  "routeCamera": true,
+  "followingCamera": true,
+  "equipmentCamera": true,
+  "demoExamples": true,
+  "delayLocationContext": true,
+  "sharedEquipmentRouteFilter": true,
+  "crossProductDetailContext": true,
+  "globalResultsUnchanged": true,
+  "restoreAllResources": true,
+  "browserRenderingVerified": false
+}

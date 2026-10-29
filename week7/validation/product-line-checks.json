@@ -1,0 +1,17 @@
+{
+  "productRouteToggle": true,
+  "boldOverlay": true,
+  "sharedSegmentsDeduplicated": true,
+  "geometryMatchesAssignedLoadedPaths": true,
+  "noEmptyTravel": true,
+  "noFutureOrUnassignedLookahead": true,
+  "zeroTimestampIncluded": true,
+  "productSwitch": true,
+  "processGroupStepFilters": true,
+  "overlayBehindEquipment": true,
+  "individualRoutePreserved": true,
+  "vehiclesAndTimeUnchanged": true,
+  "globalResultsUnchanged": true,
+  "part5SegmentsAt180": 2228,
+  "browserRenderingVerified": false
+}
