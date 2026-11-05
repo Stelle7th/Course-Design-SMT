@@ -1,0 +1,19 @@
+# 半导体晶圆厂布局优化项目（E0 数据审计 / E1 参考 LP / E2 布局 MILP / E3 全局启发式）依赖
+# 运行环境：Python >= 3.10（脚本使用了 `X | Y` 联合类型注解等 3.10+ 语法）
+
+# 数值计算与稀疏矩阵（E1/E2/E3）
+numpy>=1.22
+
+# 优化求解器：
+#   - scipy.optimize.linprog(method="highs")   E1 参考 LP、E3 内层 LP
+#   - scipy.optimize.milp (HiGHS MIP)          E2 的 L1 Bay 排序、L2 Bay 内布局
+#   - scipy.sparse / csgraph.dijkstra          轨道图最短路径
+# scipy.optimize.milp 自 scipy 1.9 起提供，故要求 >= 1.9
+scipy>=1.9
+
+# 读取 SMAT2022 Excel 工作簿（仅 E0 数据审计使用）
+openpyxl>=3.0
+
+# E3 持久化 warm-start 内层 LP（e3_warmstart.py / e3_heuristic.py --warm-start）
+# 未安装时 e3_heuristic 会自动回退到 scipy 冷求解，不影响正确性
+highspy>=1.7

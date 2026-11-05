@@ -1,0 +1,68 @@
+{
+  "e1_version": "1.0",
+  "generated_at_utc": "2026-10-22T00:57:41.255885+00:00",
+  "production_model": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_LVHM",
+  "smat_workbook": "E:\\code_index\\course_design\\v1_1021\\data\\SMAT2022\\General Data\\dataset 4\\SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+  "horizon_min": 10080.0,
+  "demand_scale": 0.1,
+  "utilization": 0.85,
+  "top_k": 12,
+  "edge_length_mode": "manhattan",
+  "solver": "scipy.optimize.linprog(method='highs')",
+  "solver_status": 2,
+  "solver_success": false,
+  "solver_message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+  "objective_value": null,
+  "model": {
+    "variable_count": 871071,
+    "equality_count": 170413,
+    "inequality_count": 1068,
+    "transport_arc_count": 787790,
+    "capacity_row_count": 1068
+  },
+  "equipment_count": 1068,
+  "operation_count": 3866,
+  "product_demands_lots": {
+    "part_1": 4.000023214423896,
+    "part_2": 4.000023214423896,
+    "part_3": 4.035694061680832,
+    "part_4": 4.000023214423896,
+    "part_5": 4.000023214423896,
+    "part_6": 4.000023214423896,
+    "part_7": 4.000023214423896,
+    "part_8": 4.000023214423896,
+    "part_9": 4.000023214423896,
+    "part_10": 4.000023214423896
+  },
+  "warnings": [],
+  "graph": {
+    "bad_edges": 0
+  },
+  "distance": {
+    "equipment_count": 1068,
+    "missing_port_path": [],
+    "unreachable_equipment_pairs": 0,
+    "reachable_equipment_pairs": 1140624
+  },
+  "checks": {
+    "solver_found_feasible_solution": false,
+    "all_operations_have_positive_demand": true,
+    "all_operations_have_eligible_equipment": true,
+    "all_selected_paths_reachable": true,
+    "order_and_flow_residuals_within_tolerance": false,
+    "capacity_within_tolerance": false
+  },
+  "checks_passed": false,
+  "solution": {
+    "operation_rows": [],
+    "transport_rows": [],
+    "utilization_rows": [],
+    "from_to_rows": [],
+    "bay_flow_rows": [],
+    "max_operation_demand_residual": null,
+    "max_capacity_excess_min": null,
+    "max_device_utilization": null,
+    "nonzero_operation_assignments": 0,
+    "nonzero_transport_arcs": 0
+  }
+}

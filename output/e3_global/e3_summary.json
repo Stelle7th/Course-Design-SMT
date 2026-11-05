@@ -1,0 +1,17 @@
+{
+  "e3_version": "1.0",
+  "equipment_count": 1068,
+  "reference_cost": 5803123608.491474,
+  "optimized_cost": 2656824536.429499,
+  "cost_reduction": 3146299072.061975,
+  "cost_reduction_pct": 54.21733680561489,
+  "lp_count": 1294,
+  "elapsed_sec": 821.243879571557,
+  "moved": 1049,
+  "distance": {
+    "equipment_count": 1068,
+    "missing_port_path": [],
+    "unreachable_equipment_pairs": 0,
+    "reachable_equipment_pairs": 1140624
+  }
+}

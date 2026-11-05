@@ -1,0 +1,504 @@
+{
+  "audit_version": "1.0",
+  "generated_at_utc": "2026-10-22T00:37:48.072047+00:00",
+  "production_model": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM",
+  "smat_workbook": "E:\\code_index\\course_design\\v1_1021\\data\\SMAT2022\\General Data\\dataset 4\\SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+  "input_files": [
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\attach.txt",
+      "sha256": "82b240c4aae83e4f08a7e4dd91a943a64864de80f77774d6773a611b4c8dedf6"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\downcal.txt",
+      "sha256": "c548e7d2c46898717b0e57986c6de745f104b4616cb31e825bf141be4d4baca0"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\fromto.txt",
+      "sha256": "56229f6f17e347e7092aec03aeec98d95628676d765555b1a1d6d0af1c95f8d1"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\order.txt",
+      "sha256": "2d1f7811af2a09970853b6f053aabd43268b713f91e39ae8d43e0103e1ec2446"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\part.txt",
+      "sha256": "b125e7826f7e03eaf18e5d0f2c0876cf7daf2c7b7826a0f5b22c60338b307b86"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\pmcal.txt",
+      "sha256": "dc36cc55f78c4471fd27d56dba2fa706ad3ff000dbf00c6ee7db5f1cea5c2bad"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\route_3.txt",
+      "sha256": "21f8e94fd36b66c869efa482056257c1c8c908b1550731e7fde9f9f2e96b74ef"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\route_4.txt",
+      "sha256": "f9daf7e844299bfb5722172b4fde6b8354a761d6fcc4fd40a27d53cc43278ac9"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\setup.txt",
+      "sha256": "bacd8cfdf6ab6599821bb430033dda12802d7424f93501c4dea8d7d1a739cdb7"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\setupgrp.txt",
+      "sha256": "e557590f4bc776607f1100b9cdd27ce373ca0ddec831b56f2ca58465ed0792f1"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\tool.txt.1l",
+      "sha256": "89bc308b59dfbcf2a26d2e4bb9f7e5aa45b187a9f95601b6ffd4c17e27a1b024"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMT2020_HVLM\\WIP.txt",
+      "sha256": "68d6164a3d9bd00e32a7d5a5516e76834649ea58aa7f3e622201252de9789698"
+    },
+    {
+      "path": "E:\\code_index\\course_design\\v1_1021\\data\\SMAT2022\\General Data\\dataset 4\\SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+      "sha256": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0"
+    }
+  ],
+  "critical_checks": {
+    "all_route_stnfam_mapped": true,
+    "all_movable_equipment_mapped": true,
+    "all_rail_endpoints_exist": true,
+    "all_rail_coordinates_present": true,
+    "all_equipment_has_port": true,
+    "all_equipment_geometry_present": true,
+    "all_port_rail_references_exist": true,
+    "all_port_distances_numeric": true,
+    "all_port_types_exist": true,
+    "all_equipment_bays_exist": true
+  },
+  "critical_check_passed": true,
+  "notes": [
+    "SMAT2022 Equipment is treated as the source of actual layout equipment instances.",
+    "STOCKER, COMMIT and COMPLETE are classified as fixed AMHS infrastructure.",
+    "DefMEt_FE_118 is mapped to DefMet_FE_118 by explicit alias.",
+    "Rail edge lengths are only audited from endpoint coordinates; route-distance generation is a later step."
+  ],
+  "smt_counts": {
+    "part_rows": 2,
+    "order_rows": 5,
+    "tool_rows": 106,
+    "wip_rows": 2255,
+    "route_rows": 926,
+    "optional_files": {
+      "attach.txt": 303,
+      "downcal.txt": 11,
+      "fromto.txt": 1,
+      "pmcal.txt": 292,
+      "setup.txt": 13,
+      "setupgrp.txt": 9
+    }
+  },
+  "smat_counts": {
+    "Address": 2858,
+    "ZCU": 734,
+    "Rail": 3424,
+    "Bay": 43,
+    "Equipment": 1116,
+    "PortType": 6,
+    "Port": 22120,
+    "VehicleType": 1,
+    "Vehicle": 500
+  },
+  "equipment": {
+    "equipment_total": 1116,
+    "fixed_amhs_total": 48,
+    "movable_process_total": 1068,
+    "equipment_missing_geometry": 0,
+    "equipment_group_counts": {
+      "COMMIT": 4,
+      "COMPLETE": 4,
+      "DE_BE_11": 12,
+      "DE_BE_12": 9,
+      "DE_BE_13": 16,
+      "DE_BE_48": 14,
+      "DE_BE_50": 12,
+      "DE_BE_65": 13,
+      "DE_BE_66": 21,
+      "DE_BE_67": 14,
+      "DE_BE_69": 3,
+      "DE_FE_1": 7,
+      "DE_FE_51": 25,
+      "DE_FE_53": 6,
+      "DE_FE_54": 4,
+      "DE_FE_56": 3,
+      "DE_FE_58": 3,
+      "DE_FE_59": 10,
+      "DE_FE_62": 21,
+      "DE_FE_70": 14,
+      "DE_FE_71": 23,
+      "DE_FE_72": 14,
+      "DE_FE_86": 149,
+      "DefMet_BE_33": 2,
+      "DefMet_BE_42": 1,
+      "DefMet_FE_10": 3,
+      "DefMet_FE_106": 1,
+      "DefMet_FE_118": 2,
+      "DefMet_FE_34": 2,
+      "DefMet_FE_43": 6,
+      "Dielectric_BE_20": 6,
+      "Dielectric_BE_21": 8,
+      "Dielectric_BE_27": 15,
+      "Dielectric_BE_28": 4,
+      "Dielectric_BE_60": 7,
+      "Dielectric_FE_112": 11,
+      "Dielectric_FE_130": 5,
+      "Dielectric_FE_29": 4,
+      "Dielectric_FE_30": 2,
+      "Dielectric_FE_31": 5,
+      "Diffusion_BE_123": 9,
+      "Diffusion_FE_100": 4,
+      "Diffusion_FE_101": 10,
+      "Diffusion_FE_120": 8,
+      "Diffusion_FE_122": 6,
+      "Diffusion_FE_125": 5,
+      "Diffusion_FE_126": 4,
+      "Diffusion_FE_127": 8,
+      "Diffusion_FE_44": 7,
+      "Diffusion_FE_94": 14,
+      "EPI_36": 2,
+      "EPI_38": 1,
+      "Implant_119": 2,
+      "Implant_128": 11,
+      "Implant_132": 7,
+      "Implant_74": 2,
+      "Implant_88": 2,
+      "Implant_90": 2,
+      "Implant_91": 7,
+      "LithoMet_BE_18": 14,
+      "LithoMet_FE_19": 18,
+      "LithoTrack_BE_117": 5,
+      "LithoTrack_FE_115": 46,
+      "LithoTrack_FE_95": 47,
+      "LithoTrack_FE_96": 2,
+      "Litho_BE_110": 25,
+      "Litho_BE_93": 4,
+      "Litho_BE_99": 3,
+      "Litho_FE_111": 22,
+      "Litho_FE_35": 2,
+      "Litho_FE_92": 28,
+      "Litho_FE_98": 4,
+      "Litho_REG_BE_63": 10,
+      "Litho_REG_FE_64": 15,
+      "Planar_BE_75": 19,
+      "Planar_FE_76": 3,
+      "Planar_FE_77": 2,
+      "Planar_FE_78": 2,
+      "Planar_FE_79": 5,
+      "Planar_FE_80": 2,
+      "STOCKER": 40,
+      "TF_BE_2": 4,
+      "TF_BE_23": 17,
+      "TF_BE_24": 4,
+      "TF_BE_26": 15,
+      "TF_BE_40": 21,
+      "TF_FE_103": 8,
+      "TF_FE_104": 6,
+      "TF_FE_113": 4,
+      "TF_FE_131": 7,
+      "TF_FE_3": 4,
+      "TF_FE_5": 3,
+      "TF_Met_FE_45": 2,
+      "TF_Met_FE_61": 3,
+      "WE_BE_14": 5,
+      "WE_BE_16": 8,
+      "WE_BE_17": 2,
+      "WE_BE_7": 1,
+      "WE_BE_81": 3,
+      "WE_BE_82": 10,
+      "WE_BE_9": 5,
+      "WE_FE_108": 31,
+      "WE_FE_41": 6,
+      "WE_FE_47": 5,
+      "WE_FE_8": 2,
+      "WE_FE_83": 6,
+      "WE_FE_84": 18,
+      "WE_FE_85": 2
+    }
+  },
+  "ports": {
+    "port_total": 22120,
+    "port_empty_equipment": 17760,
+    "port_unmapped_equipment": 0,
+    "port_unmapped_rail": 0,
+    "port_missing_distance": 0,
+    "port_unknown_type": 0,
+    "equipment_with_at_least_one_port": 1116,
+    "equipment_without_port": 0
+  },
+  "rail": {
+    "address_node_total": 2858,
+    "rail_edge_total": 3424,
+    "rail_edges_missing_from_node": 0,
+    "rail_edges_missing_to_node": 0,
+    "rail_edges_missing_coordinates": 0,
+    "curve_edge_total": 951,
+    "weak_component_count": 1,
+    "largest_weak_component": 2858,
+    "edge_length_min": 882.0103870303509,
+    "edge_length_max": 14166.666693239007,
+    "edge_length_mean": 3274.4952994961536,
+    "sample_reachability": [
+      {
+        "source": "rn_A10_1",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_10",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_11",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_12",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_13",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_14",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_15",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_16",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_17",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_18",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_19",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_2",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_20",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_21",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_22",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_23",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_24",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_25",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_26",
+        "reachable_node_count": 2858
+      },
+      {
+        "source": "rn_A10_27",
+        "reachable_node_count": 2858
+      }
+    ],
+    "rail_edges_by_bay": {
+      "A1": 37,
+      "A10": 40,
+      "A11": 40,
+      "A12": 40,
+      "A13": 40,
+      "A14": 40,
+      "A15": 40,
+      "A16": 40,
+      "A17": 40,
+      "A18": 40,
+      "A19": 40,
+      "A2": 40,
+      "A20": 37,
+      "A3": 40,
+      "A4": 40,
+      "A5": 40,
+      "A6": 40,
+      "A7": 40,
+      "A8": 40,
+      "A9": 40,
+      "B1": 37,
+      "B10": 40,
+      "B11": 40,
+      "B12": 40,
+      "B13": 40,
+      "B14": 40,
+      "B15": 40,
+      "B16": 40,
+      "B17": 40,
+      "B18": 40,
+      "B19": 40,
+      "B2": 40,
+      "B20": 37,
+      "B3": 40,
+      "B4": 40,
+      "B5": 40,
+      "B6": 40,
+      "B7": 40,
+      "B8": 40,
+      "B9": 40,
+      "InterBay1": 546,
+      "InterBay2": 744,
+      "InterBay3": 546
+    }
+  },
+  "bays": {
+    "bay_total": 43,
+    "bay_type_counts": {
+      "INTRABAY": 40,
+      "INTERBAY": 3
+    },
+    "bay_names": [
+      "A1",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19",
+      "A2",
+      "A20",
+      "A3",
+      "A4",
+      "A5",
+      "A6",
+      "A7",
+      "A8",
+      "A9",
+      "B1",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B2",
+      "B20",
+      "B3",
+      "B4",
+      "B5",
+      "B6",
+      "B7",
+      "B8",
+      "B9",
+      "InterBay1",
+      "InterBay2",
+      "InterBay3"
+    ],
+    "equipment_bays_not_in_bay_table": [],
+    "equipment_count_by_bay": {
+      "A1": 23,
+      "A10": 27,
+      "A11": 41,
+      "A12": 41,
+      "A13": 31,
+      "A14": 21,
+      "A15": 21,
+      "A16": 28,
+      "A17": 31,
+      "A18": 31,
+      "A19": 41,
+      "A2": 25,
+      "A20": 41,
+      "A3": 25,
+      "A4": 25,
+      "A5": 25,
+      "A6": 25,
+      "A7": 25,
+      "A8": 23,
+      "A9": 21,
+      "B1": 20,
+      "B10": 20,
+      "B11": 23,
+      "B12": 27,
+      "B13": 28,
+      "B14": 21,
+      "B15": 23,
+      "B16": 23,
+      "B17": 28,
+      "B18": 28,
+      "B19": 27,
+      "B2": 25,
+      "B20": 23,
+      "B3": 27,
+      "B4": 41,
+      "B5": 41,
+      "B6": 41,
+      "B7": 29,
+      "B8": 21,
+      "B9": 21,
+      "InterBay1": 4,
+      "InterBay3": 4
+    }
+  },
+  "routes": {
+    "route_row_total": 926,
+    "route_file_count": 2,
+    "route_files": [
+      {
+        "part": "part_3",
+        "route": "r_3",
+        "file": "route_3.txt",
+        "rows": 583
+      },
+      {
+        "part": "part_4",
+        "route": "r_4",
+        "file": "route_4.txt",
+        "rows": 343
+      }
+    ],
+    "route_stnfam_total": 106,
+    "route_stnfam_unmapped_to_tool": [],
+    "non_equipment_route_nodes": [
+      "Delay_32"
+    ],
+    "ptper_counts": {
+      "per_batch": 28,
+      "per_piece": 408,
+      "per_lot": 490
+    },
+    "ptunits_counts": {
+      "min": 926
+    },
+    "rows_with_rework": 14,
+    "rows_with_batch_limits": 28,
+    "missing_ptime": 0
+  },
+  "unmapped_smat_groups": [],
+  "unmapped_route_families": []
+}
